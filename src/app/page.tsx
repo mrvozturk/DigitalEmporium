@@ -1,9 +1,22 @@
 import type { Metadata } from 'next';
-
-import ExamplePage from '../pages/examplePage';
+import Link from 'next/link';
 
 export default function IndexPage() {
-  return <ExamplePage />;
+  return (
+    <div>
+      <button
+        style={{
+          backgroundColor: 'blue',
+          color: 'white',
+          padding: '10px',
+          fontSize: '20px',
+          margin: '10px'
+        }}
+      >
+        <Link href='/examplePage'>REDIRECT PAGE TO EXAMPLE FOR REDUX</Link>
+      </button>
+    </div>
+  );
 }
 
 export const metadata: Metadata = {
