@@ -19,6 +19,7 @@
     margin-top: 1rem;
   }
 }
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -74,11 +75,11 @@
 
 .searchInput {
   padding: 0.6rem;
-  border: none; /* Dört köşeli borderı kaldır */
-  border-bottom: 1px solid #ccc; /* Alt çizgi ekleyerek sadece alt kısmına çizgi ekle */
-  border-radius: 0; /* Köşe yuvarlatmasını kaldır */
+  border: none;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0;
   width: 60%;
-  background-color: transparent; /* Arkaplan rengini şeffaf yap */
+  background-color: transparent;
 }
 /* .searchButton {
   padding: 0.6rem;
