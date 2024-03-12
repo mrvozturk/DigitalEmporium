@@ -74,12 +74,13 @@
 
 .searchInput {
   padding: 0.6rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: none; /* Dört köşeli borderı kaldır */
+  border-bottom: 1px solid #ccc; /* Alt çizgi ekleyerek sadece alt kısmına çizgi ekle */
+  border-radius: 0; /* Köşe yuvarlatmasını kaldır */
   width: 60%;
+  background-color: transparent; /* Arkaplan rengini şeffaf yap */
 }
-
-.searchButton {
+/* .searchButton {
   padding: 0.6rem;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -87,7 +88,7 @@
   width: 30%;
   max-width: 80px;
   white-space: nowrap;
-}
+} */
 
 .searchInput:focus {
   outline: none;
