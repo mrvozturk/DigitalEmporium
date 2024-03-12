@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import {Header} from '@/components'
+import { Header } from '@/components';
 
 import { Inter } from 'next/font/google';
 import './globals.css';
@@ -22,8 +22,9 @@ export default function RootLayout({
     <StoreProvider>
       <html lang='en'>
         <body className={inter.className}>
-        <Header/>
-          {children}</body>
+          <Header />
+          {children}
+        </body>
       </html>
     </StoreProvider>
   );
