@@ -1,4 +1,4 @@
-@media (max-width: 768px) {
+/*@media (max-width: 768px) {
   .navbar {
     flex-direction: column;
     align-items: center;
@@ -18,7 +18,7 @@
   .navbarLinks {
     margin-top: 1rem;
   }
-}
+}*/
 
 .navbar {
   display: flex;
@@ -94,4 +94,24 @@
 .searchInput:focus {
   outline: none;
   border-color: #ccc;
+}
+
+.categoryLinks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f2f2f2;
+  padding: 1rem;
+  gap: 15px;
+}
+
+.categoryLinks a {
+  text-decoration: none;
+  color: var(--text-color);
+  margin: 0 10px; 
+  font-weight: bold;
+}
+
+.categoryLinks a:hover {
+  color: darkgray;
 }
