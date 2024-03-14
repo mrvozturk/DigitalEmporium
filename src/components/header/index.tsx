@@ -1,38 +1,52 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faStore,
   faUser,
   faHeart,
-  faShoppingCart
+  faShoppingCart,
+  faTimes,
+  faBars
 } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './index.module.css';
+import SideBar from './sideBar';
 
 const Header = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [isMobileView, setMobileView] = useState(false);
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setMobileView(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <div>
       <nav className={styles.navbar}>
         <div className={styles.combinedContainer}>
           <button className={styles.sidebarToggle} onClick={toggleSidebar}>
-            =
+            <FontAwesomeIcon icon={isSidebarOpen ? faTimes : faBars} />
           </button>
           <div className={styles.logo}>
             <a href='#'>Logo</a>
           </div>
+
           <div className={styles.searchContainer}>
             <input
               className={styles.searchInput}
               type='search'
               name='search'
-              placeholder='Search here'
+              placeholder=' Ara'
               autoComplete='off'
             />
           </div>
@@ -42,58 +56,32 @@ const Header = () => {
           <ul className={styles.primaryLinks}>
             <li>
               <a href='#'>
-                <FontAwesomeIcon icon={faUser} />
+                {isMobileView ? <FontAwesomeIcon icon={faUser} /> : 'Hesap'}
               </a>
             </li>
             <li>
               <a href='#'>
-                <FontAwesomeIcon icon={faHeart} />
+                {isMobileView ? (
+                  <FontAwesomeIcon icon={faHeart} />
+                ) : (
+                  'Favoriler'
+                )}
               </a>
             </li>
             <li>
               <a href='#'>
-                <FontAwesomeIcon icon={faShoppingCart} />
+                {isMobileView ? (
+                  <FontAwesomeIcon icon={faShoppingCart} />
+                ) : (
+                  'Sepet'
+                )}
               </a>
             </li>
           </ul>
         </div>
       </nav>
 
-      <div
-        className={`${styles.sidebar} ${
-          isSidebarOpen ? styles.sidebarOpen : ''
-        }`}
-      >
-        <button className={styles.closeButton} onClick={toggleSidebar}></button>
-        <div className={styles.categoryLinks}>
-          <ul>
-            <li>
-              <a href='#'>KADIN</a>
-            </li>
-            <li>
-              <a href='#'>ERKEK</a>
-            </li>
-            <li>
-              <a href='#'>ÇOCUK</a>
-            </li>
-            <li>
-              <a href='#'>BEBEK</a>
-            </li>
-            <li>
-              <a href='#'>FIRSATLAR</a>
-            </li>
-            <li>
-              <a href='#'>SÜRDÜRÜLEBİLİRLİK</a>
-            </li>{' '}
-            <li>
-              <a href='#'>KADIN</a>
-            </li>
-            <li>
-              <a href='#'>ERKEK</a>
-            </li>
-          </ul>
-        </div>
-      </div>
+      <SideBar toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
     </div>
   );
 };

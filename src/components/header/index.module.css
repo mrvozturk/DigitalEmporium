@@ -125,9 +125,7 @@
 .categoryLinks a:hover {
   color: darkgray;
 }
-.sidebar {
-  display: none;
-}
+
 .sidebarToggle {
   display: none;
 }
@@ -145,7 +143,6 @@
     max-width: 100%;
     height: 100%;
     background-color: #f2f2f2;
-    transition: transform 0.3s ease;
     overflow-y: auto;
     transform: translateX(-100%);
   }
@@ -180,7 +177,6 @@
     width: 100%;
     height: 100%;
     background-color: #f2f2f2;
-    transition: left 0.3s ease;
     overflow-y: auto;
   }
 
@@ -201,8 +197,15 @@
     text-decoration: none;
     color: var(--text-color);
     font-weight: bold;
-    transition: color 0.3s ease;
     width: 100%;
     text-align: center;
   }
+}
+@media (max-width: 1024px) {
+  .categoryLinks ul {
+    font-size: 14px;
+    gap: 5px;
+  }
+
+ 
 }

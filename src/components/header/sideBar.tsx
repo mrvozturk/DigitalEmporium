@@ -1,7 +1,4 @@
-'use client';
-
 import React from 'react';
-
 import styles from './index.module.css';
 
 type SideBarProps = {
@@ -14,8 +11,9 @@ const SideBar: React.FC<SideBarProps> = ({ toggleSidebar, isSidebarOpen }) => {
     <div
       className={`${styles.sidebar} ${isSidebarOpen ? styles.sidebarOpen : ''}`}
     >
-      <button className={styles.closeButton} onClick={toggleSidebar}></button>
       <div className={styles.categoryLinks}>
+        <button className={styles.closeButton} onClick={toggleSidebar}></button>
+
         <ul>
           <li>
             <a href='#'>KADIN</a>
@@ -34,7 +32,7 @@ const SideBar: React.FC<SideBarProps> = ({ toggleSidebar, isSidebarOpen }) => {
           </li>
           <li>
             <a href='#'>SÜRDÜRÜLEBİLİRLİK</a>
-          </li>{' '}
+          </li>
           <li>
             <a href='#'>KADIN</a>
           </li>
