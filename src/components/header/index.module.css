@@ -1,4 +1,4 @@
-@media (max-width: 768px) {
+/*@media (max-width: 768px) {
   .navbar {
     flex-direction: column;
     align-items: center;
@@ -18,8 +18,7 @@
   .navbarLinks {
     margin-top: 1rem;
   }
-}
-
+}*/
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -104,13 +103,106 @@
   gap: 15px;
 }
 
+.categoryLinks ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 20px;
+}
+
+.categoryLinks li {
+  margin: 0 10px;
+}
+
 .categoryLinks a {
   text-decoration: none;
   color: var(--text-color);
-  margin: 0 10px; 
   font-weight: bold;
 }
 
 .categoryLinks a:hover {
   color: darkgray;
+}
+.sidebar {
+  display: none;
+}
+.sidebarToggle {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .combinedContainer {
+    flex-direction: column;
+  }
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    max-width: 100%;
+    height: 100%;
+    background-color: #f2f2f2;
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+    transform: translateX(-100%);
+  }
+
+  .sidebarOpen {
+    transform: translateX(0);
+  }
+  .sidebarOpen {
+    transform: translateX(0);
+  }
+
+  .sidebarToggle {
+    display: block;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 999;
+  }
+  .sidebarToggle:focus {
+    outline: none;
+  }
+
+  .categoryLinks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f2f2f2;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+  }
+
+  .categoryLinks ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .categoryLinks li {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  .categoryLinks a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: bold;
+    transition: color 0.3s ease;
+    width: 100%;
+    text-align: center;
+  }
 }

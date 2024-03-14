@@ -1,11 +1,21 @@
-import React from 'react';
+'use client';
+import React, { useState } from 'react';
 import styles from './index.module.css';
 
 const Header = () => {
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!isSidebarOpen);
+  };
+
   return (
     <div>
       <nav className={styles.navbar}>
         <div className={styles.combinedContainer}>
+          <button className={styles.sidebarToggle} onClick={toggleSidebar}>
+            =
+          </button>
           <div className={styles.logo}>
             <a href='#'>Logo</a>
           </div>
@@ -38,19 +48,41 @@ const Header = () => {
         </div>
       </nav>
 
-      <div className={styles.categoryLinks}>
-        <a href='#'>KADIN</a>
-        <a href='#'>ERKEK</a>
-        <a href='#'>ÇOCUK</a>
-        <a href='#'>BEBEK</a>
-        <a href='#'>FIRSATLAR</a>
-        <a href='#'>SÜRDÜRÜLEBİLİRLİK</a>
-        <a href='#'>KADIN</a>
-        <a href='#'>ERKEK</a>
-        <a href='#'>ÇOCUK</a>
-        <a href='#'>BEBEK</a>
-        <a href='#'>FIRSATLAR</a>
-        <a href='#'>SÜRDÜRÜLEBİLİRLİK</a>
+      <div
+        className={`${styles.sidebar} ${
+          isSidebarOpen ? styles.sidebarOpen : ''
+        }`}
+      >
+        <button className={styles.closeButton} onClick={toggleSidebar}></button>
+        <div className={styles.categoryLinks}>
+          <ul>
+            <li>
+              <a href='#'>KADIN</a>
+            </li>
+            <li>
+              <a href='#'>ERKEK</a>
+            </li>
+            <li>
+              <a href='#'>ÇOCUK</a>
+            </li>
+            <li>
+              <a href='#'>BEBEK</a>
+            </li>
+            <li>
+              <a href='#'>FIRSATLAR</a>
+            </li>
+            <li>
+              <a href='#'>SÜRDÜRÜLEBİLİRLİK</a>
+            </li>{' '}
+            <li>
+              <a href='#'>KADIN</a>
+            </li>
+            <li>
+              <a href='#'>ERKEK</a>
+            </li>
+         
+          </ul>
+        </div>
       </div>
     </div>
   );
