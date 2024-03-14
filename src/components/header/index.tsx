@@ -1,5 +1,13 @@
 'use client';
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faStore,
+  faUser,
+  faHeart,
+  faShoppingCart
+} from '@fortawesome/free-solid-svg-icons';
+
 import styles from './index.module.css';
 
 const Header = () => {
@@ -33,16 +41,19 @@ const Header = () => {
         <div className={styles.navbarLinks}>
           <ul className={styles.primaryLinks}>
             <li>
-              <a href='#'>Mağaza</a>
+              <a href='#'>
+                <FontAwesomeIcon icon={faUser} />
+              </a>
             </li>
             <li>
-              <a href='#'>Hesap</a>
+              <a href='#'>
+                <FontAwesomeIcon icon={faHeart} />
+              </a>
             </li>
             <li>
-              <a href='#'>Favoriler</a>
-            </li>
-            <li>
-              <a href='#'>Sepet</a>
+              <a href='#'>
+                <FontAwesomeIcon icon={faShoppingCart} />
+              </a>
             </li>
           </ul>
         </div>
@@ -80,7 +91,6 @@ const Header = () => {
             <li>
               <a href='#'>ERKEK</a>
             </li>
-         
           </ul>
         </div>
       </div>
