@@ -110,12 +110,6 @@
   display: none;
 }
 
-
-
-
-
-
-
 @media (max-width: 768px) {
   .navbar {
     display: flex;
@@ -157,6 +151,8 @@
     top: 0;
     left: 0;
     max-width: 100%;
+    width: 90%;
+    background-color: #f2f2f2;
     height: 100%;
     overflow-y: auto;
     transform: translateX(-100%);
@@ -180,19 +176,21 @@
   .categoryLinks {
     display: flex;
     flex-direction: column;
-    align-items: center;
     top: 0;
     width: 100%;
     height: 100%;
     overflow-y: auto;
+    background-color: #f2f2f2;
   }
 
   .categoryLinks ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
     padding: 0;
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    gap: 5px;
+    justify-content: center;
   }
 
   .categoryLinks li {
@@ -201,6 +199,7 @@
   }
 
   .categoryLinks a {
+    font-size: 20px;
   }
 }
 @media (max-width: 568px) {
