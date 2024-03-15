@@ -15,10 +15,15 @@ import SideBar from './sideBar';
 
 const Header = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
-  const [isMobileView, setMobileView] = useState(false); // İlk değer false olarak ayarlandı
+  const [isMobileView, setMobileView] = useState(false);
+  const [isSearchOpen, setSearchOpen] = useState(false);
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
+  };
+
+  const toggleSearch = () => {
+    setSearchOpen(!isSearchOpen);
   };
 
   useEffect(() => {
@@ -33,6 +38,7 @@ const Header = () => {
       return () => window.removeEventListener('resize', handleResize);
     }
   }, []);
+
   return (
     <div>
       <nav className={styles.navbar}>
@@ -45,16 +51,17 @@ const Header = () => {
           </div>
 
           <div className={styles.searchContainer}>
-            <button>
-              <FontAwesomeIcon icon={faSearch} />
-            </button>
-            <input
-              className={styles.searchInput}
-              type='search'
-              name='search'
-              placeholder=' Ara'
-              autoComplete='off'
-            />
+            {isMobileView && isSearchOpen ? (
+              <input
+                className={styles.searchInput}
+                type='search'
+                name='search'
+                placeholder=' Ara'
+                autoComplete='off'
+              />
+            ) : (
+              <a href='#' onClick={toggleSearch}></a>
+            )}
           </div>
         </div>
 
@@ -62,7 +69,11 @@ const Header = () => {
           <ul className={styles.primaryLinks}>
             <li>
               <a href='#'>
-                {isMobileView ? <FontAwesomeIcon icon={faSearch} /> : ''}
+                {isMobileView ? (
+                  <FontAwesomeIcon icon={faSearch} onClick={toggleSearch} />
+                ) : (
+                  ''
+                )}
               </a>
             </li>
             <li>
