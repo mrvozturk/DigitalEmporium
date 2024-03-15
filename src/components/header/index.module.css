@@ -1,24 +1,3 @@
-/*@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .combinedContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 1rem;
-  }
-
-  .searchContainer {
-    margin-top: 1rem;
-  }
-
-  .navbarLinks {
-    margin-top: 1rem;
-  }
-}*/
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -131,9 +110,43 @@
 }
 
 @media (max-width: 768px) {
-  .combinedContainer {
-    flex-direction: column;
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding: 0.5rem;
+    position: relative;
   }
+  .navbarLinks ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 15px;
+  }
+  .logo {
+    text-decoration: none;
+    font-size: 2.2rem;
+    color: var(--text-color);
+    margin-right: auto;
+  }
+  .combinedContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 1rem;
+  }
+  .searchContainer {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 768px;
+  }
+
   .sidebar {
     display: flex;
     flex-direction: column;
@@ -146,23 +159,17 @@
     overflow-y: auto;
     transform: translateX(-100%);
   }
-
   .sidebarOpen {
     transform: translateX(0);
   }
-  .sidebarOpen {
-    transform: translateX(0);
-  }
-
   .sidebarToggle {
     display: block;
-    position: fixed;
-    top: 20px;
-    left: 20px;
     background-color: transparent;
     border: none;
-    font-size: 1.5rem;
+    font-size: 2rem;
     cursor: pointer;
+    margin-right: 20px;
+    margin-left: 0;
     z-index: 999;
   }
   .sidebarToggle:focus {
@@ -201,11 +208,16 @@
     text-align: center;
   }
 }
-@media (max-width: 1024px) {
-  .categoryLinks ul {
-    font-size: 14px;
-    gap: 5px;
+@media (max-width: 568px) {
+  .logo {
+    font-size: 1.5rem;
+  }
+  .combinedContainer {
+    padding: 0 0.5rem;
   }
 
- 
+  .sidebarToggle {
+    font-size: 1.2rem;
+    margin-right: 15px;
+  }
 }

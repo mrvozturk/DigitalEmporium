@@ -6,7 +6,8 @@ import {
   faHeart,
   faShoppingCart,
   faTimes,
-  faBars
+  faBars,
+  faSearch
 } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './index.module.css';
@@ -22,7 +23,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setMobileView(window.innerWidth < 768);
+      setMobileView(window.innerWidth < 770);
     };
 
     window.addEventListener('resize', handleResize);
@@ -42,6 +43,9 @@ const Header = () => {
           </div>
 
           <div className={styles.searchContainer}>
+            <button>
+              <FontAwesomeIcon icon={faSearch} />
+            </button>
             <input
               className={styles.searchInput}
               type='search'
@@ -54,6 +58,11 @@ const Header = () => {
 
         <div className={styles.navbarLinks}>
           <ul className={styles.primaryLinks}>
+            <li>
+              <a href='#'>
+                {isMobileView ? <FontAwesomeIcon icon={faSearch} /> : ''}
+              </a>
+            </li>
             <li>
               <a href='#'>
                 {isMobileView ? <FontAwesomeIcon icon={faUser} /> : 'Hesap'}
