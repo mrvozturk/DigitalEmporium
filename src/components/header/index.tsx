@@ -15,22 +15,24 @@ import SideBar from './sideBar';
 
 const Header = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
-  const [isMobileView, setMobileView] = useState(false);
+  const [isMobileView, setMobileView] = useState(false); // İlk değer false olarak ayarlandı
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
   };
 
   useEffect(() => {
-    const handleResize = () => {
+    if (typeof window !== 'undefined') {
       setMobileView(window.innerWidth < 770);
-    };
 
-    window.addEventListener('resize', handleResize);
+      const handleResize = () => {
+        setMobileView(window.innerWidth < 770);
+      };
+      window.addEventListener('resize', handleResize);
 
-    return () => window.removeEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }
   }, []);
-
   return (
     <div>
       <nav className={styles.navbar}>
