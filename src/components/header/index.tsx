@@ -51,29 +51,23 @@ const Header = () => {
           </div>
 
           <div className={styles.searchContainer}>
-            {isMobileView && isSearchOpen ? (
+            {(isMobileView && isSearchOpen) || !isMobileView ? (
               <input
                 className={styles.searchInput}
                 type='search'
                 name='search'
-                placeholder=' Ara'
+                placeholder={isMobileView ? ' Ara' : 'Ara...'}
                 autoComplete='off'
               />
-            ) : (
-              <a href='#' onClick={toggleSearch}></a>
-            )}
+            ) : null}
           </div>
         </div>
 
         <div className={styles.navbarLinks}>
           <ul className={styles.primaryLinks}>
             <li>
-              <a href='#'>
-                {isMobileView ? (
-                  <FontAwesomeIcon icon={faSearch} onClick={toggleSearch} />
-                ) : (
-                  ''
-                )}
+              <a href='#' onClick={toggleSearch}>
+                {isMobileView ? <FontAwesomeIcon icon={faSearch} /> : ''}
               </a>
             </li>
             <li>
