@@ -22,10 +22,6 @@ const Header = () => {
     setSidebarOpen(!isSidebarOpen);
   };
 
-  const toggleSearch = () => {
-    setSearchOpen(!isSearchOpen);
-  };
-
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setMobileView(window.innerWidth < 770);
@@ -43,13 +39,19 @@ const Header = () => {
     <div>
       <nav className={styles.navbar}>
         <div className={styles.combinedContainer}>
-          <button className={styles.sidebarToggle} onClick={toggleSidebar}>
-            <FontAwesomeIcon icon={isSidebarOpen ? faTimes : faBars} />
-          </button>
-          <div className={styles.logo}>
-            <a href='#'>Logo</a>
+          <div className={styles.buttonContainer}>
+            <button className={styles.sidebarToggle} onClick={toggleSidebar}>
+              {!isSidebarOpen ? <FontAwesomeIcon icon={faBars} /> : null}
+            </button>
           </div>
-
+          <div className={styles.logo}>
+            <a href='/'>Logo</a>
+          </div>
+          {isMobileView && isSidebarOpen && (
+            <button className={styles.sidebarToggle} onClick={toggleSidebar}>
+              <FontAwesomeIcon icon={faTimes} />
+            </button>
+          )}
           <div className={styles.searchContainer}>
             {(isMobileView && isSearchOpen) || !isMobileView ? (
               <input
@@ -66,7 +68,7 @@ const Header = () => {
         <div className={styles.navbarLinks}>
           <ul className={styles.primaryLinks}>
             <li>
-              <a href='#' onClick={toggleSearch}>
+              <a href='#' onClick={() => setSearchOpen(!isSearchOpen)}>
                 {isMobileView ? <FontAwesomeIcon icon={faSearch} /> : ''}
               </a>
             </li>
