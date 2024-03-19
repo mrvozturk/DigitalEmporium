@@ -1,5 +1,4 @@
 'use client';
-'use client';
 import React, { useEffect, useRef } from 'react';
 import styles from './index.module.css';
 
@@ -13,7 +12,11 @@ const SideBar: React.FC<SideBarProps> = ({ toggleSidebar, isSidebarOpen }) => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node) && isSidebarOpen) {
+      if (
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target as Node) &&
+        isSidebarOpen
+      ) {
         toggleSidebar();
       }
     };
@@ -23,14 +26,54 @@ const SideBar: React.FC<SideBarProps> = ({ toggleSidebar, isSidebarOpen }) => {
   }, [isSidebarOpen, toggleSidebar]);
 
   return (
-    <div ref={sidebarRef} className={`${styles.sidebar} ${isSidebarOpen ? styles.sidebarOpen : ''}`}>
+    <div
+      ref={sidebarRef}
+      className={`${styles.sidebar} ${isSidebarOpen ? styles.sidebarOpen : ''}`}
+    >
+      <div className={styles.logo}>
+        <a href='/'>Logo</a>
+      </div>
+      
       <div className={styles.categoryLinks}>
         <button className={styles.closeButton} onClick={toggleSidebar}></button>
         <div className={styles.categories}>
           <ul>
-            <li><a href='#'>KADIN</a></li>
-            <li><a href='#'>ERKEK</a></li>
-            <li><a href='#'>ÇOCUK</a></li>
+            <li>
+              <a href='#'>KADIN</a>
+            </li>
+            <li>
+              <a href='#'>ERKEK</a>
+            </li>
+            <li>
+              <a href='#'>ÇOCUK</a>
+            </li>
+            <li>
+              <a href='#'>KADIN</a>
+            </li>
+            <li>
+              <a href='#'>ERKEK</a>
+            </li>
+            <li>
+              <a href='#'>ÇOCUK</a>
+            </li>
+            <li>
+              <a href='#'>KADIN</a>
+            </li>
+            <li>
+              <a href='#'>ERKEK</a>
+            </li>
+            <li>
+              <a href='#'>ÇOCUK</a>
+            </li>
+            <li>
+              <a href='#'>KADIN</a>
+            </li>
+            <li>
+              <a href='#'>ERKEK</a>
+            </li>
+            <li>
+              <a href='#'>ÇOCUK</a>
+            </li>
           </ul>
         </div>
       </div>

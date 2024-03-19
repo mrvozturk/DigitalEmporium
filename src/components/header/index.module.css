@@ -176,10 +176,10 @@
   .categoryLinks {
     display: flex;
     flex-direction: column;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #f2f2f2;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 2rem 1rem;
+    margin-top: 20px;
   }
 
   .categoryLinks ul {
@@ -188,7 +188,6 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    gap: 5px;
   }
 
   .categoryLinks li {
@@ -211,5 +210,27 @@
   .sidebarToggle {
     font-size: 1.2rem;
     margin-right: 15px;
+  }
+  .categoryLinks {
+    padding: 1.5rem 1rem;
+    margin-top: 20px;
+  }
+
+  .categoryLinks ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 5px;
+  }
+
+  .categoryLinks li {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  .categoryLinks a {
+    font-size: 15px;
   }
 }

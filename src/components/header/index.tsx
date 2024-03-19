@@ -48,7 +48,10 @@ const Header = () => {
             <a href='/'>Logo</a>
           </div>
           {isMobileView && isSidebarOpen && (
-            <button className={styles.sidebarToggle} onClick={toggleSidebar}>
+            <button
+              className={`${styles.sidebarToggle} fa-times`}
+              onClick={toggleSidebar}
+            >
               <FontAwesomeIcon icon={faTimes} />
             </button>
           )}
