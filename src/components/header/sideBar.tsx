@@ -1,20 +1,41 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styles from './index.module.css';
 
-type SideBarProps = {
+const SideBar = ({
+  toggleSidebar,
+  isSidebarOpen
+}: {
   toggleSidebar: () => void;
   isSidebarOpen: boolean;
-};
+}) => {
+  const sidebarRef = useRef<HTMLDivElement>(null);
 
-const SideBar: React.FC<SideBarProps> = ({ toggleSidebar, isSidebarOpen }) => {
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target as HTMLElement) &&
+        isSidebarOpen
+      ) {
+        toggleSidebar();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isSidebarOpen, toggleSidebar]);
+
   return (
     <div
       className={`${styles.sidebar} ${isSidebarOpen ? styles.sidebarOpen : ''}`}
+      ref={sidebarRef}
     >
       <div className={styles.categoryLinks}>
         <button className={styles.closeButton} onClick={toggleSidebar}></button>
-
         <ul>
           <li>
             <a href='#'>KADIN</a>
@@ -33,7 +54,7 @@ const SideBar: React.FC<SideBarProps> = ({ toggleSidebar, isSidebarOpen }) => {
           </li>
           <li>
             <a href='#'>ÇOCUK</a>
-          </li>{' '}
+          </li>
           <li>
             <a href='#'>KADIN</a>
           </li>

@@ -59,6 +59,7 @@
   width: 30%;
   background-color: transparent;
 }
+
 .searchInput:focus {
   outline: none;
   border-color: #ccc;
