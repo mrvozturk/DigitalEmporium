@@ -9,7 +9,6 @@ import {
   faBars,
   faSearch
 } from '@fortawesome/free-solid-svg-icons';
-
 import styles from './index.module.css';
 import SideBar from './sideBar';
 
@@ -55,6 +54,7 @@ const Header = () => {
               <FontAwesomeIcon icon={faTimes} />
             </button>
           )}
+          
           <div className={styles.searchContainer}>
             {(isMobileView && isSearchOpen) || !isMobileView ? (
               <input
