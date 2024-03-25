@@ -1,13 +1,27 @@
 'use client';
-import React, {  useEffect, useRef } from 'react';
-import styles from './sideBar.module.css';
+import React, { useEffect, useRef } from 'react';
+import style from './sideBar.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+faBars
+} from '@fortawesome/free-solid-svg-icons';
 
-const SideBar = ({ toggleSidebar, isSidebarOpen }: { toggleSidebar: () => void; isSidebarOpen: boolean; }) => {
+const SideBar = ({
+  toggleSidebar,
+  isSidebarOpen
+}: {
+  toggleSidebar: () => void;
+  isSidebarOpen: boolean;
+}) => {
   const sidebarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (sidebarRef.current && !sidebarRef.current.contains(event.target as HTMLElement) && isSidebarOpen) {
+      if (
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target as HTMLElement) &&
+        isSidebarOpen
+      ) {
         toggleSidebar();
       }
     };
@@ -20,23 +34,36 @@ const SideBar = ({ toggleSidebar, isSidebarOpen }: { toggleSidebar: () => void; 
   }, [isSidebarOpen, toggleSidebar]);
 
   return (
-    <div className={`${styles.sidebar} ${isSidebarOpen ? styles.sidebarOpen : ''}`} ref={sidebarRef}>
-      <div className={styles.categoryLinks}>
-        <button className={styles.closeButton} onClick={toggleSidebar}></button>
-        <ul>
-          <li><a href='#'>KADIN</a></li>
-          <li><a href='#'>ERKEK</a></li>
-          <li><a href='#'>ÇOCUK</a></li>
-          <li><a href='#'>KADIN</a></li>
-          <li><a href='#'>ERKEK</a></li>
-          <li><a href='#'>ÇOCUK</a></li>
-          <li><a href='#'>KADIN</a></li>
-          <li><a href='#'>ERKEK</a></li>
-          <li><a href='#'>ÇOCUK</a></li>
-          <li><a href='#'>BEBEK</a></li>
-        </ul>
+    <>
+      <button className={style.sidebarToggle} onClick={toggleSidebar}>
+      <FontAwesomeIcon icon={faBars} />
+      </button>
+      <div
+        className={`${style.sidebar} ${isSidebarOpen ? style.sidebarOpen : ''}`}
+        ref={sidebarRef}
+      >
+        <div className={style.categoryLinks}>
+          <button
+            className={style.closeButton}
+            onClick={toggleSidebar}
+          ></button>
+          <ul>
+            <li>
+              <a href='#'>KADIN</a>
+            </li>
+            <li>
+              <a href='#'>ERKEK</a>
+            </li>
+            <li>
+              <a href='#'>ÇOCUK</a>
+            </li>
+            <li>
+              <a href='#'>BEBEK</a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

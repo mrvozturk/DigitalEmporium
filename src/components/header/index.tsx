@@ -1,19 +1,12 @@
 'use client';
-import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faUser,
-  faHeart,
-  faShoppingCart,
-  faSearch
-} from '@fortawesome/free-solid-svg-icons';
+import React, { useState } from 'react';
+
 import styles from './index.module.css';
 
 import SideBar from './sideBar';
 
 const Header = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
-  const [isSearchOpen, setSearchOpen] = useState(false);
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
@@ -25,28 +18,19 @@ const Header = () => {
         <div className={styles.logo}>
           <a href='/'>Logo</a>
         </div>
-
+        <button className={styles.sidebarToggle} onClick={toggleSidebar}>
+          ☰
+        </button>
         <div className={styles.navbarLinks}>
           <ul>
             <li>
-              <a href='#'>
-                <FontAwesomeIcon icon={faSearch} />
-              </a>
+              <a href='#'>Hesap</a>
             </li>
             <li>
-              <a href='#'>
-                <FontAwesomeIcon icon={faUser} />
-              </a>
+              <a href='#'>Favoriler</a>
             </li>
             <li>
-              <a href='#'>
-                <FontAwesomeIcon icon={faUser} />
-              </a>
-            </li>
-            <li>
-              <a href='#'>
-                <FontAwesomeIcon icon={faUser} />
-              </a>
+              <a href='#'>Sepet</a>
             </li>
           </ul>
         </div>

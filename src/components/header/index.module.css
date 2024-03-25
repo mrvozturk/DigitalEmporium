@@ -44,34 +44,34 @@
   color: var(--text-color);
 }
 
-.categoryLinks {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  gap: 15px;
+.sidebarToggle {
+  display: none;
+  z-index: 999;
 }
 
-.categoryLinks ul {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  gap: 5px;
-}
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.5rem;
+    position: relative;
+  }
+  .navbarLinks ul {
+    gap: 15px;
+  }
+  .logo {
+    font-size: 1.5rem;
+    margin-left: 40px;
+  }
 
-.categoryLinks li {
-  margin: 0 10px;
+  .combinedContainer {
+    padding: 0 1rem;
+  }
 }
-
-.categoryLinks a {
-  text-decoration: none;
-  color: var(--text-color);
-  font-weight: bold;
-  font-size: 14.5px;
-}
-
-.categoryLinks a:hover {
-  color: darkgray;
+@media (max-width: 568px) {
+  .logo {
+    font-size: 1.5rem;
+    margin-left: 40px;
+  }
+  .combinedContainer {
+    padding: 0 0.5rem;
+  }
 }
