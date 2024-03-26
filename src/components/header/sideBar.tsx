@@ -1,46 +1,50 @@
 'use client';
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import style from './sideBar.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
-const SideBar = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+interface SideBarProps {
+  isSidebarOpen: boolean;
+  onCloseSidebar: () => void;
+}
+
+const SideBar: React.FC<SideBarProps> = ({ isSidebarOpen, onCloseSidebar }) => {
   const sidebarRef = useRef<HTMLDivElement>(null);
 
-  const handleClickOutside = useCallback((event: MouseEvent) => {
-    if (
-      sidebarRef.current &&
-      !sidebarRef.current.contains(event.target as HTMLElement) &&
-      isSidebarOpen
-    ) {
-      setIsSidebarOpen(false);
-    }
-  }, [isSidebarOpen]);
+  const handleClickOutside = useCallback(
+    (event: MouseEvent) => {
+      if (
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target as HTMLElement) &&
+        isSidebarOpen
+      ) {
+        onCloseSidebar();
+      }
+    },
+    [isSidebarOpen, onCloseSidebar]
+  );
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
-    
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [handleClickOutside]);
 
-  const handleClickToggle = () => {
-    setIsSidebarOpen(prevState => !prevState);
-  };
-
   return (
     <>
-      <button className={style.sidebarToggle} onClick={handleClickToggle}>
+      <button className={style.sidebarToggle} onClick={onCloseSidebar}>
         <FontAwesomeIcon icon={faBars} />
       </button>
       <div
         className={`${style.sidebar} ${isSidebarOpen ? style.sidebarOpen : ''}`}
         ref={sidebarRef}
       >
+        <div className={style.sidebarlogo}>
+          <a href='/'>LOGO</a>
+        </div>
         <div className={style.categoryLinks}>
-          <button className={style.closeButton} onClick={handleClickToggle}></button>
           <ul>
             <li>
               <a href='#'>KADIN</a>

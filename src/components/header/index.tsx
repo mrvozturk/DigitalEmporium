@@ -1,15 +1,13 @@
 'use client';
 import React, { useState } from 'react';
-
 import styles from './index.module.css';
-
 import SideBar from './sideBar';
 
 const Header = () => {
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const toggleSidebar = () => {
-    setSidebarOpen(!isSidebarOpen);
+  const handleToggleSidebar = () => {
+    setIsSidebarOpen(prevState => !prevState);
   };
 
   return (
@@ -18,9 +16,6 @@ const Header = () => {
         <div className={styles.logo}>
           <a href='/'>Logo</a>
         </div>
-        <button className={styles.sidebarToggle} onClick={toggleSidebar}>
-          ☰
-        </button>
         <div className={styles.navbarLinks}>
           <ul>
             <li>
@@ -36,7 +31,10 @@ const Header = () => {
         </div>
       </nav>
 
-      <SideBar toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
+      <SideBar
+        isSidebarOpen={isSidebarOpen}
+        onCloseSidebar={handleToggleSidebar}
+      />
     </div>
   );
 };
