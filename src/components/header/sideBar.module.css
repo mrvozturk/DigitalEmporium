@@ -6,7 +6,7 @@
   top: 0;
   left: 0;
   max-width: 100%;
-  width: 85%;
+  width: 80%;
   background-color: #f2f2f2;
   height: 100%;
   overflow-y: auto;
@@ -50,7 +50,7 @@
 .sidebarLinks a {
   text-decoration: none;
   color: var(--text-color);
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 500;
 }
 
@@ -111,17 +111,16 @@
   }
   .sidebarlogo {
     display: block;
-    padding: 2rem 2rem;
+    padding: 0.5rem 1rem;
   }
 
   .sidebarlogo a {
     margin-left: 0.5rem;
-
     font-size: 3.2rem;
   }
   .sidebarLinks {
     display: block;
-    padding: 3.2rem 1rem;
+    padding: 1.7rem 1rem;
   }
   .sidebarLinks a {
     font-size: 25px;
@@ -132,7 +131,7 @@
   .categoryLinks {
     flex-direction: column;
     align-items: flex-start;
-    padding: 2rem;
+    padding: 3rem 1.2rem;
   }
 
   .categoryLinks li {
@@ -143,27 +142,30 @@
   .categoryLinks a {
     font-size: 25px;
   }
+  .closeIcon {
+    font-size: 2.2rem;
+  }
 }
 
 @media (max-width: 568px) {
   .sidebarlogo {
-    padding: 1rem;
+    padding: 0.3rem 0.7rem;
   }
 
   .sidebarlogo a {
     font-size: 2rem;
   }
   .sidebarLinks {
-    padding: 1.8rem 0.2rem;
+    padding: 0.9rem 0.6rem;
   }
   .sidebarLinks a {
-    font-size: 15px;
+    font-size: 17px;
   }
   .sidebarLinks li {
     margin-right: 10px;
   }
   .categoryLinks {
-    padding: 1rem;
+    padding: 2rem 0.8rem;
   }
 
   .categoryLinks li {
@@ -173,5 +175,8 @@
 
   .categoryLinks a {
     font-size: 15px;
+  }
+  .closeIcon {
+    font-size: 1.5rem;
   }
 }

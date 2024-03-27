@@ -14,6 +14,8 @@ const Header = () => {
 
   return (
     <div>
+      {isSidebarOpen && <div className={style.overlay}></div>}
+
       <nav className={styles.navbar}>
         <div className={styles.logo}>
           <a href='/'>Logo</a>

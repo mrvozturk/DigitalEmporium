@@ -1,13 +1,13 @@
 'use client';
 import React, { useEffect, useRef, useCallback } from 'react';
 import style from './sideBar.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBars,
   faUser,
   faHeart,
   faTimes
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface SideBarProps {
   isSidebarOpen: boolean;
@@ -43,6 +43,7 @@ const SideBar: React.FC<SideBarProps> = ({ isSidebarOpen, onCloseSidebar }) => {
         <FontAwesomeIcon icon={faBars} />
       </button>
 
+     
       <div
         className={`${style.sidebar} ${isSidebarOpen ? style.sidebarOpen : ''}`}
         ref={sidebarRef}
@@ -63,9 +64,10 @@ const SideBar: React.FC<SideBarProps> = ({ isSidebarOpen, onCloseSidebar }) => {
               </a>
             </li>
             <li>
-              <a href='#' onClick={onCloseSidebar}>
-                <FontAwesomeIcon icon={faTimes} />
-              </a>
+            <FontAwesomeIcon
+      icon={faTimes}
+      className={style.closeIcon}
+    />
             </li>
           </ul>
         </div>

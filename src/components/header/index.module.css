@@ -14,6 +14,11 @@
   gap: 40px;
 }
 
+.blurred {
+  backdrop-filter: blur(5px);
+}
+
+
 .navbarLinks a {
   font-size: 1rem;
   text-decoration: none;
@@ -39,6 +44,7 @@
 
 .sidebarToggle {
   display: none;
+  z-index: 999;
 }
 
 @media (max-width: 768px) {
