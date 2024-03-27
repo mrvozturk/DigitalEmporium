@@ -1,6 +1,8 @@
 'use client';
 import React, { useState } from 'react';
 import styles from './index.module.css';
+import style from './sideBar.module.css';
+
 import SideBar from './sideBar';
 
 const Header = () => {
@@ -30,6 +32,8 @@ const Header = () => {
           </ul>
         </div>
       </nav>
+
+      <div className={style.categoryLinks}></div>
 
       <SideBar
         isSidebarOpen={isSidebarOpen}

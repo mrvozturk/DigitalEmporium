@@ -2,7 +2,12 @@
 import React, { useEffect, useRef, useCallback } from 'react';
 import style from './sideBar.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import {
+  faBars,
+  faUser,
+  faHeart,
+  faTimes
+} from '@fortawesome/free-solid-svg-icons';
 
 interface SideBarProps {
   isSidebarOpen: boolean;
@@ -37,6 +42,7 @@ const SideBar: React.FC<SideBarProps> = ({ isSidebarOpen, onCloseSidebar }) => {
       <button className={style.sidebarToggle} onClick={onCloseSidebar}>
         <FontAwesomeIcon icon={faBars} />
       </button>
+
       <div
         className={`${style.sidebar} ${isSidebarOpen ? style.sidebarOpen : ''}`}
         ref={sidebarRef}
@@ -44,6 +50,26 @@ const SideBar: React.FC<SideBarProps> = ({ isSidebarOpen, onCloseSidebar }) => {
         <div className={style.sidebarlogo}>
           <a href='/'>LOGO</a>
         </div>
+        <div className={style.sidebarLinks}>
+          <ul>
+            <li>
+              <a href='#'>
+                <FontAwesomeIcon icon={faUser} />
+              </a>
+            </li>
+            <li>
+              <a href='#'>
+                <FontAwesomeIcon icon={faHeart} />
+              </a>
+            </li>
+            <li>
+              <a href='#' onClick={onCloseSidebar}>
+                <FontAwesomeIcon icon={faTimes} />
+              </a>
+            </li>
+          </ul>
+        </div>
+
         <div className={style.categoryLinks}>
           <ul>
             <li>
