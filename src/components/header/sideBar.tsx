@@ -43,7 +43,6 @@ const SideBar: React.FC<SideBarProps> = ({ isSidebarOpen, onCloseSidebar }) => {
         <FontAwesomeIcon icon={faBars} />
       </button>
 
-     
       <div
         className={`${style.sidebar} ${isSidebarOpen ? style.sidebarOpen : ''}`}
         ref={sidebarRef}
@@ -64,10 +63,14 @@ const SideBar: React.FC<SideBarProps> = ({ isSidebarOpen, onCloseSidebar }) => {
               </a>
             </li>
             <li>
-            <FontAwesomeIcon
-      icon={faTimes}
-      className={style.closeIcon}
-    />
+              <a href='#'>
+                {' '}
+                <FontAwesomeIcon
+                  onClick={onCloseSidebar}
+                  icon={faTimes}
+                  className={style.closeIcon}
+                />
+              </a>
             </li>
           </ul>
         </div>
