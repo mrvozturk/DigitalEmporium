@@ -1,4 +1,15 @@
 /*sidebaropen*/
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 20%;
+  background-color: rgba(0, 0, 0, 0.7); 
+  backdrop-filter: blur(2px); 
+  z-index: 10; 
+}
+
 .sidebar {
   display: flex;
   flex-direction: column;
