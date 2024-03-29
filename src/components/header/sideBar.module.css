@@ -125,14 +125,14 @@
 
   .sidebarlogo a {
     margin-left: 0.5rem;
-    font-size: 3.2rem;
+    font-size: 3rem;
   }
   .sidebarLinks {
     display: block;
-    padding: 1.7rem 1rem;
+    padding: 1.8rem 0.5rem;
   }
   .sidebarLinks a {
-    font-size: 25px;
+    font-size: 2rem;
   }
   .sidebarLinks li {
     margin-right: 15px;
@@ -154,23 +154,23 @@
     font-size: 25px;
   }
   .closeIcon {
-    font-size: 2.2rem;
+    font-size: 2.1rem;
   }
 }
 
 @media (max-width: 568px) {
   .sidebarlogo {
-    padding: 0.3rem 0.7rem;
+    padding: 0.2rem 0.7rem;
   }
 
   .sidebarlogo a {
-    font-size: 2rem;
+    font-size: 1.7rem;
   }
   .sidebarLinks {
-    padding: 0.9rem 0.6rem;
+    padding: 0.8rem 0.2rem;
   }
   .sidebarLinks a {
-    font-size: 17px;
+    font-size: 1.2rem;
   }
   .sidebarLinks li {
     margin-right: 10px;
@@ -192,6 +192,6 @@
     font-size: 15px;
   }
   .closeIcon {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 }
