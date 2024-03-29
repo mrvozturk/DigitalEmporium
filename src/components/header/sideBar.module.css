@@ -160,14 +160,14 @@
 
 @media (max-width: 568px) {
   .sidebarlogo {
-    padding: 0.2rem 0.7rem;
+    padding: 0.4rem 0.7rem;
   }
 
   .sidebarlogo a {
     font-size: 1.7rem;
   }
   .sidebarLinks {
-    padding: 0.8rem 0.2rem;
+    padding: 1rem 0.2rem;
   }
   .sidebarLinks a {
     font-size: 1.2rem;
