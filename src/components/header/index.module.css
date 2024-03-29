@@ -53,7 +53,7 @@
   }
 
   .logo {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     margin-left: 40px;
   }
 
@@ -66,5 +66,19 @@
 
   .navbarLinks .icon {
     display: block;
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: 568px) {
+  .navbarLinks ul {
+    gap: 10px;
+  }
+
+  .logo {
+    font-size: 1.7rem;
+  }
+
+  .navbarLinks .icon {
+    font-size: 1.3rem;
   }
 }
