@@ -2,12 +2,11 @@
 import React, { useEffect, useRef, useCallback } from 'react';
 import style from './sideBar.module.css';
 import {
-  faBars,
-  faUser,
-  faHeart,
-  faTimes
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+  AiOutlineUser,
+  AiOutlineHeart,
+  AiOutlineMenu,
+  AiOutlineClose
+} from 'react-icons/ai';
 
 interface SideBarProps {
   isSidebarOpen: boolean;
@@ -40,7 +39,7 @@ const SideBar: React.FC<SideBarProps> = ({ isSidebarOpen, onCloseSidebar }) => {
   return (
     <>
       <button className={style.sidebarToggle} onClick={onCloseSidebar}>
-        <FontAwesomeIcon icon={faBars} />
+        <AiOutlineMenu />
       </button>
 
       <div
@@ -52,25 +51,20 @@ const SideBar: React.FC<SideBarProps> = ({ isSidebarOpen, onCloseSidebar }) => {
         </div>
         <div className={style.sidebarLinks}>
           <ul>
-            <li>
-              <a href='#'>
-                <FontAwesomeIcon icon={faUser} />
+            <li className={style.navLink}>
+              <a className='#'>
+                <AiOutlineUser className={style.icon} />
               </a>
             </li>
-            <li>
-              <a href='#'>
-                <FontAwesomeIcon icon={faHeart} />
-              </a>
+            <li className={style.navLink}>
+              <a className='#'>
+                <AiOutlineHeart className={style.icon} />
+              </a>{' '}
             </li>
             <li>
-              <a href='#'>
-                {' '}
-                <FontAwesomeIcon
-                  onClick={onCloseSidebar}
-                  icon={faTimes}
-                  className={style.closeIcon}
-                />
-              </a>
+              <button onClick={onCloseSidebar}>
+                <AiOutlineClose className={style.closeIcon} />
+              </button>
             </li>
           </ul>
         </div>

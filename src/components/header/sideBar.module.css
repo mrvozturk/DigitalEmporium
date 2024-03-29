@@ -1,5 +1,3 @@
-/*sidebaropen*/
-
 /*sidebarLinks*/
 .sidebarLinks {
   padding: 2rem 2rem;
@@ -61,7 +59,6 @@
   align-items: center;
   padding: 1rem;
   gap: 15px;
-
 }
 
 .categoryLinks ul {
@@ -113,7 +110,7 @@
     margin-right: 20px;
     margin-left: 0;
     position: absolute;
-    top: 0.6rem;
+    top: 0.85rem;
     left: 1.1rem;
     display: block;
   }
@@ -144,8 +141,8 @@
     flex-direction: column;
     align-items: flex-start;
     padding: 3rem 1.2rem;
-    height: 300px; /* Sabit bir yükseklik belirleyin */
-    overflow-y: scroll; /* Dikey kaydırma çubuğu ekleyin */
+    height: 300px;
+    overflow-y: scroll;
   }
 
   .categoryLinks li {
@@ -180,9 +177,12 @@
   }
   .categoryLinks {
     padding: 2rem 0.8rem;
-    height: 200px; /* Sabit bir yükseklik belirleyin */
+    height: 200px;
   }
-
+  .sidebarToggle {
+    top: 0.9rem;
+    left: 1rem;
+  }
   .categoryLinks li {
     margin-bottom: 10px;
     width: 100%;
