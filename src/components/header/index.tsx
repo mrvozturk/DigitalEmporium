@@ -7,7 +7,7 @@ import {
   AiOutlineMenu
 } from 'react-icons/ai';
 import styles from './index.module.css';
-import style from './sideBar.module.css';
+import sideBarStyles from './sideBar.module.css';
 
 import SideBar from './sideBar';
 
@@ -20,14 +20,12 @@ const Header = () => {
 
   return (
     <div>
-      {isSidebarOpen && <div className={style.overlay}></div>}
-
       <nav className={styles.navbar}>
         <div style={{
           flexDirection: 'row',
           display: 'flex'
         }}>
-          <button className={style.sidebarToggle} onClick={handleToggleSidebar}>
+          <button className={sideBarStyles.sidebarToggle} onClick={handleToggleSidebar}>
             <AiOutlineMenu />
           </button>
           <div className={styles.logo}>
@@ -52,12 +50,12 @@ const Header = () => {
         </div>
       </nav>
 
-      <div className={style.categoryLinks}></div>
+      {isSidebarOpen && (
+        <SideBar
+          onCloseSidebar={handleToggleSidebar}
+        />
+      )}
 
-      <SideBar
-        isSidebarOpen={isSidebarOpen}
-        onCloseSidebar={handleToggleSidebar}
-      />
     </div>
   );
 };

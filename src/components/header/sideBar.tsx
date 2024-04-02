@@ -1,70 +1,78 @@
 'use client';
-import React, { useEffect, useRef, useCallback } from 'react';
+import React from 'react';
 import style from './sideBar.module.css';
 import {
   AiOutlineUser,
   AiOutlineHeart,
-  AiOutlineMenu,
   AiOutlineClose
 } from 'react-icons/ai';
 
 interface SideBarProps {
-  isSidebarOpen: boolean;
   onCloseSidebar: () => void;
 }
 
-const SideBar: React.FC<SideBarProps> = ({ isSidebarOpen, onCloseSidebar }) => {
-  const sidebarRef = useRef<HTMLDivElement>(null);
-
-  const handleClickOutside = useCallback(
-    (event: MouseEvent) => {
-      if (
-        sidebarRef.current &&
-        !sidebarRef.current.contains(event.target as HTMLElement) &&
-        isSidebarOpen
-      ) {
-        onCloseSidebar();
-      }
-    },
-    [isSidebarOpen, onCloseSidebar]
-  );
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  });
+const SideBar: React.FC<SideBarProps> = ({ onCloseSidebar }) => {
 
   return (
-    <>
+    <div style={{
+      position: 'absolute',
+      display: 'flex',
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      backgroundColor: 'rgba(0,0,0,0.7)',
+      zIndex: 999
+    }}>
+      {/* CONTENT AREA */}
       <div
-        className={`${style.sidebar} ${isSidebarOpen ? style.sidebarOpen : ''}`}
-        ref={sidebarRef}
+        style={{
+          width: '75%',
+          maxWidth: 570,
+          height: '100%',
+          flexDirection: 'row',
+          backgroundColor: '#fff'
+        }}
       >
-        <div className={style.sidebarlogo}>
-          <a href='/'>LOGO</a>
-        </div>
-        <div className={style.sidebarLinks}>
-          <ul>
-            <li className={style.navLink}>
-              <a className='#'>
-                <AiOutlineUser className={style.icon} />
-              </a>
-            </li>
-            <li className={style.navLink}>
-              <a className='#'>
-                <AiOutlineHeart className={style.icon} />
-              </a>{' '}
-            </li>
-            <li>
-              <button onClick={onCloseSidebar}>
-                <AiOutlineClose className={style.closeIcon} />
-              </button>
-            </li>
-          </ul>
+        {/* HEADER AREA */}
+        <div style={{
+          display: 'flex',
+          flexDirection: 'row',
+          backgroundColor: '#f2f2f2',
+          justifyContent: 'space-between',
+          padding: '0.4rem 0.7rem'
+        }}>
+          <div >
+            <a href='/' style={{
+              fontSize: '1.7em'
+
+            }}>LOGO</a>
+          </div>
+          <div style={{
+            display: 'flex',
+            gap: '10px'
+          }}>
+            <button>
+              <AiOutlineUser style={{
+                fontSize: '1.2em'
+              }} />
+            </button>
+
+            <button>
+              <AiOutlineHeart style={{
+                fontSize: '1.2em'
+              }} />
+            </button>
+
+            <button onClick={onCloseSidebar}>
+              <AiOutlineClose style={{
+                fontSize: '1.2em'
+              }} />
+            </button>
+          </div>
         </div>
 
+        {/* CATEGORY LIST AREA */}
         <div className={style.categoryLinks}>
           <ul>
             <li>
@@ -82,7 +90,15 @@ const SideBar: React.FC<SideBarProps> = ({ isSidebarOpen, onCloseSidebar }) => {
           </ul>
         </div>
       </div>
-    </>
+
+      {/* CLOSABLE AREA */}
+      <div
+        onClick={onCloseSidebar}
+        style={{
+          width: '25%',
+          height: '100%',
+        }} />
+    </div >
   );
 };
 
