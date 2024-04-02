@@ -34,7 +34,7 @@ const SideBar: React.FC<SideBarProps> = ({ isSidebarOpen, onCloseSidebar }) => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [handleClickOutside]);
+  });
 
   return (
     <>
