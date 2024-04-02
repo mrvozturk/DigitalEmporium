@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import {
   AiOutlineUser,
   AiOutlineHeart,
-  AiOutlineShoppingCart
+  AiOutlineShoppingCart,
+  AiOutlineMenu
 } from 'react-icons/ai';
 import styles from './index.module.css';
 import style from './sideBar.module.css';
@@ -22,8 +23,16 @@ const Header = () => {
       {isSidebarOpen && <div className={style.overlay}></div>}
 
       <nav className={styles.navbar}>
-        <div className={styles.logo}>
-          <a href='/'>Logo</a>
+        <div style={{
+          flexDirection: 'row',
+          display: 'flex'
+        }}>
+          <button className={style.sidebarToggle} onClick={handleToggleSidebar}>
+            <AiOutlineMenu />
+          </button>
+          <div className={styles.logo}>
+            <a href='/'>Logo</a>
+          </div>
         </div>
         <div className={styles.navbarLinks}>
           <ul>

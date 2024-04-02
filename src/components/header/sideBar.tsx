@@ -38,10 +38,6 @@ const SideBar: React.FC<SideBarProps> = ({ isSidebarOpen, onCloseSidebar }) => {
 
   return (
     <>
-      <button className={style.sidebarToggle} onClick={onCloseSidebar}>
-        <AiOutlineMenu />
-      </button>
-
       <div
         className={`${style.sidebar} ${isSidebarOpen ? style.sidebarOpen : ''}`}
         ref={sidebarRef}
