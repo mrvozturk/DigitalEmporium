@@ -54,7 +54,6 @@ const Header = () => {
           </ul>
         </div>
       </nav>
-      <div className={sideBarStyles.categoryLinks}></div>
 
       {isSidebarOpen && <SideBar onCloseSidebar={handleToggleSidebar} />}
     </div>
