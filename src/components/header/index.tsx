@@ -21,11 +21,16 @@ const Header = () => {
   return (
     <div>
       <nav className={styles.navbar}>
-        <div style={{
-          flexDirection: 'row',
-          display: 'flex'
-        }}>
-          <button className={styles.sidebarToggle} onClick={handleToggleSidebar}>
+        <div
+          style={{
+            flexDirection: 'row',
+            display: 'flex'
+          }}
+        >
+          <button
+            className={styles.sidebarToggle}
+            onClick={handleToggleSidebar}
+          >
             <AiOutlineMenu />
           </button>
           <div className={styles.logo}>
@@ -49,13 +54,9 @@ const Header = () => {
           </ul>
         </div>
       </nav>
+      <div className={sideBarStyles.categoryLinks}></div>
 
-      {isSidebarOpen && (
-        <SideBar
-          onCloseSidebar={handleToggleSidebar}
-        />
-      )}
-
+      {isSidebarOpen && <SideBar onCloseSidebar={handleToggleSidebar} />}
     </div>
   );
 };
