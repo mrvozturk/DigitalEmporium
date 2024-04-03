@@ -25,7 +25,7 @@ const Header = () => {
           flexDirection: 'row',
           display: 'flex'
         }}>
-          <button className={sideBarStyles.sidebarToggle} onClick={handleToggleSidebar}>
+          <button className={styles.sidebarToggle} onClick={handleToggleSidebar}>
             <AiOutlineMenu />
           </button>
           <div className={styles.logo}>
