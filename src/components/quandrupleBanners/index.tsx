@@ -14,9 +14,9 @@ const QuadrupleBanners: React.FC = () => {
   return (
     <div className={styles.bannerContainer}>
       <div className={styles.bannerText}>
-        <h1>Blog</h1>
+        <h1>BLOG</h1>
         <p>Sezon trendleri ve stil haberleri senin için Koton Blogda</p>
-        <button className={styles.bannerButton}>Daha Fazla Bilgi</button>
+        <button className={styles.bannerButton}>TRENDLERİ KEŞFET</button>
       </div>
       <div className={styles.bannerWrap}>
         {images.map((image, index) => (

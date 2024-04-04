@@ -1,13 +1,16 @@
 .bannerContainer {
   margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 60px;
 }
 
 .bannerWrap {
   width: 60rem;
-  height: 25rem;
+  height: 18rem;
   display: flex;
-  flex-direction: row;
-  gap: 9px;
+  gap: 0;
 }
 
 .bannerImage {
@@ -24,9 +27,33 @@
 }
 
 .bannerImage:hover {
-  flex: 5;
+  flex: 4;
 }
 
 .bannerImage:hover img {
   transform: scale(1.2);
+}
+.bannerText {
+  flex: 1;
+  font-weight: bold;
+}
+.bannerText h1 {
+  font-size: 5.5rem;
+}
+.bannerText p {
+  color: black;
+}
+.bannerButton {
+  background-color: black;
+  color: white;
+  padding: 5px 32px;
+  border: 2px solid transparent;
+  font-size: 0.8rem;
+  margin-top: 12px;
+}
+
+.bannerButton:hover {
+  background-color: #fff;
+  color: black;
+  border-color: black;
 }
