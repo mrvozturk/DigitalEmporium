@@ -30,6 +30,14 @@ const QuadrupleBanners: React.FC = () => {
           </div>
         ))}
       </div>
+      <div className={styles.mobileBanner}>
+        <Image
+          src='https://ktnimg2.mncdn.com/cms/2024/03/19/46a12a93-f734-4344-a3e6-ab94930e7f16.png'
+          alt='Mobile Picture'
+          width={500}
+          height={500}
+        />
+      </div>
     </div>
   );
 };

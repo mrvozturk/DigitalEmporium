@@ -57,3 +57,14 @@
   color: black;
   border-color: black;
 }
+@media (max-width: 1169px) {
+  .bannerWrap {
+    display: none;
+  }
+}
+
+@media (min-width: 1170px) {
+  .mobileBanner {
+    display: none;
+  }
+}
