@@ -1,0 +1,32 @@
+.bannerContainer {
+  margin: 0 auto;
+}
+
+.bannerWrap {
+  width: 60rem;
+  height: 25rem;
+  display: flex;
+  flex-direction: row;
+  gap: 9px;
+}
+
+.bannerImage {
+  flex: 1;
+  transition: flex 0.5s ease, z-index 0.5s ease;
+  overflow: hidden;
+}
+
+.bannerImage img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.bannerImage:hover {
+  flex: 5;
+}
+
+.bannerImage:hover img {
+  transform: scale(1.2);
+}

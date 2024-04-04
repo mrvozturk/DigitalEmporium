@@ -1,3 +1,4 @@
+import { QuandrupleBanners } from '@/components';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
@@ -17,6 +18,7 @@ export default function IndexPage() {
       <Link href='/examplePage'>REDIRECT PAGE TO EXAMPLE FOR REDUX</Link>
     </button>
   */}
+  <QuandrupleBanners/>
 </div>
 
   );
