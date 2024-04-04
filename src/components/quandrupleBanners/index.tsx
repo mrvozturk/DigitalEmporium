@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import Image from 'next/image';
 import styles from './index.module.css';
@@ -15,9 +16,7 @@ const QuadrupleBanners: React.FC = () => {
       <div className={styles.bannerText}>
         <h1>Blog</h1>
         <p>Sezon trendleri ve stil haberleri senin için Koton Blogda</p>
-        <a href='/blog' className={styles.bannerButton}>
-          Daha Fazla Bilgi
-        </a>
+        <button className={styles.bannerButton}>Daha Fazla Bilgi</button>
       </div>
       <div className={styles.bannerWrap}>
         {images.map((image, index) => (
