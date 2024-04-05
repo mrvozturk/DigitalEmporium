@@ -3,14 +3,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 60px;
+  padding: 0 35px;
 }
 
 .bannerWrap {
-  width: 60rem;
+  width: 40rem;
   height: 18rem;
   display: flex;
-  gap: 0;
 }
 
 .bannerImage {
@@ -37,6 +36,7 @@
   flex: 1;
   font-weight: bold;
 }
+
 .bannerText h1 {
   font-size: 5.5rem;
 }
@@ -47,7 +47,7 @@
   background-color: black;
   color: white;
   padding: 5px 32px;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
   font-size: 0.8rem;
   margin-top: 12px;
 }
@@ -57,14 +57,19 @@
   color: black;
   border-color: black;
 }
-@media (max-width: 1169px) {
+.mobileBanner {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .bannerContainer {
+    padding: 0 10px;
+  }
+
   .bannerWrap {
     display: none;
   }
-}
-
-@media (min-width: 1170px) {
   .mobileBanner {
-    display: none;
+    display: block;
   }
 }
