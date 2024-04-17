@@ -1,4 +1,5 @@
 'use client';
+'use client';
 import React from 'react';
 import Image from 'next/image';
 import styles from './index.module.css';
@@ -20,13 +21,8 @@ const QuadrupleBanners: React.FC = () => {
       </div>
       <div className={styles.bannerWrap}>
         {images.map((image, index) => (
-          <div
-            key={index}
-            className={`${styles.bannerImage} ${
-              styles['bannerImage' + (index + 1)]
-            }`}
-          >
-            <Image src={image} alt='Picture' width={500} height={500} />
+          <div key={index} className={styles.bannerImage}>
+            <Image src={image} alt='Picture' width={500} height={320} />
           </div>
         ))}
       </div>
