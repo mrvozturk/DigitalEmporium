@@ -3,18 +3,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 35px;
+  padding: 0 40px;
 }
 
 .bannerWrap {
-  width: 50rem;
-  height: 18rem;
+  width: 65rem;
+  height: 20rem;
   display: flex;
 }
 
 .bannerImage {
   flex: 1;
-  transition: flex 0.5s ease, z-index 0.5s ease;
+  transition: flex 0.8s ease, z-index 0.5s ease;
   overflow: hidden;
 }
 
@@ -22,7 +22,7 @@
   height: 100%;
   width: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 1s ease;
 }
 
 .bannerText {
