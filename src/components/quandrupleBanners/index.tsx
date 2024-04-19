@@ -1,10 +1,15 @@
 'use client';
-'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import styles from './index.module.css';
 
 const QuadrupleBanners: React.FC = () => {
+  const [hoveredIndex, setHoveredIndex] = useState<number>(0);
+
+  const handleMouseEnter = (index: number) => {
+    setHoveredIndex(index);
+  };
+
   const images = [
     'https://ktnimg2.mncdn.com/cms/2024/03/19/3a13246e-a9f3-4999-b970-00e05010d59e.png',
     'https://ktnimg2.mncdn.com/cms/2024/03/19/35b1cda7-bd8c-44ba-9c42-0a89386246c1.png',
@@ -21,8 +26,24 @@ const QuadrupleBanners: React.FC = () => {
       </div>
       <div className={styles.bannerWrap}>
         {images.map((image, index) => (
-          <div key={index} className={styles.bannerImage}>
-            <Image src={image} alt='Picture' width={500} height={320} />
+          <div
+            key={index}
+            className={styles.bannerImage}
+            onMouseEnter={() => handleMouseEnter(index)}
+            style={{
+              flex: hoveredIndex === index ? 4 : 1,
+              zIndex: hoveredIndex === index ? 1 : 0
+            }}
+          >
+            <Image
+              src={image}
+              alt='Picture'
+              width={500}
+              height={500}
+              style={{
+                transform: hoveredIndex === index ? 'scale(1.2)' : 'scale(1)'
+              }}
+            />
           </div>
         ))}
       </div>

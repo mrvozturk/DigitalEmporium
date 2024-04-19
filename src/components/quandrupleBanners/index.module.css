@@ -7,7 +7,7 @@
 }
 
 .bannerWrap {
-  width: 40rem;
+  width: 50rem;
   height: 18rem;
   display: flex;
 }
@@ -25,13 +25,6 @@
   transition: transform 0.5s ease;
 }
 
-.bannerImage:hover {
-  flex: 4;
-}
-
-.bannerImage:hover img {
-  transform: scale(1.2);
-}
 .bannerText {
   flex: 1;
   font-weight: bold;
