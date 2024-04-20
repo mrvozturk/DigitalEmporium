@@ -1,3 +1,4 @@
 import Header from './header';
+import QuandrupleBanners from './quandrupleBanners';
 
-export { Header };
+export { Header,QuandrupleBanners };
