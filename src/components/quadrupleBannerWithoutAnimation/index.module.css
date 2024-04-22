@@ -1,0 +1,33 @@
+.bannerContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.cardbodyimages {
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
+  width: calc(25% - 15px);
+}
+
+@media (max-width: 768px) {
+  .bannerContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cardbodyimages {
+    width: 100%;
+    height: auto;
+    padding: 10px 0;
+  }
+}
+
+@media (min-width: 1200px) {
+  .bannerContainer {
+    padding: 0 20px;
+  }
+}
