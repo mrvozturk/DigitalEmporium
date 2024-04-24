@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import styles from './index.module.css';
 
+
 const QuadrupleBanners: React.FC = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number>(0);
 
@@ -11,17 +12,17 @@ const QuadrupleBanners: React.FC = () => {
   };
 
   const images = [
-    'https://ktnimg2.mncdn.com/cms/2024/03/19/3a13246e-a9f3-4999-b970-00e05010d59e.png',
-    'https://ktnimg2.mncdn.com/cms/2024/03/19/35b1cda7-bd8c-44ba-9c42-0a89386246c1.png',
-    'https://ktnimg2.mncdn.com/cms/2024/03/19/f99753d9-35fa-4dfe-bd89-450cf5afcceb.png',
-    'https://ktnimg2.mncdn.com/cms/2024/03/19/bb0f1e17-45e2-43cc-a2e7-8465388af311.png'
+    'https://ktnimg2.mncdn.com/cms/2024/04/22/d12fb8f9-33b1-4fd7-b27a-9bb4b99efd99.png',
+    'https://ktnimg2.mncdn.com/cms/2024/04/22/c9780508-fb37-4e34-9f64-73d027fc612c.png',
+    'https://ktnimg2.mncdn.com/cms/2024/04/22/7d9e9ae6-c737-4776-bf5a-b4702bc5c27e.png',
+    'https://ktnimg2.mncdn.com/cms/2024/04/22/ed86d22b-4fed-4f6c-95eb-7cf6e1f16f98.png'
   ];
 
   return (
     <div className={styles.bannerContainer}>
       <div className={styles.bannerText}>
         <h1>BLOG</h1>
-        <p>Sezon trendleri ve stil haberleri senin için Koton Blogda</p>
+        <p>Sezon trendleri ve stil haberleri senin için Koton Blogda </p>
         <button className={styles.bannerButton}>TRENDLERİ KEŞFET</button>
       </div>
       <div className={styles.bannerWrap}>
@@ -41,7 +42,7 @@ const QuadrupleBanners: React.FC = () => {
               width={500}
               height={500}
               style={{
-                transform: hoveredIndex === index ? 'scale(1.2)' : 'scale(1)'
+                transform: hoveredIndex === index ? 'scale(1)' : 'scale(1)'
               }}
             />
           </div>
@@ -49,7 +50,7 @@ const QuadrupleBanners: React.FC = () => {
       </div>
       <div className={styles.mobileBanner}>
         <Image
-          src='https://ktnimg2.mncdn.com/cms/2024/03/19/46a12a93-f734-4344-a3e6-ab94930e7f16.png'
+          src='https://ktnimg2.mncdn.com/cms/2024/04/22/a3878e02-1178-40e5-97ec-ffe4d7167048.png'
           alt='Mobile Picture'
           width={500}
           height={500}

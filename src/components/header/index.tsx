@@ -34,7 +34,7 @@ const Header = () => {
             <AiOutlineMenu />
           </button>
           <div className={styles.logo}>
-            <a href='/'>Logo</a>
+            <a href='/'>LOGO</a>
           </div>
         </div>
         <div className={styles.navbarLinks}>

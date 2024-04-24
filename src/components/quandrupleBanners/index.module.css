@@ -3,12 +3,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 40px;
+  padding: 50px 70px;
 }
 
 .bannerWrap {
-  width: 65rem;
-  height: 20rem;
+  width: 70rem;
+  height: 18.8rem;
   display: flex;
 }
 
@@ -32,9 +32,12 @@
 
 .bannerText h1 {
   font-size: 5.5rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
 }
 .bannerText p {
-  color: black;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
 }
 .bannerButton {
   background-color: black;
@@ -52,17 +55,88 @@
 }
 .mobileBanner {
   display: none;
+  width: 30rem;
+}
+@media (max-width: 1400px) {
+  .bannerContainer {
+    padding: 50px 50px;
+  }
+  .bannerWrap {
+    width: 55rem;
+    height: 18.8rem;
+  }
+  .bannerText h1 {
+    font-size: 5.5rem;
+  }
+  .bannerText p {
+    font-size: 1rem;
+  }
+  .bannerButton {
+    padding: 5px 15px;
+    font-size: 0.6rem;
+  }
 }
 
 @media (max-width: 1024px) {
   .bannerContainer {
-    padding: 0 10px;
+    padding: 50px 40px;
   }
-
   .bannerWrap {
     display: none;
   }
   .mobileBanner {
     display: block;
+  }
+  .bannerText h1 {
+    font-size: 5.5rem;
+  }
+  .bannerText p {
+    font-size: 1.1rem;
+  }
+  .bannerButton {
+    padding: 5px 15px;
+    font-size: 0.8rem;
+  }
+  .mobileBanner {
+    width: 32rem;
+  }
+}
+@media (max-width: 768px) {
+  .bannerContainer {
+    padding: 50px 25px;
+  }
+
+  .bannerText h1 {
+    font-size: 4rem;
+  }
+  .bannerText p {
+    font-size: 1rem;
+  }
+
+  .bannerButton {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+  .mobileBanner {
+    width: 25rem;
+  }
+}
+@media (max-width: 568px) {
+  .bannerContainer {
+    padding: 30px 12px;
+  }
+  .bannerText h1 {
+    font-size: 2.4rem;
+  }
+  .bannerText p {
+    font-size: 0.6rem;
+    margin-bottom: 2px;
+  }
+  .bannerButton {
+    padding: 2px 5px;
+    font-size: 0.5rem;
+  }
+  .mobileBanner {
+    width: 12.8rem;
   }
 }
