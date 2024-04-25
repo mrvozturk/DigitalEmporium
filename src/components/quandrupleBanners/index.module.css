@@ -34,7 +34,7 @@
 }
 
 .bannerText h1 {
-  font-size: 5.5rem;
+  font-size: 5rem;
   font-weight: 400;
   letter-spacing: 0.05em;
 }
@@ -69,6 +69,9 @@
     width: 30rem;
     margin-left: 30rem;
   }
+  .bannerText h1 {
+    font-size: 4rem;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -85,7 +88,7 @@
     display: block;
   }
   .bannerText h1 {
-    font-size: 5.5rem;
+    font-size: 4rem;
   }
   .bannerText p {
     font-size: 1.3rem;
