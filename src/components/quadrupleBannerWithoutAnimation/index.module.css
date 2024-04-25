@@ -7,12 +7,27 @@
 }
 
 .cardbodyimages {
-  padding:10px;
+  padding: 10px;
   box-sizing: border-box;
   text-align: center;
   width: calc(25% - 20px);
 }
+@media (min-width: 1025px) {
+  .bannerContainer {
+    padding: 0 5px;
+  }
+}
 
+@media (min-width: 1024px) {
+  .bannerContainer {
+    padding: 10px;
+  }
+}
+@media (min-width: 769px) {
+  .bannerContainer {
+    padding: 0 10px;
+  }
+}
 @media (max-width: 768px) {
   .bannerContainer {
     flex-direction: column;
@@ -24,11 +39,5 @@
     height: auto;
     padding: 10px 0;
   }
-}
 
-@media (min-width: 1200px) {
-  .bannerContainer {
-    padding: 0 20px;
-  }
-  
 }
