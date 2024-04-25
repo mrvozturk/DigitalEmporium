@@ -4,14 +4,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 50px 55px;
+  padding: 50px 60px;
 }
 
 .bannerWrap {
-  max-width: 70rem;
-  height: 18.8rem;
+  max-width: 74.6%; 
+  height: 18.8rem; 
   display: flex;
 }
+
 
 .bannerImage {
   flex: 1;
@@ -119,10 +120,10 @@
   }
 
   .bannerText h1 {
-    font-size: 2.8rem;
+    font-size: 3.5rem;
   }
   .bannerText p {
-    font-size: 0.8rem;
+    font-size: 0.90rem;
   }
 
   .bannerButton {
@@ -130,7 +131,7 @@
     font-size: 0.6rem;
   }
   .mobileBanner {
-    width: 24rem;
+    width: 23rem;
     margin-right: 0.5rem;
   }
 }
