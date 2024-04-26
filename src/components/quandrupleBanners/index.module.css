@@ -8,11 +8,10 @@
 }
 
 .bannerWrap {
-  max-width: 74.6%; 
-  height: 18.8rem; 
+  max-width: 74.6%;
+  height: 18.8rem;
   display: flex;
 }
-
 
 .bannerImage {
   flex: 1;
@@ -25,6 +24,8 @@
   width: 100%;
   object-fit: cover;
   transition: transform 1s ease;
+  top: 0;
+  object-position: center;
 }
 
 .bannerText {
@@ -82,7 +83,7 @@
     display: block;
   }
   .bannerText {
-    margin-left:0px;
+    margin-left: 0px;
   }
   .mobileBanner {
     display: block;
