@@ -85,18 +85,18 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 568px) {
 
   .buttonContainer {
     margin-left: 15px;
   }
   .title {
     margin-top: 18px;
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .button {
     margin-top: 8px;
-    font-size: 12px;
+    font-size: 11px;
   }
 }
