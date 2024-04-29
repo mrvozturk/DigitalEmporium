@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import styles from './index.module.css';
 
-
 const QuadrupleBanners: React.FC = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number>(0);
 
@@ -32,18 +31,16 @@ const QuadrupleBanners: React.FC = () => {
             className={styles.bannerImage}
             onMouseEnter={() => handleMouseEnter(index)}
             style={{
-              flex: hoveredIndex === index ? 4 : 1,
-              zIndex: hoveredIndex === index ? 1 : 0
+              flex: hoveredIndex === index ? 3.2 : 1,
+              zIndex: hoveredIndex === index ? 1 : 1
             }}
           >
             <Image
               src={image}
               alt='Picture'
-              width={500}
-              height={500}
-              style={{
-                transform: hoveredIndex === index ? 'scale(1)' : 'scale(1)'
-              }}
+              width={800}
+              height={480}
+              style={{}}
             />
           </div>
         ))}
