@@ -1,11 +1,7 @@
 .bannerContainer {
   display: flex;
   justify-content: center;
-}
-
-.cardbodyimages {
-  padding: 10px;
-  width: calc(25% - 20px);
+  gap: 10px;
 }
 
 .title {
@@ -40,11 +36,6 @@
   .button {
     margin-top: 8px;
     font-size: 12px;
-  }
-}
-@media (min-width: 769px) {
-  .bannerContainer {
-    padding: 0 10px;
   }
 }
 

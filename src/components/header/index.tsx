@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   AiOutlineUser,
   AiOutlineHeart,
@@ -12,11 +12,19 @@ import sideBarStyles from './sideBar.module.css';
 import SideBar from './sideBar';
 
 const Header = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [sideBarVisible, setSideBarVisible] = useState(false);
 
   const handleToggleSidebar = () => {
-    setIsSidebarOpen(prevState => !prevState);
+    setSideBarVisible(prevState => !prevState);
   };
+
+  useEffect(() => {
+    if (sideBarVisible) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [sideBarVisible]);
 
   return (
     <div>
@@ -55,7 +63,7 @@ const Header = () => {
         </div>
       </nav>
 
-      {isSidebarOpen && <SideBar onCloseSidebar={handleToggleSidebar} />}
+      {sideBarVisible && <SideBar onCloseSidebar={handleToggleSidebar} />}
     </div>
   );
 };
