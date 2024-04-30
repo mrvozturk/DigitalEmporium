@@ -1,40 +1,44 @@
 .bannerContainer {
   display: flex;
   justify-content: center;
-  gap: 10px;
+}
+.buttonContainer {
+  margin-bottom: 35px;
 }
 
 .title {
-  margin-top: 35px;
-  font-size: 17px;
+  margin-top: 25px;
+  margin-bottom: 5px;
+  font-size: 18px;
   font-weight: bold;
 }
 
 .button {
-  margin-top: 8px;
-  font-size: 14px;
+  font-size: 15px;
   border-bottom: 1px solid black;
 }
 
 @media (max-width: 1024px) {
+
   .title {
-    margin-top: 30px;
-    font-size: 16.5px;
+    margin-top: 25px;
+    margin-bottom: 5px;
+    font-size: 18px;
   }
 
   .button {
-    margin-top: 8px;
-    font-size: 14.5px;
+    margin-bottom: 10px;
+    font-size: 15px;
   }
 }
 @media (max-width: 1023px) {
   .title {
     margin-top: 20px;
-    font-size: 12.2px;
+    margin-bottom: 2px;
+    font-size: 13.99px;
   }
 
   .button {
-    margin-top: 8px;
     font-size: 12px;
   }
 }
@@ -51,30 +55,31 @@
     padding: 10px 0;
   }
   .buttonContainer {
+    margin-bottom: 35px;
     margin-left: 15px;
   }
   .title {
     margin-top: 20px;
+    margin-bottom: 8px;
     font-size: 18px;
   }
 
   .button {
-    margin-top: 8px;
     font-size: 15px;
   }
 }
 
 @media (max-width: 568px) {
   .buttonContainer {
-    margin-left: 15px;
+    margin-bottom: 30px;
   }
   .title {
     margin-top: 18px;
-    font-size: 15px;
+    margin-bottom: 2px;
+    font-size: 18px;
   }
 
   .button {
-    margin-top: 8px;
-    font-size: 11px;
+    font-size: 14px;
   }
 }

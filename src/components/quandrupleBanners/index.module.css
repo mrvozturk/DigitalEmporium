@@ -25,6 +25,7 @@
 .bannerText {
   font-weight: bold;
   justify-content: space-between;
+  margin-right: 0.5rem;
 }
 
 .bannerText h1 {
@@ -34,7 +35,7 @@
 }
 .bannerText p {
   margin-bottom: 10px;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
 }
 .bannerButton {
   background-color: black;
@@ -77,14 +78,14 @@
   }
 
   .bannerText h1 {
-    font-size: 4.2rem;
+    font-size: 4.5rem;
   }
   .bannerText p {
     font-size: 1.2rem;
   }
   .bannerButton {
     padding: 5px 15px;
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
   .mobileBanner {
     flex: 1;
@@ -92,40 +93,45 @@
 }
 
 @media (max-width: 768px) {
+  .bannerContainer {
+    margin: 10px 10px;
+  }
+
   .bannerText {
     flex: 1;
-    margin-right: 2.5rem;
+    margin-right: 1.5rem;
   }
 
   .bannerText h1 {
-    font-size: 3.5rem;
+    font-size:3.5rem;
   }
   .bannerText p {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
   .bannerButton {
-    padding: 5px 10px;
-    font-size: 0.9rem;
+    padding: 5px 15px;
+    font-size: 0.8rem;
   }
   .mobileBanner {
     flex: 1;
   }
 }
 @media (max-width: 568px) {
-  .bannerText {
-    margin-left: 0.5rem;
+  .bannerContainer {
+    margin: 10px 8px;
   }
+
   .bannerText h1 {
-    font-size: 1.9rem;
+    font-size: 2.4rem;
   }
   .bannerText p {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     margin-bottom: 2px;
   }
   .bannerButton {
-    padding: 2px 3px;
-    font-size: 0.55rem;
+    padding: 3px 5px;
+    font-size: 0.6rem;
   }
   .mobileBanner {
     flex: 1;
