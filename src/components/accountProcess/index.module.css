@@ -1,0 +1,43 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.formContainer h2 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.formContainer form {
+  display: flex;
+  flex-direction: column;
+}
+
+.dateContainer {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.loginFormContainer h2 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+.loginForm {
+  max-width: 100%;
+  width: 100%;
+}
+.loginForm input {
+  outline: none;
+  font-weight: 500;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding-left: 10px;
+  font-size: 10px;
+  width: 20vw;
+  height: 3vw;
+  margin-bottom: 10px;
+}
+
+.loginForm input:hover {
+  border-color: black;
+}
