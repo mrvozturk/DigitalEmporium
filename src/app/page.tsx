@@ -1,6 +1,7 @@
 import {
   QuandrupleBanners,
-  QuandrupleBannerWithoutAnimation
+  QuandrupleBannerWithoutAnimation,
+  AccountProcess
 } from '@/components';
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -23,6 +24,7 @@ export default function IndexPage() {
   */}
       <QuandrupleBanners />
       <QuandrupleBannerWithoutAnimation />
+      <AccountProcess />
     </div>
   );
 }
