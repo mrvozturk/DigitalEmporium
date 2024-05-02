@@ -8,6 +8,22 @@
   --background-end-rgb: 255, 255, 255;
 }
 
+:root .rootContainer {
+  padding: 32px;
+}
+@media (max-width: 768px) {
+  :root .rootContainer {
+    padding: 0px;
+    
+  }
+}
+
+@media (max-width: 568px) {
+  :root .rootContainer {
+    padding: 0px;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;

@@ -1,11 +1,14 @@
-import { QuandrupleBanners } from '@/components';
+import {
+  QuandrupleBanners,
+  QuandrupleBannerWithoutAnimation
+} from '@/components';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export default function IndexPage() {
   return (
-<div>
-  {/* 
+    <div className='rootContainer'>
+      {/* 
     <button
       style={{
         backgroundColor: 'blue',
@@ -18,9 +21,9 @@ export default function IndexPage() {
       <Link href='/examplePage'>REDIRECT PAGE TO EXAMPLE FOR REDUX</Link>
     </button>
   */}
-  <QuandrupleBanners/>
-</div>
-
+      <QuandrupleBanners />
+      <QuandrupleBannerWithoutAnimation />
+    </div>
   );
 }
 
