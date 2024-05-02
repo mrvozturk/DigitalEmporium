@@ -9,15 +9,17 @@ const AccountProcess: React.FC = () => {
       <div className={styles.formContainer}>
         <h2>Kayıt Ol</h2>
 
-        <form className={styles.loginForm}>
+        <form className={styles.registrationForm}>
           <div>
             <input type='email' name='email' placeholder='E-posta Adresi*' />
           </div>
-          <div>
-            <input type='text' name='firstName' placeholder='Ad*' />
-          </div>
-          <div>
-            <input type='text' name='lastName' placeholder='Soyad*' />
+          <div className={styles.nameContainer}>
+            <div>
+              <input type='text' name='firstName' placeholder='Ad*' />
+            </div>
+            <div>
+              <input type='text' name='lastName' placeholder='Soyad*' />
+            </div>
           </div>
           <div>
             <input type='password' name='password' placeholder='Şifre*' />
