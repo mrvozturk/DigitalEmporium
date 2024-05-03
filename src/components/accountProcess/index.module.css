@@ -26,7 +26,7 @@
 }
 
 .loginFormContainer {
-  width: 35vw; 
+  width: 35vw;
 }
 
 .loginFormContainer h2 {
@@ -45,7 +45,7 @@
   border: 1px solid rgba(0, 0, 0, 0.2);
   padding-left: 10px;
   font-size: 10px;
-  width: 100%; 
+  width: 100%;
   height: 3vw;
   margin-bottom: 10px;
 }
@@ -56,7 +56,7 @@
 
 .nameContainer {
   display: flex;
-  flex-grow: 1; 
+  flex-grow: 1;
   gap: 10px;
 }
 
@@ -72,4 +72,29 @@
 
 .dateContainer input {
   width: 11.47vw;
+}
+.dateLabel {
+  font-size: 0.8em;
+  color: rgba(0, 0, 0, 0.9);
+  margin-bottom: 5px;
+}
+.genderContainer {
+  display: flex;
+  gap: 12px;
+}
+
+.genderContainer label {
+  font-size: 10px;
+  color: rgba(0, 0, 0, 0.5);
+}
+.genderName {
+  font-size: 11.8px;
+  color: rgba(0, 0, 0, 0.9);
+  font-weight: bold;
+  margin-right: 6px;
+}
+
+.genderContainer input[type='radio'] {
+  width: 22px;
+  height: 22px;
 }

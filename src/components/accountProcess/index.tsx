@@ -31,6 +31,8 @@ const AccountProcess: React.FC = () => {
               placeholder='Telefon Numarası*'
             />
           </div>
+          <div className={styles.dateLabel}>Doğum Tarihi</div>
+
           <div className={styles.dateContainer}>
             <div>
               <input type='number' name='day' placeholder='Gün*' />
@@ -41,6 +43,16 @@ const AccountProcess: React.FC = () => {
             <div>
               <input type='number' name='year' placeholder='Yıl' />
             </div>
+          </div>
+
+          {/* Cinsiyet Seçimi */}
+
+          <div className={styles.genderContainer}>
+            <div className={styles.genderName}>Cinsiyet</div>
+            <input type='radio' name='gender' value='female' />
+            <label> Kadın </label>
+            <input type='radio' name='gender' value='male' />
+            <label> Erkek</label>{' '}
           </div>
           <button type='submit'>Kayıt Ol</button>
         </form>
