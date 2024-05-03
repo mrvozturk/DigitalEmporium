@@ -1,11 +1,14 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import styles from './index.module.css';
 
 const AccountProcess: React.FC = () => {
+  const [startDate, setStartDate] = useState<Date | null>(null); 
+
   return (
     <div className={styles.container}>
-      {/* Kayıt Olma Formu */}
       <div className={styles.formContainer}>
         <h2>Kayıt Ol</h2>
 
@@ -34,19 +37,14 @@ const AccountProcess: React.FC = () => {
           <div className={styles.dateLabel}>Doğum Tarihi</div>
 
           <div className={styles.dateContainer}>
-            <div>
-              <input type='number' name='day' placeholder='Gün*' />
-            </div>
-            <div>
-              <input type='number' name='month' placeholder='Ay*' />
-            </div>
-            <div>
-              <input type='number' name='year' placeholder='Yıl' />
-            </div>
+            <DatePicker
+              selected={startDate}
+              onChange={date => setStartDate(date)}
+              placeholderText='gg/aa/yyyy'
+              dateFormat='dd/MM/yyyy'
+            />
           </div>
-
           {/* Cinsiyet Seçimi */}
-
           <div className={styles.genderContainer}>
             <div className={styles.genderName}>Cinsiyet</div>
             <input type='radio' name='gender' value='female' />
