@@ -5,7 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import styles from './index.module.css';
 
 const AccountProcess: React.FC = () => {
-  const [startDate, setStartDate] = useState<Date | null>(null); 
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
   return (
     <div className={styles.container}>
@@ -34,16 +34,25 @@ const AccountProcess: React.FC = () => {
               placeholder='Telefon Numarası*'
             />
           </div>
-          <div className={styles.dateLabel}>Doğum Tarihi</div>
+          <label htmlFor='birthdate'>Doğum Tarihi</label>
 
           <div className={styles.dateContainer}>
             <DatePicker
-              selected={startDate}
-              onChange={date => setStartDate(date)}
-              placeholderText='gg/aa/yyyy'
+              selected={selectedDate}
+              onChange={(date: Date | null) => setSelectedDate(date)}
               dateFormat='dd/MM/yyyy'
+              placeholderText='dd/MM/yyyy'
+              showMonthDropdown
+              showYearDropdown
+              dropdownMode='scroll'
+              minDate={new Date(1950, 0, 1)} // 1 Ocak 1950
+              maxDate={new Date(2008, 11, 31)} // 31 Aralık 2008
+              scrollableMonthYearDropdown
+              scrollableYearDropdown
+              yearDropdownItemNumber={58}
             />
           </div>
+
           {/* Cinsiyet Seçimi */}
           <div className={styles.genderContainer}>
             <div className={styles.genderName}>Cinsiyet</div>

@@ -66,17 +66,7 @@
 
 .dateContainer {
   display: flex;
-  gap: 5px;
   max-width: 100%;
-}
-
-.dateContainer input {
-  width: 11.47vw;
-}
-.dateLabel {
-  font-size: 0.8em;
-  color: rgba(0, 0, 0, 0.9);
-  margin-bottom: 5px;
 }
 
 .genderContainer {
