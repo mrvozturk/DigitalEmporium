@@ -4,71 +4,59 @@
   gap: 10vw;
 }
 
-.formContainer h2 {
-  font-size: 1.2em;
-  margin-bottom: 10px;
-}
-
-.formContainer form {
+.formContainer form,
+.loginFormContainer form {
   display: flex;
   flex-direction: column;
 }
-
-.registrationForm input {
-  outline: none;
-  font-weight: 500;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  padding-left: 10px;
-  font-size: 10px;
-  width: 35vw;
-  height: 3vw;
-  margin-bottom: 10px;
-}
-
-.loginFormContainer {
-  width: 35vw;
-}
-
+.formContainer h2,
 .loginFormContainer h2 {
   font-size: 1.2em;
   margin-bottom: 10px;
 }
 
-.loginFormContainer form {
-  display: flex;
-  flex-direction: column;
-}
-
+.registrationForm input,
 .loginForm input {
   outline: none;
   font-weight: 500;
   border: 1px solid rgba(0, 0, 0, 0.2);
   padding-left: 10px;
   font-size: 10px;
-  width: 100%;
-  height: 3vw;
+  width: 35vw;
+  height: 2.5vw;
   margin-bottom: 10px;
 }
 .registrationForm input:hover,
 .loginForm input:hover {
   border-color: black;
 }
-
 .nameContainer {
   display: flex;
-  flex-grow: 1;
   gap: 10px;
 }
 
 .nameContainer input {
   width: 17.2vw;
 }
-
-.dateContainer {
+.passwordInputContainer {
+  width: 35vw;
+  margin-bottom: 10px;
   display: flex;
-  max-width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
+.registrationForm .passwordWrapper {
+  border: none;
+}
+
+.passwordInputContainer button {
+  margin-right: 15px;
+}
+
+.dateContainer input {
+  display: flex;
+  width: 15vw;
+}
 .genderContainer {
   display: flex;
   gap: 12px;
@@ -77,12 +65,6 @@
 .genderContainer label {
   font-size: 10px;
   color: rgba(0, 0, 0, 0.5);
-}
-.genderName {
-  font-size: 11.2px;
-  color: rgba(0, 0, 0, 0.9);
-  font-weight: bold;
-  margin-right: 6px;
 }
 
 .genderContainer input[type='radio'] {
