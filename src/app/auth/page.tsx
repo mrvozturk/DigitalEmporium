@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Göz simgeleri için
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import styles from './index.module.css';
 
 const AccountProcess: React.FC = () => {
@@ -14,12 +14,11 @@ const AccountProcess: React.FC = () => {
 
   const togglePasswordVisibility = (type: 'registration' | 'login') => {
     if (type === 'registration') {
-      setShowRegistrationPassword(!showRegistrationPassword);
+      setShowRegistrationPassword(prevState => !prevState);
     } else {
-      setShowLoginPassword(!showLoginPassword);
+      setShowLoginPassword(prevState => !prevState);
     }
   };
-
   return (
     <div className={styles.container}>
       <div className={styles.formContainer}>
@@ -49,32 +48,36 @@ const AccountProcess: React.FC = () => {
             name='phoneNumber'
             placeholder='Telefon Numarası*'
           />
-          <label htmlFor='birthdate'>Doğum Tarihi</label>
 
-          <div className={styles.dateContainer}>
-            <DatePicker
-              selected={selectedDate}
-              onChange={(date: Date | null) => setSelectedDate(date)}
-              dateFormat='dd/MM/yyyy'
-              placeholderText='dd/MM/yyyy'
-              showMonthDropdown
-              showYearDropdown
-              dropdownMode='scroll'
-              minDate={new Date(1950, 0, 1)} // 1 Ocak 1950
-              maxDate={new Date(2024, 11, 31)} // 31 Aralık 2008
-              scrollableMonthYearDropdown
-              scrollableYearDropdown
-              yearDropdownItemNumber={78}
-            />
-          </div>
-          <label htmlFor='birthdate'>Cinsiyet</label>
-          <div className={styles.genderContainer}>
-            <input type='radio' name='gender' value='female' />
-            <label> Kadın </label>
-            <input type='radio' name='gender' value='male' />
-            <label> Erkek</label>
-            <input type='radio' name='gender' value='other' />
-            <label> Diğer</label>
+          <div className={styles.dateGenderContainer}>
+            <div className={styles.dateContainer}>
+              <label htmlFor='birthdate'>Doğum Tarihi</label>
+              <DatePicker
+                selected={selectedDate}
+                onChange={(date: Date | null) => setSelectedDate(date)}
+                dateFormat='dd/MM/yyyy'
+                placeholderText='dd/MM/yyyy'
+                showMonthDropdown
+                showYearDropdown
+                dropdownMode='scroll'
+                minDate={new Date(1950, 0, 1)}
+                maxDate={new Date(2024, 11, 31)}
+                scrollableMonthYearDropdown
+                scrollableYearDropdown
+                yearDropdownItemNumber={78}
+              />
+            </div>
+            <div className={styles.genderContainer}>
+              <label htmlFor='gender'>Cinsiyet</label>
+              <div>
+                <input type='radio' name='gender' value='female' />
+                <label> Kadın </label>
+                <input type='radio' name='gender' value='male' />
+                <label> Erkek</label>
+                <input type='radio' name='gender' value='other' />
+                <label> Diğer</label>
+              </div>
+            </div>
           </div>
 
           <button type='submit'>Kayıt Ol</button>
@@ -84,8 +87,9 @@ const AccountProcess: React.FC = () => {
         <h2>Giriş Yap</h2>
         <form className={styles.loginForm}>
           <input type='email' name='email' placeholder='E-posta Adresi*' />
-          <div>
+          <div className={styles.passwordInputContainer}>
             <input
+              className={styles.passwordWrapper}
               type={showLoginPassword ? 'text' : 'password'}
               name='password'
               placeholder='Şifre*'

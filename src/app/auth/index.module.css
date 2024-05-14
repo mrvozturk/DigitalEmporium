@@ -1,0 +1,114 @@
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 10vw;
+  margin: 8vw auto;
+}
+
+.container :hover {
+  border-color: black;
+}
+
+.formContainer form,
+.loginFormContainer form {
+  display: flex;
+  flex-direction: column;
+}
+
+.formContainer h2,
+.loginFormContainer h2 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.registrationForm input,
+.loginForm input {
+  outline: none;
+  font-weight: 500;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding-left: 10px;
+  font-size: 10px;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.nameContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.nameContainer input {
+  width: 17.2vw;
+}
+
+.passwordInputContainer {
+  width: 35vw;
+  margin-bottom: 10px;
+  display: flex;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+.passwordInputContainer button {
+  margin-right: 15px;
+}
+
+.registrationForm .passwordWrapper,
+.loginFormContainer .passwordWrapper {
+  border: none;
+  margin-bottom: 0 !important;
+}
+
+
+.dateContainer input {
+  display: flex;
+  width: 15vw;
+}
+
+.dateGenderContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dateContainer,
+.genderContainer {
+  flex: 1;
+}
+.genderContainer {
+  display: flex;
+  gap: 12px;
+}
+
+.genderContainer label {
+  font-size: 10px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.genderContainer input[type='radio'] {
+  width: 22px;
+  height: 22px;
+}
+@media (max-width: 768px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Dikey hizalama */
+    align-items: center; /* Yatay hizalama */
+    gap: 20px; /* İstenilen boşluk ayarlanabilir */
+    padding: 0 30vw; /* Sayfanın sağ ve solundaki boşluk */
+    max-width: 450; /* İstenilen maksimum genişlik ayarlanabilir */
+  }
+
+  .formContainer,
+  .loginFormContainer {
+    width: 100%;
+  }
+
+  .dateGenderContainer {
+    flex-direction: column;
+  }
+
+  .dateContainer,
+  .genderContainer {
+    width: 100%;
+  }
+}

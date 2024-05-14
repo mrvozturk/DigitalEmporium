@@ -10,6 +10,7 @@ import styles from './index.module.css';
 import sideBarStyles from './sideBar.module.css';
 
 import SideBar from './sideBar';
+import Link from 'next/link';
 
 const Header = () => {
   const [sideBarVisible, setSideBarVisible] = useState(false);
@@ -48,15 +49,15 @@ const Header = () => {
         <div className={styles.navbarLinks}>
           <ul>
             <li className={styles.navLink}>
-              <a href='#HESAP'>Hesap</a>
+              <Link href='/auth'>Hesap</Link>
               <AiOutlineUser className={styles.icon} />
             </li>
             <li className={styles.navLink}>
-              <a href='#FAVORİLER'>Favoriler</a>
+              <Link href='/favorites'>Favoriler</Link>
               <AiOutlineHeart className={styles.icon} />
             </li>
             <li className={styles.navLink}>
-              <a href='#SEPET'>Sepet</a>
+              <Link href='/basket'>Sepet</Link>
               <AiOutlineShoppingCart className={styles.icon} />
             </li>
           </ul>
