@@ -23,7 +23,6 @@
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
-  box-sizing: border-box;
   outline: none;
   font-size: 12px;
   font-weight: 500;
@@ -39,26 +38,21 @@
 }
 
 .passwordInputContainer {
+  display: flex;
+  align-items: center;
   margin-bottom: 12px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 10px;
-  font-size: 12px;
-  font-weight: 500;
 }
 
-.passwordWrapper {
-  width: calc(100% - 32px);
-}
 
-.eyeButton {
-  font-size: 18px;
-}
+
+
 
 .dateGenderContainer {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
-  
 }
 
 .dateContainer,
@@ -71,7 +65,6 @@
 .dateContainer label,
 .genderContainer label {
   margin-bottom: 5px;
-
 }
 
 .dateContainer .react-datepicker-wrapper,
@@ -95,10 +88,11 @@
 .loginButton {
   width: 100%;
   padding: 10px;
-  background-color: rgba(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.8);
   color: rgba(255, 255, 255);
   border: 1px solid;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .signUpButton:hover,

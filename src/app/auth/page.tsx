@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { FaEye, FaEyeSlash, FaCalendarAlt } from 'react-icons/fa';
+import { FaEye, FaEyeSlash} from 'react-icons/fa';
 import styles from './index.module.css';
 
 const AccountProcess: React.FC = () => {
