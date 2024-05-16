@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaCalendarAlt } from 'react-icons/fa';
 import styles from './index.module.css';
 
 const AccountProcess: React.FC = () => {
@@ -39,6 +39,7 @@ const AccountProcess: React.FC = () => {
             <button
               type='button'
               onClick={() => togglePasswordVisibility('registration')}
+              className={styles.eyeButton}
             >
               {showRegistrationPassword ? <FaEyeSlash /> : <FaEye />}
             </button>
@@ -80,7 +81,7 @@ const AccountProcess: React.FC = () => {
             </div>
           </div>
 
-          <button type='submit'>Kayıt Ol</button>
+          <button type='submit' className={styles.signUpButton}>KAYIT OL</button>
         </form>
       </div>
       <div className={styles.loginFormContainer}>
@@ -97,11 +98,12 @@ const AccountProcess: React.FC = () => {
             <button
               type='button'
               onClick={() => togglePasswordVisibility('login')}
+              className={styles.eyeButton}
             >
               {showLoginPassword ? <FaEyeSlash /> : <FaEye />}
             </button>
           </div>
-          <button type='submit'>Giriş Yap</button>
+          <button type='submit' className={styles.loginButton}>GİRİŞ YAP</button>
         </form>
       </div>
     </div>
