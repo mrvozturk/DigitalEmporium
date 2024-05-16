@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { FaEye, FaEyeSlash} from 'react-icons/fa';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import styles from './index.module.css';
 
 const AccountProcess: React.FC = () => {
@@ -81,7 +81,9 @@ const AccountProcess: React.FC = () => {
             </div>
           </div>
 
-          <button type='submit' className={styles.signUpButton}>KAYIT OL</button>
+          <button type='submit' className={styles.signUpButton}>
+            KAYIT OL
+          </button>
         </form>
       </div>
       <div className={styles.loginFormContainer}>
@@ -103,7 +105,9 @@ const AccountProcess: React.FC = () => {
               {showLoginPassword ? <FaEyeSlash /> : <FaEye />}
             </button>
           </div>
-          <button type='submit' className={styles.loginButton}>GİRİŞ YAP</button>
+          <button type='submit' className={styles.loginButton}>
+            GİRİŞ YAP
+          </button>
         </form>
       </div>
     </div>
