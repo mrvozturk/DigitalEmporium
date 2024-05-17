@@ -28,6 +28,13 @@ const LoginForm: React.FC = () => {
             {showLoginPassword ? <FaEyeSlash /> : <FaEye />}
           </button>
         </div>
+        <a
+          href='/user/password/reset/'
+          className={styles.forgotPassword}
+          target='_blank'
+        >
+          Şifremi Unuttum
+        </a>
         <button type='submit' className={styles.loginButton}>
           GİRİŞ YAP
         </button>

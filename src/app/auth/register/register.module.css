@@ -31,11 +31,16 @@
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
   outline: none;
   font-size: 12px;
 }
-
+.formContainer input[type='email']:hover,
+.nameContainer input[type='text']:hover,
+.dateContainer input[type='text']:hover,
+.formContainer input[type='tel']:hover {
+  border: 1px solid rgba(0, 0, 0, 0.6);
+}
 .nameContainer {
   display: flex;
   justify-content: space-between;
@@ -52,6 +57,10 @@
   margin-bottom: 12px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 10px;
+}
+
+.passwordInputContainer:hover {
+  border-color: rgba(0, 0, 0, 0.9);
 }
 
 .passwordInput {
@@ -99,7 +108,7 @@
 .signUpButton {
   width: 100%;
   padding: 10px;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.9);
   color: rgba(255, 255, 255);
   border: 1px solid;
   font-weight: bold;
@@ -108,5 +117,13 @@
 
 .signUpButton:hover {
   background-color: rgba(255, 255, 255);
-  color: rgba(0, 0, 0);
+  color: rgba(0, 0, 0, 0.9);
+}
+.emailRequired {
+  color: rgba(157, 157, 157);
+  font-size: 10px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }

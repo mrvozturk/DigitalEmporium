@@ -19,10 +19,14 @@
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
   outline: none;
   font-size: 12px;
-  font-weight: 500;
+}
+
+.loginFormContainer input[type='email']:hover,
+.nameContainer input[type='text']:hover {
+  border: 1px solid rgba(0, 0, 0, 0.6);
 }
 
 .nameContainer {
@@ -43,6 +47,10 @@
   padding: 10px;
 }
 
+.passwordInputContainer:hover {
+  border: 1px solid rgba(0, 0, 0, 0.9);
+}
+
 .passwordInput {
   width: calc(100% - 30px);
   outline: none;
@@ -53,7 +61,7 @@
 .loginButton {
   width: 100%;
   padding: 10px;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.9);
   color: rgba(255, 255, 255);
   border: 1px solid;
   font-weight: bold;
@@ -62,5 +70,12 @@
 
 .loginButton:hover {
   background-color: rgba(255, 255, 255);
-  color: rgba(0, 0, 0);
+  color: rgba(0, 0, 0, 0.9);
+}
+.forgotPassword {
+  color: rgba(0, 0, 0, 0.9);
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 15px;
+  margin-bottom: 10px;
 }

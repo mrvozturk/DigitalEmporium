@@ -16,6 +16,9 @@ const RegisterForm: React.FC = () => {
       <h2>Kayıt Ol</h2>
       <form className={styles.registrationForm}>
         <input type='email' name='email' placeholder='E-posta Adresi*' />
+        <p className={styles.emailRequired}>
+          * ile işaretlenmiş alanlar zorunludur
+        </p>
         <div className={styles.nameContainer}>
           <input type='text' name='firstName' placeholder='Ad*' />
           <input type='text' name='lastName' placeholder='Soyad*' />
@@ -27,6 +30,7 @@ const RegisterForm: React.FC = () => {
             name='password'
             placeholder='Şifre*'
           />
+
           <button
             type='button'
             onClick={() => setShowRegistrationPassword(prevState => !prevState)}
@@ -35,6 +39,7 @@ const RegisterForm: React.FC = () => {
             {showRegistrationPassword ? <FaEyeSlash /> : <FaEye />}
           </button>
         </div>
+
         <input type='tel' name='phoneNumber' placeholder='Telefon Numarası*' />
 
         <div className={styles.dateGenderContainer}>
@@ -55,6 +60,7 @@ const RegisterForm: React.FC = () => {
               yearDropdownItemNumber={78}
             />
           </div>
+
           <div className={styles.genderContainer}>
             <label htmlFor='gender'>Cinsiyet</label>
             <div>
