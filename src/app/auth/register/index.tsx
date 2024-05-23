@@ -46,9 +46,7 @@ const RegisterForm: React.FC = () => {
         {formErrors.email && (
           <p className={styles.error}>{formErrors.email}</p>
         )}{' '}
-        <p className={styles.emailRequired}>
-          * ile işaretlenmiş alanlar zorunludur
-        </p>
+      
         <div className={styles.nameContainer}>
           <div className={styles.inputGroup}>
             <input type='text' name='firstName' placeholder='Ad*' />
