@@ -156,3 +156,9 @@
   display: flex;
   justify-content: column;
 }
+/* styles.module.css */
+.genderContainer .error {
+  margin-top: 18px;
+  margin-bottom: 0;
+  font-size: 12px;
+}
