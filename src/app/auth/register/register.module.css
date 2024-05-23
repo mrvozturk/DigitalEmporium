@@ -25,7 +25,7 @@
 }
 
 .formContainer input[type='email'],
-.nameContainer input[type='text'],
+.nameContainer .inputGroup input[type='text'],
 .dateContainer input[type='text'],
 .formContainer input[type='tel'] {
   width: 100%;
@@ -36,17 +36,20 @@
   font-size: 12px;
 }
 .formContainer input[type='email']:hover,
-.nameContainer input[type='text']:hover,
+.nameContainer .inputGroup input[type='text']:hover,
 .dateContainer input[type='text']:hover,
 .formContainer input[type='tel']:hover {
   border: 1px solid rgba(0, 0, 0, 0.6);
 }
+
 .nameContainer {
   display: flex;
   justify-content: space-between;
 }
 
-.nameContainer input[type='text'] {
+.inputGroup {
+  display: flex;
+  flex-direction: column;
   width: calc(50% - 5px);
 }
 
@@ -119,6 +122,24 @@
   background-color: rgba(255, 255, 255);
   color: rgba(0, 0, 0, 0.9);
 }
+
+.emailInputContainer {
+  color: rgba(157, 157, 157);
+  font-size: 10px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: column;
+  align-items: center;
+}
+
+.emailInputContainer {
+  display: flex;
+  flex: 1;
+  justify-content: flex-start;
+  margin-bottom: 12px;
+  padding: 10px;
+}
+
 .emailRequired {
   color: rgba(157, 157, 157);
   font-size: 10px;
@@ -126,4 +147,12 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: column;
 }
