@@ -141,3 +141,14 @@
 .formContainer input[type='tel'] + .error {
   margin-bottom: 5px;
 }
+.criterionMet {
+  color: green;
+}
+.passwordCriteriaList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.passwordCriteriaList li {
+  margin-bottom: 5px;
+}

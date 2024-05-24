@@ -33,10 +33,19 @@ const RegisterForm: React.FC = () => {
     const password = form.password.value.trim();
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*.?&]).{8,}$/;
     if (password && !passwordRegex.test(password)) {
-      errors.password =
-        'Şifre en az 8 karakter, bir büyük harf, bir küçük harf, bir sayı ve bir özel karakter içermelidir';
+      errors.password = `Şifre en az 8 karakter,
+     bir büyük harf,
+      bir küçük harf,
+      bir sayı ve bir özel karakter içermelidir`;
     }
     setFormErrors(errors);
+  };
+
+  const handleNameInput = (e: React.FormEvent<HTMLInputElement>) => {
+    e.currentTarget.value = e.currentTarget.value.replace(
+      /[^a-zA-ZığüşöçİĞÜŞÖÇ\s]/g,
+      ''
+    );
   };
 
   return (
@@ -49,13 +58,23 @@ const RegisterForm: React.FC = () => {
         )}{' '}
         <div className={styles.nameContainer}>
           <div className={styles.inputGroup}>
-            <input type='text' name='firstName' placeholder='Ad*' />
+            <input
+              type='text'
+              name='firstName'
+              placeholder='Ad*'
+              onInput={handleNameInput}
+            />
             {formErrors.firstName && (
               <p className={styles.error}>{formErrors.firstName}</p>
             )}
           </div>
           <div className={styles.inputGroup}>
-            <input type='text' name='lastName' placeholder='Soyad*' />
+            <input
+              type='text'
+              name='lastName'
+              placeholder='Soyad*'
+              onInput={handleNameInput}
+            />
             {formErrors.lastName && (
               <p className={styles.error}>{formErrors.lastName}</p>
             )}
@@ -77,7 +96,14 @@ const RegisterForm: React.FC = () => {
           </button>
         </div>
         {formErrors.password && (
-          <p className={styles.error}>{formErrors.password}</p>
+          <p className={styles.error}>
+            {formErrors.password.split('\n').map((line, index) => (
+              <React.Fragment key={index}>
+                {line}
+                <br />
+              </React.Fragment>
+            ))}
+          </p>
         )}
         <input
           type='tel'
