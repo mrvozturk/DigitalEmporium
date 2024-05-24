@@ -79,3 +79,9 @@
   font-size: 15px;
   margin-bottom: 10px;
 }
+.error {
+  color: red;
+  font-size: 12px;
+  display: flex;
+  justify-content: column;
+}

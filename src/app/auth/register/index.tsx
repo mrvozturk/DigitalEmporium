@@ -89,7 +89,7 @@ const RegisterForm: React.FC = () => {
         )}
         <div className={styles.dateGenderContainer}>
           <div className={styles.dateContainer}>
-            <label htmlFor='birthdate'>Doğum Tarihi*</label>
+            <label htmlFor='birthdate'>Doğum Tarihi</label>
             <DatePicker
               selected={selectedDate}
               onChange={(date: Date | null) => setSelectedDate(date)}
@@ -109,7 +109,7 @@ const RegisterForm: React.FC = () => {
             )}
           </div>
           <div className={styles.genderContainer}>
-            <label>Cinsiyet*</label>
+            <label>Cinsiyet</label>
             <div>
               <input type='radio' name='gender' value='female' />
               <label> Kadın </label>
