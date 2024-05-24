@@ -9,6 +9,14 @@ const RegisterForm: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [showPassword, setShowPassword] = useState(false);
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
+  const [passwordTouched, setPasswordTouched] = useState(false);
+  const [passwordCriteria, setPasswordCriteria] = useState({
+    length: false,
+    uppercase: false,
+    lowercase: false,
+    number: false,
+    specialChar: false
+  });
 
   const validateForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,20 +39,30 @@ const RegisterForm: React.FC = () => {
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(form.email.value.trim())) {
-      errors.email = 'Geçerli bir e-posta adresi girin';
+      errors.email = 'Geçerli bir e-posta adresi girin';
     }
 
     if (!selectedDate) errors.birthdate = 'Bu alan zorunludur';
-    const password = form.password.value.trim();
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*.?&]).{8,}$/;
-    if (password && !passwordRegex.test(password)) {
-      errors.password = `Şifre en az 8 karakter,
-     bir büyük harf,
-      bir küçük harf,
-      bir sayı ve bir özel karakter içermelidir`;
-    }
 
     setFormErrors(errors);
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const password = e.target.value;
+    setPasswordCriteria({
+      length: password.length >= 8,
+      uppercase: /[A-Z]/.test(password),
+      lowercase: /[a-z]/.test(password),
+      number: /\d/.test(password),
+      specialChar: /[@$!%*.?&]/.test(password)
+    });
+
+    if (password) {
+      setFormErrors(prevErrors => {
+        const { password, ...rest } = prevErrors;
+        return rest;
+      });
+    }
   };
 
   const handleNameInput = (e: React.FormEvent<HTMLInputElement>) => {
@@ -59,9 +77,8 @@ const RegisterForm: React.FC = () => {
       <h2>Kayıt Ol</h2>
       <form className={styles.registrationForm} onSubmit={validateForm}>
         <input type='email' name='email' placeholder='E-posta Adresi*' />
-        {formErrors.email && (
-          <p className={styles.error}>{formErrors.email}</p>
-        )}{' '}
+        {formErrors.email && <p className={styles.error}>{formErrors.email}</p>}
+
         <div className={styles.nameContainer}>
           <div className={styles.inputGroup}>
             <input
@@ -86,12 +103,16 @@ const RegisterForm: React.FC = () => {
             )}
           </div>
         </div>
+
         <div className={styles.passwordInputContainer}>
           <input
             className={styles.passwordInput}
             type={showPassword ? 'text' : 'password'}
             name='password'
             placeholder='Şifre*'
+            onChange={handlePasswordChange}
+            onFocus={() => setPasswordTouched(true)}
+            onBlur={() => setPasswordTouched(false)}
           />
           <button
             type='button'
@@ -101,16 +122,29 @@ const RegisterForm: React.FC = () => {
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </button>
         </div>
-        {formErrors.password && (
-          <p className={styles.error}>
-            {formErrors.password.split('\n').map((line, index) => (
-              <React.Fragment key={index}>
-                {line}
-                <br />
-              </React.Fragment>
-            ))}
-          </p>
+        {formErrors.password && !passwordTouched && (
+          <p className={styles.error}>{formErrors.password}</p>
         )}
+        {passwordTouched && (
+          <ul className={styles.passwordCriteria}>
+            <li className={passwordCriteria.length ? styles.valid : ''}>
+              En az 8 karakter uzunluğunda olmalıdır
+            </li>
+            <li className={passwordCriteria.uppercase ? styles.valid : ''}>
+              Parolanız en az 1 büyük harf içermelidir
+            </li>
+            <li className={passwordCriteria.lowercase ? styles.valid : ''}>
+              Parolanız en az 1 küçük harf içermelidir
+            </li>
+            <li className={passwordCriteria.number ? styles.valid : ''}>
+              Parolanız en az 1 numara içermelidir
+            </li>
+            <li className={passwordCriteria.specialChar ? styles.valid : ''}>
+              Parolanız en az 1 karakter içermelidir
+            </li>
+          </ul>
+        )}
+
         <input
           type='tel'
           name='phoneNumber'
@@ -119,6 +153,7 @@ const RegisterForm: React.FC = () => {
         {formErrors.phoneNumber && (
           <p className={styles.error}>{formErrors.phoneNumber}</p>
         )}
+
         <div className={styles.dateGenderContainer}>
           <div className={styles.dateContainer}>
             <label htmlFor='birthdate'>Doğum Tarihi</label>
@@ -140,6 +175,7 @@ const RegisterForm: React.FC = () => {
               <p className={styles.error}>{formErrors.birthdate}</p>
             )}
           </div>
+
           <div className={styles.genderContainer}>
             <label>Cinsiyet</label>
             <div>
@@ -155,6 +191,7 @@ const RegisterForm: React.FC = () => {
             )}
           </div>
         </div>
+
         <button type='submit' className={styles.signUpButton}>
           KAYIT OL
         </button>

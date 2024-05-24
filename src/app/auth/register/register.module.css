@@ -146,3 +146,15 @@
 .formContainer input[type='tel'] + .error {
   margin-bottom: 5px;
 }
+.passwordCriteria {
+  list-style-type: none;
+  padding: 0;
+}
+
+.passwordCriteria li {
+  color: black;
+}
+
+.passwordCriteria li.valid {
+  color: green;
+}
