@@ -126,29 +126,23 @@
   display: flex;
   justify-content: flex-end;
 }
-
 .error {
   color: red;
   font-size: 12px;
   display: flex;
   justify-content: column;
 }
+
+/* Yeni eklenen stil */
+.error.green {
+  color: green;
+}
+
 .genderContainer .error {
   margin-top: 22px;
   margin-bottom: 0;
 }
 
 .formContainer input[type='tel'] + .error {
-  margin-bottom: 5px;
-}
-.criterionMet {
-  color: green;
-}
-.passwordCriteriaList {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-.passwordCriteriaList li {
   margin-bottom: 5px;
 }

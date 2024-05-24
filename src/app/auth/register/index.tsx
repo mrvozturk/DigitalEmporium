@@ -29,6 +29,11 @@ const RegisterForm: React.FC = () => {
       }
     });
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(form.email.value.trim())) {
+      errors.email = 'Geçerli bir e-posta adresi girin';
+    }
+
     if (!selectedDate) errors.birthdate = 'Bu alan zorunludur';
     const password = form.password.value.trim();
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*.?&]).{8,}$/;
@@ -38,6 +43,7 @@ const RegisterForm: React.FC = () => {
       bir küçük harf,
       bir sayı ve bir özel karakter içermelidir`;
     }
+
     setFormErrors(errors);
   };
 
