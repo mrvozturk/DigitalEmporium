@@ -1,4 +1,5 @@
 'use client';
+import 'react-datepicker/dist/react-datepicker.css';
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
@@ -46,7 +47,6 @@ const RegisterForm: React.FC = () => {
         {formErrors.email && (
           <p className={styles.error}>{formErrors.email}</p>
         )}{' '}
-      
         <div className={styles.nameContainer}>
           <div className={styles.inputGroup}>
             <input type='text' name='firstName' placeholder='Ad*' />
