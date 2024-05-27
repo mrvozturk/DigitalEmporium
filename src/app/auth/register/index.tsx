@@ -9,7 +9,7 @@ const RegisterForm: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [showPassword, setShowPassword] = useState(false);
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
-  const [passwordTouched, setPasswordTouched] = useState(false);
+  const [showPasswordCriteria, setShowPasswordCriteria] = useState(false);
   const [passwordCriteria, setPasswordCriteria] = useState({
     length: false,
     uppercase: false,
@@ -17,7 +17,6 @@ const RegisterForm: React.FC = () => {
     number: false,
     specialChar: false
   });
-
   const validateForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const errors: { [key: string]: string } = {};
@@ -44,6 +43,15 @@ const RegisterForm: React.FC = () => {
 
     if (!selectedDate) errors.birthdate = 'Bu alan zorunludur';
 
+    const password = form.password.value;
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*.?&])[A-Za-z\d@$!%*.?&]{8,}$/;
+    if (!passwordRegex.test(password)) {
+      errors.password = 'Şifre kriterlerini karşılamıyor';
+      setShowPasswordCriteria(true);
+    } else {
+      setShowPasswordCriteria(false);
+    }
+
     setFormErrors(errors);
   };
 
@@ -56,13 +64,6 @@ const RegisterForm: React.FC = () => {
       number: /\d/.test(password),
       specialChar: /[@$!%*.?&]/.test(password)
     });
-
-    if (password) {
-      setFormErrors(prevErrors => {
-        const { password, ...rest } = prevErrors;
-        return rest;
-      });
-    }
   };
 
   const handleNameInput = (e: React.FormEvent<HTMLInputElement>) => {
@@ -110,9 +111,8 @@ const RegisterForm: React.FC = () => {
             type={showPassword ? 'text' : 'password'}
             name='password'
             placeholder='Şifre*'
+            onFocus={() => setShowPasswordCriteria(true)}
             onChange={handlePasswordChange}
-            onFocus={() => setPasswordTouched(true)}
-            onBlur={() => setPasswordTouched(false)}
           />
           <button
             type='button'
@@ -122,10 +122,10 @@ const RegisterForm: React.FC = () => {
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </button>
         </div>
-        {formErrors.password && !passwordTouched && (
+        {formErrors.password && (
           <p className={styles.error}>{formErrors.password}</p>
         )}
-        {passwordTouched && (
+        {showPasswordCriteria && (
           <ul className={styles.passwordCriteria}>
             <li className={passwordCriteria.length ? styles.valid : ''}>
               En az 8 karakter uzunluğunda olmalıdır
@@ -140,7 +140,7 @@ const RegisterForm: React.FC = () => {
               Parolanız en az 1 numara içermelidir
             </li>
             <li className={passwordCriteria.specialChar ? styles.valid : ''}>
-              Parolanız en az 1 karakter içermelidir
+              Parolanız en az 1 özel karakter içermelidir
             </li>
           </ul>
         )}
