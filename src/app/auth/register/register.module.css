@@ -148,8 +148,9 @@
 }
 .passwordCriteria {
   list-style-type: disc;
-  padding: 0;
+  padding: 0 15px;
   font-size: 12.5px;
+  margin: 0;
 }
 
 .passwordCriteria li {
