@@ -17,6 +17,7 @@ const RegisterForm: React.FC = () => {
     number: false,
     specialChar: false
   });
+
   const validateForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const errors: { [key: string]: string } = {};
@@ -36,8 +37,11 @@ const RegisterForm: React.FC = () => {
       }
     });
 
+    const email = form.email.value.trim();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(form.email.value.trim())) {
+    if (!email) {
+      errors.email = 'Bu alan zorunludur';
+    } else if (!emailRegex.test(email)) {
       errors.email = 'Geçerli bir e-posta adresi girin';
     }
 
@@ -45,8 +49,10 @@ const RegisterForm: React.FC = () => {
 
     const password = form.password.value;
     const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*.?&])[A-Za-z\d@$!%*.?&]{8,}$/;
-    if (!passwordRegex.test(password)) {
+    if (!password) {
       errors.password = 'Bu alan zorunludur';
+    } else if (!passwordRegex.test(password)) {
+      errors.password = 'Karakterler kurallara göre girilmelidir';
       setShowPasswordCriteria(true);
     } else {
       setShowPasswordCriteria(false);
@@ -127,6 +133,7 @@ const RegisterForm: React.FC = () => {
         )}
         {showPasswordCriteria && (
           <ul className={styles.passwordCriteria}>
+            <li className={styles.criteriaHeading}>ŞİFRE KISITLAMALARI</li>
             <li className={passwordCriteria.length ? styles.valid : ''}>
               En az 8 karakter uzunluğunda olmalıdır
             </li>

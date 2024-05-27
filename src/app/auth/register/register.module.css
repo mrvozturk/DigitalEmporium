@@ -147,7 +147,7 @@
   margin-bottom: 5px;
 }
 .passwordCriteria {
-  list-style-type: none;
+  list-style-type: disc;
   padding: 0;
   font-size: 12.5px;
 }
@@ -158,4 +158,9 @@
 
 .passwordCriteria li.valid {
   color: green;
+}
+.criteriaHeading {
+  font-weight: bold;
+  margin-bottom: 5px;
+  list-style-type: none;
 }
