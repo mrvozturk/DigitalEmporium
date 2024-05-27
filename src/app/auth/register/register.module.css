@@ -162,6 +162,8 @@
 }
 .criteriaHeading {
   font-weight: bold;
+  margin-top: 5px;
+  font-size: 15px;
   margin-bottom: 5px;
   list-style-type: none;
 }
