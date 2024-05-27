@@ -46,7 +46,7 @@ const RegisterForm: React.FC = () => {
     const password = form.password.value;
     const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*.?&])[A-Za-z\d@$!%*.?&]{8,}$/;
     if (!passwordRegex.test(password)) {
-      errors.password = 'Şifre kriterlerini karşılamıyor';
+      errors.password = 'Bu alan zorunludur';
       setShowPasswordCriteria(true);
     } else {
       setShowPasswordCriteria(false);
