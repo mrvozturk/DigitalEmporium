@@ -3,6 +3,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import InputMask from 'react-input-mask';
 import styles from './register.module.css';
 
 const RegisterForm: React.FC = () => {
@@ -154,11 +155,16 @@ const RegisterForm: React.FC = () => {
           </div>
         )}
 
-        <input
+        <InputMask
+          mask='0 (599) 999 99 99'
+          maskChar='_'
           type='tel'
           name='phoneNumber'
-          placeholder='Telefon Numarası* (Örn: 5551234567)'
+          placeholder='Telefon Numarası* (Örn: 0 (555) 123 4567)'
         />
+        {formErrors.phoneNumber && (
+          <p className={styles.error}>{formErrors.phoneNumber}</p>
+        )}
         {formErrors.phoneNumber && (
           <p className={styles.error}>{formErrors.phoneNumber}</p>
         )}
