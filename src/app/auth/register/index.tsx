@@ -132,24 +132,26 @@ const RegisterForm: React.FC = () => {
           <p className={styles.error}>{formErrors.password}</p>
         )}
         {showPasswordCriteria && (
-          <ul className={styles.passwordCriteria}>
-            <li className={styles.criteriaHeading}>ŞİFRE KISITLAMALARI</li>
-            <li className={passwordCriteria.length ? styles.valid : ''}>
-              En az 8 karakter uzunluğunda olmalıdır
-            </li>
-            <li className={passwordCriteria.uppercase ? styles.valid : ''}>
-              Parolanız en az 1 büyük harf içermelidir
-            </li>
-            <li className={passwordCriteria.lowercase ? styles.valid : ''}>
-              Parolanız en az 1 küçük harf içermelidir
-            </li>
-            <li className={passwordCriteria.number ? styles.valid : ''}>
-              Parolanız en az 1 numara içermelidir
-            </li>
-            <li className={passwordCriteria.specialChar ? styles.valid : ''}>
-              Parolanız en az 1 özel karakter içermelidir
-            </li>
-          </ul>
+          <div>
+            <h1 className={styles.criteriaHeading}> ŞİFRE KISITLAMALARI</h1>
+            <ul className={styles.passwordCriteria}>
+              <li className={passwordCriteria.length ? styles.valid : ''}>
+                En az 8 karakter uzunluğunda olmalıdır
+              </li>
+              <li className={passwordCriteria.uppercase ? styles.valid : ''}>
+                Parolanız en az 1 büyük harf içermelidir
+              </li>
+              <li className={passwordCriteria.lowercase ? styles.valid : ''}>
+                Parolanız en az 1 küçük harf içermelidir
+              </li>
+              <li className={passwordCriteria.number ? styles.valid : ''}>
+                Parolanız en az 1 numara içermelidir
+              </li>
+              <li className={passwordCriteria.specialChar ? styles.valid : ''}>
+                Parolanız en az 1 özel karakter içermelidir
+              </li>
+            </ul>
+          </div>
         )}
 
         <input
