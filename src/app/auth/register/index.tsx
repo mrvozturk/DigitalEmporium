@@ -165,10 +165,6 @@ const RegisterForm: React.FC = () => {
         {formErrors.phoneNumber && (
           <p className={styles.error}>{formErrors.phoneNumber}</p>
         )}
-        {formErrors.phoneNumber && (
-          <p className={styles.error}>{formErrors.phoneNumber}</p>
-        )}
-
         <div className={styles.dateGenderContainer}>
           <div className={styles.dateContainer}>
             <label htmlFor='birthdate'>Doğum Tarihi</label>
