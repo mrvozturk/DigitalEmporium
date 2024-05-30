@@ -2,9 +2,13 @@
 import 'react-datepicker/dist/react-datepicker.css';
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
-import { FaEye, FaEyeSlash, FaCalendarAlt } from 'react-icons/fa';
 import InputMask from 'react-input-mask';
 import styles from './register.module.css';
+import {
+  AiOutlineCalendar,
+  AiOutlineEye,
+  AiOutlineEyeInvisible
+} from 'react-icons/ai';
 
 const CustomDateInput = ({
   value,
@@ -23,7 +27,7 @@ const CustomDateInput = ({
       className={styles.dateInput}
       inputMode='numeric'
     />
-    <FaCalendarAlt className={styles.calendarIcon} />
+    <AiOutlineCalendar className={styles.calendarIcon} />
   </div>
 );
 
@@ -147,7 +151,7 @@ const RegisterForm: React.FC = () => {
             onClick={() => setShowPassword(!showPassword)}
             className={styles.eyeButton}
           >
-            {showPassword ? <FaEyeSlash /> : <FaEye />}
+            {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}{' '}
           </button>
         </div>
         {formErrors.password && (

@@ -1,7 +1,9 @@
 'use client';
 import React, { useState } from 'react';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import styles from './login.module.css';
+import {
+  AiOutlineEye,
+  AiOutlineEyeInvisible
+} from 'react-icons/ai';import styles from './login.module.css';
 
 const LoginForm: React.FC = () => {
   const [showLoginPassword, setShowLoginPassword] = useState<boolean>(false);
@@ -70,7 +72,8 @@ const LoginForm: React.FC = () => {
             onClick={() => setShowLoginPassword(prevState => !prevState)}
             className={styles.eyeButton}
           >
-            {showLoginPassword ? <FaEyeSlash /> : <FaEye />}
+            {showLoginPassword ? < AiOutlineEyeInvisible /> : < AiOutlineEye />}
+     
           </button>
         </div>
         {formErrors.password && (
