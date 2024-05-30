@@ -133,7 +133,6 @@
   justify-content: column;
 }
 
-/* Yeni eklenen stil */
 .error.green {
   color: green;
 }
@@ -165,4 +164,26 @@
   margin-top: 5px;
   font-size: 15px;
   list-style-type: none;
+}
+
+.datepickerContainer {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.dateInput {
+  width: calc(100% - 20px);
+  padding: 0;
+  border: none;
+  outline: none;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.calendarIcon {
+  font-size: 16px;
 }

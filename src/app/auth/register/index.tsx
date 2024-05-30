@@ -2,9 +2,30 @@
 import 'react-datepicker/dist/react-datepicker.css';
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaCalendarAlt } from 'react-icons/fa';
 import InputMask from 'react-input-mask';
 import styles from './register.module.css';
+
+const CustomDateInput = ({
+  value,
+  onClick,
+  placeholder
+}: {
+  value?: string;
+  onClick?: () => void;
+  placeholder?: string;
+}) => (
+  <div className={styles.datepickerContainer} onClick={onClick}>
+    <input
+      value={value}
+      onClick={onClick}
+      placeholder={placeholder}
+      className={styles.dateInput}
+      inputMode='numeric'
+    />
+    <FaCalendarAlt className={styles.calendarIcon} />
+  </div>
+);
 
 const RegisterForm: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -169,6 +190,7 @@ const RegisterForm: React.FC = () => {
           <div className={styles.dateContainer}>
             <label htmlFor='birthdate'>Doğum Tarihi</label>
             <DatePicker
+              customInput={<CustomDateInput />}
               selected={selectedDate}
               onChange={(date: Date | null) => setSelectedDate(date)}
               dateFormat='dd/MM/yyyy'
