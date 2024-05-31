@@ -36,6 +36,7 @@ const RegisterForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
   const [showPasswordCriteria, setShowPasswordCriteria] = useState(false);
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [passwordCriteria, setPasswordCriteria] = useState({
     length: false,
     uppercase: false,
@@ -89,13 +90,18 @@ const RegisterForm: React.FC = () => {
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const password = e.target.value;
-    setPasswordCriteria({
+    const criteria = {
       length: password.length >= 8,
       uppercase: /[A-Z]/.test(password),
       lowercase: /[a-z]/.test(password),
       number: /\d/.test(password),
       specialChar: /[@$!%*.?&]/.test(password)
-    });
+    };
+    setPasswordCriteria(criteria);
+    setIsPasswordValid(Object.values(criteria).every(Boolean));
+    if (!isPasswordValid) {
+      setShowPasswordCriteria(true);
+    }
   };
 
   const handleNameInput = (e: React.FormEvent<HTMLInputElement>) => {
@@ -105,10 +111,20 @@ const RegisterForm: React.FC = () => {
     );
   };
 
+  const handlePasswordFocus = () => {
+    if (!isPasswordValid) {
+      setShowPasswordCriteria(true);
+    }
+  };
+
   return (
     <div className={styles.formContainer}>
       <h2>Kayıt Ol</h2>
-      <form className={styles.registrationForm} onSubmit={validateForm}>
+      <form
+        className={styles.registrationForm}
+        onSubmit={validateForm}
+        noValidate
+      >
         <input type='email' name='email' placeholder='E-posta Adresi*' />
         {formErrors.email && <p className={styles.error}>{formErrors.email}</p>}
 
@@ -143,7 +159,7 @@ const RegisterForm: React.FC = () => {
             type={showPassword ? 'text' : 'password'}
             name='password'
             placeholder='Şifre*'
-            onFocus={() => setShowPasswordCriteria(true)}
+            onFocus={handlePasswordFocus}
             onChange={handlePasswordChange}
           />
           <button
@@ -157,9 +173,8 @@ const RegisterForm: React.FC = () => {
         {formErrors.password && (
           <p className={styles.error}>{formErrors.password}</p>
         )}
-        {showPasswordCriteria && (
+        {showPasswordCriteria && !isPasswordValid && (
           <div>
-            <h1 className={styles.criteriaHeading}> ŞİFRE KISITLAMALARI</h1>
             <ul className={styles.passwordCriteria}>
               <li className={passwordCriteria.length ? styles.valid : ''}>
                 En az 8 karakter uzunluğunda olmalıdır

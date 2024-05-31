@@ -8,6 +8,7 @@
 }
 
 /* phone size */
+
 @media (max-width: 768px) {
   .formContainer {
     width: 100%;
@@ -36,6 +37,7 @@
   margin-bottom: 10px;
   margin-top: 10px;
 }
+
 .formContainer input[type='email']:hover,
 .nameContainer .inputGroup input[type='text']:hover,
 .dateContainer input[type='text']:hover,
@@ -126,6 +128,7 @@
   display: flex;
   justify-content: flex-end;
 }
+
 .error {
   color: red;
   font-size: 12px;
@@ -145,10 +148,11 @@
 .formContainer input[type='tel'] + .error {
   margin-bottom: 5px;
 }
+
 .passwordCriteria {
-  list-style-type: disc;
-  padding: 0 15px;
-  font-size: 12.5px;
+  list-style-type: none;
+  padding: 0;
+  font-size: 12px;
   margin: 0;
 }
 
@@ -159,20 +163,17 @@
 .passwordCriteria li.valid {
   color: green;
 }
-.criteriaHeading {
-  font-weight: bold;
-  margin-top: 5px;
-  font-size: 15px;
-  list-style-type: none;
-}
 
 .datepickerContainer {
   display: flex;
-  align-items: center;
   border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 10px;
   margin-bottom: 10px;
   margin-top: 10px;
+}
+
+.datepickerContainer:hover {
+  border: 1px solid rgba(0, 0, 0, 0.9);
 }
 
 .dateInput {

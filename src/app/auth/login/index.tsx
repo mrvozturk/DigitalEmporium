@@ -1,9 +1,7 @@
 'use client';
 import React, { useState } from 'react';
-import {
-  AiOutlineEye,
-  AiOutlineEyeInvisible
-} from 'react-icons/ai';import styles from './login.module.css';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import styles from './login.module.css';
 
 const LoginForm: React.FC = () => {
   const [showLoginPassword, setShowLoginPassword] = useState<boolean>(false);
@@ -19,11 +17,12 @@ const LoginForm: React.FC = () => {
       }
     });
 
-    const password = form.password.value.trim();
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*.?&]).{8,}$/;
-    if (password && !passwordRegex.test(password)) {
-      errors.password =
-        'Şifre en az 8 karakter, bir büyük harf, bir küçük harf, bir sayı ve bir özel karakter içermelidir';
+    const email = form.email.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email) {
+      errors.email = 'Bu alan zorunludur';
+    } else if (!emailRegex.test(email)) {
+      errors.email = 'Geçerli bir e-posta adresi girin';
     }
 
     setFormErrors(errors);
@@ -32,48 +31,34 @@ const LoginForm: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = e.target as HTMLFormElement;
+    const form = e.currentTarget;
     const errors = validateForm(form);
 
     if (Object.keys(errors).length === 0) {
-      // Submit form if no errors
-      console.log('Form submitted');
+      // Form is valid, proceed with form submission or API call
+      console.log('Form submitted successfully');
     }
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const form = e.target.form as HTMLFormElement;
-    validateForm(form);
   };
 
   return (
     <div className={styles.loginFormContainer}>
       <h2>Giriş Yap</h2>
-      <form className={styles.loginForm} onSubmit={handleSubmit}>
-        <input
-          type='email'
-          name='email'
-          placeholder='E-posta Adresi*'
-          onChange={handleInputChange}
-        />
-        {formErrors.email && (
-          <p className={styles.error}>{formErrors.email}</p>
-        )}
+      <form className={styles.loginForm} onSubmit={handleSubmit} noValidate>
+        <input type='email' name='email' placeholder='E-posta Adresi*' />
+        {formErrors.email && <p className={styles.error}>{formErrors.email}</p>}
         <div className={styles.passwordInputContainer}>
           <input
             className={styles.passwordInput}
             type={showLoginPassword ? 'text' : 'password'}
             name='password'
             placeholder='Şifre*'
-            onChange={handleInputChange}
           />
           <button
             type='button'
             onClick={() => setShowLoginPassword(prevState => !prevState)}
             className={styles.eyeButton}
           >
-            {showLoginPassword ? < AiOutlineEyeInvisible /> : < AiOutlineEye />}
-     
+            {showLoginPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
           </button>
         </div>
         {formErrors.password && (
