@@ -6,7 +6,9 @@
   display: flex;
   flex-direction: column;
 }
-
+.loginFormContainer h2 {
+  margin-top: 10px;
+}
 /* phone size */
 @media (max-width: 768px) {
   .loginFormContainer {
@@ -18,7 +20,8 @@
 .nameContainer input[type='text'] {
   width: 100%;
   padding: 10px;
-  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 18.5px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   outline: none;
   font-size: 12px;

@@ -85,6 +85,13 @@ const RegisterForm: React.FC = () => {
       setShowPasswordCriteria(false);
     }
 
+    const phoneNumber = form.phoneNumber.value.replace(/\D/g, '');
+    if (!phoneNumber) {
+      errors.phoneNumber = 'Bu alan zorunludur';
+    } else if (phoneNumber.length < 11) {
+      errors.phoneNumber = 'Bu alan en az 11 karakter olmalıdır';
+    }
+
     setFormErrors(errors);
   };
 
