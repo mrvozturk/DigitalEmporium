@@ -9,6 +9,10 @@ import {
   AiOutlineEye,
   AiOutlineEyeInvisible
 } from 'react-icons/ai';
+import { tr } from 'date-fns/locale';
+import { registerLocale } from 'react-datepicker';
+
+registerLocale('tr', tr);
 
 const CustomDateInput = ({
   value,
@@ -229,6 +233,7 @@ const RegisterForm: React.FC = () => {
               scrollableMonthYearDropdown
               scrollableYearDropdown
               yearDropdownItemNumber={78}
+              locale='tr'
             />
             {formErrors.birthdate && (
               <p className={styles.error}>{formErrors.birthdate}</p>
