@@ -159,7 +159,7 @@
 }
 
 .passwordCriteria li {
-  color: black;
+  color: red;
 }
 
 .passwordCriteria li.valid {

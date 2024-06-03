@@ -16,7 +16,7 @@
 
 .button {
   font-size: 15px;
-  border-bottom: 1px solid black;
+  text-decoration: underline;
 }
 
 @media (max-width: 1024px) {

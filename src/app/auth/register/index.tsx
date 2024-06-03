@@ -247,8 +247,6 @@ const RegisterForm: React.FC = () => {
               <label> Kadın </label>
               <input type='radio' name='gender' value='male' />
               <label> Erkek</label>
-              <input type='radio' name='gender' value='other' />
-              <label> Diğer</label>
             </div>
             {formErrors.gender && (
               <p className={styles.error}>{formErrors.gender}</p>
