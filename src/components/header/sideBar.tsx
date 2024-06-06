@@ -9,6 +9,10 @@ interface SideBarProps {
 }
 
 const SideBar: React.FC<SideBarProps> = ({ onCloseSidebar }) => {
+  const handleCloseSidebar = () => {
+    onCloseSidebar();
+  };
+
   return (
     <div className={sideBarStyles.overlay}>
       <div className={sideBarStyles.container}>
@@ -18,14 +22,12 @@ const SideBar: React.FC<SideBarProps> = ({ onCloseSidebar }) => {
           </a>
           <div className={sideBarStyles.icons}>
             <Link href='/auth'>
-              <AiOutlineUser />
+              <AiOutlineUser onClick={handleCloseSidebar} />
             </Link>
             <Link href='/favorites'>
-              <AiOutlineHeart />
+              <AiOutlineHeart onClick={handleCloseSidebar} />
             </Link>
-            <Link href='/cart' onClick={onCloseSidebar}>
-              <AiOutlineClose />
-            </Link>
+            <AiOutlineClose onClick={handleCloseSidebar} />
           </div>
         </div>
         <div className={sideBarStyles.categoryLinks}>
