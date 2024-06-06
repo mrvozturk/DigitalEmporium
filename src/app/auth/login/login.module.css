@@ -71,19 +71,21 @@
   color: rgba(0, 0, 0, 0.9);
 }
 .forgotPassword {
+  align-self: flex-start;
   color: rgba(0, 0, 0, 0.9);
   cursor: pointer;
-  font-size: 13px;
+  font-size: 14px;
   margin-bottom: 20px;
-  margin-top: 10px;
+  margin-top: 8px;
+}
+.buttonText {
+  display: inline-block;
   text-decoration: underline;
-  width: 40%;
 }
 .error {
   color: red;
-  font-size: 12px;
-  display: flex;
-  justify-content: column;
+  font-size: 14px;
+  align-items: center;
 }
 /* phone size */
 @media (max-width: 768px) {
@@ -91,7 +93,6 @@
     width: 100%;
   }
   .forgotPassword {
-    width: 40%;
-    font-size: 12px;
+    font-size: 14px;
   }
 }

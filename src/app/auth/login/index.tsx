@@ -64,14 +64,9 @@ const LoginForm: React.FC = () => {
         {formErrors.password && (
           <p className={styles.error}>{formErrors.password}</p>
         )}
-        <a
-          href='/user/password/reset/'
-          className={styles.forgotPassword}
-          target='_blank'
-        >
-          Şifremi Unuttum
-        </a>
-
+        <button className={styles.forgotPassword}>
+          <span className={styles.buttonText}>Şifremi Unuttum</span>
+        </button>
         <button type='submit' className={styles.loginButton}>
           GİRİŞ YAP
         </button>
