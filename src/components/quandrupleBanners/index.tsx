@@ -11,10 +11,10 @@ const QuadrupleBanners: React.FC = () => {
   };
 
   const images = [
-    'https://ktnimg2.mncdn.com/cms/2024/05/03/a927d428-9060-49b9-837d-55c66aa6982b.png',
-    'https://ktnimg2.mncdn.com/cms/2024/05/03/6bcc0746-7afa-4180-a03e-d0363b6c88aa.png',
-    'https://ktnimg2.mncdn.com/cms/2024/05/03/8cb89c8d-87fe-4a12-b3c5-54d1a3041101.png',
-    'https://ktnimg2.mncdn.com/cms/2024/05/03/61140670-b452-4e4f-a94a-3f297ccb7d91.png'
+    'https://ktnimg2.mncdn.com/cms/2024/05/20/92bb0c02-f1b4-4885-b15c-75ad6a11496e.png',
+    'https://ktnimg2.mncdn.com/cms/2024/05/20/6185e44e-4cb0-49bf-9080-55a3256d5be7.png',
+    'https://ktnimg2.mncdn.com/cms/2024/05/20/e237f683-de61-499c-9315-4e8974cd499d.png',
+    'https://ktnimg2.mncdn.com/cms/2024/05/20/98142ef2-1241-404b-9489-27fc93e2e585.png'
   ];
 
   return (

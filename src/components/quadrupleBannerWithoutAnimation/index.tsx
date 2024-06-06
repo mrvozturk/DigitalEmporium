@@ -7,7 +7,7 @@ import { GiButtonFinger } from 'react-icons/gi';
 const banners = [
   {
     src:
-      'https://ktnimg2.mncdn.com/cms/2024/05/02/8a2f2dae-1ac1-42b7-951e-f3f32d3045f9.png',
+      'https://ktnimg2.mncdn.com/cms/2024/05/24/176fc35b-aa36-440e-b9f1-7b183785f324.png',
     title: 'EL EMEĞİ KOLEKSİYONU',
     buttonData: '/el-emegi-yeni-sezon-kadin',
     button: 'ALIŞVERİŞE BAŞLA'
@@ -21,7 +21,7 @@ const banners = [
   },
   {
     src:
-      'https://ktnimg2.mncdn.com/cms/2024/05/02/783af6d6-2bf5-46af-98bf-fdf0689bca98.png',
+      'https://ktnimg2.mncdn.com/cms/2024/05/24/34f44797-3dce-4f9d-9f27-de18f4548684.png',
     title: 'POPLİN GÖMLEK',
     buttonData: '/poplin-gomlek',
     button: 'ALIŞVERİŞE BAŞLA'
