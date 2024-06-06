@@ -43,22 +43,35 @@ const Header = () => {
             <AiOutlineMenu />
           </button>
           <div className={styles.logo}>
-            <a href='/'>LOGO</a>
+            <Link href='/'>LOGO</Link>
           </div>
         </div>
         <div className={styles.navbarLinks}>
           <ul>
             <li className={styles.navLink}>
-              <Link href='/auth'>Hesap</Link>
-              <AiOutlineUser className={styles.icon} />
+              <Link href='/auth'>
+                <span className={styles.linkText}>Hesap</span>
+                <span className={styles.iconContainer}>
+                  <AiOutlineUser className={styles.icon} />
+                </span>
+              </Link>
+            </li>
+
+            <li className={styles.navLink}>
+              <Link href='/favorites'>
+                <span className={styles.linkText}>Favoriler</span>
+                <span className={styles.iconContainer}>
+                  <AiOutlineHeart className={styles.icon} />
+                </span>
+              </Link>
             </li>
             <li className={styles.navLink}>
-              <Link href='/favorites'>Favoriler</Link>
-              <AiOutlineHeart className={styles.icon} />
-            </li>
-            <li className={styles.navLink}>
-              <Link href='/basket'>Sepet</Link>
-              <AiOutlineShoppingCart className={styles.icon} />
+              <Link href='/basket'>
+                <span className={styles.linkText}>Sepet</span>
+                <span className={styles.iconContainer}>
+                  <AiOutlineShoppingCart className={styles.icon} />
+                </span>
+              </Link>
             </li>
           </ul>
         </div>

@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   background-color: #f2f2f2;
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
 }
 
 .navbarLinks ul {
@@ -37,7 +37,7 @@
   color: var(--text-color);
 }
 
-.navbarLinks .icon {
+.navbarLinks .iconContainer {
   display: none;
 }
 .sidebarToggle {
@@ -48,16 +48,18 @@
   .navbar {
     padding: 0.5rem;
   }
-  .navbarLinks a {
+  .navbarLinks .linkText {
     display: none;
+  }
+
+  .navbarLinks .iconContainer {
+    display: block;
+    font-size: 1.3rem;
   }
   .navbarLinks ul {
     gap: 15px;
   }
-  .navbarLinks .icon {
-    display: block;
-    font-size: 1.3rem;
-  }
+
   .sidebarToggle {
     font-size: 1.7rem;
     display: block;
