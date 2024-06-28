@@ -75,13 +75,17 @@ const ProductListing: React.FC = () => {
     <div className={styles.container}>
       {productData.map(product => (
         <div key={product.id} className={styles.card}>
-          <Image
-            src={product.src}
-            alt={product.title}
-            width={300}
-            height={300}
-          />
-          <h2 className={styles.title}>{product.title}</h2>
+          <a href={product.buttonData}>
+            <Image
+              src={product.src}
+              alt={product.title}
+              width={300}
+              height={300}
+            />
+          </a>
+          <a href={product.buttonData}>
+            <h2 className={styles.title}>{product.title}</h2>
+          </a>
           <div className={styles.buttonContainer}>
             <a href={product.buttonData} className={styles.button}>
               {product.button}
