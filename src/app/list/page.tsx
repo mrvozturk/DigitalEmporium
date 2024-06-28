@@ -9,7 +9,7 @@ const productData = [
     src:
       'https://ktnimg2.mncdn.com/cms/2024/05/24/176fc35b-aa36-440e-b9f1-7b183785f324.png',
     title: 'OFİSTE MODA',
-    buttonData: '/el-emegi-yeni-sezon-kadin',
+    buttonData: '/ofiste-moda',
     button: 'ALIŞVERİŞE BAŞLA'
   },
   {
@@ -17,7 +17,7 @@ const productData = [
     src:
       'https://ktnimg2.mncdn.com/cms/2024/05/02/003828af-068a-42c0-8f4e-215c2719c0e6.png',
     title: 'YENİ TRENDLER',
-    buttonData: '/ic-giyim-pijama',
+    buttonData: '/yeni-trendler',
     button: 'ALIŞVERİŞE BAŞLA'
   },
   {
@@ -25,7 +25,7 @@ const productData = [
     src:
       'https://ktnimg2.mncdn.com/cms/2024/05/24/34f44797-3dce-4f9d-9f27-de18f4548684.png',
     title: 'KOTON JEANS',
-    buttonData: '/poplin-gomlek',
+    buttonData: '/koton-jeans',
     button: 'ALIŞVERİŞE BAŞLA'
   },
   {
@@ -41,7 +41,7 @@ const productData = [
     src:
       'https://ktnimg2.mncdn.com/cms/2024/05/24/176fc35b-aa36-440e-b9f1-7b183785f324.png',
     title: 'FESTİVAL RUHU',
-    buttonData: '/el-emegi-yeni-sezon-kadin',
+    buttonData: 'festival-kombinleri',
     button: 'ALIŞVERİŞE BAŞLA'
   },
   {
@@ -49,7 +49,7 @@ const productData = [
     src:
       'https://ktnimg2.mncdn.com/cms/2024/05/02/003828af-068a-42c0-8f4e-215c2719c0e6.png',
     title: 'LEOPAR MODASI',
-    buttonData: '/ic-giyim-pijama',
+    buttonData: '/leopar-modası',
     button: 'ALIŞVERİŞE BAŞLA'
   },
   {
@@ -57,7 +57,7 @@ const productData = [
     src:
       'https://ktnimg2.mncdn.com/cms/2024/05/24/34f44797-3dce-4f9d-9f27-de18f4548684.png',
     title: 'PLAJ RUHU',
-    buttonData: '/poplin-gomlek',
+    buttonData: '/plaj-ruhu',
     button: 'ALIŞVERİŞE BAŞLA'
   },
   {
