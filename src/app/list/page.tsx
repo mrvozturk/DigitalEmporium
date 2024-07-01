@@ -2,6 +2,7 @@
 import React from 'react';
 import Image from 'next/image';
 import styles from './index.module.css';
+import Link from 'next/link';
 
 const productData = [
   {
@@ -41,7 +42,7 @@ const productData = [
     src:
       'https://ktnimg2.mncdn.com/cms/2024/05/24/176fc35b-aa36-440e-b9f1-7b183785f324.png',
     title: 'FESTİVAL RUHU',
-    buttonData: 'festival-kombinleri',
+    buttonData: '/festival-kombinleri',
     button: 'ALIŞVERİŞE BAŞLA'
   },
   {
@@ -75,19 +76,15 @@ const ProductListing: React.FC = () => {
     <div className={styles.container}>
       {productData.map(product => (
         <div key={product.id} className={styles.card}>
-import Link from 'next/link';
-
           <Link href={product.buttonData}>
             <Image
               src={product.src}
               alt={product.title}
               priority
-              src={product.src}
-              alt={product.title}
               width={300}
               height={300}
             />
-          </a>
+          </Link>
           <a href={product.buttonData}>
             <h2 className={styles.title}>{product.title}</h2>
           </a>
