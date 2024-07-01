@@ -75,7 +75,9 @@ const ProductListing: React.FC = () => {
     <div className={styles.container}>
       {productData.map(product => (
         <div key={product.id} className={styles.card}>
-          <a href={product.buttonData}>
+import Link from 'next/link';
+
+          <Link href={product.buttonData}>
             <Image
               src={product.src}
               alt={product.title}
