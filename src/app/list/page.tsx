@@ -81,6 +81,9 @@ import Link from 'next/link';
             <Image
               src={product.src}
               alt={product.title}
+              priority
+              src={product.src}
+              alt={product.title}
               width={300}
               height={300}
             />
