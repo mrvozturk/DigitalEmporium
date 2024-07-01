@@ -23,7 +23,9 @@ const QuadrupleBanners: React.FC = () => {
       <div className={styles.bannerText}>
         <h1>BLOG</h1>
         <p>Sezon trendleri ve stil haberleri senin için Koton Blogda </p>
-        <Link href='/list'>
+        <a href='/list' className={styles.bannerButton}>
+          TRENDLERİ KEŞFET
+        </a>
           <button className={styles.bannerButton}>TRENDLERİ KEŞFET</button>
         </Link>
       </div>
