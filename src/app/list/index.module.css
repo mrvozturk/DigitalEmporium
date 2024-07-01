@@ -1,0 +1,58 @@
+.container {
+  display: grid;
+  gap: 20px;
+  padding: 15px 25px;
+}
+
+.card {
+  margin: 0;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+
+.title {
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.button {
+  font-size: 12px;
+  text-decoration: underline;
+}
+
+@media (min-width: 769px) {
+  .container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (max-width: 1024px) {
+  .container {
+    padding: 15px 25px;
+  }
+  .title {
+    font-size: 15px;
+  }
+
+  .button {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 15px 15px;
+  }
+  .title {
+    font-size: 14px;
+  }
+
+  .button {
+    font-size: 10px;
+  }
+}

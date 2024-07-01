@@ -22,7 +22,9 @@ const QuadrupleBanners: React.FC = () => {
       <div className={styles.bannerText}>
         <h1>BLOG</h1>
         <p>Sezon trendleri ve stil haberleri senin için Koton Blogda </p>
-        <button className={styles.bannerButton}>TRENDLERİ KEŞFET</button>
+        <a href='/list' className={styles.bannerButton}>
+          TRENDLERİ KEŞFET
+        </a>
       </div>
       <div className={styles.bannerWrap}>
         {images.map((image, index) => (
