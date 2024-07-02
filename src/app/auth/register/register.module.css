@@ -1,0 +1,201 @@
+.formContainer {
+  width: 40%;
+}
+
+.formContainer form {
+  display: flex;
+  flex-direction: column;
+}
+.formContainer h2 {
+  margin-top: 10px;
+}
+
+.formContainer input[type='email'],
+.nameContainer .inputGroup input[type='text'],
+.dateContainer input[type='text'],
+.formContainer input[type='tel'] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  outline: none;
+  font-size: 12px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.formContainer input[type='email']:hover,
+.nameContainer .inputGroup input[type='text']:hover,
+.dateContainer input[type='text']:hover,
+.formContainer input[type='tel']:hover {
+  border: 1px solid rgba(0, 0, 0, 0.6);
+}
+
+.nameContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  width: calc(50% - 5px);
+}
+
+.passwordInputContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.passwordInputContainer:hover {
+  border-color: rgba(0, 0, 0, 0.9);
+}
+
+.passwordInput {
+  width: calc(100% - 30px);
+  outline: none;
+  border: none;
+  font-size: 12px;
+}
+
+.dateGenderContainer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+}
+
+.dateContainer,
+.genderContainer {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+}
+
+.dateContainer .react-datepicker-wrapper,
+.dateContainer .react-datepicker__input-container input {
+  width: 100%;
+}
+
+.genderContainer div {
+  display: flex;
+  gap: 10px;
+  font-size: 12px;
+  margin-top: 18px;
+}
+
+.genderContainer input[type='radio'] {
+  width: 20px;
+  height: 20px;
+}
+
+.signUpButton {
+  width: 100%;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: rgba(255, 255, 255);
+  border: 1px solid;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.signUpButton:hover {
+  background-color: rgba(255, 255, 255);
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.emailRequired {
+  color: rgba(157, 157, 157);
+  font-size: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  display: flex;
+  justify-content: column;
+}
+
+.error.green {
+  color: green;
+}
+
+.genderContainer .error {
+  margin-top: 22px;
+  margin-bottom: 0;
+}
+
+.formContainer input[type='tel'] + .error {
+  margin-bottom: 5px;
+}
+
+.passwordCriteria {
+  list-style-type: none;
+  padding: 0;
+  font-size: 12px;
+  margin: 0;
+}
+
+.passwordCriteria li {
+  color: red;
+}
+
+.passwordCriteria li.valid {
+  color: green;
+}
+
+.datepickerContainer {
+  display: flex;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding:10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.datepickerContainer:hover {
+  border: 1px solid rgba(0, 0, 0, 0.9);
+}
+
+.dateInput {
+  width: calc(100% - 20px);
+  padding: 0;
+  border: none;
+  outline: none;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.calendarIcon {
+  font-size: 16px;
+}
+
+/* phone size */
+
+@media (max-width: 768px) {
+  .formContainer {
+    width: 100%;
+  }
+
+  .dateGenderContainer {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .dateGenderContainer .dateContainer,
+  .dateGenderContainer .genderContainer {
+    width: 100%;
+  }
+  .genderContainer {
+    margin-bottom: 10px;
+  }
+  .genderContainer .error {
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+}

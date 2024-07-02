@@ -7,28 +7,28 @@ import { GiButtonFinger } from 'react-icons/gi';
 const banners = [
   {
     src:
-      'https://ktnimg2.mncdn.com/cms/2024/04/18/1490aa22-333e-41e6-b1c1-4207beaadc40.png',
+      'https://ktnimg2.mncdn.com/cms/2024/05/24/176fc35b-aa36-440e-b9f1-7b183785f324.png',
     title: 'EL EMEĞİ KOLEKSİYONU',
     buttonData: '/el-emegi-yeni-sezon-kadin',
     button: 'ALIŞVERİŞE BAŞLA'
   },
   {
     src:
-      'https://ktnimg2.mncdn.com/cms/2024/03/18/78056947-f73e-43ac-bfc1-000ca6756df6.png',
+      'https://ktnimg2.mncdn.com/cms/2024/05/02/003828af-068a-42c0-8f4e-215c2719c0e6.png',
     title: 'İÇ GİYİM & PİJAMA',
     buttonData: '/ic-giyim-pijama',
     button: 'ALIŞVERİŞE BAŞLA'
   },
   {
     src:
-      'https://ktnimg2.mncdn.com/cms/2024/03/28/df302119-8a71-4583-afa8-7324f4acfdbf.png',
+      'https://ktnimg2.mncdn.com/cms/2024/05/24/34f44797-3dce-4f9d-9f27-de18f4548684.png',
     title: 'POPLİN GÖMLEK',
     buttonData: '/poplin-gomlek',
     button: 'ALIŞVERİŞE BAŞLA'
   },
   {
     src:
-      'https://ktnimg2.mncdn.com/cms/2024/03/18/f5d6294a-d017-42fc-a3b7-109e112e5666.png',
+      'https://ktnimg2.mncdn.com/cms/2024/05/02/8da70bd5-fbfc-40e8-a92a-7ff926a1b053.png',
     title: 'SEZONUN TRENDLERİ',
     buttonData: '/sezonun-trendleri',
     button: 'ALIŞVERİŞE BAŞLA'

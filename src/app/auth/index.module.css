@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 10vw;
+}
+
+/* phone size */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    gap: 5vh;
+    padding: 20px;
+  }
+}

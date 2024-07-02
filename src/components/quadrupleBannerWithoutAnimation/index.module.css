@@ -1,6 +1,7 @@
 .bannerContainer {
   display: flex;
   justify-content: center;
+  gap: 10px;
 }
 .buttonContainer {
   margin-bottom: 35px;
@@ -15,11 +16,10 @@
 
 .button {
   font-size: 15px;
-  border-bottom: 1px solid black;
+  text-decoration: underline;
 }
 
 @media (max-width: 1024px) {
-
   .title {
     margin-top: 25px;
     margin-bottom: 5px;
