@@ -1,7 +1,7 @@
 'use client';
 import 'react-datepicker/dist/react-datepicker.css';
 import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
+import DatePicker, { registerLocale } from 'react-datepicker';
 import InputMask from 'react-input-mask';
 import styles from './register.module.css';
 import {
@@ -10,30 +10,8 @@ import {
   AiOutlineEyeInvisible
 } from 'react-icons/ai';
 import { tr } from 'date-fns/locale';
-import { registerLocale } from 'react-datepicker';
 
 registerLocale('tr', tr);
-
-const CustomDateInput = ({
-  value,
-  onClick,
-  placeholder
-}: {
-  value?: string;
-  onClick?: () => void;
-  placeholder?: string;
-}) => (
-  <div className={styles.datepickerContainer} onClick={onClick}>
-    <input
-      value={value}
-      onClick={onClick}
-      placeholder={placeholder}
-      className={styles.dateInput}
-      inputMode='numeric'
-    />
-    <AiOutlineCalendar className={styles.calendarIcon} />
-  </div>
-);
 
 const RegisterForm: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -127,6 +105,27 @@ const RegisterForm: React.FC = () => {
       setShowPasswordCriteria(true);
     }
   };
+
+  const CustomDateInput = ({
+    value,
+    onClick,
+    placeholder
+  }: {
+    value?: string;
+    onClick?: () => void;
+    placeholder?: string;
+  }) => (
+    <div className={styles.datepickerContainer} onClick={onClick}>
+      <input
+        value={value}
+        onClick={onClick}
+        placeholder={placeholder}
+        className={styles.dateInput}
+        inputMode='numeric'
+      />
+      <AiOutlineCalendar className={styles.calendarIcon} />
+    </div>
+  );
 
   return (
     <div className={styles.formContainer}>

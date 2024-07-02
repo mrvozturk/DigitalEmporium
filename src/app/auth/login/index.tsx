@@ -33,11 +33,6 @@ const LoginForm: React.FC = () => {
     e.preventDefault();
     const form = e.currentTarget;
     const errors = validateForm(form);
-
-    if (Object.keys(errors).length === 0) {
-      // Form is valid, proceed with form submission or API call
-      console.log('Form submitted successfully');
-    }
   };
 
   return (
