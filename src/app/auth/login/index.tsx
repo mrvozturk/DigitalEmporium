@@ -19,9 +19,7 @@ const LoginForm: React.FC = () => {
 
     const email = form.email.value.trim();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email) {
-      errors.email = 'Bu alan zorunludur';
-    } else if (!emailRegex.test(email)) {
+    if (!emailRegex.test(email)) {
       errors.email = 'Geçerli bir e-posta adresi girin';
     }
 
@@ -32,7 +30,7 @@ const LoginForm: React.FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
-    const errors = validateForm(form);
+    validateForm(form);
   };
 
   return (
