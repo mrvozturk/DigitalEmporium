@@ -22,8 +22,14 @@ const ProductListing: React.FC = () => {
 
   useEffect(() => {
     fetch('https://fakestoreapi.com/products?limit=8')
-      .then(res => res.json())
-      .then(data => setProductData(data));
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return res.json();
+      })
+      .then(data => setProductData(data))
+      .catch(error => console.error('Fetch error:', error));
   }, []);
 
   return (
@@ -32,12 +38,6 @@ const ProductListing: React.FC = () => {
         <Link
           href={`/product/${product.id}`}
           className={styles.card}
-          style={{
-            display: 'flex',
-            flex: 1,
-            flexDirection: 'column',
-            justifyContent: 'space-between'
-          }}
           key={product.id}
         >
           <Image

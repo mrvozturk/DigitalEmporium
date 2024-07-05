@@ -1,3 +1,4 @@
+
 .container {
   display: grid;
   gap: 20px;
@@ -5,8 +6,6 @@
 }
 
 .card {
-  margin: 0;
-  background-color: #fff;
   justify-content: space-between;
   flex-direction: column;
   flex: 1;
@@ -73,7 +72,7 @@
     height: 200px;
   }
   .title {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .button {
