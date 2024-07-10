@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import styles from './index.module.css';
 import Link from 'next/link';
+import { AiOutlineShopping, AiOutlineHeart } from 'react-icons/ai';
 
 interface Product {
   id: number;
@@ -50,9 +51,12 @@ const ProductListing: React.FC = () => {
           />
           <div className={styles.itemDescription}>
             <h2 className={styles.title}>{product.title}</h2>
-            <div className={styles.buttonContainer}>
+            <div className={styles.iconContainer}>
               <Link href={`/product/${product.id}`} className={styles.button}>
-                Alışverişe Başla
+                <AiOutlineShopping className={styles.cartIcon} />
+              </Link>
+              <Link href={`/product/${product.id}`} className={styles.button}>
+                <AiOutlineHeart className={styles.favIcon} />
               </Link>
             </div>
           </div>
