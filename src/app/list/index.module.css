@@ -5,10 +5,11 @@
 }
 
 .card {
-  justify-content: space-between;
-  flex-direction: column;
-  flex: 1;
+  position: relative;
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
 }
 
 .productImage {
@@ -26,6 +27,7 @@
   margin-top: 10px;
   flex: 1;
 }
+
 .title {
   width: 100%;
   font-size: 20px;
@@ -33,14 +35,13 @@
   margin-bottom: 10px;
 }
 
-.buttonContainer {
-  display: flex;
-  justify-content: flex-start;
-}
-
 .iconContainer {
+  position: absolute;
+  top: 10px;
+  right: 0;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .button {
@@ -63,6 +64,7 @@
   color: #000;
   font-size: 25px;
 }
+
 @media (min-width: 769px) {
   .container {
     grid-template-columns: repeat(4, 1fr);
@@ -76,11 +78,9 @@
   .title {
     font-size: 18px;
   }
-
   .cartIcon {
     font-size: 20px;
   }
-
   .favIcon {
     font-size: 20px;
   }
@@ -100,7 +100,6 @@
   .cartIcon {
     font-size: 20px;
   }
-
   .favIcon {
     font-size: 20px;
   }

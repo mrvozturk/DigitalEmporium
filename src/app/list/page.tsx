@@ -41,6 +41,15 @@ const ProductListing: React.FC = () => {
           className={styles.card}
           key={product.id}
         >
+          <div className={styles.iconContainer}>
+            <Link href={`/product/${product.id}`} className={styles.button}>
+              <AiOutlineShopping className={styles.cartIcon} />
+            </Link>
+            <Link href={`/product/${product.id}`} className={styles.button}>
+              <AiOutlineHeart className={styles.favIcon} />
+            </Link>
+          </div>
+
           <Image
             src={product.image}
             alt={product.title}
@@ -51,14 +60,6 @@ const ProductListing: React.FC = () => {
           />
           <div className={styles.itemDescription}>
             <h2 className={styles.title}>{product.title}</h2>
-            <div className={styles.iconContainer}>
-              <Link href={`/product/${product.id}`} className={styles.button}>
-                <AiOutlineShopping className={styles.cartIcon} />
-              </Link>
-              <Link href={`/product/${product.id}`} className={styles.button}>
-                <AiOutlineHeart className={styles.favIcon} />
-              </Link>
-            </div>
           </div>
         </Link>
       ))}
