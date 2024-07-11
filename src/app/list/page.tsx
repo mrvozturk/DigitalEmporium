@@ -41,15 +41,15 @@ const ProductListing: React.FC = () => {
           className={styles.card}
           key={product.id}
         >
+          {' '}
           <div className={styles.iconContainer}>
-            <Link href={`/product/${product.id}`} className={styles.button}>
+            <Link href={`/product`} className={styles.button}>
               <AiOutlineShopping className={styles.cartIcon} />
             </Link>
-            <Link href={`/product/${product.id}`} className={styles.button}>
+            <Link href={`/product`} className={styles.button}>
               <AiOutlineHeart className={styles.favIcon} />
             </Link>
           </div>
-
           <Image
             src={product.image}
             alt={product.title}

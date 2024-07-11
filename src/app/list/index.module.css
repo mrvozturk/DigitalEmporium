@@ -58,8 +58,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
+  max-height: 100%;
+  max-width: 100%;
   border-radius: 50%;
   background-color: #f0f0f0;
   cursor: pointer;
@@ -68,9 +70,8 @@
 .cartIcon,
 .favIcon {
   color: #000;
-  font-size: 25px;
+  font-size: 20px;
 }
-
 @media (min-width: 769px) {
   .container {
     grid-template-columns: repeat(4, 1fr);
@@ -93,6 +94,10 @@
   .favIcon {
     font-size: 20px;
   }
+  .button{
+    width: 35px;
+    height: 3px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -113,6 +118,10 @@
   }
   .cartIcon,
   .favIcon {
-    font-size: 20px;
+    font-size: 18px;
+  }
+  .button{
+    width: 30px;
+    height: 30px;
   }
 }
