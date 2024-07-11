@@ -1,15 +1,21 @@
 .container {
   display: grid;
   gap: 20px;
-  padding: 15px 25px;
+  padding: 15px 15px;
 }
 
 .card {
-  position: relative;
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: space-between;
-  flex: 1;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.1s;
 }
 
 .productImage {
@@ -18,6 +24,7 @@
   object-fit: contain;
   align-items: center;
   align-self: center;
+  padding: 15px;
 }
 
 .itemDescription {
@@ -30,18 +37,21 @@
 
 .title {
   width: 100%;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   margin-bottom: 10px;
+  padding: 20px;
 }
 
 .iconContainer {
   position: absolute;
   top: 10px;
-  right: 0;
+  right: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  z-index: 1;
+  padding: 5px;
 }
 
 .button {
@@ -55,11 +65,7 @@
   cursor: pointer;
 }
 
-.cartIcon {
-  color: #000;
-  font-size: 25px;
-}
-
+.cartIcon,
 .favIcon {
   color: #000;
   font-size: 25px;
@@ -74,13 +80,16 @@
 @media (max-width: 1024px) {
   .productImage {
     height: 200px;
+    padding: 12px;
   }
   .title {
-    font-size: 18px;
+    font-size: 15px;
+    padding: 15px;
   }
-  .cartIcon {
-    font-size: 20px;
+  .iconContainer {
+    padding: 0;
   }
+  .cartIcon,
   .favIcon {
     font-size: 20px;
   }
@@ -89,17 +98,20 @@
 @media (max-width: 768px) {
   .container {
     grid-template-columns: repeat(2, 1fr);
-    padding: 15px 25px;
+    gap: 15px;
   }
   .productImage {
     height: 200px;
+    padding: 10px;
   }
   .title {
-    font-size: 15px;
+    font-size: 14px;
+    padding: 10px;
   }
-  .cartIcon {
-    font-size: 20px;
+  .iconContainer {
+    padding: 0;
   }
+  .cartIcon,
   .favIcon {
     font-size: 20px;
   }
