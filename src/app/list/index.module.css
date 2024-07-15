@@ -58,10 +58,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 35px;
-  height: 35px;
   max-height: 100%;
   max-width: 100%;
+  padding: 10px;
   border-radius: 50%;
   background-color: #f0f0f0;
   cursor: pointer;
@@ -94,10 +93,6 @@
   .favIcon {
     font-size: 20px;
   }
-  .button{
-    width: 35px;
-    height: 35px;
-  }
 }
 
 @media (max-width: 768px) {
@@ -119,9 +114,5 @@
   .cartIcon,
   .favIcon {
     font-size: 18px;
-  }
-  .button{
-    width: 30px;
-    height: 30px;
   }
 }

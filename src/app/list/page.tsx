@@ -41,14 +41,27 @@ const ProductListing: React.FC = () => {
           className={styles.card}
           key={product.id}
         >
-          {' '}
           <div className={styles.iconContainer}>
-            <Link href={`/product`} className={styles.button}>
-              <AiOutlineShopping className={styles.cartIcon} />
-            </Link>
-            <Link href={`/product`} className={styles.button}>
-              <AiOutlineHeart className={styles.favIcon} />
-            </Link>
+            {[
+              {
+                icon: <AiOutlineHeart className={styles.favIcon} />,
+                onClick: () => {},
+                key: 'fav'
+              },
+              {
+                icon: <AiOutlineShopping className={styles.cartIcon} />,
+                onClick: () => {},
+                key: 'cart'
+              }
+            ].map((item, index) => (
+              <button
+                key={`${item.key}-${index}`}
+                onClick={item.onClick}
+                className={styles.button}
+              >
+                {item.icon}
+              </button>
+            ))}
           </div>
           <Image
             src={product.image}
