@@ -38,20 +38,20 @@ const ProductListing: React.FC = () => {
       const result = await response.json();
 
       if (Array.isArray(result.data.products)) {
-        const products = result.data.products
-          .map((product: any) => ({
-            id: product.asin,
-            title: product.product_title,
-            price: product.product_price || 'N/A',
-            description: product.product_description || '',
-            category: product.product_category || '',
-            image: product.product_photo,
+        const products: Product[] = result.data.products.slice(0, count).map(
+          (item: any): Product => ({
+            id: item.asin,
+            title: item.product_title,
+            price: item.product_price || 'N/A',
+            description: item.product_description || '',
+            category: item.product_category || '',
+            image: item.product_photo,
             rating: {
-              rate: product.product_rating || 0,
-              count: product.product_rating_count || 0
+              rate: item.product_rating || 0,
+              count: item.product_rating_count || 0
             }
-          }))
-          .slice(0, count);
+          })
+        );
 
         setProductData(products);
       } else {
