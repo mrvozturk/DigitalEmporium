@@ -37,22 +37,26 @@ const ProductListing: React.FC = () => {
       const response = await fetch(url, options);
       const result = await response.json();
 
-      const products = result.data.products
-        .map((product: any) => ({
-          id: product.asin,
-          title: product.product_title,
-          price: product.product_price || 'N/A',
-          description: product.product_description || '',
-          category: product.product_category || '',
-          image: product.product_photo,
-          rating: {
-            rate: product.product_rating || 0,
-            count: product.product_rating_count || 0
-          }
-        }))
-        .slice(0, count);
+      if (Array.isArray(result.data.products)) {
+        const products = result.data.products
+          .map((product: any) => ({
+            id: product.asin,
+            title: product.product_title,
+            price: product.product_price || 'N/A',
+            description: product.product_description || '',
+            category: product.product_category || '',
+            image: product.product_photo,
+            rating: {
+              rate: product.product_rating || 0,
+              count: product.product_rating_count || 0
+            }
+          }))
+          .slice(0, count);
 
-      setProductData(products);
+        setProductData(products);
+      } else {
+        console.error('Products data is not an array:', result.data.products);
+      }
     } catch (error) {
       console.error('Error fetching data:', error);
     }
