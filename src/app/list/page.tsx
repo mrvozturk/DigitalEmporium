@@ -6,9 +6,9 @@ import Link from 'next/link';
 import { AiOutlineShopping, AiOutlineHeart } from 'react-icons/ai';
 
 interface Product {
-  id: number;
+  id: string;
   title: string;
-  price: number;
+  price: string;
   description: string;
   category: string;
   image: string;
@@ -20,17 +20,46 @@ interface Product {
 
 const ProductListing: React.FC = () => {
   const [productData, setProductData] = useState<Product[]>([]);
+  const productCount = 8;
+
+  const fetchData = async (count: number) => {
+    const url =
+      'https://real-time-amazon-data.p.rapidapi.com/search?query=Dress&page=1&country=TR&sort_by=HIGHEST_PRICE&product_condition=ALL';
+    const options = {
+      method: 'GET',
+      headers: {
+        'x-rapidapi-key': '0287520abbmsh097a507c7e49900p16ef08jsn99932323e420',
+        'x-rapidapi-host': 'real-time-amazon-data.p.rapidapi.com'
+      }
+    };
+
+    try {
+      const response = await fetch(url, options);
+      const result = await response.json();
+
+      const products = result.data.products
+        .map((product: any) => ({
+          id: product.asin,
+          title: product.product_title,
+          price: product.product_price || 'N/A',
+          description: product.product_description || '',
+          category: product.product_category || '',
+          image: product.product_photo,
+          rating: {
+            rate: product.product_rating || 0,
+            count: product.product_rating_count || 0
+          }
+        }))
+        .slice(0, count);
+
+      setProductData(products);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
   useEffect(() => {
-    fetch('https://fakestoreapi.com/products?limit=8')
-      .then(res => {
-        if (!res.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return res.json();
-      })
-      .then(data => setProductData(data))
-      .catch(error => console.error('Fetch error:', error));
+    fetchData(productCount);
   }, []);
 
   return (
@@ -73,6 +102,8 @@ const ProductListing: React.FC = () => {
           />
           <div className={styles.itemDescription}>
             <h2 className={styles.title}>{product.title}</h2>
+            <p className={styles.price}>{product.price}</p>
+            <p className={styles.commentCount}>{product.rating.count} yorum</p>
           </div>
         </Link>
       ))}
