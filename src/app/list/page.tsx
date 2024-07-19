@@ -28,7 +28,7 @@ const ProductListing: React.FC = () => {
     const options = {
       method: 'GET',
       headers: {
-        'x-rapidapi-key': '0287520abbmsh097a507c7e49900p16ef08jsn99932323e420',
+        'x-rapidapi-key': process.env.API_KEY,
         'x-rapidapi-host': 'real-time-amazon-data.p.rapidapi.com'
       }
     };
