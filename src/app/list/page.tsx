@@ -28,7 +28,7 @@ const ProductListing: React.FC = () => {
     const options = {
       method: 'GET',
       headers: {
-        'x-rapidapi-key': process.env.API_KEY,
+        'x-rapidapi-key': process.env.NEXT_PUBLIC_API_KEY || '',
         'x-rapidapi-host': 'real-time-amazon-data.p.rapidapi.com'
       }
     };
@@ -36,7 +36,6 @@ const ProductListing: React.FC = () => {
     try {
       const response = await fetch(url, options);
       const result = await response.json();
-
       if (Array.isArray(result.data.products)) {
         const products: Product[] = result.data.products.slice(0, count).map(
           (item: any): Product => ({
