@@ -43,16 +43,15 @@ const Header = () => {
           >
             <AiOutlineMenu />
           </button>
-          <div className={styles.logo}>
-            <Link href='/'>
-              <Image
-                src='/images/twitter_header_photo_1-removebg-preview.png'
-                width={500}
-                height={500}
-                alt='logo'
-              />
-            </Link>
-          </div>
+          <Link href='/'>
+            <Image
+              src='/images/logo.png'
+              alt='logo'
+              width={100}
+              height={100}
+              className={styles.logo}
+            />
+          </Link>
         </div>
         <div className={styles.navbarLinks}>
           <ul>

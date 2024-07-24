@@ -27,8 +27,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 192px;
-  height: 64px;
+  width: 150px;
+  height: 50px;
   margin: 0;
 }
 
@@ -78,8 +78,7 @@
   }
 
   .logo {
-    margin-top: 5px;
-    width: 185px;
+    width: 150px;
     height: 50px;
   }
 
@@ -101,10 +100,10 @@
   }
 
   .logo {
-    margin-top: 5px;
-    width: 160px;
+    width: 120px;
     height: 40px;
   }
+
   .sidebarToggle {
     font-size: 1.5rem;
   }

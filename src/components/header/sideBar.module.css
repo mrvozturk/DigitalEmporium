@@ -22,11 +22,11 @@
   flex-direction: row;
   background-color: #f2f2f2;
   justify-content: space-between;
-  padding: 0.5rem 1.4rem;
+  padding: 0.5rem 0.5rem;
 }
 
 .logo {
-  width: 200px;
+  width: 150px;
   height: 50px;
 }
 
@@ -67,11 +67,6 @@
     font-size: 25px;
   }
 
-  .logo {
-    width: 195px;
-    height: 50px;
-  }
-
   .icons {
     font-size: 1.6em;
     gap: 15px;
@@ -90,10 +85,7 @@
   .categoryLinks a {
     font-size: 15px;
   }
-  .logo {
-    width: 150px;
-    height: 40px;
-  }
+
   .icons {
     font-size: 1.2em;
     gap: 8px;
