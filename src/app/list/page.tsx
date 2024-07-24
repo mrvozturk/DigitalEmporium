@@ -104,9 +104,15 @@ const ProductListing: React.FC = () => {
             className={styles.productImage}
           />
           <div className={styles.itemDescription}>
-            <h2 className={styles.title}>{product.title}</h2>
-            <p className={styles.price}>{product.price}</p>
-            <p className={styles.commentCount}>{product.rating.count} yorum</p>
+            <div className={styles.titleContainer}>
+              <h2 className={styles.title}>{product.title}</h2>
+            </div>
+            <div className={styles.commentContainer}> 
+              <p className={styles.commentCount}>
+                {product.rating.count} yorum
+              </p>
+              <p className={styles.price}>{product.price}</p>
+            </div>
           </div>
         </Link>
       ))}
