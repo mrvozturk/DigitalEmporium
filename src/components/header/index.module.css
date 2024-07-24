@@ -3,25 +3,33 @@
   justify-content: space-between;
   align-items: center;
   background-color: #f2f2f2;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0rem;
 }
 
 .navbarLinks ul {
   display: flex;
   list-style: none;
-  padding: 0;
+  padding: 0.5rem 2rem;
   margin: 0;
-  gap: 40px;
+  gap: 50px;
 }
 
 .navbarLinks a {
   font-size: 1rem;
   text-decoration: none;
-  color: var(--text-color);
 }
 
 .navbarLinks a:hover {
   color: darkgray;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 192px;
+  height: 64px;
+  margin: 0;
 }
 
 .combinedContainer {
@@ -31,23 +39,19 @@
   width: 100%;
 }
 
-.logo {
-  text-decoration: none;
-  font-size: 2rem;
-  color: var(--text-color);
-}
-
 .navbarLinks .iconContainer {
   display: none;
 }
+
 .sidebarToggle {
   display: none;
 }
 
 @media (max-width: 768px) {
   .navbar {
-    padding: 0.5rem;
+    padding: 0.5rem 0.8rem;
   }
+
   .navbarLinks .linkText {
     display: none;
   }
@@ -56,34 +60,52 @@
     display: block;
     font-size: 1.3rem;
   }
+
   .navbarLinks ul {
+    padding: 0.2rem;
     gap: 15px;
   }
 
   .sidebarToggle {
     font-size: 1.7rem;
     display: block;
+    align-items: center;
+    justify-content: center;
   }
 
   .sidebarToggle:focus {
     outline: none;
   }
+
   .logo {
-    font-size: 1.5rem;
-    margin-left: 10px;
+    margin-top: 5px;
+    width: 185px;
+    height: 50px;
   }
 
   .combinedContainer {
     padding: 0 1rem;
   }
 }
+
 @media (max-width: 568px) {
+  .navbar {
+    padding: 0.5rem 0.5rem;
+  }
+  .navbarLinks ul {
+    gap: 12px;
+  }
+
   .navbarLinks .icon {
     font-size: 1.3rem;
   }
+
+  .logo {
+    margin-top: 5px;
+    width: 160px;
+    height: 40px;
+  }
   .sidebarToggle {
-    top: 1rem;
-    left: 0.9rem;
     font-size: 1.5rem;
   }
 }

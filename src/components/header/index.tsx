@@ -11,6 +11,7 @@ import sideBarStyles from './sideBar.module.css';
 
 import SideBar from './sideBar';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Header = () => {
   const [sideBarVisible, setSideBarVisible] = useState(false);
@@ -43,7 +44,14 @@ const Header = () => {
             <AiOutlineMenu />
           </button>
           <div className={styles.logo}>
-            <Link href='/'>LOGO</Link>
+            <Link href='/'>
+              <Image
+                src='/images/twitter_header_photo_1-removebg-preview.png'
+                width={500}
+                height={500}
+                alt='logo'
+              />
+            </Link>
           </div>
         </div>
         <div className={styles.navbarLinks}>
