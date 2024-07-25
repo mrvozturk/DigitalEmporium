@@ -6,9 +6,9 @@ import Link from 'next/link';
 import { AiOutlineShopping, AiOutlineHeart } from 'react-icons/ai';
 
 interface Product {
-  id: number;
+  id: string;
   title: string;
-  price: number;
+  price: string;
   description: string;
   category: string;
   image: string;
@@ -20,17 +20,49 @@ interface Product {
 
 const ProductListing: React.FC = () => {
   const [productData, setProductData] = useState<Product[]>([]);
+  const productCount = 8;
+
+  const fetchData = async (count: number) => {
+    const url =
+      'https://real-time-amazon-data.p.rapidapi.com/search?query=Dress&page=1&country=TR&sort_by=HIGHEST_PRICE&product_condition=ALL';
+    const options = {
+      method: 'GET',
+      headers: {
+        'x-rapidapi-key': process.env.NEXT_PUBLIC_API_KEY || '',
+        'x-rapidapi-host': 'real-time-amazon-data.p.rapidapi.com'
+      }
+    };
+
+    try {
+      const response = await fetch(url, options);
+      const result = await response.json();
+      if (Array.isArray(result.data.products)) {
+        const products: Product[] = result.data.products.slice(0, count).map(
+          (item: any): Product => ({
+            id: item.asin,
+            title: item.product_title,
+            price: item.product_price || 'N/A',
+            description: item.product_description || '',
+            category: item.product_category || '',
+            image: item.product_photo,
+            rating: {
+              rate: item.product_rating || 0,
+              count: item.product_rating_count || 0
+            }
+          })
+        );
+
+        setProductData(products);
+      } else {
+        console.error('Products data is not an array:', result.data.products);
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
   useEffect(() => {
-    fetch('https://fakestoreapi.com/products?limit=8')
-      .then(res => {
-        if (!res.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return res.json();
-      })
-      .then(data => setProductData(data))
-      .catch(error => console.error('Fetch error:', error));
+    fetchData(productCount);
   }, []);
 
   return (
@@ -72,7 +104,15 @@ const ProductListing: React.FC = () => {
             className={styles.productImage}
           />
           <div className={styles.itemDescription}>
-            <h2 className={styles.title}>{product.title}</h2>
+            <div className={styles.titleContainer}>
+              <h2 className={styles.title}>{product.title}</h2>
+            </div>
+            <div className={styles.commentContainer}> 
+              <p className={styles.commentCount}>
+                {product.rating.count} yorum
+              </p>
+              <p className={styles.price}>{product.price}</p>
+            </div>
           </div>
         </Link>
       ))}
