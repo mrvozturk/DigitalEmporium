@@ -22,16 +22,17 @@
   flex-direction: row;
   background-color: #f2f2f2;
   justify-content: space-between;
-  padding: 0.5rem 1.4rem;
+  padding: 0.5rem 0.5rem;
 }
 
 .logo {
-  font-size: 1.7em;
+  width: 150px;
+  height: 50px;
 }
 
 .icons {
   display: flex;
-  gap: 10px;
+  gap: 15px;
   font-size: 1.2em;
   padding: 0.7rem 0.2rem;
 }
@@ -57,7 +58,7 @@
 
 @media (max-width: 768px) {
   .header {
-    padding: 0.5rem 1.2rem;
+    padding: 0.5rem 0;
   }
   .categoryLinks {
     padding: 2.5rem 1.5rem;
@@ -66,19 +67,16 @@
     font-size: 25px;
   }
 
-  .logo {
-    font-size: 2.5em;
-  }
-
   .icons {
-    font-size: 2em;
-    padding: 0.7rem 0;
+    font-size: 1.6em;
+    gap: 15px;
+    padding: 0.8rem;
   }
 }
 
 @media (max-width: 568px) {
   .header {
-    padding: 0.5rem 0.8rem;
+    padding: 0.5rem 0;
   }
   .categoryLinks {
     padding: 1.2rem 0.8rem;
@@ -87,11 +85,9 @@
   .categoryLinks a {
     font-size: 15px;
   }
-  .logo {
-    font-size: 1.5em;
-  }
+
   .icons {
     font-size: 1.2em;
-    gap: 5px;
+    gap: 8px;
   }
 }

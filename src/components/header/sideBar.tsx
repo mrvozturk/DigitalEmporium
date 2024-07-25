@@ -3,6 +3,8 @@ import React from 'react';
 import sideBarStyles from './sideBar.module.css';
 import { AiOutlineUser, AiOutlineHeart, AiOutlineClose } from 'react-icons/ai';
 import Link from 'next/link';
+import Image from 'next/image';
+
 
 interface SideBarProps {
   onCloseSidebar: () => void;
@@ -18,7 +20,12 @@ const SideBar: React.FC<SideBarProps> = ({ onCloseSidebar }) => {
       <div className={sideBarStyles.container}>
         <div className={sideBarStyles.header}>
           <a href='/' className={sideBarStyles.logo}>
-            LOGO
+            <Image
+              src='/images/twitter_header_photo_1-removebg-preview.png'
+              width={500}
+              height={500}
+              alt='logo'
+            />
           </a>
           <div className={sideBarStyles.icons}>
             <Link href='/auth'>
