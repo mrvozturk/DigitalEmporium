@@ -107,7 +107,7 @@ const ProductListing: React.FC = () => {
             <div className={styles.titleContainer}>
               <h2 className={styles.title}>{product.title}</h2>
             </div>
-            <div className={styles.commentContainer}> 
+            <div className={styles.commentContainer}>
               <p className={styles.commentCount}>
                 {product.rating.count} yorum
               </p>
