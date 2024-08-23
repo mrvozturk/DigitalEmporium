@@ -35,7 +35,7 @@ const ProductDetailPage: React.FC = () => {
   }
 
   return (
-    <div>
+    <main>
       <h1>{product.title}</h1>
       <Image
         src={product.image}
@@ -50,7 +50,7 @@ const ProductDetailPage: React.FC = () => {
       <p>
         Rating: {product.rating.rate} ({product.rating.count} reviews)
       </p>
-    </div>
+    </main>
   );
 };
 
