@@ -2,8 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import styles from './index.module.css';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { AiOutlineShopping, AiOutlineHeart } from 'react-icons/ai';
+import Link from 'next/link';
 
 interface Product {
   id: string;
@@ -21,6 +22,7 @@ interface Product {
 const ProductListing: React.FC = () => {
   const [productData, setProductData] = useState<Product[]>([]);
   const productCount = 8;
+  const router = useRouter();
 
   const fetchData = async (count: number) => {
     const url =
@@ -65,6 +67,11 @@ const ProductListing: React.FC = () => {
     fetchData(productCount);
   }, []);
 
+  const handleProductClick = (product: Product) => {
+    localStorage.setItem('selectedProduct', JSON.stringify(product));
+    router.push(`/product/${product.id}`);
+  };
+
   return (
     <div className={styles.container}>
       {productData.map(product => (
@@ -72,6 +79,7 @@ const ProductListing: React.FC = () => {
           href={`/product/${product.id}`}
           className={styles.card}
           key={product.id}
+          onClick={() => handleProductClick(product)}
         >
           <div className={styles.iconContainer}>
             {[
