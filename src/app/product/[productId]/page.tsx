@@ -2,36 +2,24 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
-
-interface Product {
-  id: string;
-  title: string;
-  price: string;
-  description: string;
-  category: string;
-  image: string;
-  rating: {
-    rate: number;
-    count: number;
-  };
-}
+import { fetchProductData, Product } from '../../../lib/productData';
 
 const ProductDetailPage: React.FC = () => {
   const { productId } = useParams();
   const [product, setProduct] = useState<Product | null>(null);
 
   useEffect(() => {
-    const savedProduct = localStorage.getItem('selectedProduct');
-    if (savedProduct) {
-      const parsedProduct = JSON.parse(savedProduct);
-      if (parsedProduct.id === productId) {
-        setProduct(parsedProduct);
-      }
-    }
+    const fetchData = async () => {
+      const products = await fetchProductData(8);
+      const selectedProduct = products.find(p => p.id === productId);
+      setProduct(selectedProduct || null);
+    };
+
+    fetchData();
   }, [productId]);
 
   if (!product) {
-    return <div>No product found.</div>;
+    return <div>Loading...</div>;
   }
 
   return (
