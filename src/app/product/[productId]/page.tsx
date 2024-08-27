@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import { fetchProductData, Product } from '../../../lib/productData';
+import styles from './index.module.css';
 
 const ProductDetailPage: React.FC = () => {
   const { productId } = useParams();
@@ -23,21 +24,23 @@ const ProductDetailPage: React.FC = () => {
   }
 
   return (
-    <main>
-      <h1>{product.title}</h1>
-      <Image
-        src={product.image}
-        alt={product.title}
-        priority
-        width={300}
-        height={300}
-      />
-      <p>{product.description}</p>
-      <p>Category: {product.category}</p>
-      <p>Price: {product.price}</p>
-      <p>
-        Rating: {product.rating.rate} ({product.rating.count} reviews)
-      </p>
+    <main className={styles.productDetail}>
+      <div className={styles.imageContainer}>
+        <Image
+          src={product.image}
+          alt={product.title}
+          priority
+          width={300}
+          height={300}
+          className={styles.productImage}
+        />
+      </div>
+      <div className={styles.productInfo}>
+        <h1>{product.title}</h1>
+
+        <p>{product.description}</p>
+        <p> {product.price}</p>
+      </div>
     </main>
   );
 };
