@@ -4,6 +4,7 @@ import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import { fetchProductData, Product } from '../../../lib/productData';
 import styles from './index.module.css';
+import { AiFillStar } from 'react-icons/ai';
 
 const ProductDetailPage: React.FC = () => {
   const { productId } = useParams();
@@ -38,8 +39,27 @@ const ProductDetailPage: React.FC = () => {
       <div className={styles.productInfo}>
         <h1>{product.title}</h1>
 
+        <div className={styles.reviewSection}>
+          <span className={styles.ratingValue}>5,0</span>
+
+          <div className={styles.starRating}>
+            {[...Array(5)].map((_, index) => (
+              <a href='#review' key={index} className={styles.starLink}>
+                <AiFillStar />
+              </a>
+            ))}
+          </div>
+          <a href='#reviews' className={styles.reviewText}>
+            2 değerlendirme
+          </a>
+          <a href='#search' className={styles.reviewText}>
+            Bu sayfayı ara
+          </a>
+        </div>
+
+        <p className={styles.productPrice}>{product.price} </p>
         <p>{product.description}</p>
-        <p> {product.price}</p>
+        <p className={styles.additionalInfo}>Fiyatlara KDV dahildir.</p>
       </div>
     </main>
   );

@@ -1,6 +1,6 @@
 .productDetail {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   padding: 30px 10px;
 }
 
@@ -16,26 +16,107 @@
 }
 
 .productInfo {
-  top: 0;
-  right: 0;
   width: calc(100% - 150px);
+  margin-left: 10px;
 }
 
-.productInfo h1,
-.productInfo p {
+.productInfo h1 {
   font-family: 'Amazon Ember', Arial, sans-serif;
-  font-weight: bold;
-  font-size: 20px;
+  font-weight: 400;
+  font-size: 25px;
   color: black;
-  margin: 0 0 10px 0;
+}
+
+.productPrice {
+  font-weight: bold;
+  font-size: 22px;
+  color: black;
+  margin-top: 10px;
+  font-family: 'Amazon Ember', Arial, sans-serif;
+  font-weight: 580;
+}
+
+.additionalInfo {
+  font-size: 14px;
+  margin-top: 10px;
+  font-family: 'Amazon Ember', Arial, sans-serif;
+}
+
+.reviewSection {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.starRating {
+  display: flex;
+  color: #d47b00;
+  font-size: 18px;
+}
+
+.reviewText {
+  font-size: 0.9rem;
+  color: #007185;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.reviewText:hover {
+  text-decoration: underline;
+  color: #d47b00;
+}
+
+.reviewText::after {
+  content: '|';
+  margin-left: 5px;
+  color: #2c697d;
+}
+
+.reviewText:last-of-type::after {
+  content: '';
+}
+
+.ratingValue {
+  font-size: 1rem;
+  color: #000;
 }
 
 @media (max-width: 768px) {
   .imageContainer {
-    margin-bottom: 20px;
+    width: 120px;
+    height: 150px;
   }
 
   .productInfo {
-    width: 100%;
+    width: calc(100% - 140px);
+  }
+
+  .productInfo h1,
+  .productPrice,
+  .additionalInfo,
+  .reviewText,
+  .ratingValue,
+  .starRating {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 568px) {
+  .imageContainer {
+    width: 100px;
+    height: 120px;
+  }
+
+  .productInfo {
+    width: calc(100% - 120px);
+  }
+
+  .productInfo h1,
+  .productPrice,
+  .additionalInfo,
+  .reviewText,
+  .ratingValue,
+  .starRating {
+    font-size: 8px;
   }
 }
