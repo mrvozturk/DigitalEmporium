@@ -5,7 +5,7 @@ import styles from './index.module.css';
 import { useRouter } from 'next/navigation';
 import { AiOutlineShopping, AiOutlineHeart } from 'react-icons/ai';
 import Link from 'next/link';
-import { fetchProductData, Product } from '../../lib/productData';
+import { getProducts, Product } from '../../lib/data';
 
 const ProductListing: React.FC = () => {
   const [productData, setProductData] = useState<Product[]>([]);
@@ -14,7 +14,7 @@ const ProductListing: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const products = await fetchProductData(productCount);
+      const products = await getProducts(productCount);
       setProductData(products);
     };
 
@@ -58,7 +58,7 @@ const ProductListing: React.FC = () => {
             ))}
           </div>
           <Image
-            src={product.image}
+            src={product.photo}
             alt={product.title}
             priority
             width={300}
