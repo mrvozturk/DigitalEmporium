@@ -73,7 +73,7 @@ export default async function Page({
         </p>
         <p className={styles.additionalInfo}>Fiyatlara KDV dahildir.</p>
         <div className={styles.productVariants}>
-          <h2>Color</h2>
+          <h2 className={styles.productColorTitle}>Color</h2>
           <div className={styles.colors}>
             {productDetail.colors.map((color, index) => (
               <div key={index} className={styles.colorOption}>
