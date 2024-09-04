@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 20px 60px;
+  padding: 20px 40px;
 }
 
 .imageThumbnails {
@@ -11,7 +11,6 @@
   gap: 10px;
   width: 40px;
   justify-content: flex-start;
-  margin-top: 30px;
 }
 
 .thumbnailImage {
@@ -48,7 +47,7 @@
 }
 
 .productInfo h1 {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 450;
   line-height: 1.3;
   margin: 5px 0;
@@ -72,7 +71,6 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  margin-top: 10px;
 }
 
 .starRating {
@@ -118,21 +116,20 @@
   object-fit: contain;
 }
 .productColorTitle {
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: #000;
   font-weight: 600;
   margin-top: 5px;
 }
 .divider {
   border-top: 1px solid #ddd;
-  margin: 10px 0;
 }
 .productDetails {
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .productDetailsTitle {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   margin-bottom: 10px;
   color: #000;
   font-weight: 500;
@@ -142,22 +139,65 @@
 .productDetailsItem {
   display: flex;
   justify-content: flex-start;
-  font-size: 0.8rem;
-  margin-bottom: 10px;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
 }
 
 .productDetailsItem strong {
   font-weight: 600;
+  font-size: 13px;
+  color: #000;
 }
 
 .productDetailsItem span {
   color: #000;
-  font-size: 14px;
+  font-size: 13px;
   margin-left: 10px;
+}
+
+@media (max-width: 1024px) {
+  .productDetail {
+    padding: 20px 40px;
+  }
+  .productInfo h1 {
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+  .productPrice {
+    font-size: 0.7rem;
+    margin-top: 10px;
+  }
+  .productDetailsTitle {
+    font-size: 0.8rem;
+  }
+  .productDetailsItem {
+    font-size: 0.75rem;
+  }
+  .ratingValue {
+    font-size: 0.8rem;
+  }
+  .reviewText {
+    font-size: 0.7rem;
+  }
+  .additionalInfo {
+    font-size: 0.75rem;
+  }
+  .productColorTitle {
+    font-size: 0.8rem;
+  }
+  .productDetailsItem strong {
+    font-size: 12px;
+  }
+
+  .productDetailsItem span {
+    color: #000;
+    font-size: 12px;
+ 
+  }
 }
 @media (max-width: 768px) {
   .productDetail {
-    padding: 0 20px;
+    padding: 20px 40px;
   }
   .imageContainer {
     max-width: 100%;
@@ -165,7 +205,6 @@
   }
 
   .productImage {
-    margin-top: 30px;
     width: 100%;
     height: auto;
     border-radius: 0;
@@ -175,7 +214,6 @@
     flex-direction: column;
     width: auto;
     margin: 0 auto;
-    margin-top: 30px;
   }
 
   .thumbnailImage {
@@ -185,10 +223,9 @@
 
   .productInfo {
     margin-left: 0;
-    padding-top: 20px;
   }
   .productInfo h1 {
-    font-size: 1rem;
+    font-size: 0.95rem;
     line-height: 1.3;
   }
   .productPrice {
@@ -221,7 +258,7 @@
   }
 
   .productDetailsItem {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     margin-bottom: 10px;
   }
 
