@@ -87,6 +87,17 @@ export default async function Page({
               </div>
             ))}
           </div>
+          <div className={styles.sizeSelector}>
+            <h2>Size</h2>
+            <select className={styles.sizeDropdown}>
+              {productDetail.sizes.map((size, index) => (
+                <option key={index} value={size.value}>
+                  {size.value}
+                </option>
+              ))}
+            </select>
+          </div>
+
           <div className={styles.productDetails}>
             <h2 className={styles.productDetailsTitle}>Product details</h2>
             <div className={styles.productDetailsItem}>
