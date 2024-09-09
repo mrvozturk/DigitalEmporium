@@ -89,12 +89,22 @@
   text-decoration: underline;
   color: #d47b00;
 }
+.reviewText::after {
+  content: '|';
+  margin-left: 5px;
+  color: #2c697d;
+}
+
+.reviewText:last-of-type::after {
+  content: '';
+}
 
 .ratingValue {
   font-size: 1rem;
   font-weight: bold;
   margin-right: 5px;
 }
+
 
 .colors {
   display: flex;
@@ -159,6 +169,8 @@
   margin-top: 12px;
   font-size: 15px;
   font-weight: bold;
+  color:#131010;
+  font-weight: 500;
 }
 .sizeDropdown {
   width: 10%;
