@@ -21,17 +21,40 @@ export default async function Page({
 
   return (
     <main className={styles.productDetail}>
-      <div className={styles.imageThumbnails}>
-        {productDetail.photos.map((photo, index) => (
-          <Image
-            key={index}
-            src={photo}
-            alt={productDetail.title}
-            width={58}
-            height={60}
-            className={styles.thumbnailImage}
-          />
-        ))}
+      <div className={styles.productContainer}>
+        <div className={styles.ratingContainer}>
+          <p className={styles.brandName}>{productDetail.brand}</p>
+          <div className={styles.ratingDetails}>
+            <span className={styles.ratingScore}>
+              {productDetail.rating.rate.toFixed(1)}
+            </span>
+            <div className={styles.ratingStars}>
+              {[...Array(5)].map((_, index) => (
+                <a href='#review' key={index} className={styles.starLink}>
+                  <AiFillStar
+                    color={index < starRating ? '#ffc107' : '#e4e5e9'}
+                  />
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+        <h1 className={styles.productTitleMobile}>{productDetail.title}</h1>
+      </div>
+
+      <div className={styles.imageThumbnailsContainer}>
+        <div className={styles.imageThumbnails}>
+          {productDetail.photos.map((photo, index) => (
+            <Image
+              key={index}
+              src={photo}
+              alt={productDetail.title}
+              width={100}
+              height={100}
+              className={styles.thumbnailImage}
+            />
+          ))}
+        </div>
       </div>
       <div className={styles.imageContainer}>
         <Image
@@ -71,49 +94,90 @@ export default async function Page({
         <p className={styles.productPrice}>
           Price: <span>{productDetail.price}</span>
         </p>
-        <p className={styles.additionalInfo}>Fiyatlara KDV dahildir.</p>
-        <div className={styles.productVariants}>
-          <h2 className={styles.productColorTitle}>Color</h2>
-          <div className={styles.colors}>
-            {productDetail.colors.map((color, index) => (
-              <div key={index} className={styles.colorOption}>
-                <Image
-                  src={color.photo}
-                  alt={color.value}
-                  width={50}
-                  height={50}
-                  className={styles.colorImage}
-                />
-              </div>
+        <h2 className={styles.productColorTitle}>Color</h2>
+        <div className={styles.colors}>
+          {productDetail.colors.map((color, index) => (
+            <div key={index} className={styles.colorOption}>
+              <Image
+                src={color.photo}
+                alt={color.value}
+                width={50}
+                height={50}
+                className={styles.colorImage}
+              />
+            </div>
+          ))}
+        </div>
+        <div className={styles.sizeSelector}>
+          <h2>Size:</h2>
+          <select className={styles.sizeDropdown}>
+            {productDetail.sizes.map((size, index) => (
+              <option key={index} value={size.value}>
+                {size.value}
+              </option>
+            ))}
+          </select>
+          <div className={styles.sizeScrollContainer}>
+            {productDetail.sizes.map((size, index) => (
+              <button key={index} className={styles.sizeButton}>
+                {size.value}
+              </button>
             ))}
           </div>
-          <div className={styles.sizeSelector}>
-            <h2>Size</h2>
-            <select className={styles.sizeDropdown}>
-              {productDetail.sizes.map((size, index) => (
-                <option key={index} value={size.value}>
-                  {size.value}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className={styles.productDetails}>
-            <h2 className={styles.productDetailsTitle}>Product details</h2>
-            <div className={styles.productDetailsItem}>
-              <strong>Fabric type</strong>{' '}
-              <span>{productDetail.fabricType}</span>
-            </div>
-            <div className={styles.productDetailsItem}>
-              <strong>Care instructions</strong>{' '}
-              <span>{productDetail.careInstructions}</span>
-            </div>
-            <div className={styles.productDetailsItem}>
-              <strong>Origin</strong> <span>{productDetail.origin}</span>
-            </div>
-            <hr className={styles.divider} />
-          </div>
         </div>
+        <hr className={styles.productDivider}></hr>
+        <p>
+          <span className={styles.priceText}>{productDetail.price}</span>
+        </p>
+        <div className={styles.productDetails}>
+          <h2 className={styles.productDetailsTitle}>Product details</h2>
+          <div className={styles.productDetailsItem}>
+            <strong>Fabric type</strong> <span>{productDetail.fabricType}</span>
+          </div>
+          <div className={styles.productDetailsItem}>
+            <strong>Care instructions</strong>{' '}
+            <span>{productDetail.careInstructions}</span>
+          </div>
+          <div className={styles.productDetailsItem}>
+            <strong>Origin</strong> <span>{productDetail.origin}</span>
+          </div>
+          <hr className={styles.divider} />
+        </div>
+      </div>
+      <div className={styles.stockAndPurchaseSection}>
+        <p className={styles.inStock}>In Stock</p>
+        <div className={styles.quantitySelector}>
+          <select
+            id='quantity'
+            className={styles.quantityDropdown}
+            defaultValue=''
+          >
+            <option value='' disabled hidden>
+              Quantity:
+            </option>
+            {[1, 2, 3, 4, 5].map(qty => (
+              <option key={qty} value={qty}>
+                {qty}
+              </option>
+            ))}
+          </select>
+        </div>
+        <button className={styles.addToCartButton}>Add to Cart</button>
+        <button className={styles.buyNowButton}>Buy Now</button>
+      </div>
+      <div className={styles.detailsSection}>
+        <h2 className={styles.detailsTitle}>Product details</h2>
+        <div className={styles.detailItem}>
+          <strong>Fabric type</strong> <span>{productDetail.fabricType}</span>
+        </div>
+        <div className={styles.detailItem}>
+          <strong>Care instructions</strong>{' '}
+          <span>{productDetail.careInstructions}</span>
+        </div>
+        <div className={styles.detailItem}>
+          <strong>Origin</strong> <span>{productDetail.origin}</span>
+        </div>
+        <hr className={styles.detailDivider} />
       </div>
     </main>
   );
