@@ -57,7 +57,10 @@ export default async function Page({
         </div>
         <div className={styles.pagination} id='paginationDots'>
           {productDetail.photos.map((_, index) => (
-            <span key={index} className={styles.dot}></span>
+            <span
+              key={index}
+              className={`${styles.dot} ${index === 0 ? styles.active : ''}`} // Class'ları doğru şekilde ekliyoruz
+            ></span>
           ))}
         </div>
       </div>
