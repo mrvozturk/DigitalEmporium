@@ -43,16 +43,21 @@ export default async function Page({
       </div>
 
       <div className={styles.imageThumbnailsContainer}>
-        <div className={styles.imageThumbnails}>
+        <div className={styles.imageThumbnails} id='imageThumbnails'>
           {productDetail.photos.map((photo, index) => (
             <Image
               key={index}
               src={photo}
               alt={productDetail.title}
-              width={100}
-              height={100}
+              width={340}
+              height={352}
               className={styles.thumbnailImage}
             />
+          ))}
+        </div>
+        <div className={styles.pagination} id='paginationDots'>
+          {productDetail.photos.map((_, index) => (
+            <span key={index} className={styles.dot}></span>
           ))}
         </div>
       </div>
@@ -109,7 +114,7 @@ export default async function Page({
           ))}
         </div>
         <div className={styles.sizeSelector}>
-          <h2>Size:</h2>
+          <h2 className={styles.sizeSelectorTitle}>Size:</h2>
           <select className={styles.sizeDropdown}>
             {productDetail.sizes.map((size, index) => (
               <option key={index} value={size.value}>
@@ -165,6 +170,8 @@ export default async function Page({
         <button className={styles.addToCartButton}>Add to Cart</button>
         <button className={styles.buyNowButton}>Buy Now</button>
       </div>
+      <hr className={styles.productDivider}></hr>
+
       <div className={styles.detailsSection}>
         <h2 className={styles.detailsTitle}>Product details</h2>
         <div className={styles.detailItem}>
@@ -177,7 +184,6 @@ export default async function Page({
         <div className={styles.detailItem}>
           <strong>Origin</strong> <span>{productDetail.origin}</span>
         </div>
-        <hr className={styles.detailDivider} />
       </div>
     </main>
   );

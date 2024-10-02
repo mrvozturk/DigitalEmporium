@@ -237,20 +237,17 @@
 }
 
 .addToCartButton {
-  background-color: #f0c14b;
+  background-color: #f7c537;
 }
 
-.addToCartButton:hover {
-  background-color: #e2a123;
-}
+
 
 .buyNowButton {
   background-color: #ff9900;
 }
 
-.buyNowButton:hover {
-  background-color: #cc7a00;
-}
+
+
 .mobileProductTitle {
   display: none;
 }
@@ -396,16 +393,16 @@
 @media (max-width: 568px) {
   .productDetail {
     flex-direction: column;
-    align-items: center;
     padding: 10px 5px;
+    justify-content: center;
   }
   .productTitleMobile {
     display: flex;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 450;
     line-height: 1.3;
     margin: 5px 0;
-    color: #111;
+    color: #565959;
   }
   .ratingScore,
   .reviewTextContent,
@@ -426,8 +423,8 @@
   .ratingValue,
   .productPrice,
   .sizeDropdown,
-  .productDetails,
-  .inStock {
+  .productDetails
+{
     display: none;
   }
   .brandName {
@@ -441,26 +438,53 @@
     width: 100%;
     display: none;
   }
+  .imageThumbnailsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .imageThumbnails {
     display: flex;
     flex-direction: row;
     overflow-x: scroll;
-    white-space: nowrap;
-    scroll-snap-type: x mandatory; /* Snap işlemi */
-    scrollbar-width: none; /* Scrollbar'ı gizle */
-    -ms-overflow-style: none; /* Internet Explorer ve eski Edge için */
+    scroll-snap-type: x mandatory;
+    gap: 10px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
   .imageThumbnails::-webkit-scrollbar {
-    display: none; /* Chrome, Safari ve diğer WebKit tarayıcıları için scrollbar'ı gizler */
+    display: none;
   }
 
   .thumbnailImage {
-    scroll-snap-align: start;
-    flex-shrink: 0;
     width: 340px;
     height: 352px;
     object-fit: cover;
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .dot {
+    height: 8px;
+    width: 8px;
+    background-color: #fff;
+    border: 1px solid;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+  }
+
+  .dot.active {
+    background-color: #19931d;
   }
 
   .ratingContainer {
@@ -487,7 +511,7 @@
 
   .ratingScore {
     font-size: 0.8rem;
-    color: #4caf50;
+    color: #007185;
     margin-right: 5px;
   }
 
@@ -505,33 +529,43 @@
     width: 100%;
     padding: 0 10px;
   }
-
+  .productColorTitle {
+    font-size: 0.8rem;
+    color: #000;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
   .colors {
     display: flex;
     flex-direction: row;
     overflow-x: scroll;
     white-space: nowrap;
-    scrollbar-color: none; /* Scrollbar rengi */
+    scrollbar-color: none;
   }
 
   .colorOption {
-    scroll-snap-align: start; /* Scroll hareketi sırasında elemanların düzgün hizalanması */
-    flex-shrink: 0; /* Flex kutuların boyutunun küçültülmemesi */
-    width: calc(100% / 4); /* Her renk seçeneği için yüzde olarak genişlik */
-    height: auto; /* Yüksekliğin otomatik olarak ayarlanması */
-    margin-right: 20px; /* Sağda boşluk */
-    border: none;
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    width: calc(100% / 4.5);
+    height: auto;
+    margin-right: 20px;
+    border-radius: 50%;
+  }
+
+  .colorOption:hover {
+    border: 2px solid #000;
+    border-radius: 50%;
   }
 
   .colorImage {
-    width: 100%; /* Resmin kutuya tam sığması */
-    height: 100%; /* Resmin kutuya tam sığması */
-    object-fit: cover; /* Resmin orantılı olarak sığdırılması */
-    border-radius: 50%; /* Daire şeklinde resim */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
   }
 
   .colors::-webkit-scrollbar {
-    display: none; /* Scrollbar'ın gizlenmesi */
+    display: none;
   }
   .sizeScrollContainer {
     display: flex;
@@ -540,22 +574,30 @@
     white-space: nowrap;
     scrollbar-color: none;
   }
-
+  .sizeSelectorTitle {
+    font-size: 0.8rem;
+    color: #000;
+    font-weight: 500;
+  }
   .sizeButton {
-    scroll-snap-align: start; /* Scroll hareketi sırasında elemanların düzgün hizalanması */
-    flex-shrink: 0; /* Flex kutuların boyutunun küçültülmemesi */
-    width: calc(100% / 4); /* Her renk seçeneği için yüzde olarak genişlik */
-    height: auto; /* Yüksekliğin otomatik olarak ayarlanması */
-    margin-right: 20px; /* Sağda boşluk */
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    width: calc(100% / 3.5);
+    height: auto;
+    margin-right: 10px;
     border: 1px solid #000;
     border-radius: 4px;
     background-color: #fff;
     padding: 10px 3px;
     font-size: 0.7rem;
     font-weight: bold;
+    margin-top: 10px;
+    color: #000;
   }
 
   .sizeButton:hover {
+    background-color: #000;
+    color: #fff;
     border-color: #31737d;
   }
 
@@ -574,5 +616,58 @@
     font-size: 2rem;
     font-weight: bold;
     font-weight: 500;
+  }
+  .quantityDropdown {
+    width: 100%;
+    padding: 0.8rem 0.5rem 0.8rem 0.5rem;
+    font-size: 1rem;
+  }
+  .addToCartButton {
+    margin-bottom: 15px;
+  }
+  .addToCartButton,
+  .buyNowButton {
+    width: 100%;
+    padding: 3vw;
+    font-size: 4vw;
+  }
+  .addToCartButton:hover {
+    border: 4px solid  #31737d;
+  }
+  
+  .buyNowButton:hover {
+    border: 4px solid  #31737d;
+  }
+  .detailsSection {
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    margin-top: 10px;
+  }
+  .detailsTitle {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+    color: #000;
+    font-weight: 500;
+    font-weight: bold;
+  }
+
+  .detailItem {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+  }
+
+  .detailItem strong {
+    font-weight: 600;
+    font-size: 13px;
+    color: #000;
+  }
+
+  .detailItem span {
+    color: #000;
+    font-size: 13px;
+    margin-left: 10px;
   }
 }
