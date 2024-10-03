@@ -1,0 +1,241 @@
+.ratingScore,
+.reviewTextContent,
+.dividerLine,
+.brandName,
+.ratingStars,
+.productTitleMobile,
+.sizeScrollContainer,
+.mobileProductTitle,
+.productShadeTitle,
+.shadeOption,
+.detailsSection,
+.purchaseSection,
+.priceText {
+  display: none;
+}
+
+@media (max-width: 568px) {
+  .productDetail {
+    flex-direction: column;
+    padding: 10px 5px;
+    justify-content: center;
+  }
+  .productTitleMobile {
+    display: flex;
+    font-size: 0.85rem;
+    font-weight: 450;
+    line-height: 1.3;
+    margin: 5px 0;
+    color: #565959;
+  }
+  .ratingScore,
+  .reviewTextContent,
+  .dividerLine,
+  .brandName,
+  .ratingStars,
+  .productTitleMobile,
+  .sizeScrollContainer,
+  .productShadeTitle,
+  .shadeOption,
+  .detailsSection,
+  .purchaseSection,
+  .priceText {
+    display: block;
+  }
+
+  .brandName {
+    display: flex;
+    margin-top: 10px;
+    font-size: 0.7rem;
+    color: #007185;
+    font-weight: 500;
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+
+  .ratingContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .ratingDetails {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    justify-content: flex-end;
+  }
+
+  .ratingScore {
+    font-size: 0.8rem;
+    color: #007185;
+    margin-right: 5px;
+  }
+
+  .ratingStars {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+  }
+
+  .productContainer {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .shades {
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    white-space: nowrap;
+    scrollbar-color: none;
+  }
+
+  .shadeOption {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    width: calc(100% / 4.5);
+    height: auto;
+    margin-right: 20px;
+    border-radius: 50%;
+  }
+
+  .shadeOption:hover {
+    border: 2px solid #000;
+    border-radius: 50%;
+  }
+
+  .shadeImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .shades::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sizeScrollContainer {
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    white-space: nowrap;
+    scrollbar-color: none;
+  }
+  .sizeSelectorTitle {
+    font-size: 0.8rem;
+    color: #000;
+    font-weight: 500;
+  }
+  .sizeButton {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    width: calc(100% / 3.5);
+    height: auto;
+    margin-right: 10px;
+    border: 1px solid #000;
+    border-radius: 4px;
+    background-color: #fff;
+    padding: 10px 3px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #000;
+  }
+
+  .sizeButton:hover {
+    background-color: #000;
+    color: #fff;
+    border-color: #31737d;
+  }
+
+  .sizeScrollContainer::-webkit-scrollbar {
+    display: none;
+  }
+
+  .productDivider {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  .priceText {
+    font-size: 2rem;
+    font-weight: bold;
+    font-weight: 500;
+  }
+
+  .detailsSection {
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    margin-top: 10px;
+  }
+  .detailsTitle {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+    color: #000;
+    font-weight: 500;
+    font-weight: bold;
+  }
+
+  .detailItem {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+  }
+
+  .detailItem strong {
+    font-weight: 600;
+    font-size: 13px;
+    color: #000;
+  }
+
+  .detailItem span {
+    color: #000;
+    font-size: 13px;
+    margin-left: 10px;
+  }
+  .purchaseSection {
+    width: 100%;
+    max-width: none;
+    border: none;
+  }
+
+  .productWrapper {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .priceDisplay {
+    font-size: 2rem;
+    font-weight: bold;
+    font-weight: 500;
+  }
+
+  .quantityDropdown {
+    width: 100%;
+    padding: 0.8rem 0.5rem 0.8rem 0.5rem;
+    font-size: 1rem;
+  }
+
+  .cartButton {
+    margin-bottom: 15px;
+  }
+
+  .cartButton,
+  .purchaseButton {
+    width: 100%;
+    padding: 3vw;
+    font-size: 4vw;
+  }
+
+  .cartButton:hover {
+    border: 4px solid #31737d;
+  }
+
+  .purchaseButton:hover {
+    border: 4px solid #31737d;
+  }
+}

@@ -46,6 +46,7 @@ const ImageSwiper = ({ productDetail }: ImageSwiperProps) => {
   }, []);
 
   return (
+    
     <div className={styles.imageThumbnailsContainer}>
       <div
         className={styles.imageThumbnails}
@@ -69,7 +70,7 @@ const ImageSwiper = ({ productDetail }: ImageSwiperProps) => {
             key={index}
             className={`${styles.dot} ${
               index === activeIndex ? styles.active : ''
-            }`} // Class'ları doğru şekilde ekliyoruz
+            }`}
           />
         ))}
       </div>

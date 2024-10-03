@@ -3,8 +3,8 @@ import Image from 'next/image';
 import { getProduct, Product } from '../../../lib/data';
 import styles from './index.module.css';
 import { AiFillStar } from 'react-icons/ai';
-
 import { SwiperImage } from '@/components';
+import ProductOverview from '@/components/product';
 
 export default async function Page({
   params
@@ -22,27 +22,7 @@ export default async function Page({
 
   return (
     <main className={styles.productDetail}>
-      <div className={styles.productContainer}>
-        <div className={styles.ratingContainer}>
-          <p className={styles.brandName}>{productDetail.brand}</p>
-          <div className={styles.ratingDetails}>
-            <span className={styles.ratingScore}>
-              {productDetail.rating.rate.toFixed(1)}
-            </span>
-            <div className={styles.ratingStars}>
-              {[...Array(5)].map((_, index) => (
-                <a href='#review' key={index} className={styles.starLink}>
-                  <AiFillStar
-                    color={index < starRating ? '#ffc107' : '#e4e5e9'}
-                  />
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-        <h1 className={styles.productTitleMobile}>{productDetail.title}</h1>
-      </div>
-
+      <ProductOverview productDetail={productDetail} starRating={starRating} />
       <div className={styles.imageThumbnailsContainer}>
         <SwiperImage
           productDetail={{
@@ -89,6 +69,11 @@ export default async function Page({
         <p className={styles.productPrice}>
           Price: <span>{productDetail.price}</span>
         </p>
+        <ProductOverview
+          productDetail={productDetail}
+          starRating={starRating}
+          showColorSection={true} // Color bölümü için prop eklendi
+        />
         <h2 className={styles.productColorTitle}>Color</h2>
         <div className={styles.colors}>
           {productDetail.colors.map((color, index) => (
@@ -112,18 +97,18 @@ export default async function Page({
               </option>
             ))}
           </select>
-          <div className={styles.sizeScrollContainer}>
-            {productDetail.sizes.map((size, index) => (
-              <button key={index} className={styles.sizeButton}>
-                {size.value}
-              </button>
-            ))}
-          </div>
+          <ProductOverview
+            starRating={starRating}
+            productDetail={productDetail}
+            showSizeScrollContainer={true} // Sadece size scroll için
+          />
         </div>
         <hr className={styles.productDivider}></hr>
-        <p>
-          <span className={styles.priceText}>{productDetail.price}</span>
-        </p>
+        <ProductOverview
+          productDetail={productDetail}
+          starRating={starRating}
+          showPriceSection={true}
+        />
         <div className={styles.productDetails}>
           <h2 className={styles.productDetailsTitle}>Product details</h2>
           <div className={styles.productDetailsItem}>
@@ -139,6 +124,11 @@ export default async function Page({
           <hr className={styles.divider} />
         </div>
       </div>
+      <ProductOverview
+        productDetail={productDetail}
+        starRating={starRating}
+        showPurchaseSection={true}
+      />
       <div className={styles.stockAndPurchaseSection}>
         <p className={styles.inStock}>In Stock</p>
         <div className={styles.quantitySelector}>
@@ -161,20 +151,11 @@ export default async function Page({
         <button className={styles.buyNowButton}>Buy Now</button>
       </div>
       <hr className={styles.productDivider}></hr>
-
-      <div className={styles.detailsSection}>
-        <h2 className={styles.detailsTitle}>Product details</h2>
-        <div className={styles.detailItem}>
-          <strong>Fabric type</strong> <span>{productDetail.fabricType}</span>
-        </div>
-        <div className={styles.detailItem}>
-          <strong>Care instructions</strong>{' '}
-          <span>{productDetail.careInstructions}</span>
-        </div>
-        <div className={styles.detailItem}>
-          <strong>Origin</strong> <span>{productDetail.origin}</span>
-        </div>
-      </div>
+      <ProductOverview
+        starRating={starRating}
+        productDetail={productDetail}
+        showDetailsSection={true} // Sadece size scroll için
+      />
     </main>
   );
 }
