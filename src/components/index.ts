@@ -1,5 +1,11 @@
 import Header from './header';
 import QuandrupleBanners from './quandrupleBanners';
 import QuandrupleBannerWithoutAnimation from './quadrupleBannerWithoutAnimation';
-export { Header, QuandrupleBanners, QuandrupleBannerWithoutAnimation};
-    
+import SwiperImage from './swiperImage';
+
+export {
+  Header,
+  QuandrupleBanners,
+  QuandrupleBannerWithoutAnimation,
+  SwiperImage
+};

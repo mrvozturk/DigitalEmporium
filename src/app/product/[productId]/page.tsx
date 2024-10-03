@@ -4,6 +4,8 @@ import { getProduct, Product } from '../../../lib/data';
 import styles from './index.module.css';
 import { AiFillStar } from 'react-icons/ai';
 
+import { SwiperImage } from '@/components';
+
 export default async function Page({
   params
 }: {
@@ -17,7 +19,6 @@ export default async function Page({
   }
 
   const starRating = Math.round(productDetail.rating.rate);
-  console.log('productDetail.product_photo', productDetail);
 
   return (
     <main className={styles.productDetail}>
@@ -43,26 +44,12 @@ export default async function Page({
       </div>
 
       <div className={styles.imageThumbnailsContainer}>
-        <div className={styles.imageThumbnails} id='imageThumbnails'>
-          {productDetail.photos.map((photo, index) => (
-            <Image
-              key={index}
-              src={photo}
-              alt={productDetail.title}
-              width={340}
-              height={352}
-              className={styles.thumbnailImage}
-            />
-          ))}
-        </div>
-        <div className={styles.pagination} id='paginationDots'>
-          {productDetail.photos.map((_, index) => (
-            <span
-              key={index}
-              className={`${styles.dot} ${index === 0 ? styles.active : ''}`} // Class'ları doğru şekilde ekliyoruz
-            ></span>
-          ))}
-        </div>
+        <SwiperImage
+          productDetail={{
+            photos: productDetail.photos,
+            title: productDetail.title
+          }}
+        />
       </div>
       <div className={styles.imageContainer}>
         <Image

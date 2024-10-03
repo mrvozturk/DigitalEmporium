@@ -58,7 +58,7 @@ class ProductModel implements Product {
       count: props.product_num_ratings || 0
     };
     this.photo = props.product_photo;
-    this.photos = props.product_photos || []; 
+    this.photos = props.product_photos || [];
     this.colors = props.product_variations?.color || [];
     this.sizes = props.product_variations?.size || [];
     this.customersSay = props.customers_say || '';
@@ -88,20 +88,9 @@ export const getProducts = async (count: number): Promise<Product[]> => {
     const response = await fetch(url, options);
     const result = await response.json();
     if (Array.isArray(result.data.products)) {
-      const products: Product[] = result.data.products.slice(0, count).map(
-        (item: any): Product => ({
-          id: item.asin,
-          title: item.product_title,
-          price: item.product_price || 'N/A',
-          description: item.product_description || '',
-          category: item.product_category || '',
-          image: item.product_photo,
-          rating: {
-            rate: item.product_rating || 0,
-            count: item.product_rating_count || 0
-          }
-        })
-      );
+      const products: Product[] = result.data.products
+        .slice(0, count)
+        .map((item: any): Product => new ProductModel(item));
 
       return products;
     } else {
@@ -127,7 +116,6 @@ export const getProduct = async (
   };
 
   try {
-    console.log('asdfas');
     const response = await fetch(url, options);
     const result = await response.json();
     if (result.data && Object.hasOwn(result.data, 'asin')) {
@@ -136,6 +124,6 @@ export const getProduct = async (
       return new ProductModel(MockProduct.data);
     }
   } catch (error) {
-    return MockProduct.data;
+    return new ProductModel(MockProduct.data);
   }
 };
