@@ -16,11 +16,7 @@
 }
 
 @media (max-width: 568px) {
-  .productDetail {
-    flex-direction: column;
-    padding: 10px 5px;
-    justify-content: center;
-  }
+
   .productTitleMobile {
     display: flex;
     font-size: 0.85rem;

@@ -26,7 +26,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    background-color: #f9f9f9;
+    background-color: #f6f4f4;
   }
 
   .imageThumbnails {
@@ -54,23 +54,31 @@
     cursor: pointer;
     scroll-snap-align: center;
   }
-
   .pagination {
     display: flex;
-    justify-content: center;
+    justify-content: center; 
     align-items: center;
+    width: 100vw; 
+    margin: 10px; 
+    padding: 20px 0; 
+    background-color: #fff; 
+    border: 1px solid #f1eded;
+    box-sizing: border-box; 
   }
-
+  
   .dot {
-    height: 10px;
-    width: 10px;
-    background-color: #bbb;
-    border-radius: 50%;
     display: inline-block;
-    margin: 0 5px;
+    height:10px;
+    width:10px;
+    background-color: #fff; 
+    border-radius: 50%;
+    margin: 0 5px; 
+    border: 1px solid #8b8a8a;
   }
-
+  
   .dot.active {
-    background-color: #717171;
+    background-color: #1a6b7c;
+    border: none;
   }
+  
 }
