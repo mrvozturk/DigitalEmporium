@@ -391,7 +391,8 @@
   .imageContainer,
   .colorOption,
   .productColorTitle,
-  .stockAndPurchaseSection {
+  .stockAndPurchaseSection,
+  .productTitleMobile {
     display: none;
   }
 

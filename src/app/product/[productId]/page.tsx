@@ -103,7 +103,11 @@ export default async function Page({
             showSizeScrollContainer={true} // Sadece size scroll için
           />
         </div>
-        <hr className={styles.productDivider}></hr>
+        <ProductOverview
+          productDetail={productDetail}
+          starRating={starRating}
+          showProductDivider={true}
+        />
         <ProductOverview
           productDetail={productDetail}
           starRating={starRating}

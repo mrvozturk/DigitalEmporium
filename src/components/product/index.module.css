@@ -10,7 +10,8 @@
 .shadeOption,
 .detailsSection,
 .purchaseSection,
-.priceText {
+.priceText,
+.productDivider {
   display: none;
 }
 
@@ -39,7 +40,8 @@
   .shadeOption,
   .detailsSection,
   .purchaseSection,
-  .priceText {
+  .priceText,
+  .productDivider {
     display: block;
   }
 
@@ -201,6 +203,15 @@
     width: 100%;
     max-width: none;
     border: none;
+    border-radius: 0.5vw;
+    padding: 3vw;
+  }
+  .stockStatus {
+    color: #136c16;
+    font-size: 1rem;
+    margin-bottom: 5px;
+    padding: 10px 0;
+    font-weight: 500;
   }
 
   .productWrapper {
@@ -216,19 +227,30 @@
 
   .quantityDropdown {
     width: 100%;
-    padding: 0.8rem 0.5rem 0.8rem 0.5rem;
-    font-size: 1rem;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f0eeee;
+    font-size: 15px;
+    margin-bottom: 20px;
   }
 
   .cartButton {
-    margin-bottom: 15px;
+    background-color: #f7d632;
+  }
+
+  .purchaseButton {
+    background-color: #ff9900;
+    margin-top: 15px;
   }
 
   .cartButton,
   .purchaseButton {
     width: 100%;
-    padding: 3vw;
+    padding: 4vw;
     font-size: 4vw;
+    border-radius: 25px;
+    font-weight: 500;
   }
 
   .cartButton:hover {

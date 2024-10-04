@@ -9,9 +9,10 @@ interface ProductOverviewProps {
   starRating: number;
   showSizeScrollContainer?: boolean;
   showDetailsSection?: boolean;
-  showColorSection?: boolean; // Color bölümü için yeni prop
-  showPurchaseSection?: boolean; // Purchase bölümü için prop
+  showColorSection?: boolean;
+  showPurchaseSection?: boolean;
   showPriceSection?: boolean;
+  showProductDivider?: boolean;
 }
 
 const ProductOverview: React.FC<ProductOverviewProps> = ({
@@ -20,16 +21,19 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
   showSizeScrollContainer = false,
   showDetailsSection = false,
   showColorSection = false,
-  showPurchaseSection = false, // Varsayılan olarak false
-  showPriceSection = false
+  showPurchaseSection = false,
+  showPriceSection = false,
+  showProductDivider = false // Default value set to false
 }) => {
   return (
     <>
+      {/* Main Product Info Section */}
       {!showSizeScrollContainer &&
         !showDetailsSection &&
         !showColorSection &&
         !showPurchaseSection &&
-        !showPriceSection && (
+        !showPriceSection &&
+        !showProductDivider && (
           <div className={styles.productContainer}>
             <div className={styles.ratingContainer}>
               <p className={styles.brandName}>{productDetail.brand}</p>
@@ -52,7 +56,7 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
           </div>
         )}
 
-      {/* Color Bölümü */}
+      {/* Color Section */}
       {showColorSection && (
         <div>
           <h2 className={styles.productShadeTitle}>Color</h2>
@@ -72,7 +76,7 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
         </div>
       )}
 
-      {/* Size Scroll Container */}
+      {/* Size Scroll Section */}
       {showSizeScrollContainer && (
         <div className={styles.sizeScrollContainer}>
           {productDetail.sizes.map((size, index) => (
@@ -82,12 +86,18 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
           ))}
         </div>
       )}
+
+      {/* Price Section */}
       {showPriceSection && (
         <p>
           <span className={styles.priceText}>{productDetail.price}</span>
         </p>
       )}
-      {/* Purchase Section - Color Bölümünden önce gelir */}
+
+      {/* Divider Section */}
+      {showProductDivider && <hr className={styles.productDivider} />}
+
+      {/* Purchase Section */}
       {showPurchaseSection && (
         <div className={styles.purchaseSection}>
           <p className={styles.stockStatus}>In Stock</p>
