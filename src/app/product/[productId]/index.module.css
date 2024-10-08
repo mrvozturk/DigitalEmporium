@@ -1,3 +1,55 @@
+.aboutSectionContainer {
+  margin: 20px 0;
+}
+
+.aboutSection {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #333;
+  max-height: 60px;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  font-weight: 450;
+}
+.aboutSectionTitle{
+  font-size: 1rem;
+  color: #000;
+  font-weight: 500;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+.toggleCheckbox {
+  display: none;
+}
+
+.toggleCheckbox:checked + .aboutSection {
+  max-height: 100vw; 
+}
+
+.toggleButton {
+  display: block;
+  background-color: transparent;
+  border: none;
+  color: #007185;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+.toggleButton:hover {
+  text-decoration: underline;
+  color: #005f67;
+}
+
+.toggleCheckbox:checked + .aboutSection + .toggleButton::after {
+  content: 'See less';
+}
+
+.toggleButton::after {
+  content: 'See more';
+}
+
+
 .productDetail {
   display: flex;
   flex-direction: row;

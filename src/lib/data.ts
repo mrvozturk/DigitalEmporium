@@ -20,6 +20,7 @@ export interface Product {
   fabricType: string;
   careInstructions: string;
   origin: string;
+  about: string[];
 }
 
 class ProductModel implements Product {
@@ -43,6 +44,7 @@ class ProductModel implements Product {
   fabricType: string;
   careInstructions: string;
   origin: string;
+  about: string[];
 
   constructor(props: any) {
     this.id = props.asin;
@@ -70,6 +72,8 @@ class ProductModel implements Product {
     this.fabricType = props.product_details?.['Fabric type'] || '';
     this.careInstructions = props.product_details?.['Care instructions'] || '';
     this.origin = props.product_details?.Origin || '';
+
+    this.about = props.about_product || [];
   }
 }
 

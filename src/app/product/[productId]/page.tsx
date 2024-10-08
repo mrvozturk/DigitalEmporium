@@ -9,9 +9,12 @@ import ProductOverview from '@/components/product';
 export default async function Page({
   params
 }: {
-  params: { productId: string };
+  params: { productId: string; colorName?: string };
 }) {
-  const { productId }: { productId: string } = params;
+  const {
+    productId,
+    colorName
+  }: { productId: string; colorName?: string } = params;
   const productDetail: Product = await getProduct(productId);
 
   if (!productDetail) {
@@ -20,9 +23,16 @@ export default async function Page({
 
   const starRating = Math.round(productDetail.rating.rate);
 
+  const selectedColor =
+    productDetail.colors.find(color => color.value === colorName) ||
+    productDetail.colors[0];
+
   return (
     <main className={styles.productDetail}>
+      {/* Display product overview */}
       <ProductOverview productDetail={productDetail} starRating={starRating} />
+
+      {/* Image Thumbnails */}
       <div className={styles.imageThumbnailsContainer}>
         <SwiperImage
           productDetail={{
@@ -31,19 +41,24 @@ export default async function Page({
           }}
         />
       </div>
+
+      {/* Main Image (Dynamically updates based on selected color) */}
       <div className={styles.imageContainer}>
         <Image
-          src={productDetail.photo}
-          alt={productDetail.title}
+          src={selectedColor.photo} // Display the selected color's image
+          alt={selectedColor.value}
           priority
           width={600}
           height={700}
           className={styles.productImage}
         />
       </div>
+
+      {/* Product Info */}
       <div className={styles.productInfo}>
         <p className={styles.productBrand}>{productDetail.brand}</p>{' '}
         <h1>{productDetail.title}</h1>
+        {/* Review Section */}
         <div className={styles.reviewSection}>
           <span className={styles.ratingValue}>
             {productDetail.rating.rate.toFixed(1)}
@@ -65,29 +80,32 @@ export default async function Page({
             Bu sayfayı ara
           </a>
         </div>
-        <hr className={styles.divider}></hr>
+        <hr className={styles.divider} />
+        {/* Price Section */}
         <p className={styles.productPrice}>
           Price: <span>{productDetail.price}</span>
         </p>
-        <ProductOverview
-          productDetail={productDetail}
-          starRating={starRating}
-          showColorSection={true} // Color bölümü için prop eklendi
-        />
-        <h2 className={styles.productColorTitle}>Color</h2>
+        {/* Color Section */}
+        <h2 className={styles.productColorTitle}>
+          Color: {selectedColor.value} {/* Dynamically show selected color */}
+        </h2>
         <div className={styles.colors}>
           {productDetail.colors.map((color, index) => (
             <div key={index} className={styles.colorOption}>
-              <Image
-                src={color.photo}
-                alt={color.value}
-                width={50}
-                height={50}
-                className={styles.colorImage}
-              />
+              {/* Create a link to the selected color's URL */}
+              <a href={`/product/${productId}/color/${color.value}`}>
+                <Image
+                  src={color.photo}
+                  alt={color.value}
+                  width={50}
+                  height={50}
+                  className={styles.colorImage}
+                />
+              </a>
             </div>
           ))}
         </div>
+        {/* Size Selector */}
         <div className={styles.sizeSelector}>
           <h2 className={styles.sizeSelectorTitle}>Size:</h2>
           <select className={styles.sizeDropdown}>
@@ -100,7 +118,7 @@ export default async function Page({
           <ProductOverview
             starRating={starRating}
             productDetail={productDetail}
-            showSizeScrollContainer={true} // Sadece size scroll için
+            showSizeScrollContainer={true}
           />
         </div>
         <ProductOverview
@@ -113,6 +131,7 @@ export default async function Page({
           starRating={starRating}
           showPriceSection={true}
         />
+        {/* Product Details */}
         <div className={styles.productDetails}>
           <h2 className={styles.productDetailsTitle}>Product details</h2>
           <div className={styles.productDetailsItem}>
@@ -127,12 +146,30 @@ export default async function Page({
           </div>
           <hr className={styles.divider} />
         </div>
+        <div className={styles.aboutSectionContainer}>
+          <h2 className={styles.aboutSectionTitle} >About this item</h2>
+
+          {/* Hidden checkbox to control the collapse/expand */}
+          <input
+            type='checkbox'
+            id='toggle'
+            className={styles.toggleCheckbox}
+          />
+
+          <div className={styles.aboutSection}>
+            <ul>
+              {productDetail.about.map((point, index) => (
+                <li key={index}>{point}</li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Label for the checkbox acts as a toggle button */}
+          <label htmlFor='toggle' className={styles.toggleButton}></label>
+        </div>
       </div>
-      <ProductOverview
-        productDetail={productDetail}
-        starRating={starRating}
-        showPurchaseSection={true}
-      />
+
+      {/* Stock and Purchase Section */}
       <div className={styles.stockAndPurchaseSection}>
         <p className={styles.inStock}>In Stock</p>
         <div className={styles.quantitySelector}>
@@ -155,10 +192,11 @@ export default async function Page({
         <button className={styles.buyNowButton}>Buy Now</button>
       </div>
       <hr className={styles.productDivider}></hr>
+
       <ProductOverview
         starRating={starRating}
         productDetail={productDetail}
-        showDetailsSection={true} // Sadece size scroll için
+        showDetailsSection={true}
       />
     </main>
   );

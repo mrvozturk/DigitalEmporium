@@ -16,7 +16,6 @@
 }
 
 @media (max-width: 568px) {
-
   .productTitleMobile {
     display: flex;
     font-size: 0.85rem;
