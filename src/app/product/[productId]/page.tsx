@@ -45,7 +45,7 @@ export default async function Page({
       {/* Main Image (Dynamically updates based on selected color) */}
       <div className={styles.imageContainer}>
         <Image
-          src={selectedColor.photo} // Display the selected color's image
+          src={selectedColor.photo}
           alt={selectedColor.value}
           priority
           width={600}
@@ -105,6 +105,11 @@ export default async function Page({
             </div>
           ))}
         </div>
+        <ProductOverview
+          productDetail={productDetail}
+          starRating={starRating}
+          showColorSection={true}
+        />
         {/* Size Selector */}
         <div className={styles.sizeSelector}>
           <h2 className={styles.sizeSelectorTitle}>Size:</h2>
@@ -115,6 +120,7 @@ export default async function Page({
               </option>
             ))}
           </select>
+
           <ProductOverview
             starRating={starRating}
             productDetail={productDetail}
@@ -147,7 +153,7 @@ export default async function Page({
           <hr className={styles.divider} />
         </div>
         <div className={styles.aboutSectionContainer}>
-          <h2 className={styles.aboutSectionTitle} >About this item</h2>
+          <h2 className={styles.aboutSectionTitle}>About this item</h2>
 
           {/* Hidden checkbox to control the collapse/expand */}
           <input

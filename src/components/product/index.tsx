@@ -23,7 +23,7 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
   showColorSection = false,
   showPurchaseSection = false,
   showPriceSection = false,
-  showProductDivider = false // Default value set to false
+  showProductDivider = false 
 }) => {
   return (
     <>

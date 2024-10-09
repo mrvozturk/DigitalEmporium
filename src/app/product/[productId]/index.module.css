@@ -11,19 +11,20 @@
   transition: max-height 0.3s ease;
   font-weight: 450;
 }
-.aboutSectionTitle{
+.aboutSectionTitle {
   font-size: 1rem;
   color: #000;
   font-weight: 500;
   margin-bottom: 10px;
   font-weight: bold;
 }
+
 .toggleCheckbox {
   display: none;
 }
 
 .toggleCheckbox:checked + .aboutSection {
-  max-height: 100vw; 
+  max-height: max-content; /* İçeriğin tamamının gösterilmesi */
 }
 
 .toggleButton {
@@ -48,7 +49,6 @@
 .toggleButton::after {
   content: 'See more';
 }
-
 
 .productDetail {
   display: flex;
@@ -444,7 +444,8 @@
   .colorOption,
   .productColorTitle,
   .stockAndPurchaseSection,
-  .productTitleMobile {
+  .productTitleMobile,
+  .productDetails {
     display: none;
   }
 
