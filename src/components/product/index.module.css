@@ -17,7 +17,6 @@
 }
 
 @media (max-width: 568px) {
-
   .productTitleMobile {
     display: flex;
     font-size: 0.85rem;
@@ -165,13 +164,13 @@
     gap: 10px;
     margin-top: 10px;
   }
-  .detailsTitle{
-  font-size: 1.1rem;
-  font-weight: 500;
- font-weight: bold;
-  color: #000;
-  margin-top: 10px;
-}
+  .detailsTitle {
+    font-size: 1.1rem;
+    font-weight: 500;
+    font-weight: bold;
+    color: #000;
+    margin-top: 10px;
+  }
   .detailItem {
     display: flex;
     flex-direction: column;

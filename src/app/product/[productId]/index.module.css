@@ -460,6 +460,9 @@
   .sizeSelector {
     font-size: 0.84rem;
   }
+  .aboutSection {
+    color: #555;
+  }
   .aboutSectionTitle {
     font-size: 1.1rem;
   }
