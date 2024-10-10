@@ -1,3 +1,7 @@
+.imageThumbnailsContainer {
+ 
+  padding: 0px 20px;
+} 
 .imageThumbnails {
   display: flex;
   flex-direction: column;
