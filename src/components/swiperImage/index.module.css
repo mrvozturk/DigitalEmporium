@@ -1,22 +1,50 @@
 .imageThumbnailsContainer {
- 
-  padding: 0px 20px;
-} 
+  padding: 0px;
+}
 .imageThumbnails {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 10px;
+  padding: 0;
   align-items: center;
 }
 .thumbnailImage {
   width: 50px;
   height: 50px;
-  border: 1px solid #000;
-  object-fit: contain;
+  border: 1px solid #b8b4b4;
+  object-fit: cover;
   object-position: center;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  scroll-snap-align: start;
+}
+
+@media (max-width: 1024px) {
+  .imageThumbnailsContainer {
+    padding: 0px;
+  }
+  .imageThumbnails {
+    gap: 10px;
+    padding: 0;
+  }
+  .thumbnailImage {
+    width: 70px;
+    height: 60px;
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 768px) {
+  .imageThumbnailsContainer {
+    padding: 0;
+  }
+  .imageThumbnails {
+    padding: 0;
+  }
+  .thumbnailImage {
+    width: 55px;
+    height: 45px;
+  }
 }
 
 @media (max-width: 568px) {
@@ -44,6 +72,7 @@
     scroll-behavior: smooth;
     border-radius: none;
     border: none;
+    padding: 10px;
   }
   .imageThumbnails::-webkit-scrollbar {
     display: none;
@@ -60,29 +89,28 @@
   }
   .pagination {
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
-    width: 100vw; 
-    margin: 10px; 
-    padding: 20px 0; 
-    background-color: #fff; 
+    width: 100vw;
+    margin: 10px;
+    padding: 20px 0;
+    background-color: #fff;
     border: 1px solid #f1eded;
-    box-sizing: border-box; 
+    box-sizing: border-box;
   }
-  
+
   .dot {
     display: inline-block;
-    height:10px;
-    width:10px;
-    background-color: #fff; 
+    height: 10px;
+    width: 10px;
+    background-color: #fff;
     border-radius: 50%;
-    margin: 0 5px; 
+    margin: 0 5px;
     border: 1px solid #8b8a8a;
   }
-  
+
   .dot.active {
     background-color: #1a6b7c;
     border: none;
   }
-  
 }

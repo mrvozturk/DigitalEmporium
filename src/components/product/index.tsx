@@ -59,7 +59,6 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
       {/* Color Section */}
       {showColorSection && (
         <div>
-          <h2 className={styles.productShadeTitle}>Color</h2>
           <div className={styles.shades}>
             {productDetail.colors.map((color, index) => (
               <div key={index} className={styles.shadeOption}>

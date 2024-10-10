@@ -122,11 +122,7 @@
     white-space: nowrap;
     scrollbar-color: none;
   }
-  .sizeSelectorTitle {
-    font-size: 0.8rem;
-    color: #000;
-    font-weight: 500;
-  }
+
   .sizeButton {
     scroll-snap-align: start;
     flex-shrink: 0;

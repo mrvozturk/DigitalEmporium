@@ -87,12 +87,12 @@ export default async function Page({
         </p>
         {/* Color Section */}
         <h2 className={styles.productColorTitle}>
-          Color: {selectedColor.value} {/* Dynamically show selected color */}
+          <span className={styles.colorLabel}>Color:</span>
+          <span className={styles.pieceInfo}>{selectedColor.value}</span>
         </h2>
         <div className={styles.colors}>
           {productDetail.colors.map((color, index) => (
             <div key={index} className={styles.colorOption}>
-              {/* Create a link to the selected color's URL */}
               <a href={`/product/${productId}/color/${color.value}`}>
                 <Image
                   src={color.photo}
