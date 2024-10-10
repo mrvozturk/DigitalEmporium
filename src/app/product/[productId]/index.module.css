@@ -341,7 +341,7 @@
   .productBrand {
     font-size: 0.6rem;
   }
-  .productColorTitle {
+   .productColorTitle {
     font-size: 0.7rem;
   }
 }
@@ -426,7 +426,8 @@
   .colorOption,
   .stockAndPurchaseSection,
   .productTitleMobile,
-  .productDetails {
+  .productDetails,
+  .purchaseSection {
     display: none;
   }
 

@@ -175,6 +175,11 @@ export default async function Page({
         </div>
       </div>
 
+<ProductOverview
+  productDetail={productDetail} 
+  starRating={starRating}
+  showPurchaseSection={true}
+/>
       {/* Stock and Purchase Section */}
       <div className={styles.stockAndPurchaseSection}>
         <p className={styles.inStock}>In Stock</p>
