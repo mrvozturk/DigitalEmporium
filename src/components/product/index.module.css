@@ -17,6 +17,7 @@
 }
 
 @media (max-width: 568px) {
+
   .productTitleMobile {
     display: flex;
     font-size: 0.85rem;
@@ -162,19 +163,25 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-left: 12px;
     margin-top: 10px;
   }
-
+  .detailsTitle{
+  font-size: 1.1rem;
+  font-weight: 500;
+ font-weight: bold;
+  color: #000;
+  margin-top: 10px;
+}
   .detailItem {
     display: flex;
     flex-direction: column;
     font-size: 0.9rem;
-    margin-bottom: 5px;
+    margin-bottom: 12px;
   }
 
   .detailItem strong {
     font-weight: 600;
+    font-weight: bold;
     font-size: 13px;
     color: #000;
     margin-bottom: 3px;
@@ -182,7 +189,7 @@
 
   .detailItem span {
     color: #555;
-    font-size: 13px;
+    font-size: 15px;
   }
 
   .purchaseSection {

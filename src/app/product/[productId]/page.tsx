@@ -137,6 +137,17 @@ export default async function Page({
           starRating={starRating}
           showPriceSection={true}
         />
+        <ProductOverview
+          productDetail={productDetail}
+          starRating={starRating}
+          showPurchaseSection={true}
+        />
+        <hr className={styles.productDivider}></hr>
+        <ProductOverview
+          starRating={starRating}
+          productDetail={productDetail}
+          showDetailsSection={true}
+        />
         {/* Product Details */}
         <div className={styles.productDetails}>
           <h2 className={styles.productDetailsTitle}>Product details</h2>
@@ -175,11 +186,6 @@ export default async function Page({
         </div>
       </div>
 
-<ProductOverview
-  productDetail={productDetail} 
-  starRating={starRating}
-  showPurchaseSection={true}
-/>
       {/* Stock and Purchase Section */}
       <div className={styles.stockAndPurchaseSection}>
         <p className={styles.inStock}>In Stock</p>
@@ -202,13 +208,6 @@ export default async function Page({
         <button className={styles.addToCartButton}>Add to Cart</button>
         <button className={styles.buyNowButton}>Buy Now</button>
       </div>
-      <hr className={styles.productDivider}></hr>
-
-      <ProductOverview
-        starRating={starRating}
-        productDetail={productDetail}
-        showDetailsSection={true}
-      />
     </main>
   );
 }

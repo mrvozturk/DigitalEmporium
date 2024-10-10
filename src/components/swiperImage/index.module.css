@@ -10,7 +10,7 @@
 }
 .thumbnailImage {
   width: 50px;
-  height: 50px;
+  height: 55px;
   border: 1px solid #b8b4b4;
   object-fit: cover;
   object-position: center;

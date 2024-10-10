@@ -1,5 +1,7 @@
 .aboutSectionContainer {
-  margin: 20px 0;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.5;
 }
 
 .aboutSection {
@@ -12,9 +14,10 @@
   font-weight: 450;
 }
 .aboutSectionTitle {
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: #000;
   font-weight: 500;
+  margin-top: 10px;
   margin-bottom: 10px;
   font-weight: bold;
 }
@@ -59,7 +62,7 @@
 }
 
 .imageContainer {
-  flex: 1 1 40%;
+  flex: 1 1 35%;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -74,7 +77,7 @@
 .productInfo {
   flex-basis: 60%;
   background-color: #ffffff;
-  padding: 0px 20px;
+  padding: 0px 12px;
 }
 
 .productBrand {
@@ -188,7 +191,7 @@
 }
 
 .productDetailsTitle {
-  font-size: 0.95rem;
+  font-size: 1.2rem;
   margin-bottom: 10px;
   color: #000;
   font-weight: 500;
@@ -212,6 +215,7 @@
   color: #000;
   font-size: 13px;
   margin-left: 10px;
+  margin-bottom: 5px;
 }
 .sizeSelector {
   font-size: 0.8rem;
@@ -292,7 +296,9 @@
 .buyNowButton {
   background-color: #ff9900;
 }
-
+.productDivider {
+  display: none;
+}
 @media (max-width: 1024px) {
   .productDetail {
     flex-direction: row;
@@ -323,7 +329,7 @@
   .productInfo h1 {
     font-size: 1.2rem;
   }
- 
+
   .sizeDropdown {
     width: 30%;
     font-size: 14px;
@@ -341,8 +347,14 @@
   .productBrand {
     font-size: 0.6rem;
   }
-   .productColorTitle {
+  .productColorTitle {
     font-size: 0.7rem;
+  }
+  .aboutSectionTitle {
+    font-size: 1.1rem;
+  }
+  .productDetailsTitle {
+    font-size: 1.1rem;
   }
 }
 
@@ -404,7 +416,12 @@
   .productColorTitle {
     font-size: 0.7rem;
   }
-  
+  .aboutSectionTitle {
+    font-size: 1.1rem;
+  }
+  .productDetailsTitle {
+    font-size: 1.1rem;
+  }
 }
 @media (max-width: 568px) {
   .productDetail {
@@ -412,7 +429,9 @@
     padding: 10px 0px;
     justify-content: center;
   }
-
+  .productDivider {
+    display: block;
+  }
   .productInfo h1,
   .ratingValue,
   .reviewText,
@@ -440,5 +459,8 @@
   }
   .sizeSelector {
     font-size: 0.84rem;
+  }
+  .aboutSectionTitle {
+    font-size: 1.1rem;
   }
 }
