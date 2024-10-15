@@ -7,7 +7,6 @@ import styles from './index.module.css';
 interface ProductOverviewProps {
   productDetail: Product;
   starRating: number;
-  showSizeScrollContainer?: boolean;
   showDetailsSection?: boolean;
   showColorSection?: boolean;
   showPurchaseSection?: boolean;
@@ -18,18 +17,16 @@ interface ProductOverviewProps {
 const ProductOverview: React.FC<ProductOverviewProps> = ({
   productDetail,
   starRating,
-  showSizeScrollContainer = false,
   showDetailsSection = false,
   showColorSection = false,
   showPurchaseSection = false,
   showPriceSection = false,
-  showProductDivider = false 
+  showProductDivider = false
 }) => {
   return (
     <>
       {/* Main Product Info Section */}
-      {!showSizeScrollContainer &&
-        !showDetailsSection &&
+      {!showDetailsSection &&
         !showColorSection &&
         !showPurchaseSection &&
         !showPriceSection &&
@@ -72,17 +69,6 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
               </div>
             ))}
           </div>
-        </div>
-      )}
-
-      {/* Size Scroll Section */}
-      {showSizeScrollContainer && (
-        <div className={styles.sizeScrollContainer}>
-          {productDetail.sizes.map((size, index) => (
-            <button key={index} className={styles.sizeButton}>
-              {size.value}
-            </button>
-          ))}
         </div>
       )}
 

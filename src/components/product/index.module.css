@@ -115,40 +115,6 @@
     display: none;
   }
 
-  .sizeScrollContainer {
-    display: flex;
-    flex-direction: row;
-    overflow-x: scroll;
-    white-space: nowrap;
-    scrollbar-color: none;
-  }
-
-  .sizeButton {
-    scroll-snap-align: start;
-    flex-shrink: 0;
-    width: calc(100% / 3.5);
-    height: auto;
-    margin-right: 10px;
-    border: 1px solid #000;
-    border-radius: 4px;
-    background-color: #fff;
-    padding: 10px 3px;
-    font-size: 0.7rem;
-    font-weight: bold;
-    margin-top: 10px;
-    color: #000;
-  }
-
-  .sizeButton:hover {
-    background-color: #000;
-    color: #fff;
-    border-color: #31737d;
-  }
-
-  .sizeScrollContainer::-webkit-scrollbar {
-    display: none;
-  }
-
   .productDivider {
     margin-top: 20px;
     margin-bottom: 10px;

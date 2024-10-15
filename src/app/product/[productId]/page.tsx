@@ -5,6 +5,7 @@ import styles from './index.module.css';
 import { AiFillStar } from 'react-icons/ai';
 import { SwiperImage } from '@/components';
 import ProductOverview from '@/components/product';
+import SizeSelector from '@/components/sizeSelector'; // SizeSelector bileşenini dahil ediyoruz
 
 export default async function Page({
   params
@@ -112,6 +113,10 @@ export default async function Page({
         />
         {/* Size Selector */}
         <div className={styles.sizeSelector}>
+          <SizeSelector sizes={productDetail.sizes} />{' '}
+        </div>
+        {/* Size Selector */}
+        <div className={styles.sizeSelector}>
           <h2 className={styles.sizeSelectorTitle}>Size:</h2>
           <select className={styles.sizeDropdown}>
             {productDetail.sizes.map((size, index) => (
@@ -120,12 +125,6 @@ export default async function Page({
               </option>
             ))}
           </select>
-
-          <ProductOverview
-            starRating={starRating}
-            productDetail={productDetail}
-            showSizeScrollContainer={true}
-          />
         </div>
         <ProductOverview
           productDetail={productDetail}

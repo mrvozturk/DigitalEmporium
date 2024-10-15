@@ -464,4 +464,7 @@
   .aboutSectionTitle {
     font-size: 1.1rem;
   }
+  .sizeSelectorTitle {
+    display: none;
+  }
 }
