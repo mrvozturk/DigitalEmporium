@@ -9,5 +9,6 @@ export {
   QuandrupleBanners,
   QuandrupleBannerWithoutAnimation,
   SwiperImage,
-  MobileComponents
+  MobileComponents,
+  
 };

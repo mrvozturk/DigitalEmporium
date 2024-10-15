@@ -429,9 +429,7 @@
     padding: 10px 0px;
     justify-content: center;
   }
-  .productDivider {
-    display: block;
-  }
+
   .productInfo h1,
   .ratingValue,
   .reviewText,
@@ -445,7 +443,6 @@
   .colorOption,
   .stockAndPurchaseSection,
   .productTitleMobile,
-  .productDetails,
   .purchaseSection {
     display: none;
   }
@@ -453,6 +450,7 @@
   .productDivider {
     margin-top: 20px;
     margin-bottom: 10px;
+    display: block;
   }
   .productColorTitle {
     font-size: 0.84rem;
