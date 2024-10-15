@@ -66,6 +66,9 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
                   height={50}
                   className={styles.shadeImage}
                 />
+                <div className={styles.price}>
+                  {color.price ?? productDetail.price}
+                </div>
               </div>
             ))}
           </div>

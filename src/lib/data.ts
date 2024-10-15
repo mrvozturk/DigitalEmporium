@@ -12,7 +12,7 @@ export interface Product {
   };
   photo: string;
   photos: string[];
-  colors: { value: string; photo: string; is_available: boolean }[];
+  colors: { value: string; photo: string; is_available: boolean; price: string }[]; // price eklendi
   sizes: { value: string; is_available: boolean }[];
   customersSay: string;
   categories: string[];
@@ -36,7 +36,7 @@ class ProductModel implements Product {
   };
   photo: string;
   photos: string[];
-  colors: { value: string; photo: string; is_available: boolean }[];
+  colors: { value: string; photo: string; is_available: boolean; price: string }[]; // price eklendi
   sizes: { value: string; is_available: boolean }[];
   customersSay: string;
   categories: string[];

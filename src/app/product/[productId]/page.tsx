@@ -5,7 +5,7 @@ import styles from './index.module.css';
 import { AiFillStar } from 'react-icons/ai';
 import { SwiperImage } from '@/components';
 import ProductOverview from '@/components/product';
-import SizeSelector from '@/components/sizeSelector'; // SizeSelector bileşenini dahil ediyoruz
+import SizeSelector from '@/components/sizeSelector'; 
 
 export default async function Page({
   params
