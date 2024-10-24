@@ -6,7 +6,6 @@
 .productTitleMobile,
 .mobileProductTitle,
 .productShadeTitle,
-.shadeOption,
 .detailsSection,
 .purchaseSection,
 .priceText,
@@ -31,7 +30,6 @@
   .ratingStars,
   .productTitleMobile,
   .productShadeTitle,
-  .shadeOption,
   .detailsSection,
   .purchaseSection,
   .priceText,
@@ -78,44 +76,6 @@
   .productContainer {
     width: 100%;
     padding: 0 10px;
-  }
-  .shades {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    white-space: nowrap;
-    scrollbar-color: none;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .shadeOption {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: 80px;
-    height: auto;
-    margin: 0 10px 0 0;
-  }
-
-  .shadeOption:hover .shadeImage {
-    border: 2px solid #000;
-    border-radius: 50%;
-  }
-
-  .shadeImage {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 50%;
-    aspect-ratio: 1/1;
-    transition: border 0.3s ease;
-  }
-
-  .shades::-webkit-scrollbar {
-    display: none;
   }
 
   .price {

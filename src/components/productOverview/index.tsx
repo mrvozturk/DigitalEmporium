@@ -8,7 +8,6 @@ interface ProductOverviewProps {
   productDetail: Product;
   starRating: number;
   showDetailsSection?: boolean;
-  showColorSection?: boolean;
   showPurchaseSection?: boolean;
   showPriceSection?: boolean;
   showProductDivider?: boolean;
@@ -18,7 +17,6 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
   productDetail,
   starRating,
   showDetailsSection = false,
-  showColorSection = false,
   showPurchaseSection = false,
   showPriceSection = false,
   showProductDivider = false
@@ -27,7 +25,6 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
     <>
       {/* Main Product Info Section */}
       {!showDetailsSection &&
-        !showColorSection &&
         !showPurchaseSection &&
         !showPriceSection &&
         !showProductDivider && (
@@ -52,28 +49,6 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
             <h1 className={styles.productTitleMobile}>{productDetail.title}</h1>
           </div>
         )}
-
-      {/* Color Section */}
-      {showColorSection && (
-        <div>
-          <div className={styles.shades}>
-            {productDetail.colors.map((color, index) => (
-              <div key={index} className={styles.shadeOption}>
-                <Image
-                  src={color.photo}
-                  alt={color.value}
-                  width={50}
-                  height={50}
-                  className={styles.shadeImage}
-                />
-                <div className={styles.price}>
-                  {color.price ?? productDetail.price}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
 
       {/* Price Section */}
       {showPriceSection && (

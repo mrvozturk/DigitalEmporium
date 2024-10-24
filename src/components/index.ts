@@ -6,6 +6,7 @@ import ProductOverview from './productOverview';
 import SizeSelector from './sizeSelector';
 import ProductImageAndColors from './productImageAndColors';
 import MainImage from './mainImage';
+import ColorSelector from './colorSelector';
 
 export {
   Header,
@@ -15,6 +16,7 @@ export {
   ProductOverview,
   SizeSelector,
   ProductImageAndColors,
-  MainImage
+  MainImage,
+  ColorSelector
 
 };

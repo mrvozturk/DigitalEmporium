@@ -1,0 +1,73 @@
+.colors,
+.colorImage,
+.colorOption,
+.colorLabel,
+.colorOption:hover .colorImage,
+.color::-webkit-scrollbar,
+.productColorTitle {
+  display: none;
+}
+
+@media (max-width: 568px) {
+  .colors,
+  .colorImage,
+  .colorOption,
+  .colorLabel,
+  .colorOption:hover .colorImage,
+  .color::-webkit-scrollbar,
+  .productColorTitle {
+    display: block;
+  }
+  .colors {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-color: none;
+    align-items: center;
+    justify-content: center;
+  }
+  .colorImage {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    transition: border 0.3s ease;
+  }
+  .colorOption {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width:75px;
+    height: auto;
+    margin: 0 10px 0 0;
+  }
+
+  .colorLabel {
+    font-weight: 400;
+    color: #000;
+  }
+  .colorOption:hover .colorImage {
+    border: 2px solid #000;
+    border-radius: 50%;
+  }
+
+  .colors::-webkit-scrollbar {
+    display: none;
+  }
+  .productColorTitle {
+    display: flex;
+    font-size: 0.8rem;
+    color: #000;
+    font-weight: 400;
+    margin-top: 5px;
+    margin-bottom: 1rem;
+  }
+  .colorLabel {
+    font-weight: 400;
+    color: #000;
+  }
+}

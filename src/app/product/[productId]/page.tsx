@@ -7,6 +7,7 @@ import ProductOverview from '@/components/productOverview';
 import SizeSelector from '@/components/sizeSelector';
 import ProductImageAndColors from '@/components/productImageAndColors';
 import MainImage from '@/components/mainImage';
+import ColorSelector from '@/components/colorSelector';
 
 export default async function Page({
   params
@@ -77,17 +78,8 @@ export default async function Page({
         <p className={styles.productPrice}>
           Price: <span>{productDetail.price}</span>
         </p>
-        {/* Color Section */}
-        <h2 className={styles.productColorTitle}>
-          <span className={styles.colorLabel}>Color:</span>
-          <span className={styles.pieceInfo}>{selectedColor.value}</span>
-        </h2>
         <ProductImageAndColors colors={productDetail.colors} />
-        <ProductOverview
-          productDetail={productDetail}
-          starRating={starRating}
-          showColorSection={true}
-        />
+        <ColorSelector colors={productDetail.colors} />
         {/* Size Selector */}
         <div className={styles.sizeSelector}>
           <SizeSelector sizes={productDetail.sizes} />{' '}
