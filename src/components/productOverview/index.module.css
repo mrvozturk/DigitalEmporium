@@ -85,6 +85,8 @@
     overflow-x: auto;
     white-space: nowrap;
     scrollbar-color: none;
+    align-items: center;
+    justify-content: center;
   }
 
   .shadeOption {
@@ -95,7 +97,7 @@
     flex-shrink: 0;
     width: 80px;
     height: auto;
-    margin-right: 20px;
+    margin: 0 10px 0 0;
   }
 
   .shadeOption:hover .shadeImage {

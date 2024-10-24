@@ -1,0 +1,13 @@
+.imageContainer {
+    flex: 1 1 35%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  
+  .productImage {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    padding: 0;
+  }

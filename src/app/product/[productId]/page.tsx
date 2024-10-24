@@ -1,11 +1,12 @@
 import React from 'react';
-import Image from 'next/image';
 import { getProduct, Product } from '../../../lib/data';
 import styles from './index.module.css';
 import { AiFillStar } from 'react-icons/ai';
 import { SwiperImage } from '@/components';
-import ProductOverview from '@/components/product';
-import SizeSelector from '@/components/sizeSelector'; 
+import ProductOverview from '@/components/productOverview';
+import SizeSelector from '@/components/sizeSelector';
+import ProductImageAndColors from '@/components/productImageAndColors';
+import MainImage from '@/components/mainImage';
 
 export default async function Page({
   params
@@ -32,7 +33,6 @@ export default async function Page({
     <main className={styles.productDetail}>
       {/* Display product overview */}
       <ProductOverview productDetail={productDetail} starRating={starRating} />
-
       {/* Image Thumbnails */}
       <div className={styles.imageThumbnailsContainer}>
         <SwiperImage
@@ -43,17 +43,8 @@ export default async function Page({
         />
       </div>
 
-      {/* Main Image (Dynamically updates based on selected color) */}
-      <div className={styles.imageContainer}>
-        <Image
-          src={selectedColor.photo}
-          alt={selectedColor.value}
-          priority
-          width={600}
-          height={700}
-          className={styles.productImage}
-        />
-      </div>
+      {/* Ana Resim */}
+      <MainImage initialColor={productDetail.colors[0]} />
 
       {/* Product Info */}
       <div className={styles.productInfo}>
@@ -91,21 +82,7 @@ export default async function Page({
           <span className={styles.colorLabel}>Color:</span>
           <span className={styles.pieceInfo}>{selectedColor.value}</span>
         </h2>
-        <div className={styles.colors}>
-          {productDetail.colors.map((color, index) => (
-            <div key={index} className={styles.colorOption}>
-              <a href={`/product/${productId}/color/${color.value}`}>
-                <Image
-                  src={color.photo}
-                  alt={color.value}
-                  width={50}
-                  height={50}
-                  className={styles.colorImage}
-                />
-              </a>
-            </div>
-          ))}
-        </div>
+        <ProductImageAndColors colors={productDetail.colors} />
         <ProductOverview
           productDetail={productDetail}
           starRating={starRating}

@@ -1,0 +1,45 @@
+.colors {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
+.colorImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.colorOption {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.productColorTitle {
+  font-size: 0.8rem;
+  color: #000;
+  font-weight: 400;
+  margin-top: 5px;
+  margin-bottom: 1rem;
+}
+
+.colorLabel {
+  font-weight: 400;
+  color: #000;
+}
+.imageContainer {
+  flex: 1 1 35%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.productImage {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  padding: 0;
+}
