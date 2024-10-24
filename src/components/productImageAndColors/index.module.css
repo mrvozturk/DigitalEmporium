@@ -1,0 +1,44 @@
+.colors {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
+.colorImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.colorOption {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.productColorTitle {
+  font-size: 0.8rem;
+  color: #000;
+  font-weight: 400;
+  margin-top: 5px;
+  margin-bottom: 1rem;
+}
+
+.colorLabel {
+  font-weight: 400;
+  color: #000;
+}
+
+@media (max-width: 568px) {
+  .colors,
+  .colorImage,
+  .colorOption,
+  .colorLabel,
+  .colorOption:hover .colorImage,
+  .color::-webkit-scrollbar,
+  .productColorTitle {
+    display: none;
+  }
+}
