@@ -37,6 +37,7 @@ export default async function Page({
             photos: productDetail.photos,
             title: productDetail.title
           }}
+          colors={productDetail.colors}
         />
       </div>
 

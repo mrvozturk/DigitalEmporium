@@ -1,48 +1,48 @@
-'use client';
-// components/ColorSelector.tsx
+'use client'; 
+import React, { useState } from 'react';
 import Image from 'next/image';
-import { useState } from 'react';
+import Link from 'next/link';
 import styles from './index.module.css';
 
-interface ColorSelectorProps {
-  colors: { value: string; photo: string }[];
+interface Color {
+  value: string;
+  photo: string;
 }
 
-const ColorSelector: React.FC<ColorSelectorProps> = ({ colors }) => {
+interface ColorSelectorProps {
+  colors: Color[];
+}
+
+const ColorSelector: React.FC<ColorSelectorProps> = ({
+  colors,
+}) => {
   const [selectedColorName, setSelectedColorName] = useState(colors[0].value);
+  const [selectedColorPhoto, setSelectedColorPhoto] = useState(colors[0].photo);
 
   const handleColorSelect = (colorPhoto: string, colorName: string) => {
-    const mainImage = document.getElementById(
-      'mainProductImage'
-    ) as HTMLImageElement;
-    if (mainImage) {
-      mainImage.src = colorPhoto;
-      mainImage.setAttribute('src', colorPhoto);
-    }
+    setSelectedColorPhoto(colorPhoto);
     setSelectedColorName(colorName);
   };
 
   return (
-    <div>
+    <div className={styles.colors}>
       <h2 className={styles.productColorTitle}>
-        <span className={styles.colorLabel}>Color:</span>
-        <span className={styles.pieceInfo}>{selectedColorName}</span>{' '}
+        <span>Color: </span>
+        <span className={styles.selectedColorName}>{selectedColorName}</span>
       </h2>
-      <div className={styles.colors}>
+
+      <div className={styles.colorOptions}>
         {colors.map((color, index) => (
-          <div
+          <Link
             key={index}
-            className={styles.colorOption}
-            onClick={() => handleColorSelect(color.photo, color.value)} // Renk seçimi
+            href={`?colorName=${color.value}`}
+            shallow 
+            onClick={() => handleColorSelect(color.photo, color.value)} // Call onClick to handle color selection
           >
-            <Image
-              src={color.photo}
-              alt={color.value}
-              width={50}
-              height={50}
-              className={styles.colorImage}
-            />
-          </div>
+            <div className={styles.colorOption}>
+              <Image src={color.photo} alt={color.value} width={50} height={50} className={styles.colorImage} />
+            </div>
+          </Link>
         ))}
       </div>
     </div>

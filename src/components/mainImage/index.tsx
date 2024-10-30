@@ -17,7 +17,6 @@ const MainImage: React.FC<MainImageProps> = ({ colors }) => {
   const searchParams = useSearchParams();
   const colorName = searchParams.get('colorName');
 
-  // Find the selected color based on the URL parameter or default to the first color
   const selectedColor = colors.find(color => color.value === colorName) || colors[0];
 
   return (
