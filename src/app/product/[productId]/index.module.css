@@ -1,5 +1,3 @@
-
-
 .aboutSectionContainer {
   align-items: center;
   justify-content: center;
@@ -145,45 +143,6 @@
   font-size: 1rem;
   font-weight: bold;
   margin-right: 5px;
-}
-
-.colors {
-  display: flex;
-  gap: 10px;
-  margin-top: 5px;
-}
-.colorImage {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.colorOption {
-  width: 40px;
-  height: 40px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.productColorTitle {
-  font-size: 0.8rem;
-  color: #000;
-  font-weight: 400;
-  margin-top: 5px;
-  margin-bottom: 1rem;
-}
-
-.colorLabel {
-  font-weight: 400;
-  color: #000;
-}
-
-.pieceInfo {
-  font-weight: 600;
-  font-weight: bold;
-  color: #0b0a0a;
 }
 
 .divider {
@@ -350,9 +309,7 @@
   .productBrand {
     font-size: 0.6rem;
   }
-  .productColorTitle {
-    font-size: 0.7rem;
-  }
+
   .aboutSectionTitle {
     font-size: 1.1rem;
   }
@@ -409,16 +366,7 @@
   .buyNowButton {
     font-size: 1.2vw;
   }
-  .colorOption {
-    width: 40px;
-    height: 35px;
-  }
-  .colors {
-    gap: 5px;
-  }
-  .productColorTitle {
-    font-size: 0.7rem;
-  }
+
   .aboutSectionTitle {
     font-size: 1.1rem;
   }
@@ -443,7 +391,6 @@
   .sizeDropdown,
   .productDetails,
   .imageContainer,
-  .colorOption,
   .stockAndPurchaseSection,
   .productTitleMobile,
   .purchaseSection {
@@ -455,9 +402,7 @@
     margin-bottom: 10px;
     display: block;
   }
-  .productColorTitle {
-    font-size: 0.84rem;
-  }
+
   .sizeSelector {
     font-size: 0.84rem;
   }

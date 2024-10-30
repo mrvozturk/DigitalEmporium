@@ -1,19 +1,30 @@
 'use client';
-// components/MainImage.tsx
+import React from 'react';
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
 import styles from './index.module.css';
 
-interface MainImageProps {
-  initialColor: { value: string; photo: string };
+interface Color {
+  value: string;
+  photo: string;
 }
 
-const MainImage: React.FC<MainImageProps> = ({ initialColor }) => {
+interface MainImageProps {
+  colors: Color[];
+}
+
+const MainImage: React.FC<MainImageProps> = ({ colors }) => {
+  const searchParams = useSearchParams();
+  const colorName = searchParams.get('colorName');
+
+  // Find the selected color based on the URL parameter or default to the first color
+  const selectedColor = colors.find(color => color.value === colorName) || colors[0];
+
   return (
     <div className={styles.imageContainer}>
       <Image
-        id="mainProductImage" // Ana resmin id'si
-        src={initialColor.photo}
-        alt={initialColor.value}
+        src={selectedColor.photo}
+        alt={selectedColor.value}
         width={600}
         height={700}
         className={styles.productImage}

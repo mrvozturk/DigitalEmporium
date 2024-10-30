@@ -26,10 +26,6 @@ export default async function Page({
 
   const starRating = Math.round(productDetail.rating.rate);
 
-  const selectedColor =
-    productDetail.colors.find(color => color.value === colorName) ||
-    productDetail.colors[0];
-
   return (
     <main className={styles.productDetail}>
       {/* Display product overview */}
@@ -44,8 +40,7 @@ export default async function Page({
         />
       </div>
 
-      {/* Ana Resim */}
-      <MainImage initialColor={productDetail.colors[0]} />
+      <MainImage colors={productDetail.colors} />
 
       {/* Product Info */}
       <div className={styles.productInfo}>

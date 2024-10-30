@@ -9,7 +9,7 @@ interface ColorSelectorProps {
 }
 
 const ColorSelector: React.FC<ColorSelectorProps> = ({ colors }) => {
-  const [selectedColorName, setSelectedColorName] = useState(colors[0].value); // İlk rengi varsayılan yapıyoruz
+  const [selectedColorName, setSelectedColorName] = useState(colors[0].value);
 
   const handleColorSelect = (colorPhoto: string, colorName: string) => {
     const mainImage = document.getElementById(
@@ -19,7 +19,7 @@ const ColorSelector: React.FC<ColorSelectorProps> = ({ colors }) => {
       mainImage.src = colorPhoto;
       mainImage.setAttribute('src', colorPhoto);
     }
-    setSelectedColorName(colorName); // Seçilen rengin ismini güncelliyoruz
+    setSelectedColorName(colorName);
   };
 
   return (
@@ -27,7 +27,6 @@ const ColorSelector: React.FC<ColorSelectorProps> = ({ colors }) => {
       <h2 className={styles.productColorTitle}>
         <span className={styles.colorLabel}>Color:</span>
         <span className={styles.pieceInfo}>{selectedColorName}</span>{' '}
-        {/* Dinamik olarak seçilen rengi gösteriyoruz */}
       </h2>
       <div className={styles.colors}>
         {colors.map((color, index) => (
@@ -42,7 +41,7 @@ const ColorSelector: React.FC<ColorSelectorProps> = ({ colors }) => {
               width={50}
               height={50}
               className={styles.colorImage}
-              />
+            />
           </div>
         ))}
       </div>
