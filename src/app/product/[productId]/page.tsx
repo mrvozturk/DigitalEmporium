@@ -71,8 +71,8 @@ export default async function Page({
         <p className={styles.productPrice}>
           Price: <span>{productDetail.price}</span>
         </p>
-        <ColorSelector colors={productDetail.colors} />
         <ProductImageAndColors colors={productDetail.colors} />
+        <ColorSelector colors={productDetail.colors} />
         {/* Size Selector */}
         <div className={styles.sizeSelector}>
           <SizeSelector sizes={productDetail.sizes} />{' '}
