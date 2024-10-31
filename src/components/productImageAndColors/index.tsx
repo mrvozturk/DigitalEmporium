@@ -16,7 +16,6 @@ interface ProductImageAndColorsProps {
 const ProductImageAndColors: React.FC<ProductImageAndColorsProps> = ({
   colors,
 }) => {
-  // Set the initial state using the first color in the colors array
   const [selectedColorName, setSelectedColorName] = useState(colors[0].value);
   const [selectedColorPhoto, setSelectedColorPhoto] = useState(colors[0].photo);
 
@@ -38,7 +37,7 @@ const ProductImageAndColors: React.FC<ProductImageAndColorsProps> = ({
             key={index}
             href={`?colorName=${color.value}`}
             shallow 
-            onClick={() => handleColorSelect(color.photo, color.value)} // Call onClick to handle color selection
+            onClick={() => handleColorSelect(color.photo, color.value)} 
           >
             <div className={styles.colorOption}>
               <Image src={color.photo} alt={color.value} width={50} height={50} />

@@ -40,7 +40,6 @@
   .colorOptions {
     display: flex;
     overflow-x: auto;
-    overflow-y: hidden;
     white-space: nowrap;
     scrollbar-color: none;
   }

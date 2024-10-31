@@ -14,10 +14,7 @@ export default async function Page({
 }: {
   params: { productId: string; colorName?: string };
 }) {
-  const {
-    productId,
-    colorName
-  }: { productId: string; colorName?: string } = params;
+  const { productId }: { productId: string; colorName?: string } = params;
   const productDetail: Product = await getProduct(productId);
 
   if (!productDetail) {
@@ -74,8 +71,8 @@ export default async function Page({
         <p className={styles.productPrice}>
           Price: <span>{productDetail.price}</span>
         </p>
-        <ProductImageAndColors colors={productDetail.colors} />
         <ColorSelector colors={productDetail.colors} />
+        <ProductImageAndColors colors={productDetail.colors} />
         {/* Size Selector */}
         <div className={styles.sizeSelector}>
           <SizeSelector sizes={productDetail.sizes} />{' '}

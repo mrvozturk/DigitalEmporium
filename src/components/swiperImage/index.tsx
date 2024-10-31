@@ -1,8 +1,9 @@
+// ImageSwiper.tsx
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import styles from './index.module.css';
 
 interface ProductDetail {
@@ -24,7 +25,9 @@ const ImageSwiper = ({ productDetail, colors }: ImageSwiperProps) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const thumbnailsRef = useRef<HTMLDivElement | null>(null);
   const searchParams = useSearchParams();
+  const router = useRouter();
   const colorName = searchParams.get('colorName');
+  const imageUrl = searchParams.get('imageUrl');
 
   const selectedColor =
     colors.find(color => color.value === colorName) || colors[0];
@@ -37,6 +40,10 @@ const ImageSwiper = ({ productDetail, colors }: ImageSwiperProps) => {
       setActiveIndex(0);
     }
   }, [selectedColor]);
+
+  const handleThumbnailClick = (photo: string) => {
+    router.push(`?colorName=${selectedColor.value}&imageUrl=${photo}`, undefined);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -75,6 +82,7 @@ const ImageSwiper = ({ productDetail, colors }: ImageSwiperProps) => {
           width={340}
           height={352}
           className={styles.thumbnailImage}
+          onClick={() => handleThumbnailClick(selectedColor.photo)}
         />
 
         {filteredPhotos.map((photo, index) => (
@@ -85,6 +93,7 @@ const ImageSwiper = ({ productDetail, colors }: ImageSwiperProps) => {
             width={340}
             height={352}
             className={styles.thumbnailImage}
+            onClick={() => handleThumbnailClick(photo)}
           />
         ))}
       </div>

@@ -61,19 +61,6 @@
   margin: 0 auto;
 }
 
-.imageContainer {
-  flex: 1 1 35%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-}
-
-.productImage {
-  max-width: 100%;
-  height: auto;
-  object-fit: contain;
-  padding: 0;
-}
 .productInfo {
   flex-basis: 60%;
   background-color: #ffffff;
@@ -267,15 +254,7 @@
     justify-content: space-between;
     padding: 10px 15px;
   }
-  .imageContainer {
-    flex: 1 1 50%;
-  }
-
-  .productImage {
-    max-width: 100%;
-    height: auto;
-  }
-
+ 
   .reviewSection {
     margin-top: 10px;
   }
@@ -325,15 +304,7 @@
     padding: 10px 15px;
   }
 
-  .imageContainer {
-    flex: 1 1 50%;
-  }
-
-  .productImage {
-    max-width: 100%;
-    height: auto;
-  }
-
+ 
   .reviewSection {
     margin-top: 10px;
   }

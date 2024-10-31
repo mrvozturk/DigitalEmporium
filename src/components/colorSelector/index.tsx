@@ -1,4 +1,4 @@
-'use client'; 
+'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -13,9 +13,7 @@ interface ColorSelectorProps {
   colors: Color[];
 }
 
-const ColorSelector: React.FC<ColorSelectorProps> = ({
-  colors,
-}) => {
+const ColorSelector: React.FC<ColorSelectorProps> = ({ colors }) => {
   const [selectedColorName, setSelectedColorName] = useState(colors[0].value);
   const [selectedColorPhoto, setSelectedColorPhoto] = useState(colors[0].photo);
 
@@ -36,11 +34,17 @@ const ColorSelector: React.FC<ColorSelectorProps> = ({
           <Link
             key={index}
             href={`?colorName=${color.value}`}
-            shallow 
-            onClick={() => handleColorSelect(color.photo, color.value)} // Call onClick to handle color selection
+            shallow
+            onClick={() => handleColorSelect(color.photo, color.value)}
           >
             <div className={styles.colorOption}>
-              <Image src={color.photo} alt={color.value} width={50} height={50} className={styles.colorImage} />
+              <Image
+                src={color.photo}
+                alt={color.value}
+                width={50}
+                height={50}
+                className={styles.colorImage}
+              />
             </div>
           </Link>
         ))}

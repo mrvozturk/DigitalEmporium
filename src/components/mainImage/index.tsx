@@ -1,3 +1,4 @@
+// MainImage.tsx
 'use client';
 import React from 'react';
 import Image from 'next/image';
@@ -16,13 +17,15 @@ interface MainImageProps {
 const MainImage: React.FC<MainImageProps> = ({ colors }) => {
   const searchParams = useSearchParams();
   const colorName = searchParams.get('colorName');
+  const imageUrl = searchParams.get('imageUrl');
 
-  const selectedColor = colors.find(color => color.value === colorName) || colors[0];
+  const selectedColor =
+    colors.find(color => color.value === colorName) || colors[0];
 
   return (
     <div className={styles.imageContainer}>
       <Image
-        src={selectedColor.photo}
+        src={imageUrl || selectedColor.photo} 
         alt={selectedColor.value}
         width={600}
         height={700}
