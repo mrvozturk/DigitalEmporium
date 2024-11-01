@@ -31,6 +31,7 @@ const MainImage: React.FC<MainImageProps> = ({ colors }) => {
         height={700}
         className={styles.productImage}
       />
+      
     </div>
   );
 };

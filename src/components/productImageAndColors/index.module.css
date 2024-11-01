@@ -24,6 +24,13 @@
   margin-top: 5px;
   margin-bottom: 0.6rem;
 }
+.colorPrice {
+  font-size: 0.9em;
+  color: #333;
+  text-align: center;
+  margin-top: 4px;
+}
+
 
 @media (max-width: 568px) {
   .colors,

@@ -71,8 +71,9 @@ export default async function Page({
         <p className={styles.productPrice}>
           Price: <span>{productDetail.price}</span>
         </p>
-        <ProductImageAndColors colors={productDetail.colors} />
-        <ColorSelector colors={productDetail.colors} />
+        
+        <ProductImageAndColors colors={productDetail.colors}    />
+        <ColorSelector colors={productDetail.colors}       />
         {/* Size Selector */}
         <div className={styles.sizeSelector}>
           <SizeSelector sizes={productDetail.sizes} />{' '}
@@ -97,6 +98,7 @@ export default async function Page({
           productDetail={productDetail}
           starRating={starRating}
           showPriceSection={true}
+
         />
         <ProductOverview
           productDetail={productDetail}

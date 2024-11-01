@@ -26,8 +26,11 @@ const ProductImageAndColors: React.FC<ProductImageAndColorsProps> = ({
 
   return (
     <div className={styles.colors}>
+      
       <h2 className={styles.productColorTitle}>
-        <span>Color: </span>
+        <span>Color:</span>
+        
+
         <span>{selectedColorName}</span>
       </h2>
 
@@ -42,6 +45,7 @@ const ProductImageAndColors: React.FC<ProductImageAndColorsProps> = ({
             <div className={styles.colorOption}>
               <Image src={color.photo} alt={color.value} width={50} height={50} />
             </div>
+            
           </Link>
         ))}
       </div>

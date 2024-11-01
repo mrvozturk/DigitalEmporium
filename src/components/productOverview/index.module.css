@@ -8,9 +8,9 @@
 .productShadeTitle,
 .detailsSection,
 .purchaseSection,
-.priceText,
 .productDivider,
-.productDetails {
+.productDetails,
+.priceText {
   display: none;
 }
 
@@ -32,8 +32,8 @@
   .productShadeTitle,
   .detailsSection,
   .purchaseSection,
-  .priceText,
-  .productDivider {
+  .productDivider,
+  .priceText {
     display: block;
   }
 

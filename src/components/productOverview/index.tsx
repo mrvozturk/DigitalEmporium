@@ -54,6 +54,7 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
       {showPriceSection && (
         <p>
           <span className={styles.priceText}>{productDetail.price}</span>
+            
         </p>
       )}
 
