@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import { AiFillStar } from 'react-icons/ai';
 import { Product } from '../../lib/data';
 import styles from './index.module.css';
@@ -54,7 +53,6 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
       {showPriceSection && (
         <p>
           <span className={styles.priceText}>{productDetail.price}</span>
-            
         </p>
       )}
 

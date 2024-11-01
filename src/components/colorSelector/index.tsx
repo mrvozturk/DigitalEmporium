@@ -7,7 +7,7 @@ import styles from './index.module.css';
 interface Color {
   value: string;
   photo: string;
-  price: string; // Added price property to Color interface
+  price: string; 
 }
 
 interface ColorSelectorProps {
@@ -48,7 +48,7 @@ const ColorSelector: React.FC<ColorSelectorProps> = ({ colors }) => {
                 className={styles.colorImage}
               />
             </div>
-            <p className={styles.productPrice}>$29{color.price}</p> {/* Added price below each image */}
+            <p className={styles.productPrice}>$29{color.price}</p> 
 
           </Link>
         ))}
