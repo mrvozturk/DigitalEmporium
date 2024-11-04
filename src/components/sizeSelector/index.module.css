@@ -36,12 +36,12 @@
     color: #000;
   }
 
+  .selectedSize,
   .sizeButton:hover {
     background-color: #000;
     color: #fff;
     border-color: #31737d;
   }
-
   .sizeScrollContainer::-webkit-scrollbar {
     display: none;
   }

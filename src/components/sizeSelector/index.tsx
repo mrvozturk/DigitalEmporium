@@ -23,7 +23,7 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({ sizes }) => {
           <button
             key={index}
             className={`${styles.sizeButton} ${
-              selectedSize === size.value ? styles.selected : ''
+              selectedSize === size.value ? styles.selectedSize : ''
             }`}
             onClick={() => setSelectedSize(size.value)}
           >

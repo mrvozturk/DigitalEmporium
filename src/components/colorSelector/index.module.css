@@ -70,20 +70,18 @@
     text-align: center;
   }
 
-  .colorImage:hover {
-    border: 1px solid #000;
+  .selectedColor,
+  .colorOption:hover .colorImage {
+    border: 1.5px solid #000;
+    border-radius: 50%;
   }
-
   .colorImage {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    border: 1px solid #cccaca;
+    border: 1.5px solid #cccaca;
     object-fit: cover;
   }
 
-  .colorOption:hover .colorImage {
-    border: 2px solid #000;
-    border-radius: 50%;
-  }
+
 }

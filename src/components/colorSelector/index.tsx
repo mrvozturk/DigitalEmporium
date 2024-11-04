@@ -7,7 +7,7 @@ import styles from './index.module.css';
 interface Color {
   value: string;
   photo: string;
-  price: string; 
+  price: string;
 }
 
 interface ColorSelectorProps {
@@ -17,7 +17,6 @@ interface ColorSelectorProps {
 const ColorSelector: React.FC<ColorSelectorProps> = ({ colors }) => {
   const [selectedColorName, setSelectedColorName] = useState(colors[0].value);
   const [selectedColorPhoto, setSelectedColorPhoto] = useState(colors[0].photo);
-
 
   const handleColorSelect = (colorPhoto: string, colorName: string) => {
     setSelectedColorPhoto(colorPhoto);
@@ -39,7 +38,11 @@ const ColorSelector: React.FC<ColorSelectorProps> = ({ colors }) => {
             shallow
             onClick={() => handleColorSelect(color.photo, color.value)}
           >
-            <div className={styles.colorOption}>
+            <div
+              className={`${styles.colorOption} ${
+                selectedColorName === color.value ? styles.selectedColor : ''
+              }`}
+            >
               <Image
                 src={color.photo}
                 alt={color.value}
@@ -48,8 +51,7 @@ const ColorSelector: React.FC<ColorSelectorProps> = ({ colors }) => {
                 className={styles.colorImage}
               />
             </div>
-            <p className={styles.productPrice}>$29{color.price}</p> 
-
+            <p className={styles.productPrice}>$29{color.price}</p>
           </Link>
         ))}
       </div>
