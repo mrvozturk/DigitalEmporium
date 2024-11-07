@@ -98,13 +98,17 @@
 .reviewSection {
   display: flex;
   align-items: center;
-  gap: 5px;
 }
 
 .starRating {
   display: flex;
+  margin-left: 2px;
+  margin-right: 10px;
 }
-
+.starRating svg {
+  color: #ffcc00;
+  font-size: 1.1rem;
+}
 .reviewText {
   color: #007185;
   font-size: 0.75rem;
@@ -254,12 +258,12 @@
     justify-content: space-between;
     padding: 10px 15px;
   }
- 
+
   .reviewSection {
     margin-top: 10px;
   }
   .ratingValue {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
   .reviewText {
     font-size: 0.6rem;
@@ -271,6 +275,9 @@
     font-size: 1.2rem;
   }
 
+  .starRating svg {
+    font-size: 0.9rem;
+  }
   .sizeDropdown {
     width: 30%;
     font-size: 14px;
@@ -304,7 +311,6 @@
     padding: 10px 15px;
   }
 
- 
   .reviewSection {
     margin-top: 10px;
   }
@@ -317,9 +323,14 @@
   .reviewText::after {
     margin: 0 5px;
   }
+ 
+  .starRating svg {
+    font-size: 0.9rem;
+  }
   .productInfo h1 {
     font-size: 1.1rem;
   }
+
   .sizeSelector {
     font-size: 0.7rem;
   }
