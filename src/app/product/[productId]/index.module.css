@@ -16,10 +16,9 @@
 .aboutSectionTitle {
   font-size: 1.2rem;
   color: #000;
-  font-weight: 500;
+  font-weight: 700;
   margin-top: 10px;
   margin-bottom: 10px;
-  font-weight: bold;
 }
 
 .toggleCheckbox {
@@ -147,8 +146,7 @@
   font-size: 1.2rem;
   margin-bottom: 10px;
   color: #000;
-  font-weight: 500;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .productDetailsItem {
@@ -173,9 +171,8 @@
 .sizeSelector {
   font-size: 0.8rem;
   margin-top: 10px;
-  font-weight: bold;
   color: #000;
-  font-weight: 400;
+  font-weight: 450;
 }
 .sizeDropdown {
   margin-top: 2px;
