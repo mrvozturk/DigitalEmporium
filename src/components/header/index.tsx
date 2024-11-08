@@ -7,7 +7,6 @@ import {
   AiOutlineMenu
 } from 'react-icons/ai';
 import styles from './index.module.css';
-import sideBarStyles from './sideBar.module.css';
 
 import SideBar from './sideBar';
 import Link from 'next/link';
