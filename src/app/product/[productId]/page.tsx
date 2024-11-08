@@ -14,7 +14,7 @@ export default async function Page({
 }: {
   readonly params: Readonly<{ productId: string; colorName?: string }>;
 }) {
-  const { productId, colorName } = params;
+  const { productId } = params; 
   const productDetail: Product = await getProduct(productId);
 
   if (!productDetail) {
