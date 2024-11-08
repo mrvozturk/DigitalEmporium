@@ -148,8 +148,8 @@ export default async function Page({
           </div>
 
           {/* Label for the checkbox acts as a toggle button */}
-          <label htmlFor='toggle' className={styles.toggleButton}></label>
-        </div>
+          <label htmlFor="toggle" className={styles.toggleButton} aria-label="Toggle more information"></label>
+          </div>
       </div>
 
       {/* Stock and Purchase Section */}
