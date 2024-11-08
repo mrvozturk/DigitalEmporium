@@ -1,4 +1,4 @@
-'use client'; // Use client-side rendering
+'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -14,38 +14,41 @@ interface ProductImageAndColorsProps {
 }
 
 const ProductImageAndColors: React.FC<ProductImageAndColorsProps> = ({
-  colors,
+  colors
 }) => {
   const [selectedColorName, setSelectedColorName] = useState(colors[0].value);
-  const [selectedColorPhoto, setSelectedColorPhoto] = useState(colors[0].photo);
 
   const handleColorSelect = (colorPhoto: string, colorName: string) => {
-    setSelectedColorPhoto(colorPhoto);
     setSelectedColorName(colorName);
   };
 
   return (
     <div className={styles.colors}>
-      
       <h2 className={styles.productColorTitle}>
         <span>Color:</span>
-        
-
         <span>{selectedColorName}</span>
       </h2>
 
       <div className={styles.colorOptions}>
-        {colors.map((color, index) => (
+        {colors.map(color => (
           <Link
-            key={index}
+            key={color.value}
             href={`?colorName=${color.value}`}
-            shallow 
-            onClick={() => handleColorSelect(color.photo, color.value)} 
+            shallow
+            onClick={() => handleColorSelect(color.photo, color.value)}
           >
-            <div className={styles.colorOption}>
-              <Image src={color.photo} alt={color.value} width={50} height={50} />
+            <div
+              className={`${styles.colorOption} ${
+                selectedColorName === color.value ? styles.selectedColor : ''
+              }`}
+            >
+              <Image
+                src={color.photo}
+                alt={color.value}
+                width={50}
+                height={50}
+              />
             </div>
-            
           </Link>
         ))}
       </div>

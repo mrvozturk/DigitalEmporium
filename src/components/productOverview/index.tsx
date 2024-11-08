@@ -36,7 +36,11 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
                 </span>
                 <div className={styles.ratingStars}>
                   {[...Array(5)].map((_, index) => (
-                    <a href='#review' key={index} className={styles.starLink}>
+                    <a
+                      href='#review'
+                      key={`${productDetail.title}-star-${index}`} 
+                      className={styles.starLink}
+                    >
                       <AiFillStar
                         color={index < starRating ? '#ffc107' : '#e4e5e9'}
                       />

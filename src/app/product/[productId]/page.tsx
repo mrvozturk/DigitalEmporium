@@ -12,9 +12,9 @@ import ColorSelector from '@/components/colorSelector';
 export default async function Page({
   params
 }: {
-  params: { productId: string; colorName?: string };
+  readonly params: Readonly<{ productId: string; colorName?: string }>;
 }) {
-  const { productId }: { productId: string; colorName?: string } = params;
+  const { productId, colorName } = params;
   const productDetail: Product = await getProduct(productId);
 
   if (!productDetail) {
@@ -52,13 +52,18 @@ export default async function Page({
 
           <div className={styles.starRating}>
             {[...Array(5)].map((_, index) => (
-              <a href='#review' key={index} className={styles.starLink}>
+              <a
+                href='#review'
+                key={`star-${productId}-${index}`}
+                className={styles.starLink}
+              >
                 <AiFillStar
                   color={index < starRating ? '#ffc107' : '#e4e5e9'}
                 />
               </a>
             ))}
           </div>
+
           <a href='#reviews' className={styles.reviewText}>
             {productDetail.rating.count} değerlendirme
           </a>
@@ -71,9 +76,8 @@ export default async function Page({
         <p className={styles.productPrice}>
           Price: <span>{productDetail.price}</span>
         </p>
-        
-        <ProductImageAndColors colors={productDetail.colors}    />
-        <ColorSelector colors={productDetail.colors}       />
+        <ProductImageAndColors colors={productDetail.colors} />
+        <ColorSelector colors={productDetail.colors} />
         {/* Size Selector */}
         <div className={styles.sizeSelector}>
           <SizeSelector sizes={productDetail.sizes} />{' '}
@@ -82,8 +86,8 @@ export default async function Page({
         <div className={styles.sizeSelector}>
           <h2 className={styles.sizeSelectorTitle}>Size:</h2>
           <select className={styles.sizeDropdown}>
-            {productDetail.sizes.map((size, index) => (
-              <option key={index} value={size.value}>
+            {productDetail.sizes.map(size => (
+              <option key={size.value} value={size.value}>
                 {size.value}
               </option>
             ))}
@@ -98,7 +102,6 @@ export default async function Page({
           productDetail={productDetail}
           starRating={starRating}
           showPriceSection={true}
-
         />
         <ProductOverview
           productDetail={productDetail}
@@ -138,8 +141,8 @@ export default async function Page({
 
           <div className={styles.aboutSection}>
             <ul>
-              {productDetail.about.map((point, index) => (
-                <li key={index}>{point}</li>
+              {productDetail.about.map(point => (
+                <li key={point}>{point}</li>
               ))}
             </ul>
           </div>

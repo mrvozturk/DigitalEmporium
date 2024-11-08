@@ -1,4 +1,3 @@
-// ImageSwiper.tsx
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
@@ -27,7 +26,6 @@ const ImageSwiper = ({ productDetail, colors }: ImageSwiperProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const colorName = searchParams.get('colorName');
-  const imageUrl = searchParams.get('imageUrl');
 
   const selectedColor =
     colors.find(color => color.value === colorName) || colors[0];
@@ -42,7 +40,10 @@ const ImageSwiper = ({ productDetail, colors }: ImageSwiperProps) => {
   }, [selectedColor]);
 
   const handleThumbnailClick = (photo: string) => {
-    router.push(`?colorName=${selectedColor.value}&imageUrl=${photo}`, undefined);
+    router.push(
+      `?colorName=${selectedColor.value}&imageUrl=${photo}`,
+      undefined
+    );
   };
 
   useEffect(() => {
@@ -84,10 +85,9 @@ const ImageSwiper = ({ productDetail, colors }: ImageSwiperProps) => {
           className={styles.thumbnailImage}
           onClick={() => handleThumbnailClick(selectedColor.photo)}
         />
-
-        {filteredPhotos.map((photo, index) => (
+        {filteredPhotos.map(photo => (
           <Image
-            key={index}
+            key={photo}
             src={photo}
             alt={productDetail.title}
             width={340}
@@ -99,9 +99,9 @@ const ImageSwiper = ({ productDetail, colors }: ImageSwiperProps) => {
       </div>
 
       <div className={styles.pagination} id='paginationDots'>
-        {[selectedColor.photo, ...filteredPhotos].map((_, index) => (
+        {[selectedColor.photo, ...filteredPhotos].map((photo, index) => (
           <span
-            key={index}
+            key={`dot-${photo}`}
             className={`${styles.dot} ${
               index === activeIndex ? styles.active : ''
             }`}

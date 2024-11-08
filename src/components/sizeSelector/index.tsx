@@ -19,9 +19,9 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({ sizes }) => {
         Size: {selectedSize ? <strong>{selectedSize}</strong> : ''}
       </h2>
       <div className={styles.sizeScrollContainer}>
-        {sizes.map((size, index) => (
+        {sizes.map((size) => (
           <button
-            key={index}
+            key={size.value} 
             className={`${styles.sizeButton} ${
               selectedSize === size.value ? styles.selectedSize : ''
             }`}
