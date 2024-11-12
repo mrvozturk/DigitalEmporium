@@ -50,7 +50,7 @@ const ImageSwiper = ({ productDetail, colors }: ImageSwiperProps) => {
     const handleScroll = () => {
       if (thumbnailsRef.current) {
         const thumbnails = thumbnailsRef.current;
-        const scrollLeft = thumbnails.scrollLeft;
+        const {scrollLeft} = thumbnails;
         const thumbnailWidth = thumbnails.clientWidth;
 
         const newIndex = Math.round(scrollLeft / thumbnailWidth);
