@@ -1,4 +1,6 @@
 import MockProduct from './mock/product.json';
+import MockProducts from './mock/listProducts.json';
+
 export interface Product {
   id: string;
   title: string;
@@ -12,7 +14,12 @@ export interface Product {
   };
   photo: string;
   photos: string[];
-  colors: { value: string; photo: string; is_available: boolean; price: string }[]; // price eklendi
+  colors: {
+    value: string;
+    photo: string;
+    is_available: boolean;
+    price: string;
+  }[];
   sizes: { value: string; is_available: boolean }[];
   customersSay: string;
   categories: string[];
@@ -21,6 +28,9 @@ export interface Product {
   careInstructions: string;
   origin: string;
   about: string[];
+  salesVolume: string;
+  delivery: string;
+  couponText: string;
 }
 
 class ProductModel implements Product {
@@ -36,7 +46,12 @@ class ProductModel implements Product {
   };
   photo: string;
   photos: string[];
-  colors: { value: string; photo: string; is_available: boolean; price: string }[]; // price eklendi
+  colors: {
+    value: string;
+    photo: string;
+    is_available: boolean;
+    price: string;
+  }[];
   sizes: { value: string; is_available: boolean }[];
   customersSay: string;
   categories: string[];
@@ -45,6 +60,9 @@ class ProductModel implements Product {
   careInstructions: string;
   origin: string;
   about: string[];
+  salesVolume: string;
+  delivery: string;
+  couponText: string;
 
   constructor(props: any) {
     this.id = props.asin;
@@ -68,12 +86,13 @@ class ProductModel implements Product {
       ? props.category_path.map((cat: any) => cat.name)
       : [];
     this.brand = props.product_byline || '';
-
     this.fabricType = props.product_details?.['Fabric type'] || '';
     this.careInstructions = props.product_details?.['Care instructions'] || '';
     this.origin = props.product_details?.Origin || '';
-
     this.about = props.about_product || [];
+    this.salesVolume = props.sales_volume || '';
+    this.delivery = props.delivery || '';
+    this.couponText = props.coupon_text || '';
   }
 }
 
@@ -95,15 +114,18 @@ export const getProducts = async (count: number): Promise<Product[]> => {
       const products: Product[] = result.data.products
         .slice(0, count)
         .map((item: any): Product => new ProductModel(item));
-
       return products;
     } else {
-      console.error('Products data is not an array:', result.data.products);
-      return [];
+      console.warn('API data is not an array. Using fallback data.');
+      return MockProducts.data.products
+        .slice(0, count)
+        .map((item: any) => new ProductModel(item));
     }
   } catch (error) {
-    console.error('Error fetching data:', error);
-    return [];
+    console.error('Error fetching product listing data:', error);
+    return MockProducts.data.products
+      .slice(0, count)
+      .map((item: any) => new ProductModel(item));
   }
 };
 
@@ -123,11 +145,13 @@ export const getProduct = async (
     const response = await fetch(url, options);
     const result = await response.json();
     if (result.data && Object.hasOwn(result.data, 'asin')) {
-      return result.data;
+      return new ProductModel(result.data);
     } else {
+      console.warn('Product data not available. Using fallback product.');
       return new ProductModel(MockProduct.data);
     }
   } catch (error) {
+    console.error('Error fetching product data:', error);
     return new ProductModel(MockProduct.data);
   }
 };
