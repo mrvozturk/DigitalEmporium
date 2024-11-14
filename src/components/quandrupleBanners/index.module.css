@@ -111,9 +111,6 @@
     padding: 5px 15px;
     font-size: 0.8rem;
   }
-  .mobileBanner {
-    flex: 1;
-  }
 }
 @media (max-width: 568px) {
   .bannerContainer {
@@ -130,8 +127,5 @@
   .bannerButton {
     padding: 3px 5px;
     font-size: 0.6rem;
-  }
-  .mobileBanner {
-    flex: 1;
   }
 }
