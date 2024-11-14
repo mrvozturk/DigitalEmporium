@@ -23,7 +23,6 @@ const ProductListing: React.FC = () => {
   }, [productCount]);
 
   const handleProductClick = (product: Product) => {
-    localStorage.setItem('selectedProductId', product.id);
     router.push(`/product/${product.id}`);
   };
 
