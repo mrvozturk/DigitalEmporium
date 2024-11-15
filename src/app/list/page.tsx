@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import styles from './index.module.css';
-import { useRouter } from 'next/navigation';
 import { AiOutlineShopping, AiOutlineHeart } from 'react-icons/ai';
 import Link from 'next/link';
 import { getProducts, Product } from '../../lib/data';
