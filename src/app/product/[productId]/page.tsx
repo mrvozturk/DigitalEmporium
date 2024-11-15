@@ -9,12 +9,19 @@ import ProductImageAndColors from '@/components/productImageAndColors';
 import MainImage from '@/components/mainImage';
 import ColorSelector from '@/components/colorSelector';
 
+export type FiltersType = {
+  imageUrl: string;
+};
+
 export default async function Page({
-  params
+  params,
+  searchParams
 }: {
-  readonly params: Readonly<{ productId: string; colorName?: string }>;
+  readonly params: Promise<Readonly<{ productId: string; colorName?: string }>>;
+  readonly searchParams: Promise<Readonly<FiltersType>>;
 }) {
-  const { productId } = params; 
+  const filters = await searchParams;
+  const { productId } = await params;
   const productDetail: Product = await getProduct(productId);
 
   if (!productDetail) {
@@ -38,7 +45,7 @@ export default async function Page({
         />
       </div>
 
-      <MainImage colors={productDetail.colors} />
+      <MainImage initialPhoto={productDetail.photo} filters={filters} />
 
       {/* Product Info */}
       <div className={styles.productInfo}>
@@ -76,8 +83,19 @@ export default async function Page({
         <p className={styles.productPrice}>
           Price: <span>{productDetail.price}</span>
         </p>
-        <ProductImageAndColors colors={productDetail.colors} />
-        <ColorSelector colors={productDetail.colors} />
+        {!!productDetail.colors.length && (
+          <ProductImageAndColors
+            colors={productDetail.colors}
+            productId={productId}
+          />
+        )}
+        {!!productDetail.colors.length && (
+          <ColorSelector
+            colors={productDetail.colors}
+            productId={productId}
+            price={productDetail.price}
+          />
+        )}
         {/* Size Selector */}
         <div className={styles.sizeSelector}>
           <SizeSelector sizes={productDetail.sizes} />{' '}
@@ -148,8 +166,12 @@ export default async function Page({
           </div>
 
           {/* Label for the checkbox acts as a toggle button */}
-          <label htmlFor="toggle" className={styles.toggleButton} aria-label="Toggle more information"></label>
-          </div>
+          <label
+            htmlFor='toggle'
+            className={styles.toggleButton}
+            aria-label='Toggle more information'
+          ></label>
+        </div>
       </div>
 
       {/* Stock and Purchase Section */}

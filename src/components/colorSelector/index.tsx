@@ -3,42 +3,38 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './index.module.css';
+import { VariantColor } from '@/lib/data';
 
-interface Color {
-  value: string;
-  photo: string;
+interface ColorSelectorProps {
+  colors: VariantColor[];
+  productId: string;
   price: string;
 }
 
-interface ColorSelectorProps {
-  colors: Color[];
-}
+const ColorSelector: React.FC<ColorSelectorProps> = ({
+  colors,
+  productId,
+  price
+}) => {
+  const selectedColor = colors.find(color => color.asin === productId);
 
-const ColorSelector: React.FC<ColorSelectorProps> = ({ colors }) => {
-  const [selectedColorName, setSelectedColorName] = useState(colors[0].value);
-
-  const handleColorSelect = (colorName: string) => {
-    setSelectedColorName(colorName);
-  };
+  if (!selectedColor) {
+    return null;
+  }
 
   return (
     <div className={styles.colors}>
       <h2 className={styles.productColorTitle}>
         <span>Color: </span>
-        <span className={styles.selectedColorName}>{selectedColorName}</span>
+        <span className={styles.selectedColorName}>{selectedColor?.value}</span>
       </h2>
 
       <div className={styles.colorOptions}>
-        {colors.map((color) => (
-          <Link
-            key={color.value}
-            href={`?colorName=${color.value}`}
-            shallow
-            onClick={() => handleColorSelect(color.value)}
-          >
+        {colors.map(color => (
+          <Link key={color.value} href={`${color.asin}`} shallow>
             <div
               className={`${styles.colorOption} ${
-                selectedColorName === color.value ? styles.selectedColor : ''
+                selectedColor?.value === color.value ? styles.selectedColor : ''
               }`}
             >
               <Image
@@ -49,7 +45,7 @@ const ColorSelector: React.FC<ColorSelectorProps> = ({ colors }) => {
                 className={styles.colorImage}
               />
             </div>
-            <p className={styles.productPrice}>$29{color.price}</p>
+            <p className={styles.productPrice}>{price}</p>
           </Link>
         ))}
       </div>

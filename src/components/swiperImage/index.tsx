@@ -23,34 +23,24 @@ interface ImageSwiperProps {
 const ImageSwiper = ({ productDetail, colors }: ImageSwiperProps) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const thumbnailsRef = useRef<HTMLDivElement | null>(null);
-  const searchParams = useSearchParams();
   const router = useRouter();
-  const colorName = searchParams.get('colorName');
-
-  const selectedColor =
-    colors.find(color => color.value === colorName) || colors[0];
-
-  const filteredPhotos = productDetail.photos.slice(1);
 
   useEffect(() => {
     if (thumbnailsRef.current) {
       thumbnailsRef.current.scrollLeft = 0;
       setActiveIndex(0);
     }
-  }, [selectedColor]);
+  }, []);
 
   const handleThumbnailClick = (photo: string) => {
-    router.push(
-      `?colorName=${selectedColor.value}&imageUrl=${photo}`,
-      undefined
-    );
+    router.push(`?imageUrl=${photo}`);
   };
 
   useEffect(() => {
     const handleScroll = () => {
       if (thumbnailsRef.current) {
         const thumbnails = thumbnailsRef.current;
-        const {scrollLeft} = thumbnails;
+        const { scrollLeft } = thumbnails;
         const thumbnailWidth = thumbnails.clientWidth;
 
         const newIndex = Math.round(scrollLeft / thumbnailWidth);
@@ -77,15 +67,7 @@ const ImageSwiper = ({ productDetail, colors }: ImageSwiperProps) => {
         id='imageThumbnails'
         ref={thumbnailsRef}
       >
-        <Image
-          src={selectedColor.photo}
-          alt={selectedColor.value}
-          width={340}
-          height={352}
-          className={styles.thumbnailImage}
-          onClick={() => handleThumbnailClick(selectedColor.photo)}
-        />
-        {filteredPhotos.map(photo => (
+        {productDetail.photos.map(photo => (
           <Image
             key={photo}
             src={photo}
@@ -99,7 +81,7 @@ const ImageSwiper = ({ productDetail, colors }: ImageSwiperProps) => {
       </div>
 
       <div className={styles.pagination} id='paginationDots'>
-        {[selectedColor.photo, ...filteredPhotos].map((photo, index) => (
+        {productDetail.photos.map((photo, index) => (
           <span
             key={`dot-${photo}`}
             className={`${styles.dot} ${
