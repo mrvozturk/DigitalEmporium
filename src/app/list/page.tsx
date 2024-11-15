@@ -22,10 +22,6 @@ const ProductListing: React.FC = () => {
     fetchData();
   }, [productCount]);
 
-  const handleProductClick = (product: Product) => {
-    router.push(`/product/${product.id}`);
-  };
-
   return (
     <div className={styles.container}>
       {productData.map(product => (
@@ -33,7 +29,6 @@ const ProductListing: React.FC = () => {
           href={`/product/${product.id}`}
           className={styles.card}
           key={product.id}
-          onClick={() => handleProductClick(product)}
         >
           <div className={styles.iconContainer}>
             {[
