@@ -1,0 +1,42 @@
+.imageContainer {
+  flex: 1 1 25%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 0px 10px;
+}
+
+.productImage {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  padding: 0;
+}
+@media (max-width: 1024px) {
+  .imageContainer {
+    flex: 1 1 45%;
+  }
+
+  .productImage {
+    display: block;
+  }
+}
+@media (max-width: 768px) {
+  .imageContainer {
+    flex: 1 1 35%;
+  }
+
+  .productImage {
+    display: block;
+  }
+}
+
+@media (max-width: 568px) {
+  .imageContainer {
+    display: none;
+  }
+
+  .productImage {
+    display: none;
+  }
+}

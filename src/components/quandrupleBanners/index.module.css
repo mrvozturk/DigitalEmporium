@@ -71,6 +71,7 @@
   }
   .mobileBanner {
     display: block;
+    flex: 1;
   }
   .bannerText {
     flex: 1;
@@ -87,9 +88,6 @@
     padding: 5px 15px;
     font-size: 0.8rem;
   }
-  .mobileBanner {
-    flex: 1;
-  }
 }
 
 @media (max-width: 768px) {
@@ -103,7 +101,7 @@
   }
 
   .bannerText h1 {
-    font-size:3.5rem;
+    font-size: 3.5rem;
   }
   .bannerText p {
     font-size: 1rem;
@@ -112,9 +110,6 @@
   .bannerButton {
     padding: 5px 15px;
     font-size: 0.8rem;
-  }
-  .mobileBanner {
-    flex: 1;
   }
 }
 @media (max-width: 568px) {
@@ -132,8 +127,5 @@
   .bannerButton {
     padding: 3px 5px;
     font-size: 0.6rem;
-  }
-  .mobileBanner {
-    flex: 1;
   }
 }

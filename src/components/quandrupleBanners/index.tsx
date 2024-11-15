@@ -4,17 +4,33 @@ import Image from 'next/image';
 import styles from './index.module.css';
 
 const QuadrupleBanners: React.FC = () => {
-  const [hoveredIndex, setHoveredIndex] = useState<number>(0);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const handleMouseEnter = (index: number) => {
     setHoveredIndex(index);
   };
 
   const images = [
-    'https://ktnimg2.mncdn.com/cms/2024/05/20/92bb0c02-f1b4-4885-b15c-75ad6a11496e.png',
-    'https://ktnimg2.mncdn.com/cms/2024/05/20/6185e44e-4cb0-49bf-9080-55a3256d5be7.png',
-    'https://ktnimg2.mncdn.com/cms/2024/05/20/e237f683-de61-499c-9315-4e8974cd499d.png',
-    'https://ktnimg2.mncdn.com/cms/2024/05/20/98142ef2-1241-404b-9489-27fc93e2e585.png'
+    {
+      id: '1',
+      src:
+        'https://ktnimg2.mncdn.com/cms/2024/05/20/92bb0c02-f1b4-4885-b15c-75ad6a11496e.png'
+    },
+    {
+      id: '2',
+      src:
+        'https://ktnimg2.mncdn.com/cms/2024/05/20/6185e44e-4cb0-49bf-9080-55a3256d5be7.png'
+    },
+    {
+      id: '3',
+      src:
+        'https://ktnimg2.mncdn.com/cms/2024/05/20/e237f683-de61-499c-9315-4e8974cd499d.png'
+    },
+    {
+      id: '4',
+      src:
+        'https://ktnimg2.mncdn.com/cms/2024/05/20/98142ef2-1241-404b-9489-27fc93e2e585.png'
+    }
   ];
 
   return (
@@ -29,21 +45,15 @@ const QuadrupleBanners: React.FC = () => {
       <div className={styles.bannerWrap}>
         {images.map((image, index) => (
           <div
-            key={index}
+            key={image.id}
             className={styles.bannerImage}
             onMouseEnter={() => handleMouseEnter(index)}
             style={{
               flex: hoveredIndex === index ? 3.2 : 1,
-              zIndex: hoveredIndex === index ? 1 : 1
+              zIndex: hoveredIndex === index ? 2 : 1
             }}
           >
-            <Image
-              src={image}
-              alt='Picture'
-              width={800}
-              height={480}
-              style={{}}
-            />
+            <Image src={image.src} alt='Picture' width={800} height={480} />
           </div>
         ))}
       </div>
