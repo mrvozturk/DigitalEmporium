@@ -11,7 +11,6 @@ const ProductListing: React.FC = () => {
   const [productData, setProductData] = useState<Product[]>([]);
 
   const productCount = 8;
-  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
