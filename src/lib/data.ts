@@ -1,13 +1,6 @@
 import MockProduct from './mock/product.json';
 import MockProducts from './mock/listProducts.json';
 
-export type VariantColor = {
-  asin: string;
-  value: string;
-  photo: string;
-  is_available: boolean;
-};
-
 export interface Product {
   id: string;
   title: string;
@@ -18,7 +11,12 @@ export interface Product {
   rating: { rate: number; count: number };
   photo: string;
   photos: string[];
-  colors: VariantColor[];
+  colors: {
+    value: string;
+    photo: string;
+    is_available: boolean;
+    price: string;
+  }[];
   sizes: { value: string; is_available: boolean }[];
   customersSay: string;
   categories: string[];
@@ -94,7 +92,7 @@ export const getProducts = async (count: number): Promise<Product[]> => {
 };
 
 export const getProduct = async (
-  productId: string = 'B07ZPKBL9V'
+  productId: string = 'B0CPF9P98V'
 ): Promise<Product> => {
   const url = `https://real-time-amazon-data.p.rapidapi.com/product-details?asin=${productId}&country=US`;
   const options = {

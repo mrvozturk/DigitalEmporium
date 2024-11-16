@@ -1,4 +1,4 @@
-'use client';
+
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -17,10 +17,6 @@ const ColorSelector: React.FC<ColorSelectorProps> = ({
   price
 }) => {
   const selectedColor = colors.find(color => color.asin === productId);
-
-  if (!selectedColor) {
-    return null;
-  }
 
   return (
     <div className={styles.colors}>
