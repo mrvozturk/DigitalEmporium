@@ -17,11 +17,11 @@ export default async function Page({
   params,
   searchParams
 }: {
-  readonly params: Promise<Readonly<{ productId: string; colorName?: string }>>;
-  readonly searchParams: Promise<Readonly<FiltersType>>;
+  readonly params: Readonly<{ productId: string; colorName?: string }>;
+  readonly searchParams: Readonly<FiltersType>;
 }) {
-  const filters = await searchParams;
-  const { productId } = await params;
+  const filters = searchParams;
+  const { productId } = params;
   const productDetail: Product = await getProduct(productId);
 
   if (!productDetail) {
