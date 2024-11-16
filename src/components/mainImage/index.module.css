@@ -2,7 +2,7 @@
   flex: 1 1 25%;
   display: flex;
   align-items: flex-start;
-  margin: 0px 10px;
+  margin: 0px 8px;
   justify-content: center;
   object-fit: contain;
 
@@ -14,7 +14,8 @@
   height: auto;
   max-height: 25vw;
   object-fit: contain;
-  padding: 0;
+  padding: 10px;
+  border: 1px solid rgb(246, 245, 245);
   background-color: rgb(246, 245, 245);
 }
 @media (max-width: 1024px) {

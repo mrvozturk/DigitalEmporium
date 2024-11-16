@@ -9,7 +9,7 @@
   align-items: center;
 }
 .thumbnailImage {
-  width: 50px;
+  width: 45px;
   height: 55px;
   border: 1px solid #b8b4b4;
   object-fit: contain;
