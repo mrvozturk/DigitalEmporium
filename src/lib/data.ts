@@ -1,6 +1,13 @@
 import MockProduct from './mock/product.json';
 import MockProducts from './mock/listProducts.json';
 
+export type VariantColor = {
+  asin: string;
+  value: string;
+  photo: string;
+  is_available: boolean;
+};
+
 export interface Product {
   id: string;
   title: string;
@@ -11,12 +18,7 @@ export interface Product {
   rating: { rate: number; count: number };
   photo: string;
   photos: string[];
-  colors: {
-    value: string;
-    photo: string;
-    is_available: boolean;
-    price: string;
-  }[];
+  colors: VariantColor[];
   sizes: { value: string; is_available: boolean }[];
   customersSay: string;
   categories: string[];

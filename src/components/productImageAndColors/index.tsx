@@ -1,45 +1,32 @@
-'use client';
-import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './index.module.css';
-
-interface Color {
-  value: string;
-  photo: string;
-}
+import { VariantColor } from '@/lib/data';
 
 interface ProductImageAndColorsProps {
-  colors: Color[];
+  colors: VariantColor[];
+  productId: string;
 }
 
 const ProductImageAndColors: React.FC<ProductImageAndColorsProps> = ({
-  colors
+  colors,
+  productId
 }) => {
-  const [selectedColorName, setSelectedColorName] = useState(colors[0].value);
-
-  const handleColorSelect = (colorPhoto: string, colorName: string) => {
-    setSelectedColorName(colorName);
-  };
+  const selectedColor = colors.find(color => color.asin === productId);
 
   return (
     <div className={styles.colors}>
       <h2 className={styles.productColorTitle}>
         <span>Color:</span>
-        <span>{selectedColorName}</span>
+        <span>{selectedColor?.value}</span>
       </h2>
 
       <div className={styles.colorOptions}>
         {colors.map(color => (
-          <Link
-            key={color.value}
-            href={`?colorName=${color.value}`}
-            shallow
-            onClick={() => handleColorSelect(color.photo, color.value)}
-          >
+          <Link key={color.value} href={`${color.asin}`} shallow>
             <div
               className={`${styles.colorOption} ${
-                selectedColorName === color.value ? styles.selectedColor : ''
+                selectedColor?.value === color.value ? styles.selectedColor : ''
               }`}
             >
               <Image
