@@ -1,6 +1,5 @@
 'use client';
 import React from 'react';
-import sideBarStyles from './sideBar.module.css';
 import { AiOutlineUser, AiOutlineHeart, AiOutlineClose } from 'react-icons/ai';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -15,40 +14,40 @@ const SideBar: React.FC<SideBarProps> = ({ onCloseSidebar }) => {
   };
 
   return (
-    <div className={sideBarStyles.overlay}>
-      <div className={sideBarStyles.container}>
-        <div className={sideBarStyles.header}>
-          <a href='/' className={sideBarStyles.logo}>
-            <Image src='/images/logo.png' width={500} height={500} alt='logo' />
+    <div className="fixed inset-0 bg-black bg-opacity-70 z-50 flex">
+      <div className="w-3/4 max-w-[570px] h-full bg-white flex flex-col">
+        <div className="flex justify-between items-center bg-gray-200 p-2">
+          <a href="/" className="w-36 h-12">
+            <Image src="/images/logo.png" width={500} height={500} alt="logo" />
           </a>
-          <div className={sideBarStyles.icons}>
-            <Link href='/auth'>
+          <div className="flex gap-4 text-xl p-2">
+            <Link href="/auth">
               <AiOutlineUser onClick={handleCloseSidebar} />
             </Link>
-            <Link href='/favorites'>
+            <Link href="/favorites">
               <AiOutlineHeart onClick={handleCloseSidebar} />
             </Link>
             <AiOutlineClose onClick={handleCloseSidebar} />
           </div>
         </div>
-        <div className={sideBarStyles.categoryLinks}>
-          <ul>
+        <div className="flex flex-col items-start overflow-y-auto p-6">
+          <ul className="space-y-4">
             <li>
-              <a href='#'>KADIN</a>
+              <a href="#" className="text-lg">KADIN</a>
             </li>
             <li>
-              <a href='#'>ERKEK</a>
+              <a href="#" className="text-lg">ERKEK</a>
             </li>
             <li>
-              <a href='#'>ÇOCUK</a>
+              <a href="#" className="text-lg">ÇOCUK</a>
             </li>
             <li>
-              <a href='#'>BEBEK</a>
+              <a href="#" className="text-lg">BEBEK</a>
             </li>
           </ul>
         </div>
       </div>
-      <div onClick={onCloseSidebar} className={sideBarStyles.overlayClose} />
+      <div onClick={onCloseSidebar} className="w-1/4 h-full"></div>
     </div>
   );
 };

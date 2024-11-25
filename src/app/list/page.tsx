@@ -1,14 +1,12 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import styles from './index.module.css';
 import { AiOutlineShopping, AiOutlineHeart } from 'react-icons/ai';
 import Link from 'next/link';
 import { getProducts, Product } from '../../lib/data';
 
 const ProductListing: React.FC = () => {
   const [productData, setProductData] = useState<Product[]>([]);
-
   const productCount = 8;
 
   useEffect(() => {
@@ -21,52 +19,51 @@ const ProductListing: React.FC = () => {
   }, [productCount]);
 
   return (
-    <div className={styles.container}>
+    <div className='grid gap-5 p-4 grid-cols-2 md:grid-cols-4'>
       {productData.map(product => (
         <Link
           href={`/product/${product.id}`}
-          className={styles.card}
+          className='flex flex-col justify-between overflow-hidden cursor-pointer relative border border-gray-200 rounded-md shadow-md'
           key={product.id}
         >
-          <div className={styles.iconContainer}>
-            {[
-              {
-                icon: <AiOutlineHeart className={styles.favIcon} />,
-                onClick: () => {},
-                key: 'fav'
-              },
-              {
-                icon: <AiOutlineShopping className={styles.cartIcon} />,
-                onClick: () => {},
-                key: 'cart'
-              }
-            ].map((item, index) => (
-              <button
-                key={`${item.key}-${index}`}
-                onClick={item.onClick}
-                className={styles.button}
-              >
-                {item.icon}
-              </button>
-            ))}
+          <div className='absolute top-2 right-2 flex flex-col gap-2 z-10 p-1'>
+            <button
+              className='flex items-center justify-center w-8 h-8 rounded-full bg-gray-200'
+              onClick={() => {
+                console.log('Added to favorites', product.id);
+              }}
+            >
+              <AiOutlineHeart className='text-black text-lg' />
+            </button>
+            <button
+              className='flex items-center justify-center w-8 h-8 rounded-full bg-gray-200'
+              onClick={() => {
+                console.log('Added to cart', product.id);
+              }}
+            >
+              <AiOutlineShopping className='text-black text-lg' />
+            </button>
           </div>
+
           <Image
             src={product.photo}
             alt={product.title}
             priority
             width={300}
             height={300}
-            className={styles.productImage}
+            className='w-full h-64 object-contain p-4'
           />
-          <div className={styles.itemDescription}>
-            <div className={styles.titleContainer}>
-              <h2 className={styles.title}>{product.title}</h2>
-            </div>
-            <div className={styles.commentContainer}>
-              <p className={styles.commentCount}>
+
+          <div className='flex flex-col justify-between mt-2 flex-1'>
+            <h2 className='text-lg font-bold px-5 sm:text-base'>
+              {product.title}
+            </h2>
+            <div className='flex flex-col mt-2 mb-2 px-5'>
+              <p className='text-sm text-gray-500 mb-2'>
                 {product.rating.count} yorum
               </p>
-              <p className={styles.price}>{product.price}</p>
+
+              <p className='text-sm font-bold text-black'>{product.price}₺</p>
             </div>
           </div>
         </Link>
