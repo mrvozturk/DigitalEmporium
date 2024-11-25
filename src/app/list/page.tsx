@@ -18,6 +18,14 @@ const ProductListing: React.FC = () => {
     fetchData();
   }, [productCount]);
 
+  const addToFavorites = (productId: string) => {
+    console.log(`Product ${productId} added to favorites`);
+  };
+
+  const addToCart = (productId: string) => {
+    console.log(`Product ${productId} added to cart`);
+  };
+
   return (
     <div className='grid gap-5 p-4 grid-cols-2 md:grid-cols-4'>
       {productData.map(product => (
@@ -29,16 +37,18 @@ const ProductListing: React.FC = () => {
           <div className='absolute top-2 right-2 flex flex-col gap-2 z-10 p-1'>
             <button
               className='flex items-center justify-center w-8 h-8 rounded-full bg-gray-200'
-              onClick={() => {
-                console.log('Added to favorites', product.id);
+              onClick={event => {
+                event.stopPropagation();
+                addToFavorites(product.id);
               }}
             >
               <AiOutlineHeart className='text-black text-lg' />
             </button>
             <button
               className='flex items-center justify-center w-8 h-8 rounded-full bg-gray-200'
-              onClick={() => {
-                console.log('Added to cart', product.id);
+              onClick={event => {
+                event.stopPropagation();
+                addToCart(product.id);
               }}
             >
               <AiOutlineShopping className='text-black text-lg' />
