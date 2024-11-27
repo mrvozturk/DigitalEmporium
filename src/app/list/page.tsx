@@ -12,18 +12,18 @@ const ProductListing: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       const products = await getProducts(productCount);
-      setProductData(products); // Ürünleri state'e yükle
+      setProductData(products);
     };
 
     fetchData();
-  }, [productCount]); // `productCount` değişirse yeniden çağırır
+  }, [productCount]);
 
   const addToFavorites = (productId: string) => {
-    console.log(`Product ${productId} added to favorites`); // Favorilere ekleme işlemi
+    console.log(`Product ${productId} added to favorites`);
   };
 
   const addToCart = (productId: string) => {
-    console.log(`Product ${productId} added to cart`); // Sepete ekleme işlemi
+    console.log(`Product ${productId} added to cart`);
   };
 
   return (
@@ -106,16 +106,17 @@ const ProductListing: React.FC = () => {
               mt-2: Üstte 8px boşluk.
               flex-1: Esnek alan kullanımı.
             */}
-            <h2 className='text-lg font-bold px-5 sm:text-base'>
+            <h2 className='text-md font-bold tracking-tight leading-5 line-clamp-3 mb-4 px-4'>
               {product.title}
             </h2>
+
             {/* 
               text-lg: Yazı boyutu büyük.
               font-bold: Kalın yazı stili.
               px-5: Yatayda 20px iç boşluk.
               sm:text-base: Küçük ekranlarda yazı boyutu 1rem (16px).
             */}
-            <div className='flex flex-col mt-2 mb-2 px-5'>
+            <div className='flex flex-col mt-2 mb-2 px-4'>
               {/* 
                 flex flex-col: İçerikler dikey düzenlenir.
                 mt-2: Üstte 8px boşluk.

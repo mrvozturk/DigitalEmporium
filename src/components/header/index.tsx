@@ -50,7 +50,7 @@ const Header = () => {
               alt='logo'
               width={100}
               height={100}
-              className='w-28 h-12 md:w-36 md:h-14'
+              className='w-28 h-12 md:w-40 md:h-14'
             />
             {/* 
           w-28: Küçük ekranlarda logonun genişliğini 7rem (112px) yapar.
