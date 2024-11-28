@@ -17,7 +17,7 @@ const ColorSelector: React.FC<ColorSelectorProps> = ({
 
   return (
     <div className='hidden xs:block'>
-      <h2 className='text-xs text-black font-normal mt-1 mb-1'>
+      <h2 className='text-xs text-black font-normal mt-1 mb-1  font-medium'>
         <span>Color: </span>
         <span className='font-bold'>{selectedColor?.value}</span>
       </h2>
