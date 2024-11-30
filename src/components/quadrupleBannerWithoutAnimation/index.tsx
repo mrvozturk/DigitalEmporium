@@ -8,7 +8,7 @@ const banners = [
     id: '1',
     src:
       'https://ktnimg2.mncdn.com/cms/2024/05/24/176fc35b-aa36-440e-b9f1-7b183785f324.png',
-    title: 'EL EMEĞİ KOLEKSİYONU',
+    title: 'YAZ KOLEKSİYONU',
     buttonData: '/el-emegi-yeni-sezon-kadin',
     button: 'ALIŞVERİŞE BAŞLA'
   },
@@ -51,7 +51,7 @@ const QuadrupleBannersWithoutAnimation: React.FC = () => {
             className='w-full h-auto'
           />
           <div className=' bottom-0 left-0 mt-2 p-2 text-black w-full'>
-            <h2 className='text-xs sm:text-xs md:text-xs  custom-897:text-base lg:text-lg'>
+            <h2 className='text-xs sm:text-xs md:text-xs  custom-1024:text-base lg:text-lg'>
               {banner.title}
             </h2>
 
