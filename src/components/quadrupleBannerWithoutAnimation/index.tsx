@@ -40,13 +40,25 @@ const banners = [
 
 const QuadrupleBannersWithoutAnimation: React.FC = () => {
   return (
-    <div className={styles.bannerContainer}>
+    <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-10'>
       {banners.map(banner => (
-        <div key={banner.id} className={styles.cardbodyimages}>
-          <Image src={banner.src} alt={banner.title} width={800} height={480} />
-          <div className={styles.buttonContainer}>
-            <h2 className={styles.title}>{banner.title}</h2>
-            <a href={banner.buttonData} className={styles.button}>
+        <div key={banner.id} className='relative'>
+          <Image
+            src={banner.src}
+            alt={banner.title}
+            width={800}
+            height={480}
+            className='w-full h-auto'
+          />
+          <div className=' bottom-0 left-0 mt-2 p-2 text-black w-full'>
+            <h2 className='text-xs sm:text-xs md:text-xs  custom-897:text-base lg:text-lg'>
+              {banner.title}
+            </h2>
+
+            <a
+              href={banner.buttonData}
+              className='text-xs sm:text-base sm:text-xs underline'
+            >
               {banner.button}
             </a>
           </div>

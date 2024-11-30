@@ -24,9 +24,10 @@ const config: Config = {
         lg: ['1.125rem', '1.75rem']
       },
       screens: {
-        xs: { max: '568px' }, // 568px ve altı için özel ekran genişliği
-        sm: '640px',          // Varsayılan sm boyutu (üstü 640px)
+        xs: { max: '568px' },
+        sm: '640px',
         md: '768px',
+        'custom-897': '897px',
         lg: '1024px',
         xl: '1280px',
         '2xl': '1536px'
