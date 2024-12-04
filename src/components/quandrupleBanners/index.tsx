@@ -1,7 +1,6 @@
 'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
-import styles from './index.module.css';
 
 const QuadrupleBanners: React.FC = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -34,35 +33,47 @@ const QuadrupleBanners: React.FC = () => {
   ];
 
   return (
-    <div className={styles.bannerContainer}>
-      <div className={styles.bannerText}>
-        <h1>BLOG</h1>
-        <p>Sezon trendleri ve stil haberleri senin için Koton Blogda </p>
-        <a href='/list' className={styles.bannerButton}>
+    <div className='flex justify-between items-center mx-4 lg:mx-12 my-1 '>
+      <div className='flex flex-col font-bold space-y-6 mr-12'>
+        <h1 className='text-3xl md:text-4xl lg:text-5xl tracking-wide'>BLOG</h1>
+        <p className='text-sm md:text-base lg:text-lg'>
+          Sezon trendleri ve stil haberleri senin için Koton Blogda
+        </p>
+        <a
+          href='/list'
+          className='bg-black text-white px-8 py-2 text-xs md:text-sm hover:bg-white hover:text-black border border-transparent hover:border-black transition-colors w-fit'
+        >
           TRENDLERİ KEŞFET
         </a>
       </div>
-      <div className={styles.bannerWrap}>
+
+      <div className='hidden lg:flex w-full h-60 lg:h-80'>
         {images.map((image, index) => (
           <div
             key={image.id}
-            className={styles.bannerImage}
+            className={`flex-1 transition-all duration-700 ease-in-out overflow-hidden ${
+              hoveredIndex === index ? 'flex-[3.2] z-10' : 'z-1'
+            }`}
             onMouseEnter={() => handleMouseEnter(index)}
-            style={{
-              flex: hoveredIndex === index ? 3.2 : 1,
-              zIndex: hoveredIndex === index ? 2 : 1
-            }}
           >
-            <Image src={image.src} alt='Picture' width={800} height={480} />
+            <Image
+              src={image.src}
+              alt={`Image ${index + 1}`}
+              width={800}
+              height={480}
+              className='object-cover h-full w-full transition-transform duration-1000'
+            />
           </div>
         ))}
       </div>
-      <div className={styles.mobileBanner}>
+
+      <div className='block lg:hidden my-2 '>
         <Image
           src='https://ktnimg2.mncdn.com/cms/2024/04/22/a3878e02-1178-40e5-97ec-ffe4d7167048.png'
-          alt='Mobile Picture'
+          alt='Mobile Banner'
           width={500}
           height={500}
+          className='object-cover'
         />
       </div>
     </div>

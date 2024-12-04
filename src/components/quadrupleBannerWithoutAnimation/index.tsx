@@ -1,7 +1,6 @@
 'use client';
 import React from 'react';
 import Image from 'next/image';
-import styles from './index.module.css';
 
 const banners = [
   {
@@ -40,7 +39,7 @@ const banners = [
 
 const QuadrupleBannersWithoutAnimation: React.FC = () => {
   return (
-    <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-10'>
+    <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-10 p-0 xs:p-0 sm:p-0 md:p-4 lg:p-11'>
       {banners.map(banner => (
         <div key={banner.id} className='relative'>
           <Image
@@ -50,14 +49,13 @@ const QuadrupleBannersWithoutAnimation: React.FC = () => {
             height={480}
             className='w-full h-auto'
           />
-          <div className=' bottom-0 left-0 mt-2 p-2 text-black w-full'>
-            <h2 className='text-xs sm:text-xs md:text-xs  custom-1024:text-base lg:text-lg'>
+          <div className='bottom-0 left-0 mt-2 p-2 text-black w-full'>
+            <h2 className='text-sm sm:text-xs md:text-xs lg:text-sm'>
               {banner.title}
             </h2>
-
             <a
               href={banner.buttonData}
-              className='text-xs sm:text-base sm:text-xs underline'
+              className='text-xs xs:text-xs underline'
             >
               {banner.button}
             </a>
