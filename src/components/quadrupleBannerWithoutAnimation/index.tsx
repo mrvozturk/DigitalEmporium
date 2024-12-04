@@ -50,12 +50,12 @@ const QuadrupleBannersWithoutAnimation: React.FC = () => {
             className='w-full h-auto'
           />
           <div className='bottom-0 left-0 mt-2 p-2 text-black w-full'>
-            <h2 className='text-sm sm:text-xs md:text-xs lg:text-sm'>
+            <h2 className='text-sm sm:text-xs md:text-sm lg:text-md'>
               {banner.title}
             </h2>
             <a
               href={banner.buttonData}
-              className='text-xs xs:text-xs underline'
+              className='text-xs xs:text-xs sm:text-xs md:text-xs lg:text-xs  underline'
             >
               {banner.button}
             </a>
