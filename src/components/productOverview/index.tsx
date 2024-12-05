@@ -21,7 +21,6 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
 }) => {
   return (
     <div className=' xs:block hidden'>
-      {/* Main Product Info Section */}
       {!showDetailsSection &&
         !showPurchaseSection &&
         !showPriceSection &&
