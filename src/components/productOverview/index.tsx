@@ -58,17 +58,14 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
           </div>
         )}
 
-      {/* Price Section */}
       {showPriceSection && (
         <p className='text-2xl font-semibold text-gray-900 mt-4'>
           {productDetail.price}
         </p>
       )}
 
-      {/* Divider Section */}
       {showProductDivider && <hr className='my-4 border-t border-gray-300' />}
 
-      {/* Purchase Section */}
       {showPurchaseSection && (
         <div className='w-full p-1 mt-4 rounded-lg'>
           <p className='text-green-700 text-lg font-medium mb-2'>In Stock</p>
@@ -97,7 +94,6 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
         </div>
       )}
 
-      {/* Details Section */}
       {showDetailsSection && (
         <div className='flex flex-col gap-4 mt-4'>
           <h2 className='text-xl font-bold text-gray-900'>Product details</h2>
