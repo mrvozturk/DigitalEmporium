@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import styles from './index.module.css';
 
 interface ProductDetail {
   photos: string[];
@@ -32,7 +31,8 @@ const ImageSwiper = ({ productDetail, colors }: ImageSwiperProps) => {
     }
   }, []);
 
-  const handleThumbnailClick = (photo: string) => {
+  const handleThumbnailClick = (photo: string, index: number) => {
+    setActiveIndex(index);
     router.push(`?imageUrl=${photo}`);
   };
 
@@ -61,39 +61,39 @@ const ImageSwiper = ({ productDetail, colors }: ImageSwiperProps) => {
   }, []);
 
   return (
-    <div className='w-full flex flex-col justify-center items-center  p-0 md:p-0 sm:p-0'>
-  <div
-  className='flex snap-x snap-mandatory overflow-x-auto scroll-smooth px-0 w-full lg:w-full sm:flex-col sm:p-0 sm:ml-0 gap-0 items-center sm:gap-2 md:p-0 lg:p-0 hide-scrollbar'
-  id='imageThumbnails'
-  ref={thumbnailsRef}
->
-        {productDetail.photos.map(photo => (
+    <div className='w-full flex flex-col justify-center items-center p-0 xs:bg-[#f6f4f4] mt-2 '>
+      <div
+        className='flex snap-x snap-mandatory overflow-x-auto scroll-smooth px-0 w-full sm:flex-col gap-2 items-center hide-scrollbar'
+        id='imageThumbnails'
+        ref={thumbnailsRef}
+      >
+        {productDetail.photos.map((photo, index) => (
           <Image
             key={photo}
             src={photo}
             alt={productDetail.title}
             width={340}
             height={352}
-            className={`w-full flex-shrink-0 snap-center aspect-[4/5] object-contain object-center cursor-pointer 
-              xs:w-full xs:aspect-square xs:object-contain xs:bg-[#f6f4f4]
-              
-              sm:w-[70px] sm:h-[50px] sm:border sm:border-[#b8b4b4] sm:rounded-md sm:shadow-lg sm:ml-0 
+            className={`w-full flex-shrink-0 snap-center aspect-[4/5] object-contain object-center cursor-pointer align-center p-3
+              xs:w-full xs:aspect-square xs:object-contain 
+              sm:w-[70px] sm:h-[50px] sm:border sm:border-[#b8b4b4] sm:rounded-md sm:shadow-lg 
               md:w-[55px] md:h-[45px]
-              lg:w-[45px] lg:h-[55px]
-            `}
-            onClick={() => handleThumbnailClick(photo)}
+              lg:w-[45px] lg:h-[55px]`}
+            onClick={() => handleThumbnailClick(photo, index)}
           />
         ))}
       </div>
       <div
-        className='flex justify-center items-center mt-4 xs:mt-2 xs:bg-white xs:border xs:border-[#f1eded] xs:py-4 xs:w-full xs:bg-[#fff]'
+        className='flex justify-center items-center  xs:bg-white xs:border xs:bg-[#f6f4f4]  xs:py-4 xs:w-full sm:hidden mb-3'
         id='paginationDots'
       >
-        {productDetail.photos.map((photo, index) => (
+        {productDetail.photos.map((_, index) => (
           <span
-            key={`dot-${photo}`}
-            className={`${styles.dot} ${
-              index === activeIndex ? styles.active : ''
+            key={`dot-${index}`}
+            className={`xs:inline-block xs:h-2.5 xs:w-2.5 xs:rounded-full xs:mx-1 xs:border xs:border-[#8b8a8a] ${
+              index === activeIndex
+                ? 'xs:bg-[#1a6b7c] xs:border-none'
+                : 'xs:bg-white'
             }`}
           />
         ))}
