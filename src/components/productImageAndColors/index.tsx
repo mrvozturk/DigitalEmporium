@@ -15,7 +15,7 @@ const ProductImageAndColors: React.FC<ProductImageAndColorsProps> = ({
 
   return (
     <div className='flex flex-col items-start   xs:hidden'>
-      <h2 className='text-sm font-normal text-black mt-1 mb-2 xs:text-xs'>
+      <h2 className='text-xs font-normal text-black mt-1 mb-2 xs:text-xs sm:text-xs lg:text-sm' >
         <span>Color: </span>
         <span className='font-medium'>{selectedColor?.value}</span>
       </h2>
