@@ -34,14 +34,16 @@ const QuadrupleBanners: React.FC = () => {
 
   return (
     <div className='flex justify-between items-center mx-4 lg:mx-12 my-1 '>
-      <div className='flex flex-col font-bold space-y-6 mr-12'>
-        <h1 className='text-3xl md:text-4xl lg:text-5xl tracking-wide'>BLOG</h1>
-        <p className='text-sm md:text-base lg:text-lg'>
+      <div className='flex flex-col font-bold  mr-12 p-0  lg:max-w-3xl '>
+        <h1 className='text-xs font-normal tracking-widest xs:text-2xl md:text-5xl lg:text-5xl sm:text-3xl'>
+          BLOG
+        </h1>
+        <p className='text-sm mb:text-sm xs:text-sm lg:text-lg md:text-base mt-0 mb-2'>
           Sezon trendleri ve stil haberleri senin için Koton Blogda
         </p>
         <a
           href='/list'
-          className='bg-black text-white px-8 py-2 text-xs md:text-sm hover:bg-white hover:text-black border border-transparent hover:border-black transition-colors w-fit'
+          className=' px-4 py-2 lg:px-5 lg:py-1.5 lg:text-sm md:px-5 md:py-1.5 md:text-xs sm:px-3 sm:py-1 xs:px-3 xs:py-1 xs:text-[0.6rem] sm:text-[0.6rem] bg-black text-white border border-black hover:bg-white hover:text-black inline-block max-w-max'
         >
           TRENDLERİ KEŞFET
         </a>
