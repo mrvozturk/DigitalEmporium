@@ -31,7 +31,7 @@ export default async function Page({
   const starRating = Math.round(productDetail.rating.rate);
 
   return (
-    <main className={styles.productDetail}>
+    <main className=' flex flex-row justify-content-space-between px-3 py-2 mx-auto md:px-4 lg:px-6 sm:flex-row xs:flex-col xs:justify-center xs:py-2'>
       {/* Display product overview */}
       <ProductOverview productDetail={productDetail} starRating={starRating} />
       {/* Image Thumbnails */}
@@ -48,24 +48,29 @@ export default async function Page({
       <MainImage initialPhoto={productDetail.photo} filters={filters} />
 
       {/* Product Info */}
-      <div className={styles.productInfo}>
-        <p className={styles.productBrand}>{productDetail.brand}</p>{' '}
-        <h1>{productDetail.title}</h1>
+      <div className='basis-[60%] bg-white px-3'>
+        <p className='text-[0.75rem] lg:text-[0.85rem] md:text-[0.75rem] sm:text-[0.85rem]  text-[#007185] font-semibold xs:hidden'>
+          {productDetail.brand}
+        </p>{' '}
+        <h1 className='flex font-weight-bold text-[#111] leading-[1.3] my-1 xs:text-[0.9rem] sm:text-[0.9rem] md:text-[1.2rem] lg:text-[1.3rem] xs:hidden'>
+          {productDetail.title}
+        </h1>
         {/* Review Section */}
-        <div className={styles.reviewSection}>
+        <div className='reviewSection flex items-center lg:mt-2 sm:mt-1 md:mt-1'>
           <span className='text-base font-bold mr-1 lg:text-xs sm:text-[0.75rem] md:text-[0.65rem] xs:hidden'>
             {productDetail.rating.rate.toFixed(1)}
           </span>
 
-          <div className={styles.starRating}>
+          <div className='flex ml-0.5 mr-1'>
             {[...Array(5)].map((_, index) => (
               <a
                 href='#review'
                 key={`star-${productId}-${index}`}
-                className={styles.starLink}
+                className='flex items-center'
               >
                 <AiFillStar
                   color={index < starRating ? '#ffc107' : '#e4e5e9'}
+                  className='text-[1.1rem] sm:text-[0.9rem] xs:hidden'
                 />
               </a>
             ))}
@@ -134,7 +139,7 @@ export default async function Page({
           starRating={starRating}
           showPurchaseSection={true}
         />
-        <hr className={styles.productDivider}></hr>
+        <hr className=' mt-4 mb-1 xs:block sm:hidden'></hr>
         <ProductOverview
           starRating={starRating}
           productDetail={productDetail}
