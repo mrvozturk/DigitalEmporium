@@ -133,31 +133,39 @@ export default async function Page({
           showDetailsSection={true}
         />
         {/* Product Details */}
-        <div className={styles.productDetails}>
-          <h2 className={styles.productDetailsTitle}>Product details</h2>
-          <div className={styles.productDetailsItem}>
-            <strong>Fabric type</strong> <span>{productDetail.fabricType}</span>
+        <div className='mt-4 xs:hidden'>
+          <h2 className='text-xl font-bold mb-2 text-black'>Product details</h2>
+          <div className='flex justify-start text-sm mb-3'>
+            <strong className='font-semibold text-black'>Fabric type</strong>
+            <span className='text-black text-sm ml-2'>
+              {productDetail.fabricType}
+            </span>
           </div>
-          <div className={styles.productDetailsItem}>
-            <strong>Care instructions</strong>{' '}
-            <span>{productDetail.careInstructions}</span>
+          <div className='flex justify-start text-sm mb-3'>
+            <strong className='font-semibold text-black'>
+              Care instructions
+            </strong>
+            <span className='text-black text-sm ml-2'>
+              {productDetail.careInstructions}
+            </span>
           </div>
-          <div className={styles.productDetailsItem}>
-            <strong>Origin</strong> <span>{productDetail.origin}</span>
+          <div className='flex justify-start text-sm mb-3'>
+            <strong className='font-semibold text-black'>Origin</strong>
+            <span className='text-black text-sm ml-2'>
+              {productDetail.origin}
+            </span>
           </div>
-          <hr className={styles.divider} />
+          <hr className='border-t border-gray-300 mt-2' />
         </div>
-        <div className={styles.aboutSectionContainer}>
-          <h2 className={styles.aboutSectionTitle}>About this item</h2>
+        <div className='flex flex-col leading-6'>
+          <h2 className='text-xl font-bold text-black my-2 sm:text-lg'>
+            About this item
+          </h2>
 
           {/* Hidden checkbox to control the collapse/expand */}
-          <input
-            type='checkbox'
-            id='toggle'
-            className={styles.toggleCheckbox}
-          />
+          <input type='checkbox' id='toggle' className='hidden peer' />
 
-          <div className={styles.aboutSection}>
+          <div className='text-[0.9rem] leading-6 text-gray-800 max-h-16 overflow-hidden transition-[max-height] duration-300 ease-in-out font-medium peer-checked:max-h-full sm:text-gray-700'>
             <ul>
               {productDetail.about.map(point => (
                 <li key={point}>{point}</li>
@@ -168,19 +176,19 @@ export default async function Page({
           {/* Label for the checkbox acts as a toggle button */}
           <label
             htmlFor='toggle'
-            className={styles.toggleButton}
+            className="block mt-2 bg-transparent border-none text-[#007185] cursor-pointer text-[0.9rem] hover:underline hover:text-[#007185] peer-checked:after:content-['See_less'] after:content-['See_more']"
             aria-label='Toggle more information'
           ></label>
         </div>
       </div>
 
       {/* Stock and Purchase Section */}
-      <div className={styles.stockAndPurchaseSection}>
-        <p className={styles.inStock}>In Stock</p>
-        <div className={styles.quantitySelector}>
+      <div className='flex flex-col bg-white sm:p-4 md:p-4 p-6 rounded-lg border border-gray-300 w-full max-w-[250px] sm:max-w-[26vw] md:max-w-[24vw] lg:max-w-[250px] hidden sm:flex'>
+        <p className='text-green-600 text-base mb-2 mt-0'>In Stock</p>
+        <div className='w-full mb-5'>
           <select
             id='quantity'
-            className={styles.quantityDropdown}
+            className='w-full p-2.5 border border-gray-300 rounded-md bg-gray-50 text-sm'
             defaultValue=''
           >
             <option value='' disabled hidden>
@@ -193,8 +201,12 @@ export default async function Page({
             ))}
           </select>
         </div>
-        <button className={styles.addToCartButton}>Add to Cart</button>
-        <button className={styles.buyNowButton}>Buy Now</button>
+        <button className='block w-full py-2 text-sm text-black bg-yellow-400 rounded-full cursor-pointer mb-4'>
+          Add to Cart
+        </button>
+        <button className='block w-full py-2 text-sm text-black bg-orange-500 rounded-full cursor-pointer'>
+          Buy Now
+        </button>
       </div>
     </main>
   );
