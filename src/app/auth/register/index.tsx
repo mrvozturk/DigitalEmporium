@@ -3,7 +3,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import React, { useState } from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import InputMask from 'react-input-mask';
-import styles from './register.module.css';
 import {
   AiOutlineCalendar,
   AiOutlineEye,
@@ -115,57 +114,65 @@ const RegisterForm: React.FC = () => {
     onClick?: () => void;
     placeholder?: string;
   }) => (
-    <div className={styles.datepickerContainer} onClick={onClick}>
+    <div
+      className='flex border border-gray-300 p-2 my-2 hover:border-gray-900'
+      onClick={onClick}
+    >
       <input
         value={value}
         onClick={onClick}
         placeholder={placeholder}
-        className={styles.dateInput}
+        className='w-[calc(100%-20px)] p-0 border-0 outline-none text-xs cursor-pointer'
         inputMode='numeric'
       />
-      <AiOutlineCalendar className={styles.calendarIcon} />
+      <AiOutlineCalendar className='text-[16px]' />
     </div>
   );
 
   return (
-    <div className={styles.formContainer}>
-      <h2>Kayıt Ol</h2>
-      <form
-        className={styles.registrationForm}
-        onSubmit={validateForm}
-        noValidate
-      >
-        <input type='email' name='email' placeholder='E-posta Adresi*' />
-        {formErrors.email && <p className={styles.error}>{formErrors.email}</p>}
+    <div className='w-2/5  xs:w-[100%] sm:w-[100%]  md:w-[40%] w-[40%]   '>
+      <h2 className='mt-2'>Kayıt Ol</h2>
+      <form className='flex flex-col' onSubmit={validateForm} noValidate>
+        <input
+          type='email'
+          name='email'
+          placeholder='E-posta Adresi*'
+          className='w-full p-2 border border-gray-300 outline-none text-xs mb-2 mt-2 hover:border-gray-600'
+        />
 
-        <div className={styles.nameContainer}>
-          <div className={styles.inputGroup}>
+        {formErrors.email && (
+          <p className='text-red-500 text-xs'>{formErrors.email}</p>
+        )}
+        <div className='flex justify-between'>
+          <div className='flex flex-col w-[calc(50%-5px)]'>
             <input
               type='text'
               name='firstName'
               placeholder='Ad*'
               onInput={handleNameInput}
+              className='w-full p-2 border border-gray-300 outline-none text-xs mb-2 mt-2 hover:border-gray-600'
             />
             {formErrors.firstName && (
-              <p className={styles.error}>{formErrors.firstName}</p>
+              <p className='text-red-500 text-xs'>{formErrors.firstName}</p>
             )}
           </div>
-          <div className={styles.inputGroup}>
+          <div className='flex flex-col w-[calc(50%-5px)]'>
             <input
               type='text'
               name='lastName'
               placeholder='Soyad*'
               onInput={handleNameInput}
+              className='w-full p-2 border border-gray-300 outline-none text-xs mb-2 mt-2 hover:border-gray-600'
             />
             {formErrors.lastName && (
-              <p className={styles.error}>{formErrors.lastName}</p>
+              <p className='text-red-500 text-xs'>{formErrors.lastName}</p>
             )}
           </div>
         </div>
 
-        <div className={styles.passwordInputContainer}>
+        <div className='flex items-center justify-between border border-gray-300 p-2 my-2 hover:border-gray-900'>
           <input
-            className={styles.passwordInput}
+            className='w-[calc(100%-30px)] outline-none border-none text-xs'
             type={showPassword ? 'text' : 'password'}
             name='password'
             placeholder='Şifre*'
@@ -175,30 +182,54 @@ const RegisterForm: React.FC = () => {
           <button
             type='button'
             onClick={() => setShowPassword(!showPassword)}
-            className={styles.eyeButton}
+            className='text-gray-700'
           >
-            {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}{' '}
+            {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
           </button>
         </div>
+
         {formErrors.password && (
-          <p className={styles.error}>{formErrors.password}</p>
+          <p className='text-red-500 text-xs'>{formErrors.password}</p>
         )}
+
         {showPasswordCriteria && !isPasswordValid && (
           <div>
-            <ul className={styles.passwordCriteria}>
-              <li className={passwordCriteria.length ? styles.valid : ''}>
+            <ul className='list-none p-0 text-xs m-0'>
+              <li
+                className={`${
+                  passwordCriteria.length ? 'text-green-500' : 'text-red-500'
+                }`}
+              >
                 En az 8 karakter uzunluğunda olmalıdır
               </li>
-              <li className={passwordCriteria.uppercase ? styles.valid : ''}>
+              <li
+                className={`${
+                  passwordCriteria.uppercase ? 'text-green-500' : 'text-red-500'
+                }`}
+              >
                 Parolanız en az 1 büyük harf içermelidir
               </li>
-              <li className={passwordCriteria.lowercase ? styles.valid : ''}>
+              <li
+                className={`${
+                  passwordCriteria.lowercase ? 'text-green-500' : 'text-red-500'
+                }`}
+              >
                 Parolanız en az 1 küçük harf içermelidir
               </li>
-              <li className={passwordCriteria.number ? styles.valid : ''}>
+              <li
+                className={`${
+                  passwordCriteria.number ? 'text-green-500' : 'text-red-500'
+                }`}
+              >
                 Parolanız en az 1 numara içermelidir
               </li>
-              <li className={passwordCriteria.specialChar ? styles.valid : ''}>
+              <li
+                className={`${
+                  passwordCriteria.specialChar
+                    ? 'text-green-500'
+                    : 'text-red-500'
+                }`}
+              >
                 Parolanız en az 1 özel karakter içermelidir
               </li>
             </ul>
@@ -211,12 +242,14 @@ const RegisterForm: React.FC = () => {
           type='tel'
           name='phoneNumber'
           placeholder='Telefon Numarası* (Örn: 0 (555) 123 4567)'
+          className='w-full p-2 border border-gray-300 outline-none text-xs mb-2 mt-2 hover:border-gray-600'
         />
         {formErrors.phoneNumber && (
-          <p className={styles.error}>{formErrors.phoneNumber}</p>
+          <p className='text-red-500 text-xs'>{formErrors.phoneNumber}</p>
         )}
-        <div className={styles.dateGenderContainer}>
-          <div className={styles.dateContainer}>
+
+        <div className='flex flex-col md:flex-row md:justify-between text-base gap-2'>
+          <div className='xs:w-full md:w-1/2 w-full flex flex-col'>
             <label htmlFor='birthdate'>Doğum Tarihi</label>
             <DatePicker
               customInput={<CustomDateInput />}
@@ -235,25 +268,43 @@ const RegisterForm: React.FC = () => {
               locale='tr'
             />
             {formErrors.birthdate && (
-              <p className={styles.error}>{formErrors.birthdate}</p>
+              <p className='text-red-500 text-xs'>{formErrors.birthdate}</p>
             )}
           </div>
-
-          <div className={styles.genderContainer}>
+          <div className='w-1/2 flex flex-col'>
             <label>Cinsiyet</label>
-            <div>
-              <input type='radio' name='gender' value='female' />
+            <div className='flex gap-2 text-xs mt-4'>
+              <input
+                type='radio'
+                name='gender'
+                value='female'
+                className='w-4 h-4'
+              />
               <label> Kadın </label>
-              <input type='radio' name='gender' value='male' />
-              <label> Erkek</label>
+              <input
+                type='radio'
+                name='gender'
+                value='male'
+                className='w-4 h-4'
+              />
+              <label> Erkek </label>
             </div>
             {formErrors.gender && (
-              <p className={styles.error}>{formErrors.gender}</p>
+              <p
+                className={`text-[0.72rem] flex flex-col mt-4 mb-0 ${
+                  formErrors.isGreen ? 'text-green-500' : 'text-red-500'
+                }`}
+              >
+                {formErrors.gender}
+              </p>
             )}
           </div>
         </div>
 
-        <button type='submit' className={styles.signUpButton}>
+        <button
+          type='submit'
+          className='w-full p-2 bg-black text-white border font-bold cursor-pointer mt-2 hover:bg-white hover:text-black'
+        >
           KAYIT OL
         </button>
       </form>
