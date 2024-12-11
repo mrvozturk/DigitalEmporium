@@ -27,13 +27,6 @@
   color: #111;
 }
 
-.productPrice {
-  font-size: 1rem;
-  color: #000;
-  font-weight: 600;
-  margin-top: 10px;
-}
-
 .additionalInfo {
   font-size: 14px;
   margin-top: 5px;
@@ -54,60 +47,6 @@
   color: #ffcc00;
   font-size: 1.1rem;
 }
-.reviewText {
-  color: #007185;
-  font-size: 0.75rem;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.reviewText:hover {
-  text-decoration: underline;
-  color: #d47b00;
-}
-.reviewText::after {
-  content: '|';
-  margin-left: 5px;
-  margin-right: 5px;
-  color: #2c697d;
-}
-
-.reviewText:last-of-type::after {
-  content: '';
-}
-
-.ratingValue {
-  font-size: 1rem;
-  font-weight: bold;
-  margin-right: 5px;
-}
-
-.sizeSelector {
-  font-size: 0.8rem;
-  margin-top: 10px;
-  color: #000;
-  font-weight: 450;
-}
-.sizeDropdown {
-  margin-top: 2px;
-  width: 20%;
-  padding: 5px;
-  border: 1px solid #d1d1d1;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  outline: none;
-  font-size: 14px;
-  color: #333;
-}
-
-.sizeDropdown:focus {
-  border: 1px solid #d1d1d1;
-  box-shadow: 0 0 0 3px #31737d;
-}
-
-.sizeDropdown:hover {
-  border-color: #bdbdbd;
-}
 
 .productDivider {
   display: none;
@@ -122,25 +61,13 @@
   .reviewSection {
     margin-top: 10px;
   }
-  .ratingValue {
-    font-size: 0.8rem;
-  }
-  .reviewText {
-    font-size: 0.6rem;
-  }
-  .reviewText::after {
-    margin: 0 5px;
-  }
+
   .productInfo h1 {
     font-size: 1.2rem;
   }
 
   .starRating svg {
     font-size: 0.9rem;
-  }
-  .sizeDropdown {
-    width: 30%;
-    font-size: 14px;
   }
 
   .productBrand {
@@ -158,29 +85,12 @@
   .reviewSection {
     margin-top: 10px;
   }
-  .ratingValue {
-    font-size: 0.75rem;
-  }
-  .reviewText {
-    font-size: 0.52rem;
-  }
-  .reviewText::after {
-    margin: 0 5px;
-  }
 
   .starRating svg {
     font-size: 0.9rem;
   }
   .productInfo h1 {
     font-size: 1.1rem;
-  }
-
-  .sizeSelector {
-    font-size: 0.7rem;
-  }
-  .sizeDropdown {
-    width: 35%;
-    font-size: 14px;
   }
 }
 @media (max-width: 568px) {
@@ -191,13 +101,9 @@
   }
 
   .productInfo h1,
-  .ratingValue,
-  .reviewText,
   .divider,
   .productBrand,
   .starRating,
-  .productPrice,
-  .sizeDropdown,
   .imageContainer,
   .productTitleMobile {
     display: none;
@@ -207,13 +113,5 @@
     margin-top: 20px;
     margin-bottom: 10px;
     display: block;
-  }
-
-  .sizeSelector {
-    font-size: 0.84rem;
-  }
-
-  .sizeSelectorTitle {
-    display: none;
   }
 }

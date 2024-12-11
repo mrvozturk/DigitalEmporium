@@ -53,7 +53,7 @@ export default async function Page({
         <h1>{productDetail.title}</h1>
         {/* Review Section */}
         <div className={styles.reviewSection}>
-          <span className={styles.ratingValue}>
+          <span className='text-base font-bold mr-1 lg:text-xs sm:text-[0.75rem] md:text-[0.65rem] xs:hidden'>
             {productDetail.rating.rate.toFixed(1)}
           </span>
 
@@ -71,16 +71,24 @@ export default async function Page({
             ))}
           </div>
 
-          <a href='#reviews' className={styles.reviewText}>
-            {productDetail.rating.count} değerlendirme
-          </a>
-          <a href='#search' className={styles.reviewText}>
-            Bu sayfayı ara
-          </a>
+          <div className='reviewSection flex items-center lg:mt-0'>
+            <a
+              href='#reviews'
+              className="text-[0.75rem] text-[#007185] no-underline cursor-pointer hover:text-[#d47b00] hover:underline after:content-['|'] after:ml-1 after:mr-1 after:text-[#2c697d] last:after:content-[''] xs:text-[0.25rem] sm:text-[0.64rem] md:text-[0.6rem] lg:text-[0.7rem] xl:text-[0.75rem] xs:hidden"
+            >
+              {productDetail.rating.count} değerlendirme
+            </a>
+            <a
+              href='#search'
+              className="text-[0.75rem] text-[#007185] no-underline cursor-pointer hover:text-[#d47b00] hover:underline after:content-['|'] after:ml-1 after:mr-1 after:text-[#2c697d] last:after:content-[''] xs:text-[0.25rem]  sm:text-[0.64rem] md:text-[0.6rem] lg:text-[0.7rem] xl:text-[0.75rem] xs:hidden"
+            >
+              Bu sayfayı ara
+            </a>
+          </div>
         </div>
-        <hr className={styles.divider} />
+        <hr className='border-t border-gray-300 xs:hidden' />
         {/* Price Section */}
-        <p className={styles.productPrice}>
+        <p className='text-base font-semibold text-black mt-2 xs:hidden '>
           Price: <span>{productDetail.price}</span>
         </p>
         {!!productDetail.colors.length && (
@@ -101,9 +109,9 @@ export default async function Page({
           <SizeSelector sizes={productDetail.sizes} />{' '}
         </div>
         {/* Size Selector */}
-        <div className={styles.sizeSelector}>
-          <h2 className={styles.sizeSelectorTitle}>Size:</h2>
-          <select className={styles.sizeDropdown}>
+        <div className=' mt-2 text-black text-[0.8rem] sm:text-[0.7rem] md:text-[0.8rem] lg:text-[0.9rem] xs:hidden'>
+          <h2 className='hidden sm:block'>Size:</h2>
+          <select className='mt-1 w-[20%] p-1.5 border border-[#31737d] rounded-lg bg-gray-90 outline-none text-sm  text-[0.8rem] sm:text-[0.7rem] md:text-[0.9rem] lg:text-[0.8rem] focus:ring-2 focus:ring-teal-500 hover:border-gray-400 sm:w-[40%] md:w-[45%] md:text-base lg:w-[30%] xl:w-[25%]'>
             {productDetail.sizes.map(size => (
               <option key={size.value} value={size.value}>
                 {size.value}
