@@ -1,6 +1,5 @@
 import React from 'react';
 import { getProduct, Product } from '../../../lib/data';
-import styles from './index.module.css';
 import { AiFillStar } from 'react-icons/ai';
 import { SwiperImage } from '@/components';
 import ProductOverview from '@/components/productOverview';
@@ -31,11 +30,11 @@ export default async function Page({
   const starRating = Math.round(productDetail.rating.rate);
 
   return (
-    <main className=' flex flex-row justify-content-space-between px-3 py-2 mx-auto md:px-4 lg:px-6 sm:flex-row xs:flex-col xs:justify-center xs:py-2'>
+    <main className='productDetail flex flex-row justify-between lg:px-4 lg:py-2 mx-auto sm:px-3 md:px-3  xs:flex-col xs:py-0 xs:justify-center'>
       {/* Display product overview */}
       <ProductOverview productDetail={productDetail} starRating={starRating} />
       {/* Image Thumbnails */}
-      <div className={styles.imageThumbnailsContainer}>
+      <div>
         <SwiperImage
           productDetail={{
             photos: productDetail.photos,
@@ -110,7 +109,7 @@ export default async function Page({
           />
         )}
         {/* Size Selector */}
-        <div className={styles.sizeSelector}>
+        <div>
           <SizeSelector sizes={productDetail.sizes} />{' '}
         </div>
         {/* Size Selector */}
