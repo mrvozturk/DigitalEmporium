@@ -1,6 +1,5 @@
 import React from 'react';
 import { getProduct, Product } from '../../../lib/data';
-import styles from './index.module.css';
 import { AiFillStar } from 'react-icons/ai';
 import { SwiperImage } from '@/components';
 import ProductOverview from '@/components/productOverview';
@@ -31,11 +30,11 @@ export default async function Page({
   const starRating = Math.round(productDetail.rating.rate);
 
   return (
-    <main className={styles.productDetail}>
+    <main className='productDetail flex flex-row justify-between lg:px-4 lg:py-2 mx-auto sm:px-3 md:px-3  xs:flex-col xs:py-0 xs:justify-center'>
       {/* Display product overview */}
       <ProductOverview productDetail={productDetail} starRating={starRating} />
       {/* Image Thumbnails */}
-      <div className={styles.imageThumbnailsContainer}>
+      <div>
         <SwiperImage
           productDetail={{
             photos: productDetail.photos,
@@ -48,39 +47,52 @@ export default async function Page({
       <MainImage initialPhoto={productDetail.photo} filters={filters} />
 
       {/* Product Info */}
-      <div className={styles.productInfo}>
-        <p className={styles.productBrand}>{productDetail.brand}</p>{' '}
-        <h1>{productDetail.title}</h1>
+      <div className='basis-[60%] bg-white px-3'>
+        <p className='text-[0.75rem] lg:text-[0.85rem] md:text-[0.75rem] sm:text-[0.85rem]  text-[#007185] font-semibold xs:hidden'>
+          {productDetail.brand}
+        </p>{' '}
+        <h1 className='flex font-weight-bold text-[#111] leading-[1.3] my-1 xs:text-[0.9rem] sm:text-[0.9rem] md:text-[1.2rem] lg:text-[1.3rem] xs:hidden'>
+          {productDetail.title}
+        </h1>
         {/* Review Section */}
-        <div className={styles.reviewSection}>
-          <span className={styles.ratingValue}>
+        <div className='reviewSection flex items-center lg:mt-2 sm:mt-1 md:mt-1'>
+          <span className='text-base font-bold mr-1 lg:text-xs sm:text-[0.75rem] md:text-[0.65rem] xs:hidden'>
             {productDetail.rating.rate.toFixed(1)}
           </span>
 
-          <div className={styles.starRating}>
+          <div className='flex ml-0.5 mr-1'>
             {[...Array(5)].map((_, index) => (
               <a
                 href='#review'
                 key={`star-${productId}-${index}`}
-                className={styles.starLink}
+                className='flex items-center'
               >
                 <AiFillStar
                   color={index < starRating ? '#ffc107' : '#e4e5e9'}
+                  className='text-[1.1rem] sm:text-[0.9rem] xs:hidden'
                 />
               </a>
             ))}
           </div>
 
-          <a href='#reviews' className={styles.reviewText}>
-            {productDetail.rating.count} değerlendirme
-          </a>
-          <a href='#search' className={styles.reviewText}>
-            Bu sayfayı ara
-          </a>
+          <div className='reviewSection flex items-center lg:mt-0'>
+            <a
+              href='#reviews'
+              className="text-[0.75rem] text-[#007185] no-underline cursor-pointer hover:text-[#d47b00] hover:underline after:content-['|'] after:ml-1 after:mr-1 after:text-[#2c697d] last:after:content-[''] xs:text-[0.25rem] sm:text-[0.64rem] md:text-[0.6rem] lg:text-[0.7rem] xl:text-[0.75rem] xs:hidden"
+            >
+              {productDetail.rating.count} değerlendirme
+            </a>
+            <a
+              href='#search'
+              className="text-[0.75rem] text-[#007185] no-underline cursor-pointer hover:text-[#d47b00] hover:underline after:content-['|'] after:ml-1 after:mr-1 after:text-[#2c697d] last:after:content-[''] xs:text-[0.25rem]  sm:text-[0.64rem] md:text-[0.6rem] lg:text-[0.7rem] xl:text-[0.75rem] xs:hidden"
+            >
+              Bu sayfayı ara
+            </a>
+          </div>
         </div>
-        <hr className={styles.divider} />
+        <hr className='border-t border-gray-300 xs:hidden' />
         {/* Price Section */}
-        <p className={styles.productPrice}>
+        <p className='text-base font-semibold text-black mt-2 xs:hidden '>
           Price: <span>{productDetail.price}</span>
         </p>
         {!!productDetail.colors.length && (
@@ -97,13 +109,13 @@ export default async function Page({
           />
         )}
         {/* Size Selector */}
-        <div className={styles.sizeSelector}>
+        <div>
           <SizeSelector sizes={productDetail.sizes} />{' '}
         </div>
         {/* Size Selector */}
-        <div className={styles.sizeSelector}>
-          <h2 className={styles.sizeSelectorTitle}>Size:</h2>
-          <select className={styles.sizeDropdown}>
+        <div className=' mt-2 text-black text-[0.8rem] sm:text-[0.7rem] md:text-[0.8rem] lg:text-[0.9rem] xs:hidden'>
+          <h2 className='hidden sm:block'>Size:</h2>
+          <select className='mt-1 w-[20%] p-1.5 border border-[#31737d] rounded-lg bg-gray-90 outline-none text-sm  text-[0.8rem] sm:text-[0.7rem] md:text-[0.9rem] lg:text-[0.8rem] focus:ring-2 focus:ring-teal-500 hover:border-gray-400 sm:w-[40%] md:w-[45%] md:text-base lg:w-[30%] xl:w-[25%]'>
             {productDetail.sizes.map(size => (
               <option key={size.value} value={size.value}>
                 {size.value}
@@ -126,38 +138,46 @@ export default async function Page({
           starRating={starRating}
           showPurchaseSection={true}
         />
-        <hr className={styles.productDivider}></hr>
+        <hr className=' mt-4 mb-1 xs:block sm:hidden'></hr>
         <ProductOverview
           starRating={starRating}
           productDetail={productDetail}
           showDetailsSection={true}
         />
         {/* Product Details */}
-        <div className={styles.productDetails}>
-          <h2 className={styles.productDetailsTitle}>Product details</h2>
-          <div className={styles.productDetailsItem}>
-            <strong>Fabric type</strong> <span>{productDetail.fabricType}</span>
+        <div className='mt-4 xs:hidden'>
+          <h2 className='text-xl font-bold mb-2 text-black'>Product details</h2>
+          <div className='flex justify-start text-sm mb-3'>
+            <strong className='font-semibold text-black'>Fabric type</strong>
+            <span className='text-black text-sm ml-2'>
+              {productDetail.fabricType}
+            </span>
           </div>
-          <div className={styles.productDetailsItem}>
-            <strong>Care instructions</strong>{' '}
-            <span>{productDetail.careInstructions}</span>
+          <div className='flex justify-start text-sm mb-3'>
+            <strong className='font-semibold text-black'>
+              Care instructions
+            </strong>
+            <span className='text-black text-sm ml-2'>
+              {productDetail.careInstructions}
+            </span>
           </div>
-          <div className={styles.productDetailsItem}>
-            <strong>Origin</strong> <span>{productDetail.origin}</span>
+          <div className='flex justify-start text-sm mb-3'>
+            <strong className='font-semibold text-black'>Origin</strong>
+            <span className='text-black text-sm ml-2'>
+              {productDetail.origin}
+            </span>
           </div>
-          <hr className={styles.divider} />
+          <hr className='border-t border-gray-300 mt-2' />
         </div>
-        <div className={styles.aboutSectionContainer}>
-          <h2 className={styles.aboutSectionTitle}>About this item</h2>
+        <div className='flex flex-col leading-6'>
+          <h2 className='text-xl font-bold text-black my-2 sm:text-lg'>
+            About this item
+          </h2>
 
           {/* Hidden checkbox to control the collapse/expand */}
-          <input
-            type='checkbox'
-            id='toggle'
-            className={styles.toggleCheckbox}
-          />
+          <input type='checkbox' id='toggle' className='hidden peer' />
 
-          <div className={styles.aboutSection}>
+          <div className='text-[0.9rem] leading-6 text-gray-800 max-h-16 overflow-hidden transition-[max-height] duration-300 ease-in-out font-medium peer-checked:max-h-full sm:text-gray-700'>
             <ul>
               {productDetail.about.map(point => (
                 <li key={point}>{point}</li>
@@ -168,19 +188,19 @@ export default async function Page({
           {/* Label for the checkbox acts as a toggle button */}
           <label
             htmlFor='toggle'
-            className={styles.toggleButton}
+            className="block mt-2 bg-transparent border-none text-[#007185] cursor-pointer text-[0.9rem] hover:underline hover:text-[#007185] peer-checked:after:content-['See_less'] after:content-['See_more']"
             aria-label='Toggle more information'
           ></label>
         </div>
       </div>
 
       {/* Stock and Purchase Section */}
-      <div className={styles.stockAndPurchaseSection}>
-        <p className={styles.inStock}>In Stock</p>
-        <div className={styles.quantitySelector}>
+      <div className='flex flex-col bg-white sm:p-4 md:p-4 p-6 rounded-lg border border-gray-300 w-full max-w-[250px] sm:max-w-[26vw] md:max-w-[24vw] lg:max-w-[250px] hidden sm:flex'>
+        <p className='text-green-600 text-base mb-2 mt-0'>In Stock</p>
+        <div className='w-full mb-5'>
           <select
             id='quantity'
-            className={styles.quantityDropdown}
+            className='w-full p-2.5 border border-gray-300 rounded-md bg-gray-50 text-sm'
             defaultValue=''
           >
             <option value='' disabled hidden>
@@ -193,8 +213,12 @@ export default async function Page({
             ))}
           </select>
         </div>
-        <button className={styles.addToCartButton}>Add to Cart</button>
-        <button className={styles.buyNowButton}>Buy Now</button>
+        <button className='block w-full py-2 text-sm text-black bg-yellow-400 rounded-full cursor-pointer mb-4'>
+          Add to Cart
+        </button>
+        <button className='block w-full py-2 text-sm text-black bg-orange-500 rounded-full cursor-pointer'>
+          Buy Now
+        </button>
       </div>
     </main>
   );

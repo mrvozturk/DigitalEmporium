@@ -1,7 +1,6 @@
 'use client';
 import React, { useState } from 'react';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
-import styles from './login.module.css';
 
 const LoginForm: React.FC = () => {
   const [showLoginPassword, setShowLoginPassword] = useState<boolean>(false);
@@ -34,14 +33,23 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-    <div className={styles.loginFormContainer}>
-      <h2>Giriş Yap</h2>
-      <form className={styles.loginForm} onSubmit={handleSubmit} noValidate>
-        <input type='email' name='email' placeholder='E-posta Adresi*' />
-        {formErrors.email && <p className={styles.error}>{formErrors.email}</p>}
-        <div className={styles.passwordInputContainer}>
+    <div className='loginFormContainer xs:w-[100%] sm:w-[100%]  md:w-[40%] w-[40%]  flex flex-col'>
+      <h2 className='mt-2'>Giriş Yap</h2>
+      <form onSubmit={handleSubmit} noValidate>
+        <input
+          className='w-full px-2 py-2 mt-2 mb-2 border border-black border-opacity-20 outline-none text-sm'
+          type='email'
+          name='email'
+          placeholder='E-posta Adresi*'
+        />{' '}
+        {formErrors.email && (
+          <p className='text-red-500 text-[0.8rem] items-center'>
+            {formErrors.email}
+          </p>
+        )}
+        <div className='password-input-container flex items-center justify-between border border-gray-300 hover:border-black px-3 py-2 mb-2 mt-2'>
           <input
-            className={styles.passwordInput}
+            className='password-input flex-grow outline-none border-none text-sm'
             type={showLoginPassword ? 'text' : 'password'}
             name='password'
             placeholder='Şifre*'
@@ -49,18 +57,23 @@ const LoginForm: React.FC = () => {
           <button
             type='button'
             onClick={() => setShowLoginPassword(prevState => !prevState)}
-            className={styles.eyeButton}
+            className='eye-button text-xl ml-2'
           >
             {showLoginPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
           </button>
         </div>
         {formErrors.password && (
-          <p className={styles.error}>{formErrors.password}</p>
+          <p className=' text-red-500 text-[0.8rem] items-center'>
+            {formErrors.password}
+          </p>
         )}
-        <button className={styles.forgotPassword}>
-          <span className={styles.buttonText}>Şifremi Unuttum</span>
+        <button className='self-start text-black text-opacity-90 cursor-pointer text-sm mt-2 mb-5 md:text-sm'>
+          <span className='underline inline-block'>Şifremi Unuttum</span>
         </button>
-        <button type='submit' className={styles.loginButton}>
+        <button
+          type='submit'
+          className='loginButton w-full p-2 bg-black bg-opacity-90 text-white border border-solid font-bold cursor-pointer hover:bg-white hover:text-black'
+        >
           GİRİŞ YAP
         </button>
       </form>
