@@ -123,7 +123,7 @@ const RegisterForm: React.FC = () => {
         onClick={onClick}
         placeholder={placeholder}
         className='w-[calc(100%-20px)] p-0 border-0 outline-none text-xs cursor-pointer'
-        inputMode='numeric'
+        inputMode='text'
       />
       <AiOutlineCalendar className='text-[16px]' />
     </div>
