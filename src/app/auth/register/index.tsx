@@ -114,7 +114,7 @@ const RegisterForm: React.FC = () => {
     onClick?: () => void;
     placeholder?: string;
   }) => (
-    <div
+    <button
       className='flex border border-gray-300 p-2 my-2 hover:border-gray-900'
       onClick={onClick}
     >
@@ -126,7 +126,7 @@ const RegisterForm: React.FC = () => {
         inputMode='text'
       />
       <AiOutlineCalendar className='text-[16px]' />
-    </div>
+    </button>
   );
 
   return (

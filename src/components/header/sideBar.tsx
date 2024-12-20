@@ -68,7 +68,7 @@ const SideBar: React.FC<SideBarProps> = ({ onCloseSidebar }) => {
       </div>
 
       {/* Clickable background to close sidebar */}
-      <div onClick={onCloseSidebar} className='w-1/4 h-full'></div>
+      <button onClick={onCloseSidebar} className='w-1/4 h-full'></button>
     </div>
   );
 };
