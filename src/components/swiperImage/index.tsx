@@ -87,9 +87,9 @@ const ImageSwiper = ({ productDetail, colors }: ImageSwiperProps) => {
         className='flex justify-center items-center  xs:bg-white xs:border xs:bg-[#f6f4f4]  xs:py-4 xs:w-full sm:hidden xs:mb-3'
         id='paginationDots'
       >
-        {productDetail.photos.map((_, index) => (
+        {productDetail.photos.map((photo, index) => (
           <span
-            key={`dot-${index}`}
+            key={`dot-${photo}`}
             className={`xs:inline-block xs:h-2.5 xs:w-2.5 xs:rounded-full xs:mx-1 xs:border xs:border-[#8b8a8a] ${
               index === activeIndex
                 ? 'xs:bg-[#1a6b7c] xs:border-none'
