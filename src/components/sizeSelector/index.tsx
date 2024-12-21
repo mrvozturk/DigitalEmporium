@@ -1,6 +1,5 @@
 'use client';
 import React, { useState } from 'react';
-import styles from './index.module.css';
 
 interface Size {
   value: string;
@@ -14,16 +13,23 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({ sizes }) => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
   return (
-    <div>
-      <h2 className={styles.sizeHeading}>
-        Size: {selectedSize ? <strong>{selectedSize}</strong> : ''}
+    <div  className='xs:block hidden'>
+      <h2 className='text-sm mt-2  '>
+        Size:{' '}
+        {selectedSize ? (
+          <span className='font-semibold'>{selectedSize}</span>
+        ) : (
+          ''
+        )}
       </h2>
-      <div className={styles.sizeScrollContainer}>
-        {sizes.map((size) => (
+      <div className='flex flex-row overflow-x-scroll whitespace-nowrap mt-1 scrollbar-hide '>
+        {sizes.map(size => (
           <button
-            key={size.value} 
-            className={`${styles.sizeButton} ${
-              selectedSize === size.value ? styles.selectedSize : ''
+            key={size.value}
+            className={`shrink-0 w-1/4 lg:w-1/4 mr-2 border rounded px-3 py-2 text-xs font-bold mt-2 ${
+              selectedSize === size.value
+                ? 'bg-black text-white border-black'
+                : 'bg-white text-black border-black'
             }`}
             onClick={() => setSelectedSize(size.value)}
           >

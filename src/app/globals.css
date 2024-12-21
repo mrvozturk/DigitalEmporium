@@ -9,7 +9,7 @@
 }
 
 :root .rootContainer {
-  padding: 32px;
+  padding:10px;
 }
 @media (max-width: 768px) {
   :root .rootContainer {
@@ -20,6 +20,13 @@
 @media (max-width: 568px) {
   :root .rootContainer {
     padding: 0px;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
   }
 }
 

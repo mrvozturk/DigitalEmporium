@@ -1,7 +1,5 @@
-
 import Image from 'next/image';
 import Link from 'next/link';
-import styles from './index.module.css';
 import { VariantColor } from '@/lib/data';
 
 interface ColorSelectorProps {
@@ -18,29 +16,33 @@ const ColorSelector: React.FC<ColorSelectorProps> = ({
   const selectedColor = colors.find(color => color.asin === productId);
 
   return (
-    <div className={styles.colors}>
-      <h2 className={styles.productColorTitle}>
+    <div className='hidden xs:block'>
+      <h2 className='text-xs text-black font-normal mt-1 mb-1  font-medium'>
         <span>Color: </span>
-        <span className={styles.selectedColorName}>{selectedColor?.value}</span>
+        <span className='font-bold'>{selectedColor?.value}</span>
       </h2>
 
-      <div className={styles.colorOptions}>
+      <div className='flex overflow-x-auto whitespace-nowrap scrollbar-hide'>
         {colors.map(color => (
           <Link key={color.value} href={`${color.asin}`} shallow>
             <div
-              className={`${styles.colorOption} ${
-                selectedColor?.value === color.value ? styles.selectedColor : ''
-              }`}
+              className={`flex-shrink-0 w-16 h-16 flex justify-center items-center rounded-full overflow-hidden border m-1 
+              ${
+                selectedColor?.value === color.value
+                  ? 'border-[2px] border-black'
+                  : 'border-gray-300'
+              }
+              hover:border-[2px] hover:border-black`}
             >
               <Image
                 src={color.photo}
                 alt={color.value}
                 width={50}
                 height={50}
-                className={styles.colorImage}
+                className='w-full h-full rounded-full object-cover'
               />
             </div>
-            <p className={styles.productPrice}>{price}</p>
+            <p className='text-xs text-gray-700 text-center mb-1'>{price}</p>
           </Link>
         ))}
       </div>

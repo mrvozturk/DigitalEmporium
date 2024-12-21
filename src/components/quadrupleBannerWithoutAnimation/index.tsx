@@ -1,14 +1,13 @@
 'use client';
 import React from 'react';
 import Image from 'next/image';
-import styles from './index.module.css';
 
 const banners = [
   {
     id: '1',
     src:
       'https://ktnimg2.mncdn.com/cms/2024/05/24/176fc35b-aa36-440e-b9f1-7b183785f324.png',
-    title: 'EL EMEĞİ KOLEKSİYONU',
+    title: 'YAZ KOLEKSİYONU',
     buttonData: '/el-emegi-yeni-sezon-kadin',
     button: 'ALIŞVERİŞE BAŞLA'
   },
@@ -40,13 +39,24 @@ const banners = [
 
 const QuadrupleBannersWithoutAnimation: React.FC = () => {
   return (
-    <div className={styles.bannerContainer}>
+    <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-10 p-0 xs:p-0 sm:p-0 md:p-4 lg:p-11'>
       {banners.map(banner => (
-        <div key={banner.id} className={styles.cardbodyimages}>
-          <Image src={banner.src} alt={banner.title} width={800} height={480} />
-          <div className={styles.buttonContainer}>
-            <h2 className={styles.title}>{banner.title}</h2>
-            <a href={banner.buttonData} className={styles.button}>
+        <div key={banner.id} className='relative'>
+          <Image
+            src={banner.src}
+            alt={banner.title}
+            width={800}
+            height={480}
+            className='w-full h-auto'
+          />
+          <div className='bottom-0 left-0 mt-2 p-2 text-black w-full'>
+            <h2 className='text-sm sm:text-xs md:text-sm lg:text-md'>
+              {banner.title}
+            </h2>
+            <a
+              href={banner.buttonData}
+              className='text-xs xs:text-xs sm:text-xs md:text-xs lg:text-xs  underline'
+            >
               {banner.button}
             </a>
           </div>
