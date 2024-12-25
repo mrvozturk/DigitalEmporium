@@ -4,11 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/lib/store';
 import { setRegisterData } from '@/lib/features/user/registerSlice';
 import { FiChevronRight } from 'react-icons/fi';
-import { useRouter } from 'next/navigation';
 
 const ProfilePage: React.FC = () => {
   const dispatch = useDispatch();
-  const router = useRouter();
   const user = useSelector((state: RootState) => state.register);
 
   useEffect(() => {
@@ -26,15 +24,15 @@ const ProfilePage: React.FC = () => {
   };
 
   return (
-    <div className='w-full flex justify-center md:justify-start mt-5'>
-      <div className='w-full max-w-lg md:w-[55%] lg:w-[50%] xl:w-[45%] md:ml-12 p-4'>
-        <h1 className='text-lg font-light mb-5 md:text-left text-gray-800'>
+    <div className='w-full flex justify-center lg:justify-start mt-5'>
+      <div className='w-full max-w-3xl lg:w-[70%] xl:w-[60%] px-4 md:ml-12 lg:ml-20 xl:ml-24'>
+        <h1 className='text-lg font-light mb-5 text-gray-800'>
           {`${user.firstName || ''} ${user.lastName || ''}`}
         </h1>
 
-        <div className='border border-gray-200 bg-white shadow-sm rounded-lg'>
+        <div className='border border-black/40 bg-white  '>
           {/* Adresler */}
-          <div className='p-5 flex justify-between items-center xs:border-b md:border-0'>
+          <div className='p-5 flex justify-between items-center xs:border-b xs:border-black'>
             <div>
               <h2 className='text-xs font-medium text-gray-700'>ADRESLER</h2>
             </div>
@@ -42,7 +40,7 @@ const ProfilePage: React.FC = () => {
           </div>
 
           {/* E-posta */}
-          <div className='p-5 flex justify-between items-center xs:border-b md:border-0'>
+          <div className='p-5 flex justify-between items-center xs:border-b xs:border-black'>
             <div>
               <h2 className='text-xs font-medium text-gray-700'>
                 E-POSTA ADRESİ
@@ -53,7 +51,7 @@ const ProfilePage: React.FC = () => {
           </div>
 
           {/* Telefon */}
-          <div className='p-5 flex justify-between items-center xs:border-b md:border-0'>
+          <div className='p-5 flex justify-between items-center xs:border-b xs:border-black'>
             <div>
               <h2 className='text-xs font-medium text-gray-700'>TELEFON</h2>
               <p className='text-[13px] text-gray-500'>
@@ -64,7 +62,7 @@ const ProfilePage: React.FC = () => {
           </div>
 
           {/* Doğum Tarihi */}
-          <div className='p-5 flex justify-between items-center xs:border-b md:border-0'>
+          <div className='p-5 flex justify-between items-center xs:border-b xs:border-black'>
             <div>
               <h2 className='text-xs font-medium text-gray-700'>
                 DOĞUM TARİHİ
@@ -77,7 +75,7 @@ const ProfilePage: React.FC = () => {
           </div>
 
           {/* Cinsiyet */}
-          <div className='p-5 flex justify-between items-center  xs:border-b md:border-0'>
+          <div className='p-5 flex justify-between items-center xs:border-b xs:border-black'>
             <div>
               <h2 className='text-xs font-medium text-gray-700'>CİNSİYET</h2>
               <p className='text-[13px] text-gray-500'>
@@ -88,7 +86,7 @@ const ProfilePage: React.FC = () => {
           </div>
 
           {/* Parola */}
-          <div className='p-5 flex justify-between items-center  xs:border-b md:border-0'>
+          <div className='p-5 flex justify-between items-center'>
             <div>
               <h2 className='text-xs font-medium text-gray-700'>PAROLA</h2>
               <p className='text-[13px] text-gray-500'>..........</p>
