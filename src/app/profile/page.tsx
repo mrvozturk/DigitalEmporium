@@ -1,28 +1,18 @@
 'use client';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/lib/store';
-import { setRegisterData } from '@/lib/features/user/registerSlice';
+import { resetRegisterData } from '@/lib/features/user/registerSlice';
 import { FiChevronRight } from 'react-icons/fi';
 
 const ProfilePage: React.FC = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.register);
 
-  useEffect(() => {
-    const savedUser = localStorage.getItem('user');
-    if (savedUser) {
-      const userData = JSON.parse(savedUser);
-      dispatch(setRegisterData(userData));
-    }
-  }, [dispatch]);
-
   const handleLogout = () => {
-    dispatch(setRegisterData({}));
-    localStorage.removeItem('user');
-    window.location.href = '/auth';
+    dispatch(resetRegisterData()); 
+    window.location.href = '/auth'; 
   };
-
   return (
     <div className='w-full flex justify-center lg:justify-start mt-5'>
       <div className='w-full max-w-3xl lg:w-[70%] xl:w-[60%] px-4 md:ml-12 lg:ml-20 xl:ml-24'>
@@ -97,7 +87,7 @@ const ProfilePage: React.FC = () => {
           </div>
         </div>
 
-        {/* Logout ve Hesap Silme Butonları */}
+        {/* Logout and Delete Account Buttons */}
         <div className='mt-6'>
           <button
             onClick={handleLogout}

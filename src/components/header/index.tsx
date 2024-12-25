@@ -73,7 +73,7 @@ const Header = () => {
           */}
             <li>
               <Link
-                href='/auth/profile'
+                href='/auth'
                 className='flex items-center hover:text-gray-600'
               >
                 {/* 

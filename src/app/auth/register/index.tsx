@@ -80,6 +80,7 @@ const RegisterForm: React.FC = () => {
     }
 
     setFormErrors(errors);
+
     if (Object.keys(errors).length === 0) {
       const formData = {
         email: form.email.value,
@@ -92,7 +93,6 @@ const RegisterForm: React.FC = () => {
       };
 
       dispatch(setRegisterData(formData));
-      localStorage.setItem('user', JSON.stringify(formData)); // LocalStorage'a kaydet
       router.push('/profile');
     }
   };
