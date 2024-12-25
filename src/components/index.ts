@@ -17,6 +17,6 @@ export {
   SizeSelector,
   ProductImageAndColors,
   MainImage,
-  ColorSelector
+  ColorSelector,
 
 };

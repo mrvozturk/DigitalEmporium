@@ -73,7 +73,7 @@ const Header = () => {
           */}
             <li>
               <Link
-                href='/auth'
+                href='/auth/profile'
                 className='flex items-center hover:text-gray-600'
               >
                 {/* 
@@ -81,7 +81,7 @@ const Header = () => {
               items-center: Metin ve ikonun dikey eksende hizalı olmasını sağlar.
               hover:text-gray-600: Fareyle üzerine gelindiğinde metnin rengini koyu gri yapar.
               */}
-                <span className='hidden md:block mr-6'>Hesap</span>
+                <span className='hidden md:block mr-6'>Profil</span>
                 {/* 
               hidden: Küçük ekranlarda bu elementi gizler.
               md:block: Orta ve büyük ekranlarda elementi gösterir.

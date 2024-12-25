@@ -9,10 +9,16 @@ import {
   AiOutlineEyeInvisible
 } from 'react-icons/ai';
 import { tr } from 'date-fns/locale';
+import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/navigation';
+import { setRegisterData } from '../../../lib/features/user/registerSlice';
 
 registerLocale('tr', tr);
 
 const RegisterForm: React.FC = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [showPassword, setShowPassword] = useState(false);
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
@@ -74,6 +80,21 @@ const RegisterForm: React.FC = () => {
     }
 
     setFormErrors(errors);
+    if (Object.keys(errors).length === 0) {
+      const formData = {
+        email: form.email.value,
+        firstName: form.firstName.value,
+        lastName: form.lastName.value,
+        password: form.password.value,
+        phoneNumber: form.phoneNumber.value,
+        gender: form.gender.value,
+        birthdate: selectedDate ? selectedDate.toLocaleDateString('tr-TR') : ''
+      };
+
+      dispatch(setRegisterData(formData));
+      localStorage.setItem('user', JSON.stringify(formData)); // LocalStorage'a kaydet
+      router.push('/profile');
+    }
   };
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -130,7 +151,7 @@ const RegisterForm: React.FC = () => {
   );
 
   return (
-    <div className='w-2/5  xs:w-[100%] sm:w-[100%]  md:w-[40%] w-[40%]   '>
+    <div className='w-2/5 xs:w-[100%] sm:w-[100%] md:w-[40%]'>
       <h2 className='mt-2'>Kayıt Ol</h2>
       <form className='flex flex-col' onSubmit={validateForm} noValidate>
         <input
@@ -139,10 +160,10 @@ const RegisterForm: React.FC = () => {
           placeholder='E-posta Adresi*'
           className='w-full p-2 border border-gray-300 outline-none text-xs mb-2 mt-2 hover:border-gray-600'
         />
-
         {formErrors.email && (
           <p className='text-red-500 text-xs'>{formErrors.email}</p>
         )}
+
         <div className='flex justify-between'>
           <div className='flex flex-col w-[calc(50%-5px)]'>
             <input
@@ -196,39 +217,39 @@ const RegisterForm: React.FC = () => {
           <div>
             <ul className='list-none p-0 text-xs m-0'>
               <li
-                className={`${
+                className={
                   passwordCriteria.length ? 'text-green-500' : 'text-red-500'
-                }`}
+                }
               >
                 En az 8 karakter uzunluğunda olmalıdır
               </li>
               <li
-                className={`${
+                className={
                   passwordCriteria.uppercase ? 'text-green-500' : 'text-red-500'
-                }`}
+                }
               >
                 Parolanız en az 1 büyük harf içermelidir
               </li>
               <li
-                className={`${
+                className={
                   passwordCriteria.lowercase ? 'text-green-500' : 'text-red-500'
-                }`}
+                }
               >
                 Parolanız en az 1 küçük harf içermelidir
               </li>
               <li
-                className={`${
+                className={
                   passwordCriteria.number ? 'text-green-500' : 'text-red-500'
-                }`}
+                }
               >
                 Parolanız en az 1 numara içermelidir
               </li>
               <li
-                className={`${
+                className={
                   passwordCriteria.specialChar
                     ? 'text-green-500'
                     : 'text-red-500'
-                }`}
+                }
               >
                 Parolanız en az 1 özel karakter içermelidir
               </li>
@@ -277,14 +298,14 @@ const RegisterForm: React.FC = () => {
               <input
                 type='radio'
                 name='gender'
-                value='female'
+                value='kadın'
                 className='w-4 h-4'
               />
               <label> Kadın </label>
               <input
                 type='radio'
                 name='gender'
-                value='male'
+                value='erkek'
                 className='w-4 h-4'
               />
               <label> Erkek </label>
