@@ -30,9 +30,9 @@ const ProfilePage: React.FC = () => {
           {`${user.firstName || ''} ${user.lastName || ''}`}
         </h1>
 
-        <div className='border border-black/40 bg-white  '>
+        <div className='border border-black/40 bg-white'>
           {/* Adresler */}
-          <div className='p-5 flex justify-between items-center xs:border-b xs:border-black'>
+          <div className='p-5 flex justify-between items-center xs:border-b xs:border-black/40'>
             <div>
               <h2 className='text-xs font-medium text-gray-700'>ADRESLER</h2>
             </div>
@@ -40,21 +40,23 @@ const ProfilePage: React.FC = () => {
           </div>
 
           {/* E-posta */}
-          <div className='p-5 flex justify-between items-center xs:border-b xs:border-black'>
+          <div className='p-5 flex justify-between items-center xs:border-b xs:border-black/40'>
             <div>
               <h2 className='text-xs font-medium text-gray-700'>
                 E-POSTA ADRESİ
               </h2>
-              <p className='text-[13px] text-gray-500'>{user.email || ''}</p>
+              <p className='text-[13px] text-gray-500 mt-1'>
+                {user.email || ''}
+              </p>
             </div>
             <FiChevronRight className='text-md text-gray-400' />
           </div>
 
           {/* Telefon */}
-          <div className='p-5 flex justify-between items-center xs:border-b xs:border-black'>
+          <div className='p-5 flex justify-between items-center xs:border-b xs:border-black/40'>
             <div>
               <h2 className='text-xs font-medium text-gray-700'>TELEFON</h2>
-              <p className='text-[13px] text-gray-500'>
+              <p className='text-[13px] text-gray-500 mt-1'>
                 {user.phoneNumber || ''}
               </p>
             </div>
@@ -62,12 +64,12 @@ const ProfilePage: React.FC = () => {
           </div>
 
           {/* Doğum Tarihi */}
-          <div className='p-5 flex justify-between items-center xs:border-b xs:border-black'>
+          <div className='p-5 flex justify-between items-center xs:border-b xs:border-black/40'>
             <div>
               <h2 className='text-xs font-medium text-gray-700'>
                 DOĞUM TARİHİ
               </h2>
-              <p className='text-[13px] text-gray-500'>
+              <p className='text-[13px] text-gray-500 mt-1'>
                 {user.birthdate || 'Belirtilmemiş'}
               </p>
             </div>
@@ -75,10 +77,10 @@ const ProfilePage: React.FC = () => {
           </div>
 
           {/* Cinsiyet */}
-          <div className='p-5 flex justify-between items-center xs:border-b xs:border-black'>
+          <div className='p-5 flex justify-between items-center xs:border-b xs:border-black/40'>
             <div>
               <h2 className='text-xs font-medium text-gray-700'>CİNSİYET</h2>
-              <p className='text-[13px] text-gray-500'>
+              <p className='text-[13px] text-gray-500 mt-1'>
                 {user.gender || 'Belirtilmemiş'}
               </p>
             </div>
@@ -89,12 +91,13 @@ const ProfilePage: React.FC = () => {
           <div className='p-5 flex justify-between items-center'>
             <div>
               <h2 className='text-xs font-medium text-gray-700'>PAROLA</h2>
-              <p className='text-[13px] text-gray-500'>..........</p>
+              <p className='text-[13px] text-gray-500 mt-1'>..........</p>
             </div>
             <FiChevronRight className='text-md text-gray-400' />
           </div>
         </div>
 
+        {/* Logout ve Hesap Silme Butonları */}
         <div className='mt-6'>
           <button
             onClick={handleLogout}
@@ -103,7 +106,7 @@ const ProfilePage: React.FC = () => {
             Oturumu sonlandır
           </button>
         </div>
-        <div className='mt-2'>
+        <div className='mt-1'>
           <button
             onClick={handleLogout}
             className='text-xs text-gray-400 underline'
