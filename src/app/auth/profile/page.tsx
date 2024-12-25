@@ -22,73 +22,95 @@ const ProfilePage: React.FC = () => {
   const handleLogout = () => {
     dispatch(setRegisterData({}));
     localStorage.removeItem('user');
-
     window.location.href = '/auth';
   };
 
   return (
-    <div className='w-full flex justify-center md:justify-start mt-12'>
+    <div className='w-full flex justify-center md:justify-start mt-5'>
       <div className='w-full max-w-lg md:w-[55%] lg:w-[50%] xl:w-[45%] md:ml-12 p-4'>
-        <h1 className='text-2xl font-medium mb-8 text-center md:text-left'>
+        <h1 className='text-lg font-light mb-5 md:text-left text-gray-800'>
           {`${user.firstName || ''} ${user.lastName || ''}`}
         </h1>
 
-        <div className='border border-gray-300 rounded-md'>
+        <div className='border border-gray-200 bg-white shadow-sm rounded-lg'>
           {/* Adresler */}
-          <div className='p-6 flex justify-between items-center border-b border-gray-200'>
+          <div className='p-5 flex justify-between items-center xs:border-b md:border-0'>
             <div>
-              <h2 className='text-sm font-medium'>ADRESLER</h2>
+              <h2 className='text-xs font-medium text-gray-700'>ADRESLER</h2>
             </div>
-            <FiChevronRight className='text-lg text-gray-500' />
+            <FiChevronRight className='text-md text-gray-400' />
           </div>
 
           {/* E-posta */}
-          <div className='p-6 flex justify-between items-center border-b border-gray-200'>
+          <div className='p-5 flex justify-between items-center xs:border-b md:border-0'>
             <div>
-              <h2 className='text-sm font-medium'>E-POSTA ADRESİ</h2>
-              <p className='text-md text-gray-700'>{user.email || ''}</p>
+              <h2 className='text-xs font-medium text-gray-700'>
+                E-POSTA ADRESİ
+              </h2>
+              <p className='text-[13px] text-gray-500'>{user.email || ''}</p>
             </div>
-            <FiChevronRight className='text-lg text-gray-500' />
+            <FiChevronRight className='text-md text-gray-400' />
           </div>
 
           {/* Telefon */}
-          <div className='p-6 flex justify-between items-center border-b border-gray-200'>
+          <div className='p-5 flex justify-between items-center xs:border-b md:border-0'>
             <div>
-              <h2 className='text-sm font-medium'>TELEFON</h2>
-              <p className='text-md text-gray-700'>{user.phoneNumber || ''}</p>
+              <h2 className='text-xs font-medium text-gray-700'>TELEFON</h2>
+              <p className='text-[13px] text-gray-500'>
+                {user.phoneNumber || ''}
+              </p>
             </div>
-            <FiChevronRight className='text-lg text-gray-500' />
+            <FiChevronRight className='text-md text-gray-400' />
           </div>
 
           {/* Doğum Tarihi */}
-          <div className='p-6 flex justify-between items-center border-b border-gray-200'>
+          <div className='p-5 flex justify-between items-center xs:border-b md:border-0'>
             <div>
-              <h2 className='text-sm font-medium'>DOĞUM TARİHİ</h2>
-              <p className='text-md text-gray-700'>
+              <h2 className='text-xs font-medium text-gray-700'>
+                DOĞUM TARİHİ
+              </h2>
+              <p className='text-[13px] text-gray-500'>
                 {user.birthdate || 'Belirtilmemiş'}
               </p>
             </div>
-            <FiChevronRight className='text-lg text-gray-500' />
+            <FiChevronRight className='text-md text-gray-400' />
           </div>
 
           {/* Cinsiyet */}
-          <div className='p-6 flex justify-between items-center'>
+          <div className='p-5 flex justify-between items-center  xs:border-b md:border-0'>
             <div>
-              <h2 className='text-sm font-medium'>CİNSİYET</h2>
-              <p className='text-md text-gray-700'>
+              <h2 className='text-xs font-medium text-gray-700'>CİNSİYET</h2>
+              <p className='text-[13px] text-gray-500'>
                 {user.gender || 'Belirtilmemiş'}
               </p>
             </div>
-            <FiChevronRight className='text-lg text-gray-500' />
+            <FiChevronRight className='text-md text-gray-400' />
+          </div>
+
+          {/* Parola */}
+          <div className='p-5 flex justify-between items-center  xs:border-b md:border-0'>
+            <div>
+              <h2 className='text-xs font-medium text-gray-700'>PAROLA</h2>
+              <p className='text-[13px] text-gray-500'>..........</p>
+            </div>
+            <FiChevronRight className='text-md text-gray-400' />
           </div>
         </div>
 
-        <div className='mt-6 '>
+        <div className='mt-6'>
           <button
             onClick={handleLogout}
-            className='text-sm text-gray-500 hover:text-gray-700 underline'
+            className='text-xs text-gray-400 underline'
           >
             Oturumu sonlandır
+          </button>
+        </div>
+        <div className='mt-2'>
+          <button
+            onClick={handleLogout}
+            className='text-xs text-gray-400 underline'
+          >
+            Hesabınızı Silin
           </button>
         </div>
       </div>
