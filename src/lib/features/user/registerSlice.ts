@@ -10,6 +10,7 @@ interface RegisterState {
   gender: string;
 }
 
+// Başlangıç durumu
 const initialState: RegisterState = {
   email: '',
   firstName: '',
@@ -20,26 +21,36 @@ const initialState: RegisterState = {
   gender: ''
 };
 
-const savedData = localStorage.getItem('userData');
-const initialStateFromStorage = savedData
-  ? JSON.parse(savedData)
-  : initialState;
+// Client-side için localStorage kontrolü
+const getInitialState = (): RegisterState => {
+  if (typeof window !== 'undefined') {
+    const savedData = localStorage.getItem('userData');
+    return savedData ? JSON.parse(savedData) : initialState;
+  }
+  return initialState;
+};
 
 export const registerSlice = createSlice({
   name: 'register',
-  initialState: initialStateFromStorage,
+  initialState: getInitialState(),
   reducers: {
     setRegisterData: (state, action: PayloadAction<Partial<RegisterState>>) => {
       const updatedState = { ...state, ...action.payload };
-      localStorage.setItem('userData', JSON.stringify(updatedState));
+      // localStorage'a kaydet (client-side'da)
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('userData', JSON.stringify(updatedState));
+      }
       return updatedState;
     },
     resetRegisterData: () => {
-      localStorage.removeItem('userData');
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('userData');
+      }
       return initialState;
     }
   }
 });
 
+// Aksiyonları dışa aktar
 export const { setRegisterData, resetRegisterData } = registerSlice.actions;
 export default registerSlice.reducer;
