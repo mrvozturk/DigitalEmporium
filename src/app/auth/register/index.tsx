@@ -1,6 +1,6 @@
 'use client';
 import 'react-datepicker/dist/react-datepicker.css';
-import React, { useState, forwardRef, useRef } from 'react';
+import React, { useState, forwardRef } from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import InputMask from 'react-input-mask';
 import {
@@ -18,8 +18,6 @@ registerLocale('tr', tr);
 const RegisterForm: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const inputRef = useRef<HTMLInputElement | null>(null);
-
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [showPassword, setShowPassword] = useState(false);
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
@@ -127,30 +125,28 @@ const RegisterForm: React.FC = () => {
     }
   };
   const CustomDateInput = forwardRef<
-  HTMLInputElement,
-  { value?: string; onClick?: () => void; placeholder?: string }
->(({ value, onClick, placeholder }, ref) => (
-  <button
-    className='flex border border-gray-300 p-2 my-2 hover:border-gray-900'
-    onClick={onClick}
-    type='button'
-  >
-    <input
-      ref={ref}
-      value={value}
+    HTMLInputElement,
+    { value?: string; onClick?: () => void; placeholder?: string }
+  >(({ value, onClick, placeholder }, ref) => (
+    <button
+      className='flex border border-gray-300 p-2 my-2 hover:border-gray-900'
       onClick={onClick}
-      placeholder={placeholder}
-      className='w-[calc(100%-20px)] p-0 border-0 outline-none text-xs cursor-pointer'
-      inputMode='text'
-      readOnly
-    />
-    <AiOutlineCalendar className='text-[16px]' />
-  </button>
-));
+      type='button'
+    >
+      <input
+        ref={ref}
+        value={value}
+        onClick={onClick}
+        placeholder={placeholder}
+        className='w-[calc(100%-20px)] p-0 border-0 outline-none text-xs cursor-pointer'
+        inputMode='text'
+        readOnly
+      />
+      <AiOutlineCalendar className='text-[16px]' />
+    </button>
+  ));
 
-// Bileşene displayName ekleniyor
-CustomDateInput.displayName = 'CustomDateInput';
-
+  CustomDateInput.displayName = 'CustomDateInput';
 
   return (
     <div className='w-2/5 xs:w-[100%] sm:w-[100%] md:w-[40%]'>

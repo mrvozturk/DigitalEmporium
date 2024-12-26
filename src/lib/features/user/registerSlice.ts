@@ -20,31 +20,14 @@ const initialState: RegisterState = {
   gender: ''
 };
 
-const getInitialState = () => {
-  if (typeof window !== 'undefined') {
-    const savedData = localStorage.getItem('userData');
-    return savedData ? JSON.parse(savedData) : initialState;
-  }
-  return initialState;
-};
-
-const initialStateFromStorage = getInitialState();
-
 export const registerSlice = createSlice({
   name: 'register',
-  initialState: initialStateFromStorage,
+  initialState,
   reducers: {
     setRegisterData: (state, action: PayloadAction<Partial<RegisterState>>) => {
-      const updatedState = { ...state, ...action.payload };
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('userData', JSON.stringify(updatedState));
-      }
-      return updatedState;
+      return { ...state, ...action.payload };
     },
     resetRegisterData: () => {
-      if (typeof window !== 'undefined') {
-        localStorage.removeItem('userData');
-      }
       return initialState;
     }
   }
