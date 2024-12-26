@@ -127,26 +127,30 @@ const RegisterForm: React.FC = () => {
     }
   };
   const CustomDateInput = forwardRef<
-    HTMLInputElement,
-    { value?: string; onClick?: () => void; placeholder?: string }
-  >(({ value, onClick, placeholder }, ref) => (
-    <button
-      className='flex border border-gray-300 p-2 my-2 hover:border-gray-900'
+  HTMLInputElement,
+  { value?: string; onClick?: () => void; placeholder?: string }
+>(({ value, onClick, placeholder }, ref) => (
+  <button
+    className='flex border border-gray-300 p-2 my-2 hover:border-gray-900'
+    onClick={onClick}
+    type='button'
+  >
+    <input
+      ref={ref}
+      value={value}
       onClick={onClick}
-      type='button'
-    >
-      <input
-        ref={ref}
-        value={value}
-        onClick={onClick}
-        placeholder={placeholder}
-        className='w-[calc(100%-20px)] p-0 border-0 outline-none text-xs cursor-pointer'
-        inputMode='text'
-        readOnly
-      />
-      <AiOutlineCalendar className='text-[16px]' />
-    </button>
-  ));
+      placeholder={placeholder}
+      className='w-[calc(100%-20px)] p-0 border-0 outline-none text-xs cursor-pointer'
+      inputMode='text'
+      readOnly
+    />
+    <AiOutlineCalendar className='text-[16px]' />
+  </button>
+));
+
+// Bileşene displayName ekleniyor
+CustomDateInput.displayName = 'CustomDateInput';
+
 
   return (
     <div className='w-2/5 xs:w-[100%] sm:w-[100%] md:w-[40%]'>
