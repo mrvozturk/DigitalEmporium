@@ -10,8 +10,8 @@ const ProfilePage: React.FC = () => {
   const user = useSelector((state: RootState) => state.register);
 
   const handleLogout = () => {
-    dispatch(resetRegisterData()); 
-    window.location.href = '/auth'; 
+    dispatch(resetRegisterData());
+    window.location.href = '/auth';
   };
   return (
     <div className='w-full flex justify-center lg:justify-start mt-5'>

@@ -1,6 +1,6 @@
 'use client';
 import 'react-datepicker/dist/react-datepicker.css';
-import React, { useState } from 'react';
+import React, { useState, forwardRef, useRef } from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import InputMask from 'react-input-mask';
 import {
@@ -18,6 +18,7 @@ registerLocale('tr', tr);
 const RegisterForm: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [showPassword, setShowPassword] = useState(false);
@@ -86,10 +87,10 @@ const RegisterForm: React.FC = () => {
         email: form.email.value,
         firstName: form.firstName.value,
         lastName: form.lastName.value,
-        password: form.password.value,
+        password,
         phoneNumber: form.phoneNumber.value,
         gender: form.gender.value,
-        birthdate: selectedDate ? selectedDate.toLocaleDateString('tr-TR') : ''
+        birthdate: selectedDate?.toLocaleDateString('tr-TR') ?? ''
       };
 
       dispatch(setRegisterData(formData));
@@ -125,30 +126,27 @@ const RegisterForm: React.FC = () => {
       setShowPasswordCriteria(true);
     }
   };
-
-  const CustomDateInput = ({
-    value,
-    onClick,
-    placeholder
-  }: {
-    value?: string;
-    onClick?: () => void;
-    placeholder?: string;
-  }) => (
+  const CustomDateInput = forwardRef<
+    HTMLInputElement,
+    { value?: string; onClick?: () => void; placeholder?: string }
+  >(({ value, onClick, placeholder }, ref) => (
     <button
       className='flex border border-gray-300 p-2 my-2 hover:border-gray-900'
       onClick={onClick}
+      type='button'
     >
       <input
+        ref={ref}
         value={value}
         onClick={onClick}
         placeholder={placeholder}
         className='w-[calc(100%-20px)] p-0 border-0 outline-none text-xs cursor-pointer'
         inputMode='text'
+        readOnly
       />
       <AiOutlineCalendar className='text-[16px]' />
     </button>
-  );
+  ));
 
   return (
     <div className='w-2/5 xs:w-[100%] sm:w-[100%] md:w-[40%]'>
@@ -260,11 +258,13 @@ const RegisterForm: React.FC = () => {
         <InputMask
           mask='0 (599) 999 99 99'
           maskChar='_'
+          alwaysShowMask={true}
           type='tel'
           name='phoneNumber'
-          placeholder='Telefon Numarası* (Örn: 0 (555) 123 4567)'
+          placeholder='Telefon Numarası*'
           className='w-full p-2 border border-gray-300 outline-none text-xs mb-2 mt-2 hover:border-gray-600'
         />
+
         {formErrors.phoneNumber && (
           <p className='text-red-500 text-xs'>{formErrors.phoneNumber}</p>
         )}

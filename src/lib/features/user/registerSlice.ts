@@ -10,7 +10,6 @@ interface RegisterState {
   gender: string;
 }
 
-// Başlangıç durumu
 const initialState: RegisterState = {
   email: '',
   firstName: '',
@@ -21,8 +20,7 @@ const initialState: RegisterState = {
   gender: ''
 };
 
-// Client-side için localStorage kontrolü
-const getInitialState = (): RegisterState => {
+const getInitialState = () => {
   if (typeof window !== 'undefined') {
     const savedData = localStorage.getItem('userData');
     return savedData ? JSON.parse(savedData) : initialState;
@@ -30,13 +28,14 @@ const getInitialState = (): RegisterState => {
   return initialState;
 };
 
+const initialStateFromStorage = getInitialState();
+
 export const registerSlice = createSlice({
   name: 'register',
-  initialState: getInitialState(),
+  initialState: initialStateFromStorage,
   reducers: {
     setRegisterData: (state, action: PayloadAction<Partial<RegisterState>>) => {
       const updatedState = { ...state, ...action.payload };
-      // localStorage'a kaydet (client-side'da)
       if (typeof window !== 'undefined') {
         localStorage.setItem('userData', JSON.stringify(updatedState));
       }
@@ -51,6 +50,5 @@ export const registerSlice = createSlice({
   }
 });
 
-// Aksiyonları dışa aktar
 export const { setRegisterData, resetRegisterData } = registerSlice.actions;
 export default registerSlice.reducer;

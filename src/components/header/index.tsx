@@ -51,6 +51,7 @@ const Header = () => {
               width={100}
               height={100}
               className='w-28 h-12 md:w-40 md:h-14'
+              priority
             />
             {/* 
           w-28: Küçük ekranlarda logonun genişliğini 7rem (112px) yapar.
@@ -97,7 +98,7 @@ const Header = () => {
             </li>
             <li>
               <Link
-                href='/favorites'
+                href='#'
                 className='flex items-center hover:text-gray-600'
               >
                 <span className='hidden md:block mr-6'>Favoriler</span>
@@ -106,7 +107,7 @@ const Header = () => {
             </li>
             <li>
               <Link
-                href='/basket'
+                href='#'
                 className='flex items-center hover:text-gray-600'
               >
                 <span className='hidden md:block mr-6'>Sepet</span>
