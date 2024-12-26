@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/lib/store';
 import { resetRegisterData } from '@/lib/features/user/registerSlice';
@@ -9,15 +9,26 @@ const ProfilePage: React.FC = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.register);
 
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const handleLogout = () => {
     dispatch(resetRegisterData());
     window.location.href = '/auth';
   };
+
+  if (!isClient) {
+    return <div className='text-center mt-5'>Yükleniyor...</div>;
+  }
+
   return (
     <div className='w-full flex justify-center lg:justify-start mt-5'>
       <div className='w-full max-w-3xl lg:w-[70%] xl:w-[60%] px-4 md:ml-12 lg:ml-20 xl:ml-24'>
         <h1 className='text-lg font-light mb-5 text-gray-800'>
-          {`${user.firstName || ''} ${user.lastName || ''}`}
+          {`${user.firstName || 'Kullanıcı'} ${user.lastName || ''}`}
         </h1>
 
         <div className='border border-black/40 bg-white'>
@@ -36,7 +47,7 @@ const ProfilePage: React.FC = () => {
                 E-POSTA ADRESİ
               </h2>
               <p className='text-[13px] text-gray-500 mt-1'>
-                {user.email || ''}
+                {user.email || 'Belirtilmemiş'}
               </p>
             </div>
             <FiChevronRight className='text-md text-gray-400' />
@@ -47,7 +58,7 @@ const ProfilePage: React.FC = () => {
             <div>
               <h2 className='text-xs font-medium text-gray-700'>TELEFON</h2>
               <p className='text-[13px] text-gray-500 mt-1'>
-                {user.phoneNumber || ''}
+                {user.phoneNumber || 'Belirtilmemiş'}
               </p>
             </div>
             <FiChevronRight className='text-md text-gray-400' />
