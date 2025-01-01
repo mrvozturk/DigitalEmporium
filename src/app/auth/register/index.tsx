@@ -1,4 +1,5 @@
 'use client';
+
 import 'react-datepicker/dist/react-datepicker.css';
 import React, { useState, forwardRef } from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
@@ -12,6 +13,7 @@ import { tr } from 'date-fns/locale';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { setRegisterData } from '../../../lib/features/user/registerSlice';
+import { signIn, getSession } from 'next-auth/react';
 
 registerLocale('tr', tr);
 
@@ -31,7 +33,7 @@ const RegisterForm: React.FC = () => {
     specialChar: false
   });
 
-  const validateForm = (e: React.FormEvent<HTMLFormElement>) => {
+  const validateForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const errors: { [key: string]: string } = {};
     const form = e.target as HTMLFormElement;
@@ -87,12 +89,16 @@ const RegisterForm: React.FC = () => {
         lastName: form.lastName.value,
         password,
         phoneNumber: form.phoneNumber.value,
-        gender: form.gender.value,
-        birthdate: selectedDate?.toLocaleDateString('tr-TR') ?? ''
+        gender: form.gender.value?.toUpperCase(),
+        birthDate: '1990-05-15'
       };
-
-      dispatch(setRegisterData(formData));
-      router.push('/profile');
+      // dispatch(setRegisterData(formData));
+      await signIn('register', {
+        redirect: false,
+        callbackUrl: '/',
+        ...formData,
+        username: 'ahmetyilmaz'
+      });
     }
   };
 
