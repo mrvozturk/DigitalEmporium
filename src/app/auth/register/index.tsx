@@ -93,12 +93,18 @@ const RegisterForm: React.FC = () => {
         birthDate: '1990-05-15'
       };
       // dispatch(setRegisterData(formData));
-      await signIn('register', {
+      const response = await signIn('register', {
         redirect: false,
         callbackUrl: '/',
         ...formData,
         username: 'ahmetyilmaz'
       });
+      
+      if (response?.error) {
+        console.error('Kayıt Hatası:', response.error);
+      } else {
+        console.log('Kullanıcı başarıyla kaydedildi');
+      }
     }
   };
 

@@ -26,7 +26,7 @@ const handler = NextAuth({
           redirect: 'follow'
         };
 
-        const register = (
+        const register = await (
           await fetch(
             'https://postresql-api-pink.vercel.app/api/v1/user/register',
             requestOptions
@@ -34,6 +34,7 @@ const handler = NextAuth({
         ).json();
 
         if (!register.user) {
+          console.error('Backend Error Response:', register);
           throw new Error(JSON.stringify(register));
         }
 
