@@ -90,20 +90,21 @@ const RegisterForm: React.FC = () => {
         password,
         phoneNumber: form.phoneNumber.value,
         gender: form.gender.value?.toUpperCase(),
-        birthDate: '1990-05-15'
+        birthDate: selectedDate ? selectedDate.toISOString().split('T')[0] : ''
       };
-      // dispatch(setRegisterData(formData));
+      dispatch(setRegisterData(formData));
       const response = await signIn('register', {
         redirect: false,
         callbackUrl: '/',
         ...formData,
         username: 'ahmetyilmaz'
       });
-      
+
       if (response?.error) {
         console.error('Kayıt Hatası:', response.error);
       } else {
         console.log('Kullanıcı başarıyla kaydedildi');
+        router.push('/');
       }
     }
   };
