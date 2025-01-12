@@ -1,7 +1,6 @@
 import NextAuth, { NextAuthOptions, Session } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-console.log('NEXTAUTH_SECRET:', process.env.NEXTAUTH_SECRET);
 
 const handler = NextAuth({
   secret: process.env.NEXTAUTH_SECRET, // Gizli anahtar tanımlandı
