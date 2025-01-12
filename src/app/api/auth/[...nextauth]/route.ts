@@ -2,6 +2,7 @@ import NextAuth, { NextAuthOptions, Session } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 const handler = NextAuth({
+  secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: 'jwt' // JWT tabanlı oturum
   },
@@ -23,7 +24,7 @@ const handler = NextAuth({
           method: 'POST',
           headers: myHeaders,
           body: raw,
-          redirect: 'follow' as RequestRedirect // Türü açıkça belirtin
+          redirect: 'follow' as RequestRedirect 
         };
 
         const register = await (
