@@ -133,12 +133,7 @@ const ProfilePage: React.FC = () => {
           >
             Hesabınızı Silin
           </button>
-          <button
-            onClick={handleLogout}
-            className='text-xs text-gray-400 underline'
-          >
-            Hesabınızı Silin
-          </button>
+       
         </div>
       </div>
     </div>
