@@ -1,10 +1,14 @@
 'use client';
 import React, { useState } from 'react';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 const LoginForm: React.FC = () => {
+  const router = useRouter();
   const [showLoginPassword, setShowLoginPassword] = useState<boolean>(false);
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
+  const [loginError, setLoginError] = useState<string | null>(null); // State for login errors
 
   const validateForm = (form: HTMLFormElement) => {
     const errors: { [key: string]: string } = {};
@@ -18,7 +22,7 @@ const LoginForm: React.FC = () => {
 
     const email = form.email.value.trim();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (email && !emailRegex.test(email)) {
       errors.email = 'Geçerli bir e-posta adresi girin';
     }
 
@@ -26,14 +30,32 @@ const LoginForm: React.FC = () => {
     return errors;
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
-    validateForm(form);
+    const errors = validateForm(form);
+
+    if (Object.keys(errors).length > 0) {
+      setLoginError(null);
+      return;
+    }
+    const response = await signIn('login', {
+      redirect: false,
+      email: form.email.value,
+      password: form.password.value
+    });
+
+    if (response?.error) {
+      setLoginError('Geçersiz e-posta veya şifre'); 
+      console.error('Giriş hatası:', response.error);
+    } else {
+      console.log('Başarıyla giriş yapıldı');
+      router.push('/');
+    }
   };
 
   return (
-    <div className='loginFormContainer xs:w-[100%] sm:w-[100%]  md:w-[40%] w-[40%]  flex flex-col'>
+    <div className='loginFormContainer xs:w-[100%] sm:w-[100%] md:w-[40%] w-[40%] flex flex-col'>
       <h2 className='mt-2'>Giriş Yap</h2>
       <form onSubmit={handleSubmit} noValidate>
         <input
@@ -41,7 +63,7 @@ const LoginForm: React.FC = () => {
           type='email'
           name='email'
           placeholder='E-posta Adresi*'
-        />{' '}
+        />
         {formErrors.email && (
           <p className='text-red-500 text-[0.8rem] items-center'>
             {formErrors.email}
@@ -63,8 +85,13 @@ const LoginForm: React.FC = () => {
           </button>
         </div>
         {formErrors.password && (
-          <p className=' text-red-500 text-[0.8rem] items-center'>
+          <p className='text-red-500 text-[0.8rem] items-center'>
             {formErrors.password}
+          </p>
+        )}
+        {loginError && (
+          <p className='text-red-500 text-[0.8rem] items-center'>
+            {loginError}
           </p>
         )}
         <button className='self-start text-black text-opacity-90 cursor-pointer text-sm mt-2 mb-5 md:text-sm'>

@@ -81,7 +81,6 @@ const RegisterForm: React.FC = () => {
     }
 
     setFormErrors(errors);
-
     if (Object.keys(errors).length === 0) {
       const formData = {
         email: form.email.value,
@@ -92,7 +91,6 @@ const RegisterForm: React.FC = () => {
         gender: form.gender.value?.toUpperCase(),
         birthDate: selectedDate ? selectedDate.toISOString().split('T')[0] : ''
       };
-      dispatch(setRegisterData(formData));
       const response = await signIn('register', {
         redirect: false,
         callbackUrl: '/',
@@ -105,6 +103,7 @@ const RegisterForm: React.FC = () => {
       } else {
         console.log('Kullanıcı başarıyla kaydedildi');
         router.push('/');
+        dispatch(setRegisterData(formData));
       }
     }
   };
