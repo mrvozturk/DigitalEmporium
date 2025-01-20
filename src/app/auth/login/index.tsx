@@ -22,7 +22,8 @@ const LoginForm: React.FC = () => {
 
     const email = form.email.value.trim();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (email && !emailRegex.test(email)) {
+
+    if (!emailRegex.test(email)) {
       errors.email = 'Geçerli bir e-posta adresi girin';
     }
 
@@ -46,7 +47,7 @@ const LoginForm: React.FC = () => {
     });
 
     if (response?.error) {
-      setLoginError('Geçersiz e-posta veya şifre'); 
+      setLoginError('Geçersiz e-posta veya şifre');
       console.error('Giriş hatası:', response.error);
     } else {
       console.log('Başarıyla giriş yapıldı');
