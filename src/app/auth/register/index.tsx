@@ -17,6 +17,11 @@ import { signIn } from 'next-auth/react';
 
 registerLocale('tr', tr);
 
+interface CustomDateInputProps {
+  value?: string;
+  onClick?: () => void;
+  placeholder?: string;
+}
 const RegisterForm: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -136,29 +141,28 @@ const RegisterForm: React.FC = () => {
       setShowPasswordCriteria(true);
     }
   };
-  const CustomDateInput = forwardRef<
-    HTMLInputElement,
-    { value?: string; onClick?: () => void; placeholder?: string }
-  >(({ value, onClick, placeholder }, ref) => (
-    <button
-      className='flex border border-gray-300 p-2 my-2 hover:border-gray-900'
-      onClick={onClick}
-      type='button'
-      aria-label='Tarih seçici aç'
-    >
-      <input
-        ref={ref}
-        value={value}
+  const CustomDateInput = forwardRef<HTMLInputElement, CustomDateInputProps>(
+    ({ value, onClick, placeholder }, ref) => (
+      <button
+        className='flex border border-gray-300 p-2 my-2 hover:border-gray-900'
         onClick={onClick}
-        placeholder={placeholder}
-        className='w-[calc(100%-20px)] p-0 border-0 outline-none text-xs cursor-pointer'
-        inputMode='text'
-        readOnly
-        aria-label={`Seçilen tarih: ${value ?? 'Henüz bir tarih seçilmedi'}`}
-      />
-      <AiOutlineCalendar className='text-[16px]' />
-    </button>
-  ));
+        type='button'
+        aria-label='Tarih seçici aç'
+      >
+        <input
+          ref={ref}
+          value={value}
+          onClick={onClick}
+          placeholder={placeholder}
+          className='w-[calc(100%-20px)] p-0 border-0 outline-none text-xs cursor-pointer'
+          inputMode='text'
+          readOnly
+          aria-label={`Seçilen tarih: ${value ?? 'Henüz bir tarih seçilmedi'}`}
+        />
+        <AiOutlineCalendar className='text-[16px]' />
+      </button>
+    )
+  );
 
   CustomDateInput.displayName = 'CustomDateInput';
 
