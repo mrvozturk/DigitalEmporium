@@ -3,12 +3,13 @@ import React from 'react';
 import { AiOutlineUser, AiOutlineHeart, AiOutlineClose } from 'react-icons/ai';
 import Link from 'next/link';
 import Image from 'next/image';
-
+import { useSession } from 'next-auth/react';
 interface SideBarProps {
   onCloseSidebar: () => void;
 }
 
 const SideBar: React.FC<SideBarProps> = ({ onCloseSidebar }) => {
+  const { data: session } = useSession();
   const handleCloseSidebar = () => {
     onCloseSidebar();
   };
@@ -22,7 +23,7 @@ const SideBar: React.FC<SideBarProps> = ({ onCloseSidebar }) => {
           </a>
 
           <div className='flex gap-3 text-lg items-center align-center'>
-            <Link href='/auth'>
+            <Link href={session ? 'profile' : '/auth'}>
               <AiOutlineUser
                 onClick={handleCloseSidebar}
                 className='cursor-pointer'
