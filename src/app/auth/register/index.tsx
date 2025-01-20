@@ -13,7 +13,7 @@ import { tr } from 'date-fns/locale';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { setRegisterData } from '../../../lib/features/user/registerSlice';
-import { signIn, getSession } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 
 registerLocale('tr', tr);
 
@@ -144,6 +144,7 @@ const RegisterForm: React.FC = () => {
       className='flex border border-gray-300 p-2 my-2 hover:border-gray-900'
       onClick={onClick}
       type='button'
+      aria-label='Tarih seçici aç'
     >
       <input
         ref={ref}
@@ -153,6 +154,7 @@ const RegisterForm: React.FC = () => {
         className='w-[calc(100%-20px)] p-0 border-0 outline-none text-xs cursor-pointer'
         inputMode='text'
         readOnly
+        aria-label={`Seçilen tarih: ${value ?? 'Henüz bir tarih seçilmedi'}`}
       />
       <AiOutlineCalendar className='text-[16px]' />
     </button>
