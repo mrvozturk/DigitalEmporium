@@ -30,7 +30,7 @@ const ProfilePage: React.FC = () => {
 
   const handleLogout = () => {
     dispatch(resetRegisterData());
-    signOut({ callbackUrl: '/auth' });
+    signOut({ callbackUrl: '/' });
   };
 
   if (!isClient) {
@@ -133,7 +133,6 @@ const ProfilePage: React.FC = () => {
           >
             Hesabınızı Silin
           </button>
-       
         </div>
       </div>
     </div>

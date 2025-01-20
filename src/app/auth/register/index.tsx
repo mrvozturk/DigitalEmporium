@@ -294,7 +294,7 @@ const RegisterForm: React.FC = () => {
               showYearDropdown
               dropdownMode='scroll'
               minDate={new Date(1950, 0, 1)}
-              maxDate={new Date(2024, 11, 31)}
+              maxDate={new Date(2025, 11, 31)}
               scrollableMonthYearDropdown
               scrollableYearDropdown
               yearDropdownItemNumber={78}
