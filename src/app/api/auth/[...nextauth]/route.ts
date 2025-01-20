@@ -1,4 +1,4 @@
-import NextAuth, { NextAuthOptions, Session } from 'next-auth';
+import NextAuth, { Session } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 const handler = NextAuth({
