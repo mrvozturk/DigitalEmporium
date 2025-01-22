@@ -1,11 +1,8 @@
-'use client';
-
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '@/lib/store';
-import { resetRegisterData } from '@/lib/features/user/registerSlice';
+import React, { use } from 'react';
 import { FiChevronRight } from 'react-icons/fi';
-import { useSession, signOut } from 'next-auth/react';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../api/auth/[...nextauth]/route';
+import LogoutButton from '@/components/logout';
 
 type UserType = {
   firstName?: string | null;
@@ -18,28 +15,10 @@ type UserType = {
 };
 
 const ProfilePage: React.FC = () => {
-  const dispatch = useDispatch();
-  const { data: session } = useSession();
-  const userRedux = useSelector((state: RootState) => state.register);
-
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  const handleLogout = () => {
-    dispatch(resetRegisterData());
-    signOut({ callbackUrl: '/' });
-  };
-
-  if (!isClient) {
-    return <div className='text-center mt-5'>Yükleniyor...</div>;
-  }
+  const session: { user: UserType } | null = use(getServerSession(authOptions));
 
   const user: UserType = {
-    ...userRedux,
-    ...(session?.user || {})
+    ...session?.user
   };
 
   return (
@@ -49,7 +28,7 @@ const ProfilePage: React.FC = () => {
           {user.firstName ?? 'Kullanıcı'} {user.lastName ?? ''}
         </h1>
         <div className='border border-black/40 bg-white'>
-          {/* Adresler */}
+          {/* Address */}
           <div className='p-5 flex justify-between items-center xs:border-b xs:border-black/40'>
             <div>
               <h2 className='text-xs font-medium text-gray-700'>ADRESLER</h2>
@@ -57,7 +36,7 @@ const ProfilePage: React.FC = () => {
             <FiChevronRight className='text-md text-gray-400' />
           </div>
 
-          {/* E-posta */}
+          {/* Email */}
           <div className='p-5 flex justify-between items-center xs:border-b xs:border-black/40'>
             <div>
               <h2 className='text-xs font-medium text-gray-700'>
@@ -70,7 +49,7 @@ const ProfilePage: React.FC = () => {
             <FiChevronRight className='text-md text-gray-400' />
           </div>
 
-          {/* Telefon */}
+          {/* Phone */}
           <div className='p-5 flex justify-between items-center xs:border-b xs:border-black/40'>
             <div>
               <h2 className='text-xs font-medium text-gray-700'>TELEFON</h2>
@@ -81,7 +60,7 @@ const ProfilePage: React.FC = () => {
             <FiChevronRight className='text-md text-gray-400' />
           </div>
 
-          {/* Doğum Tarihi */}
+          {/* Birth Date */}
           <div className='p-5 flex justify-between items-center xs:border-b xs:border-black/40'>
             <div>
               <h2 className='text-xs font-medium text-gray-700'>
@@ -96,7 +75,7 @@ const ProfilePage: React.FC = () => {
             <FiChevronRight className='text-md text-gray-400' />
           </div>
 
-          {/* Cinsiyet */}
+          {/* Gender */}
           <div className='p-5 flex justify-between items-center xs:border-b xs:border-black/40'>
             <div>
               <h2 className='text-xs font-medium text-gray-700'>CİNSİYET</h2>
@@ -107,7 +86,7 @@ const ProfilePage: React.FC = () => {
             <FiChevronRight className='text-md text-gray-400' />
           </div>
 
-          {/* Parola */}
+          {/* Password */}
           <div className='p-5 flex justify-between items-center'>
             <div>
               <h2 className='text-xs font-medium text-gray-700'>PAROLA</h2>
@@ -116,24 +95,8 @@ const ProfilePage: React.FC = () => {
             <FiChevronRight className='text-md text-gray-400' />
           </div>
         </div>
-
         {/* Logout and Delete Account Buttons */}
-        <div className='mt-6'>
-          <button
-            onClick={handleLogout}
-            className='text-xs text-gray-400 underline'
-          >
-            Oturumu sonlandır
-          </button>
-        </div>
-        <div className='mt-1'>
-          <button
-            onClick={handleLogout}
-            className='text-xs text-gray-400 underline'
-          >
-            Hesabınızı Silin
-          </button>
-        </div>
+        <LogoutButton />
       </div>
     </div>
   );
