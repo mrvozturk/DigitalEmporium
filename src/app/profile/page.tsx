@@ -1,8 +1,8 @@
 import React, { use } from 'react';
 import { FiChevronRight } from 'react-icons/fi';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../api/auth/[...nextauth]/route';
 import LogoutButton from '@/components/logout';
+import { authOptions } from '@/lib/authOptions';
 
 type UserType = {
   firstName?: string | null;
