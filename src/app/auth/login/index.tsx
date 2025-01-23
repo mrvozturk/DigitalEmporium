@@ -100,7 +100,7 @@ const LoginForm: React.FC = () => {
         </button>
         <button
           type='submit'
-          className='loginButton w-full p-2 bg-black bg-opacity-90 text-white border border-solid font-bold cursor-pointer hover:bg-white hover:text-black'
+          className='loginButton w-full p-2 bg-black bg-opacity-90 text-white border border-transparent border-solid font-bold cursor-pointer hover:bg-white hover:text-black hover:border-black'
         >
           GİRİŞ YAP
         </button>

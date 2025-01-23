@@ -342,7 +342,7 @@ const RegisterForm: React.FC = () => {
 
         <button
           type='submit'
-          className='w-full p-2 bg-black text-white border font-bold cursor-pointer mt-2 hover:bg-white hover:text-black'
+          className='w-full p-2 bg-black text-white border border-transparent font-bold cursor-pointer mt-2 hover:bg-white hover:text-black hover:border-black'
         >
           KAYIT OL
         </button>
