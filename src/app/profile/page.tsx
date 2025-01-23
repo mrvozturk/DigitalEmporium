@@ -33,7 +33,7 @@ const ProfilePage: React.FC = () => {
             <div>
               <h2 className='text-xs font-medium text-gray-700'>ADRESLER</h2>
             </div>
-            <FiChevronRight className='text-md text-gray-400' />
+            <FiChevronRight className='text-md text-black' />
           </div>
 
           {/* Email */}
@@ -42,22 +42,22 @@ const ProfilePage: React.FC = () => {
               <h2 className='text-xs font-medium text-gray-700'>
                 E-POSTA ADRESİ
               </h2>
-              <p className='text-[13px] text-gray-500 mt-1'>
+              <p className='text-[11px] text-gray-500 mt-1'>
                 {user.email ?? 'Belirtilmemiş'}
               </p>
             </div>
-            <FiChevronRight className='text-md text-gray-400' />
+            <FiChevronRight className='text-md text-black' />
           </div>
 
           {/* Phone */}
           <div className='p-5 flex justify-between items-center xs:border-b xs:border-black/40'>
             <div>
               <h2 className='text-xs font-medium text-gray-700'>TELEFON</h2>
-              <p className='text-[13px] text-gray-500 mt-1'>
+              <p className='text-[11px] text-gray-500 mt-1'>
                 {user.phoneNumber ?? 'Belirtilmemiş'}
               </p>
             </div>
-            <FiChevronRight className='text-md text-gray-400' />
+            <FiChevronRight className='text-md text-black ' />
           </div>
 
           {/* Birth Date */}
@@ -66,33 +66,33 @@ const ProfilePage: React.FC = () => {
               <h2 className='text-xs font-medium text-gray-700'>
                 DOĞUM TARİHİ
               </h2>
-              <p className='text-[13px] text-gray-500 mt-1'>
+              <p className='text-[11px] text-gray-500 mt-1'>
                 {user.birthDate
                   ? new Date(user.birthDate).toISOString().split('T')[0]
                   : 'Belirtilmemiş'}
               </p>
             </div>
-            <FiChevronRight className='text-md text-gray-400' />
+            <FiChevronRight className='text-md text-black' />
           </div>
 
           {/* Gender */}
           <div className='p-5 flex justify-between items-center xs:border-b xs:border-black/40'>
             <div>
               <h2 className='text-xs font-medium text-gray-700'>CİNSİYET</h2>
-              <p className='text-[13px] text-gray-500 mt-1'>
+              <p className='text-[11px] text-gray-500 mt-1'>
                 {user.gender ?? 'Belirtilmemiş'}
               </p>
             </div>
-            <FiChevronRight className='text-md text-gray-400' />
+            <FiChevronRight className='text-md text-black' />
           </div>
 
           {/* Password */}
           <div className='p-5 flex justify-between items-center'>
             <div>
               <h2 className='text-xs font-medium text-gray-700'>PAROLA</h2>
-              <p className='text-[13px] text-gray-500 mt-1'>..........</p>
+              <p className='text-[11px] text-gray-500 mt-1'>..........</p>
             </div>
-            <FiChevronRight className='text-md text-gray-400' />
+            <FiChevronRight className='text-md text-black' />
           </div>
         </div>
         {/* Logout and Delete Account Buttons */}
