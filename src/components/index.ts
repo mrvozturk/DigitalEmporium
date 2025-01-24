@@ -1,3 +1,4 @@
+import Logout from './logout';
 import Header from './header';
 import QuandrupleBanners from './quandrupleBanners';
 import QuandrupleBannerWithoutAnimation from './quadrupleBannerWithoutAnimation';
@@ -17,6 +18,6 @@ export {
   SizeSelector,
   ProductImageAndColors,
   MainImage,
-  ColorSelector
-
+  ColorSelector,
+  Logout
 };

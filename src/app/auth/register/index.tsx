@@ -1,6 +1,7 @@
 'use client';
+
 import 'react-datepicker/dist/react-datepicker.css';
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import InputMask from 'react-input-mask';
 import {
@@ -9,10 +10,21 @@ import {
   AiOutlineEyeInvisible
 } from 'react-icons/ai';
 import { tr } from 'date-fns/locale';
+import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/navigation';
+import { setRegisterData } from '../../../lib/features/user/registerSlice';
+import { signIn } from 'next-auth/react';
 
 registerLocale('tr', tr);
 
+interface CustomDateInputProps {
+  value?: string;
+  onClick?: () => void;
+  placeholder?: string;
+}
 const RegisterForm: React.FC = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [showPassword, setShowPassword] = useState(false);
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
@@ -26,7 +38,7 @@ const RegisterForm: React.FC = () => {
     specialChar: false
   });
 
-  const validateForm = (e: React.FormEvent<HTMLFormElement>) => {
+  const validateForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const errors: { [key: string]: string } = {};
     const form = e.target as HTMLFormElement;
@@ -74,6 +86,31 @@ const RegisterForm: React.FC = () => {
     }
 
     setFormErrors(errors);
+    if (Object.keys(errors).length === 0) {
+      const formData = {
+        email: form.email.value,
+        firstName: form.firstName.value,
+        lastName: form.lastName.value,
+        password,
+        phoneNumber: form.phoneNumber.value,
+        gender: form.gender.value?.toUpperCase(),
+        birthDate: selectedDate ? selectedDate.toISOString().split('T')[0] : ''
+      };
+      const response = await signIn('register', {
+        redirect: false,
+        callbackUrl: '/',
+        ...formData,
+        username: 'ahmetyilmaz'
+      });
+
+      if (response?.error) {
+        console.error('Kayıt Hatası:', response.error);
+      } else {
+        console.log('Kullanıcı başarıyla kaydedildi');
+        router.push('/');
+        dispatch(setRegisterData(formData));
+      }
+    }
   };
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -104,33 +141,33 @@ const RegisterForm: React.FC = () => {
       setShowPasswordCriteria(true);
     }
   };
-
-  const CustomDateInput = ({
+  const CustomDateInput: React.FC<CustomDateInputProps> = ({
     value,
     onClick,
     placeholder
-  }: {
-    value?: string;
-    onClick?: () => void;
-    placeholder?: string;
   }) => (
     <button
       className='flex border border-gray-300 p-2 my-2 hover:border-gray-900'
       onClick={onClick}
+      type='button'
+      aria-label='Tarih seçici aç'
     >
       <input
         value={value}
-        onClick={onClick}
         placeholder={placeholder}
         className='w-[calc(100%-20px)] p-0 border-0 outline-none text-xs cursor-pointer'
         inputMode='text'
+        readOnly
+        aria-label={`Seçilen tarih: ${value ?? 'Henüz bir tarih seçilmedi'}`}
       />
       <AiOutlineCalendar className='text-[16px]' />
     </button>
   );
 
+  CustomDateInput.displayName = 'CustomDateInput';
+
   return (
-    <div className='w-2/5  xs:w-[100%] sm:w-[100%]  md:w-[40%] w-[40%]   '>
+    <div className='w-2/5 xs:w-[100%] sm:w-[100%] md:w-[40%]'>
       <h2 className='mt-2'>Kayıt Ol</h2>
       <form className='flex flex-col' onSubmit={validateForm} noValidate>
         <input
@@ -139,10 +176,10 @@ const RegisterForm: React.FC = () => {
           placeholder='E-posta Adresi*'
           className='w-full p-2 border border-gray-300 outline-none text-xs mb-2 mt-2 hover:border-gray-600'
         />
-
         {formErrors.email && (
           <p className='text-red-500 text-xs'>{formErrors.email}</p>
         )}
+
         <div className='flex justify-between'>
           <div className='flex flex-col w-[calc(50%-5px)]'>
             <input
@@ -196,39 +233,39 @@ const RegisterForm: React.FC = () => {
           <div>
             <ul className='list-none p-0 text-xs m-0'>
               <li
-                className={`${
+                className={
                   passwordCriteria.length ? 'text-green-500' : 'text-red-500'
-                }`}
+                }
               >
                 En az 8 karakter uzunluğunda olmalıdır
               </li>
               <li
-                className={`${
+                className={
                   passwordCriteria.uppercase ? 'text-green-500' : 'text-red-500'
-                }`}
+                }
               >
                 Parolanız en az 1 büyük harf içermelidir
               </li>
               <li
-                className={`${
+                className={
                   passwordCriteria.lowercase ? 'text-green-500' : 'text-red-500'
-                }`}
+                }
               >
                 Parolanız en az 1 küçük harf içermelidir
               </li>
               <li
-                className={`${
+                className={
                   passwordCriteria.number ? 'text-green-500' : 'text-red-500'
-                }`}
+                }
               >
                 Parolanız en az 1 numara içermelidir
               </li>
               <li
-                className={`${
+                className={
                   passwordCriteria.specialChar
                     ? 'text-green-500'
                     : 'text-red-500'
-                }`}
+                }
               >
                 Parolanız en az 1 özel karakter içermelidir
               </li>
@@ -239,11 +276,13 @@ const RegisterForm: React.FC = () => {
         <InputMask
           mask='0 (599) 999 99 99'
           maskChar='_'
+          alwaysShowMask={true}
           type='tel'
           name='phoneNumber'
-          placeholder='Telefon Numarası* (Örn: 0 (555) 123 4567)'
+          placeholder='Telefon Numarası*'
           className='w-full p-2 border border-gray-300 outline-none text-xs mb-2 mt-2 hover:border-gray-600'
         />
+
         {formErrors.phoneNumber && (
           <p className='text-red-500 text-xs'>{formErrors.phoneNumber}</p>
         )}
@@ -261,7 +300,7 @@ const RegisterForm: React.FC = () => {
               showYearDropdown
               dropdownMode='scroll'
               minDate={new Date(1950, 0, 1)}
-              maxDate={new Date(2024, 11, 31)}
+              maxDate={new Date(2025, 11, 31)}
               scrollableMonthYearDropdown
               scrollableYearDropdown
               yearDropdownItemNumber={78}
@@ -277,14 +316,14 @@ const RegisterForm: React.FC = () => {
               <input
                 type='radio'
                 name='gender'
-                value='female'
+                value='kadın'
                 className='w-4 h-4'
               />
               <label> Kadın </label>
               <input
                 type='radio'
                 name='gender'
-                value='male'
+                value='erkek'
                 className='w-4 h-4'
               />
               <label> Erkek </label>
@@ -303,7 +342,7 @@ const RegisterForm: React.FC = () => {
 
         <button
           type='submit'
-          className='w-full p-2 bg-black text-white border font-bold cursor-pointer mt-2 hover:bg-white hover:text-black'
+          className='w-full p-2 bg-black text-white border border-transparent font-bold cursor-pointer mt-2 hover:bg-white hover:text-black hover:border-black'
         >
           KAYIT OL
         </button>
