@@ -2,7 +2,7 @@ import { NextAuthOptions, Session } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 export const authOptions: NextAuthOptions = {
-  secret: process.env.NEXTAUTH_SECRET ?? process.env.SECRET, // Secret key for JWT
+  secret: process.env.NEXTAUTH_SECRET || process.env.SECRET, // Secret key for JWT
   session: {
     strategy: 'jwt' // Use JWT for session management
   },
