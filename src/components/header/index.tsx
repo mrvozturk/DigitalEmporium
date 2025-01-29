@@ -54,7 +54,7 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <Link href="#" className="flex items-center hover:text-gray-600">
+            <Link href="/cart" className="flex items-center hover:text-gray-600">
                 <span className="hidden md:block mr-6">Sepet</span>
                 <AiOutlineShoppingCart className="block md:hidden text-lg" />
               </Link>
