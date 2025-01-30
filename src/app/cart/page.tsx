@@ -60,14 +60,12 @@ const CartPage: React.FC = () => {
 
   return (
     <div className='p-6 flex flex-col items-center text-center'>
-      {/* Sepet Boş İçeriği */}
       <AiOutlineShopping className='text-5xl mb-4' />
       <h2 className='text-xl font-bold mb-2'>Sepetiniz Boş</h2>
       <p className='mb-6 text-xs'>
         Alışverişe başlayın ve yeni gelen ürünlerimize göz atın.
       </p>
 
-      {/* Kategori Butonları */}
       <section className='grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-6'>
         {['Kadın', 'Erkek', 'Çocuk', 'Bebek'].map(category => (
           <a
@@ -80,7 +78,6 @@ const CartPage: React.FC = () => {
         ))}
       </section>
 
-      {/* Kampanya Alanı */}
       <div className='mt-10 p-6 w-full flex items-center justify-between'>
         <div className='text-left'>
           <h3 className='text-lg font-bold text-black'>
@@ -102,22 +99,19 @@ const CartPage: React.FC = () => {
         />
       </div>
 
-      {/* Özellikler Alanı */}
       <section className='bg-white border-t border-gray-200 py-6 mt-10 w-full'>
-        <div className='max-w-full mx-auto px-10 xs:px-1 '>
+        <div className='max-w-full mx-auto px-10 xs:px-4 md:px-10'>
           <div
             ref={scrollRef}
             className='flex w-full overflow-x-auto flex-nowrap scrollbar-hide items-center justify-between'
           >
             {features.map((feature, index) => (
               <div key={index} className='flex items-center justify-center'>
-                {/* İkon ve Metin */}
-                <div className='flex flex-col items-center px-4 xs:px-4 text-center font-bold '>
+                <div className='flex flex-col items-center px-4 xs:px-4 text-center font-bold'>
                   {feature.icon}
                   <p className='text-xs'>{feature.text}</p>
                 </div>
 
-                {/* Dikey Çizgi (Son öğeden sonra eklenmez) */}
                 {index < features.length - 1 && (
                   <div className='h-10 w-px bg-black mx-8 align-center'></div>
                 )}
@@ -125,13 +119,20 @@ const CartPage: React.FC = () => {
             ))}
           </div>
 
-          {/* Sayfa Noktaları */}
-          <div className='flex justify-center items-center py-4 w-full xl:hidden mb-3'>
-            {features.map((_, index) => (
+          <div className='flex justify-center items-center py-4 w-full mb-3 :hidden '>
+            {Array.from({ length: 6 }).map((_, index) => (
               <span
                 key={index}
-                className={`inline-block h-2.5 w-2.5 rounded-full mx-1 border border-[#000] ${
-                  activeIndex === index ? 'bg-[#000] border-none' : 'bg-white'
+                className={`dot inline-block h-2.5 w-2.5 rounded-full mx-1 border border-[#000] ${
+                  activeIndex === index ? 'bg-[#000]' : 'bg-white'
+                } ${
+                  index >= 2
+                    ? 'md:block lg:hidden'
+                    : '' /* 1024px ve üstünde sadece ilk 2 dot gizlenecek */
+                } ${
+                  index >= 3
+                    ? 'md:hidden'
+                    : '' /* 768px - 1023px arasında sadece 3 dot gösterilir */
                 }`}
               />
             ))}
