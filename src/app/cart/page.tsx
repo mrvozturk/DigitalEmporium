@@ -104,7 +104,7 @@ const CartPage: React.FC = () => {
 
       {/* Özellikler Alanı */}
       <section className='bg-white border-t border-gray-200 py-6 mt-10 w-full'>
-        <div className='max-w-full mx-auto px-10 relative'>
+        <div className='max-w-full mx-auto px-10 xs:px-1 '>
           <div
             ref={scrollRef}
             className='flex w-full overflow-x-auto flex-nowrap scrollbar-hide items-center justify-between'
@@ -112,7 +112,7 @@ const CartPage: React.FC = () => {
             {features.map((feature, index) => (
               <div key={index} className='flex items-center justify-center'>
                 {/* İkon ve Metin */}
-                <div className='flex flex-col items-center px-4 text-center font-bold min-w-[120px]'>
+                <div className='flex flex-col items-center px-4 xs:px-4 text-center font-bold '>
                   {feature.icon}
                   <p className='text-xs'>{feature.text}</p>
                 </div>
