@@ -19,6 +19,7 @@ const config: Config = {
         '80': '20rem'
       },
       fontSize: {
+        xxs: ['0.625rem', '0.75rem'],
         xs: ['0.75rem', '1rem'],
         sm: ['0.875rem', '1.25rem'],
         lg: ['1.125rem', '1.75rem'],
