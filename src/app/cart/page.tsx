@@ -84,8 +84,8 @@ const CartPage: React.FC = () => {
           />
         </div>
       </div>
-      <section className=' border-t  w-full '>
-        <div className=' text-center p-8 px-10 md:px-10 xs:px-4 '>
+      <section className=' border-t  w-full'>
+        <div className=' w-full text-center p-8 px-10 md:px-10 xs:px-4 '>
           <Swiper
             modules={[Pagination]}
             slidesPerView={1}
@@ -98,21 +98,22 @@ const CartPage: React.FC = () => {
               340: { slidesPerView: 2 },
               640: { slidesPerView: 2 },
               768: { slidesPerView: 3 },
-              1024: { slidesPerView: 3 }
+              1024: { slidesPerView: 4 },
+              1280: { slidesPerView: 7 }
             }}
-            className='swiper-container  '
+            className='swiper-container'
           >
             {features.map((feature, index) => (
               <SwiperSlide key={index}>
                 <div className='flex items-center '>
                   <div className='flex flex-col items-center  font-bold  w-full mx-auto  '>
                     {feature.icon}
-                    <p className='text-xs whitespace-nowrap  xs:text-xxs '>
+                    <p className='text-xs whitespace-nowrap xs:text-xs '>
                       {feature.text}
                     </p>
                   </div>
                   {index < features.length - 1 && (
-                    <div className='h-10 w-px bg-black mx-10 flex   '>
+                    <div className='h-10 w-px bg-black mx-0 flex xs:mx-0   '>
                       <div className='h-full w-px '></div>
                     </div>
                   )}
