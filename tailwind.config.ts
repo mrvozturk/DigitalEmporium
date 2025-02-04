@@ -30,7 +30,7 @@ const config: Config = {
         '5xl': ['3rem', '4rem'],
         '6xl': ['3.75rem', '5rem'],
         '7xl': ['4.5rem', '6rem'],
-        '8xl': ['6rem', '8rem'],
+        '8xl': ['6rem', '8rem']
       },
       screens: {
         xs: { max: '568px' },

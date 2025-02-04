@@ -44,7 +44,7 @@ const features = [
 const CartPage: React.FC = () => {
   return (
     <div>
-      <div className='p-6 flex flex-col items-center text-center'>
+      <div className='xs:p-0 sm:p-0 md:p-0 lg:p-0 p-6 flex flex-col items-center text-center'>
         <AiOutlineShopping className='text-5xl mb-4' />
         <h2 className='text-xl font-bold mb-2'>Sepetiniz Boş</h2>
         <p className='mb-6 text-xs'>
@@ -62,25 +62,14 @@ const CartPage: React.FC = () => {
             </a>
           ))}
         </section>
-
-        <div className='mt-10 p-6 w-full flex items-center justify-between'>
-          <div className='text-left'>
-            <h3 className='text-lg font-bold text-black'>
-              İLK SİPARİŞE ÖZEL TÜM ÜRÜNLERDE{' '}
-              <span className='text-red-600'>KARGO BEDAVA</span> <br />+ YENİ
-              SEZONDA <span className='text-red-600'>%10 İNDİRİM!</span>
-            </h3>
-            <p className='text-sm text-gray-600 mt-2'>
-              Kampanyalar 28.02.2025 saat 23:59 kadar geçerlidir.
-            </p>
-          </div>
-
+        <div className='mt-3 xs:mt-2 sm:mt-2 md:mt-6 lg:mt-4 xl:mt-5 xs:p-0 sm:p-0 md:p-0 lg:p-0 p-6 w-full flex items-center justify-center'>
           <Image
-            src='/images/kampanya-banner.png'
-            alt='Kampanya Banner'
-            width={200}
-            height={100}
-            className='rounded-lg'
+            src='/images/kampanya7.png'
+            alt='KAMPANYALAR'
+            width={1300}
+            height={700}
+            priority
+            className='object-cover w-full max-h-[700px] xs:max-h-[200px] sm:max-h-[250px] md:max-h-[300px] lg:max-h-[400px] xl:max-h-[600px]  object-center  '
           />
         </div>
       </div>
@@ -92,7 +81,9 @@ const CartPage: React.FC = () => {
             spaceBetween={20}
             pagination={{
               clickable: true,
-              el: '.custom-pagination'
+              el: '.custom-pagination',
+              bulletClass: 'swiper-pagination-bullet',
+              bulletActiveClass: 'swiper-pagination-bullet-active'
             }}
             breakpoints={{
               340: { slidesPerView: 2 },
@@ -121,7 +112,6 @@ const CartPage: React.FC = () => {
               </SwiperSlide>
             ))}
           </Swiper>
-          {/* Özel Pagination Container */}
           <div className='custom-pagination mt-4 !relative !h-6 ' />
         </div>
       </section>
