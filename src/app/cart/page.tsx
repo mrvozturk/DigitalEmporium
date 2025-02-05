@@ -99,12 +99,12 @@ const CartPage: React.FC = () => {
                 <div className='flex items-center justify-center gap-4 xs:gap-0 w-full relative'>
                   <div className='flex flex-col items-center text-center font-bold w-full px-4 py-2'>
                     {feature.icon}
-                    <p className='text-xs whitespace-nowrap xs:text-xxs'>
+                    <p className='text-xs whitespace-nowrap xs:text-2xs sm:text-md md:text-xs'>
                       {feature.text}
                     </p>
                   </div>
                   {index < features.length - 1 && (
-                    <div className=' right-0 transform translate-x-[10px] w-[1px] bg-black xs:block h-10' />
+                    <div className='  right-0 transform translate-x-[10px] w-[1px] bg-black xs:block h-10' />
                   )}
                 </div>
               </SwiperSlide>
