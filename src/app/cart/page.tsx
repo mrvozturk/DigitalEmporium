@@ -96,17 +96,18 @@ const CartPage: React.FC = () => {
           >
             {features.map((feature, index) => (
               <SwiperSlide key={index}>
-                <div className='flex items-center '>
-                  <div className='flex flex-col items-center  font-bold  w-full mx-auto  '>
+                <div className='flex items-center justify-center gap-4 xs:gap-0 w-full relative'>
+                  {/* İçerik */}
+                  <div className='flex flex-col items-center text-center font-bold w-full px-4 py-2'>
                     {feature.icon}
-                    <p className='text-xs whitespace-nowrap xs:text-xs '>
+                    <p className='text-xs whitespace-nowrap xs:text-xxs'>
                       {feature.text}
                     </p>
                   </div>
                   {index < features.length - 1 && (
-                    <div className='h-10 w-px bg-black mx-0 flex xs:mx-0   '>
-                      <div className='h-full w-px '></div>
-                    </div>
+                  
+                      <div className=' right-0 transform translate-x-[10px] w-[1px] bg-black xs:block h-10' />
+                  
                   )}
                 </div>
               </SwiperSlide>
