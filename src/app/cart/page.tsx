@@ -62,9 +62,9 @@ const CartPage: React.FC = () => {
             </a>
           ))}
         </section>
-        <div className='mt-12 xs:mt-2 sm:mt-2 md:mt-6 md:mb-6 lg:mt-10 lg:mb-10 xl:mt-20 xl:mb-20 xs:p-0 sm:p-0 md:p-0 lg:p-0 p-6 w-full flex items-center justify-center'>
+        <div className='mt-12 xs:mt-6 xs:mb-6 sm:mt-2 md:mt-6 md:mb-6 lg:mt-10 lg:mb-10 xl:mt-20 xl:mb-20 xs:p-0 sm:p-0 md:p-0 lg:p-0 p-6 w-full flex items-center justify-center '>
           <Image
-            src='/images/kampanya13.png'
+            src='/images/kampanya5.jpg'
             alt='KAMPANYALAR'
             width={1300}
             height={700}
