@@ -15,30 +15,40 @@ import 'swiper/css/pagination';
 
 const features = [
   {
+    id: 'digital-emporium',
     icon: <MdStorefront className='text-3xl mb-2' />,
     text: 'Digital Emporium'
   },
   {
+    id: 'store-pickup',
     icon: <MdStorefront className='text-3xl mb-2' />,
     text: 'Mağazadan Gel-Al'
   },
   {
+    id: 'exchange-return',
     icon: <AiOutlineSwap className='text-3xl mb-2' />,
     text: 'Mağazada Değişim & İade'
   },
   {
+    id: 'cash-on-delivery',
     icon: <AiOutlineCreditCard className='text-3xl mb-2' />,
     text: 'Kapıda Ödeme'
   },
   {
+    id: 'fast-delivery',
     icon: <MdDeliveryDining className='text-3xl mb-2' />,
     text: 'Bi Tıkla Kapında'
   },
   {
+    id: 'secure-shopping',
     icon: <AiOutlineCheckCircle className='text-3xl mb-2' />,
     text: 'Güvenli Alışveriş'
   },
-  { icon: <AiOutlineUndo className='text-3xl mb-2' />, text: 'Ücretsiz İade' }
+  {
+    id: 'free-return',
+    icon: <AiOutlineUndo className='text-3xl mb-2' />,
+    text: 'Ücretsiz İade'
+  }
 ];
 
 const CartPage: React.FC = () => {
@@ -94,8 +104,8 @@ const CartPage: React.FC = () => {
             }}
             className='swiper-container'
           >
-            {features.map((feature, index) => (
-              <SwiperSlide key={index}>
+            {features.map(feature => (
+              <SwiperSlide key={feature.id}>
                 <div className='flex items-center justify-center gap-4 xs:gap-0 w-full relative'>
                   <div className='flex flex-col items-center text-center font-bold w-full px-4 py-2'>
                     {feature.icon}
@@ -103,8 +113,8 @@ const CartPage: React.FC = () => {
                       {feature.text}
                     </p>
                   </div>
-                  {index < features.length - 1 && (
-                    <div className='  right-0 transform translate-x-[10px] w-[1px] bg-black xs:block h-10' />
+                  {feature.id !== features[features.length - 1].id && (
+                    <div className='right-0 transform translate-x-[10px] w-[1px] bg-black xs:block h-10' />
                   )}
                 </div>
               </SwiperSlide>
