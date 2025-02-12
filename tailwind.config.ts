@@ -19,6 +19,8 @@ const config: Config = {
         '80': '20rem'
       },
       fontSize: {
+        '2xs': ['0.60rem', '0.75rem'],
+        xxs: ['0.625rem', '0.75rem'],
         xs: ['0.75rem', '1rem'],
         sm: ['0.875rem', '1.25rem'],
         lg: ['1.125rem', '1.75rem'],
@@ -29,7 +31,7 @@ const config: Config = {
         '5xl': ['3rem', '4rem'],
         '6xl': ['3.75rem', '5rem'],
         '7xl': ['4.5rem', '6rem'],
-        '8xl': ['6rem', '8rem'],
+        '8xl': ['6rem', '8rem']
       },
       screens: {
         xs: { max: '568px' },
