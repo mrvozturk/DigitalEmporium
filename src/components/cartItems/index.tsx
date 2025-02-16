@@ -65,20 +65,24 @@ const CartPage = () => {
                   <div className='mt-1 '>
                     <a
                       href='#'
-                      className='text-xs text-black-600 underline block'
+                      className='text-xs text-black-600 underline block xs:text-xxs xs:mr-2'
                     >
                       Düzenle
                     </a>
                     <div className='  text-xs mt-1'>
-                      <p className=' flex font-bold mr-2 '>Renk:</p>
+                      <p className=' flex font-bold mr-2 xs:mr-3 xs:text-xxs'>
+                        Renk:
+                      </p>
 
-                      <p className='font-bold mr-2 '>Beden:</p>
+                      <p className='font-bold mr-2 xs:mr-3 xs:text-xxs  '>
+                        Beden:
+                      </p>
                     </div>
                   </div>
                 </div>
                 {/* Adet ve Fiyat Bilgileri */}
-                <div className='flex items-center gap-8 ml-auto mt-4'>
-                  <select className='border px-3 py-1 text-xxs'>
+                <div className='flex items-center gap-8 ml-auto mt-4 xs:mt-10'>
+                  <select className='border px-3 py-1 text-xxs xs:px-2 xs:py-1'>
                     {[1, 2, 3, 4, 5].map(num => (
                       <option
                         key={num}
@@ -89,7 +93,7 @@ const CartPage = () => {
                       </option>
                     ))}
                   </select>
-                  <p className='text-xs font-bold'>{item.price} </p>
+                  <p className='text-xs   font-bold'>{item.price} </p>
                 </div>
               </div>
             ))}
@@ -122,7 +126,7 @@ const CartPage = () => {
               </div>
               <hr className='my-3' />
 
-              <button className='mt-4 w-full bg-black text-white py-2 font-semibold'>
+              <button className='mt-2 w-full h-10 text-sm bg-black text-white  font-semibold'>
                 SİPARİŞİ TAMAMLA
               </button>
             </div>
