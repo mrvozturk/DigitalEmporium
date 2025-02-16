@@ -31,32 +31,38 @@ const CartPage = () => {
           </div>
         </div>
       ) : (
-        <div className='flex flex-col lg:flex-row gap-8'>
+        <div className='flex flex-col lg:flex-row gap-20 xs:gap-6 md:gap-6 lg:gap-20 xs:p-2 sm:p-4 md:p-6 lg:p-0'>
           {/* 🚀 Sepet Ürünleri */}
           <div className='flex-1 mt-2'>
-            <div className='flex justify-between items-center border-b border-gray-300 pb-2'>
+            <div className='flex justify-between items-center border-b border-gray-300 pb-4'>
               <h1 className='text-lg font-bold'>Sepetim</h1>
               <a href='#' className='text-xs text-black-600 underline'>
                 Alışverişe Devam Et
               </a>
             </div>
             {cartItems.map(item => (
-              <div key={item.id} className='flex border-b border-gray-300 py-4'>
+              <div
+                key={item.id}
+                className='flex border-b border-gray-300 py-4 '
+              >
                 {/* Ürün Resmi */}
-                <div className='w-24 h-32'>
+                <div className='w-40 h-48 border border-gray-200 rounded-lg shadow-sm flex items-center justify-center '>
                   <Image
                     src={item.src}
                     alt={item.title}
                     width={100}
                     height={130}
-                    className='object-contain w-full h-full'
+                    className='object-contain w-full h-[180px] '
                   />
                 </div>
 
                 {/* Ürün Bilgileri */}
                 <div className='flex flex-col w-full items-start ml-4'>
-                  <p className='text-xs'>{item.title}</p>
-                  <div className='mt-1'>
+                  {/* Ürün Bilgileri */}
+                  <p className='text-xs text-left leading-tight max-w-[400px]'>
+                    {item.title}
+                  </p>
+                  <div className='mt-1 '>
                     <a
                       href='#'
                       className='text-xs text-black-600 underline block'
@@ -71,7 +77,7 @@ const CartPage = () => {
                   </div>
                 </div>
                 {/* Adet ve Fiyat Bilgileri */}
-                <div className='flex items-center gap-8 ml-auto'>
+                <div className='flex items-center gap-8 ml-auto mt-4'>
                   <select className='border px-3 py-1 text-xxs'>
                     {[1, 2, 3, 4, 5].map(num => (
                       <option
@@ -83,18 +89,15 @@ const CartPage = () => {
                       </option>
                     ))}
                   </select>
-                  <p className='text-xs font-bold'>{item.price} TL</p>
+                  <p className='text-xs font-bold'>{item.price} </p>
                 </div>
               </div>
             ))}
           </div>
 
           {/* 🛒 Sipariş Özeti */}
-          <div
-            className='w-full lg:w-1/3 
-          '
-          >
-            <h3 className=' py-2 flex text-lg font-semibold  border-b border-gray-300 '>
+          <div className='w-full lg:w-1/3 '>
+            <h3 className=' py-3 flex text-lg font-semibold  border-b border-gray-300 '>
               Sipariş Özeti
             </h3>
             <div className='mt-3 text-xs'>
