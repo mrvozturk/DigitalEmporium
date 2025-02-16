@@ -46,20 +46,20 @@ const CartPage = () => {
                 className='flex border-b border-gray-300 py-4 '
               >
                 {/* Ürün Resmi */}
-                <div className='w-40 h-48 border border-gray-200 rounded-lg shadow-sm flex items-center justify-center '>
+                <div className='w-40 h-48 xs:w-30 xs:h-32 border border-gray-200 rounded-lg shadow-sm flex items-center justify-center '>
                   <Image
                     src={item.src}
                     alt={item.title}
                     width={100}
                     height={130}
-                    className='object-contain w-full h-[180px] '
+                    className='object-contain w-full h-[180px] xs:w-full xs:h-[100px] '
                   />
                 </div>
 
                 {/* Ürün Bilgileri */}
                 <div className='flex flex-col w-full items-start ml-4'>
                   {/* Ürün Bilgileri */}
-                  <p className='text-xs text-left leading-tight max-w-[400px]'>
+                  <p className='text-xs text-left leading-tight max-w-[400px] xs:text-xxs '>
                     {item.title}
                   </p>
                   <div className='mt-1 '>
