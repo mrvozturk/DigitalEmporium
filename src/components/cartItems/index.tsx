@@ -92,8 +92,8 @@ const CartItems = () => {
                     </div>
                   </div>
                 </div>
-                <div className='flex items-center gap-4 mt-2 xs:mt-20 sm:mt-6 md:mt-10  lg:mt-3 '>
-                  <p className='text-xs lg:text-sm font-bold lg:mt-0 lg:ml-2.5'>
+                <div className='flex items-center gap-4 mt-2 xs:mt-20 sm:mt-6 md:mt-10  lg:mt-5 '>
+                  <p className='text-xs lg:text-sm font-bold  lg:ml-2.5'>
                     {item.price}
                   </p>
                 </div>
