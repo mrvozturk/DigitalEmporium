@@ -6,7 +6,7 @@ import { RootState } from '@/lib/store';
 import Image from 'next/image';
 import { AiOutlineShopping } from 'react-icons/ai';
 
-const CartPage = () => {
+const CartList = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
 
   return (
@@ -31,7 +31,7 @@ const CartPage = () => {
           </div>
         </div>
       ) : (
-        <div className='flex flex-col lg:flex-row gap-20 xs:gap-6 md:gap-6 lg:gap-20 xs:p-2 sm:p-4 md:p-6 lg:p-0'>
+        <div className='flex flex-col lg:flex-row gap-6 p-2 sm:p-4 md:p-6 lg:p-0'>
           {/* 🚀 Sepet Ürünleri */}
           <div className='flex-1 mt-2'>
             <div className='flex justify-between items-center border-b border-gray-300 pb-4'>
@@ -41,65 +41,64 @@ const CartPage = () => {
               </a>
             </div>
             {cartItems.map(item => (
-              <div
-                key={item.id}
-                className='flex border-b border-gray-300 py-4 '
-              >
+              <div key={item.id} className='flex border-b border-gray-300 py-4'>
                 {/* Ürün Resmi */}
-                <div className='w-40 h-48 xs:w-30 xs:h-32 border border-gray-200 rounded-lg shadow-sm flex items-center justify-center '>
+                <div className='w-40 h-48 xs:w-30 xs:h-32 border border-gray-200 rounded-lg shadow-sm flex items-center justify-center'>
                   <Image
                     src={item.src}
                     alt={item.title}
                     width={100}
                     height={130}
-                    className='object-contain w-full h-[180px] xs:w-full xs:h-[100px] '
+                    className='object-contain w-full h-[180px] xs:h-[100px]'
                   />
                 </div>
 
                 {/* Ürün Bilgileri */}
                 <div className='flex flex-col w-full items-start ml-4'>
-                  {/* Ürün Bilgileri */}
-                  <p className='text-xs text-left leading-tight max-w-[400px] xs:text-xxs '>
+                  <p className='text-xs text-left leading-tight max-w-[400px] xs:text-xxs'>
                     {item.title}
                   </p>
-                  <div className='mt-1 '>
-                    <a
-                      href='#'
-                      className='text-xs text-black-600 underline block xs:text-xxs xs:mr-2'
-                    >
-                      Düzenle
-                    </a>
+                  <a
+                    href='#'
+                    className='text-xs text-black-600 underline mt-1 xs:text-xxs'
+                  >
+                    Düzenle
+                  </a>
+
+                  <div className='flex flex-col w-full'>
                     <div className='  text-xs mt-1'>
                       <p className=' flex font-bold mr-2 xs:mr-3 xs:text-xxs'>
                         Renk:
                       </p>
-
-                      <p className='font-bold mr-2 xs:mr-3 xs:text-xxs  '>
+                      <p className=' flex font-bold mr-2 xs:mr-3 xs:text-xxs'>
                         Beden:
-                      </p>
+                      </p>{' '}
+                    </div>
+                    <div className='flex flex-col xs:flex-row md:gap-4 lg:gap-2.5 w-full lg:justify-end lg:flex-row lg:items-center'>
+                      <select className='border px-2 py-1 text-xs xs:px-2 xs:py-1 md:px-2 md:py-1 lg:px-2 lg:py-1 w-full md:w-20 lg:w-16 max-w-[70px]'>
+                        {[1, 2, 3, 4, 5].map(num => (
+                          <option
+                            key={num}
+                            value={num}
+                            selected={num === item.quantity}
+                          >
+                            {num}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                   </div>
                 </div>
-                {/* Adet ve Fiyat Bilgileri */}
-                <div className='flex items-center gap-8 ml-auto mt-4 xs:mt-10'>
-                  <select className='border px-3 py-1 text-xxs xs:px-2 xs:py-1'>
-                    {[1, 2, 3, 4, 5].map(num => (
-                      <option
-                        key={num}
-                        value={num}
-                        selected={num === item.quantity}
-                      >
-                        {num}
-                      </option>
-                    ))}
-                  </select>
-                  <p className='text-xs   font-bold'>{item.price} </p>
+
+                <div className='flex items-center gap-4'>
+                  <p className='text-xs font-bold mt-2 lg:mt-0 lg:ml-2.5'>
+                    {item.price}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* 🛒 Sipariş Özeti */}
           <div className='w-full lg:w-1/3 '>
             <h3 className=' py-3 flex text-lg font-semibold  border-b border-gray-300 '>
               Sipariş Özeti
@@ -137,4 +136,4 @@ const CartPage = () => {
   );
 };
 
-export default CartPage;
+export default CartList;
