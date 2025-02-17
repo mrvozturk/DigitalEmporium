@@ -10,7 +10,7 @@ const CartList = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
 
   return (
-    <div className='w-full max-w-6xl mx-auto p-4 bg-white'>
+    <div className='w-full max-w-6xl mx-auto p-4 bg-white xs:p-0 sm:p-0 md:p-0 lg:p-0'>
       {cartItems.length === 0 ? (
         <div className='flex flex-col items-center text-center mt-20'>
           <AiOutlineShopping className='text-5xl mb-4' />
@@ -54,17 +54,15 @@ const CartList = () => {
                 </div>
 
                 {/* Ürün Bilgileri */}
-                <div className='flex flex-col w-full items-start ml-4'>
-                  <p className='text-xs text-left leading-tight max-w-[400px] xs:text-xxs xs:max-w-1/4'>
-                    {item.title}
-                  </p>
+                <div className='flex flex-col w-full items-start ml-2 text-left'>
+                  {' '}
+                  <p className='text-xs w-full ml-0 '>{item.title}</p>
                   <a
                     href='#'
                     className='text-xs text-black-600 underline mt-1 xs:text-xxs'
                   >
                     Düzenle
                   </a>
-
                   <div className='flex flex-col w-full'>
                     <div className='  text-xs mt-1'>
                       <p className=' flex font-bold mr-2 xs:mr-3 xs:text-xxs'>
