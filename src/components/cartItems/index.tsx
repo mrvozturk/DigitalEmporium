@@ -4,7 +4,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/lib/store';
 import Image from 'next/image';
-import { AiOutlineShopping } from 'react-icons/ai';
+import { AiOutlineShopping, AiOutlineClose } from 'react-icons/ai';
 
 import { removeFromCart } from '@/lib/features/cart/cartSlice';
 
@@ -99,9 +99,9 @@ const CartItems = () => {
                 </div>
                 <button
                   onClick={() => dispatch(removeFromCart(item.id))}
-                  className=' flex text-black-200 text-lg xs:text-2xs sm:text-xs md:text-xs lg:text-sm   '
+                  className=' flex text-black-200   '
                 >
-                  ✖️
+                  <AiOutlineClose className='text-lg text-lg xs:text-xs sm:text-xs md:text-xs lg:text-sm xs:mt-1 sm:mt-1 md:mt-1 lg:mt-0 ' />
                 </button>
               </div>
             ))}
