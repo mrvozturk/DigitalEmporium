@@ -10,7 +10,7 @@ const CartList = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
 
   return (
-    <div className='w-full max-w-6xl mx-auto p-4 bg-white xs:p-0 sm:p-0 md:p-0 lg:p-0'>
+    <div className='w-full max-w-6xl mx-auto p-4 bg-white xs:p-2 sm:p-0 md:p-0 lg:p-0'>
       {cartItems.length === 0 ? (
         <div className='flex flex-col items-center text-center mt-20'>
           <AiOutlineShopping className='text-5xl mb-4' />
@@ -42,7 +42,6 @@ const CartList = () => {
             </div>
             {cartItems.map(item => (
               <div key={item.id} className='flex border-b border-gray-300 py-4'>
-                {/* Ürün Resmi */}
                 <div className='w-40 h-48 xs:w-30 xs:h-32 border border-gray-200 rounded-lg shadow-sm flex items-center justify-center'>
                   <Image
                     src={item.src}
@@ -54,12 +53,13 @@ const CartList = () => {
                 </div>
 
                 {/* Ürün Bilgileri */}
-                <div className='flex flex-col w-full items-start ml-2 text-left'>
-                  {' '}
-                  <p className='text-xs w-full ml-0 '>{item.title}</p>
+                <div className='l w-full ml-2 '>
+                  <div>
+                    <p className=' text-xs text-start '>{item.title}</p>
+                  </div>
                   <a
                     href='#'
-                    className='text-xs text-black-600 underline mt-1 xs:text-xxs'
+                    className='flex flex-col text-xs text-black-600 underline mt-1 xs:text-xxs text-start'
                   >
                     Düzenle
                   </a>
