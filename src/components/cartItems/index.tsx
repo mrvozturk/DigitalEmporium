@@ -99,7 +99,7 @@ const CartItems = () => {
                 </div>
                 <button
                   onClick={() => dispatch(removeFromCart(item.id))}
-                  className=' flex text-black-500 text-lg xs:text-sm md:text-sm   hover:text-black-700 transition'
+                  className=' flex text-black-500 text-lg xs:text-xxs md:text-sm   hover:text-black-700 transition'
                 >
                   ✖️
                 </button>
