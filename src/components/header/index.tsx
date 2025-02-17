@@ -1,23 +1,15 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import {
-  AiOutlineUser,
-  AiOutlineHeart,
-  AiOutlineShoppingCart,
-  AiOutlineMenu
-} from 'react-icons/ai';
+import { AiOutlineUser, AiOutlineHeart, AiOutlineMenu } from 'react-icons/ai';
 import SideBar from './sideBar';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/lib/store';
+import CartIcon from './../cartIcon';
 
 const Header = () => {
   const [sideBarVisible, setSideBarVisible] = useState(false);
   const { data: session } = useSession();
-
-  const cartItems = useSelector((state: RootState) => state.cart.items);
 
   const handleToggleSidebar = () => {
     setSideBarVisible(prevState => !prevState);
@@ -64,26 +56,9 @@ const Header = () => {
               </Link>
             </li>
 
-            {/* 🛒 SEPET */}
-            <li className='relative'>
-              <Link
-                href='/cart'
-                className='flex items-center hover:text-gray-600 relative'
-              >
-                {/* Masaüstü: SEPET [x] şeklinde */}
-                <span className='hidden md:block mr-6 '>
-                  Sepet [{cartItems.length}]
-                </span>
-
-                <div className='relative block md:hidden'>
-                  <AiOutlineShoppingCart className='text-xl' />{' '}
-                  {cartItems.length > 0 && (
-                    <span className='absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full'>
-                      {cartItems.length}
-                    </span>
-                  )}
-                </div>
-              </Link>
+            {/* SEPET */}
+            <li>
+              <CartIcon />
             </li>
           </ul>
         </div>
