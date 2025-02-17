@@ -32,7 +32,7 @@ const CartList = () => {
         </div>
       ) : (
         <div className='flex flex-col lg:flex-row gap-20 p-2 sm:p-4 md:p-6 lg:p-0 xs:gap-10 sm:gap-10 md:gap-10 lg:gap-20'>
-          {/* 🚀 Sepet Ürünleri */}
+          {/*  Sepet Ürünleri */}
           <div className='flex-1 mt-2'>
             <div className='flex justify-between items-center border-b border-gray-300 pb-4'>
               <h1 className='text-lg font-bold'>Sepetim</h1>
@@ -55,7 +55,7 @@ const CartList = () => {
 
                 {/* Ürün Bilgileri */}
                 <div className='flex flex-col w-full items-start ml-4'>
-                  <p className='text-xs text-left leading-tight max-w-[400px] xs:text-xxs'>
+                  <p className='text-xs text-left leading-tight max-w-[400px] xs:text-xxs xs:max-w-1/4'>
                     {item.title}
                   </p>
                   <a
@@ -70,7 +70,7 @@ const CartList = () => {
                       <p className=' flex font-bold mr-2 xs:mr-3 xs:text-xxs'>
                         Renk:
                       </p>
-                      <p className=' flex font-bold mr-2 xs:mr-3 xs:text-xxs xs:mb-2 sm:mb-2 md:mb-1'>
+                      <p className=' flex font-bold mr-2 xs:mr-3 xs:text-xxs xs:mb-4 sm:mb-4 md:mb-1'>
                         Beden:
                       </p>{' '}
                     </div>
@@ -90,7 +90,7 @@ const CartList = () => {
                   </div>
                 </div>
 
-                <div className='flex items-center gap-4 mt-3'>
+                <div className='flex items-center gap-4 mt-3 xs:mt-24 '>
                   <p className='text-xs  font-bold lg:mt-0 lg:ml-2.5'>
                     {item.price}
                   </p>
