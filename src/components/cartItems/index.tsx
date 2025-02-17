@@ -99,7 +99,7 @@ const CartItems = () => {
                 </div>
                 <button
                   onClick={() => dispatch(removeFromCart(item.id))}
-                  className=' flex text-black-200 text-lg xs:text-xxs md:text-sm   '
+                  className=' flex text-black-200 text-lg xs:text-2xs sm:text-xs md:text-xs lg:text-sm   '
                 >
                   ✖️
                 </button>
