@@ -45,13 +45,13 @@ const CartItems = () => {
             </div>
             {cartItems.map(item => (
               <div key={item.id} className='flex border-b border-gray-300 py-4'>
-                <div className='xs:w-30 xs:h-32 sm:w-40 sm:h-40 md:w-40 md:h-40 lg:w-50 lg:h-60 border border-gray-200 rounded-lg shadow-sm flex items-center justify-center'>
+                <div className='w-40 h-48 xs:w-30 xs:h-32 border border-gray-200 rounded-lg shadow-sm flex items-center justify-center'>
                   <Image
                     src={item.src}
                     alt={item.title}
                     width={100}
                     height={130}
-                    className='object-contain w-full h-[140px] xs:h-[100px]'
+                    className='object-contain w-full h-[180px] xs:h-[100px]'
                   />
                 </div>
 
@@ -75,7 +75,7 @@ const CartItems = () => {
                         Beden:
                       </p>{' '}
                     </div>
-                    <div className='flex flex-col  xs:flex-row md:gap-4 lg:gap-2.5 w-full lg:justify-end lg:flex-row lg:items-center xs:mt-0 sm:mt-0 md:mt-0 lg:mt-3 '>
+                    <div className='flex flex-col  xs:flex-row md:gap-4 lg:gap-2.5 w-full lg:justify-end lg:flex-row lg:items-center xs:mt-0 sm:mt-0 md:mt-0 lg:mt-0 '>
                       <select
                         value={item.quantity}
                         onChange={e => {
@@ -92,7 +92,7 @@ const CartItems = () => {
                     </div>
                   </div>
                 </div>
-                <div className='flex items-center   xs:mt-20 sm:mt-3 md:mt-10 lg:mt-0 xl:mt-0 '>
+                <div className='flex items-center  mt-2 xs:mt-20 sm:mt-3 md:mt-10 lg:mt-0 xl:mt-0 '>
                   <p className='text-xs lg:text-sm font-bold  lg:ml-2.5'>
                     {item.price}
                   </p>
