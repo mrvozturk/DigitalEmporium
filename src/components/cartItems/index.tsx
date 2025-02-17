@@ -81,7 +81,7 @@ const CartItems = () => {
                         onChange={e => {
                           const newQuantity = Number(e.target.value);
                         }}
-                        className='border px-2 py-1 text-xxs xs:py-1 md:py-1 lg:px-2  w-full xs:w-12 md:w-12 lg:w-80 lg:h-8 max-w-[60px] '
+                        className='border px-2 py-1 text-xs xs:py-1 md:py-1 lg:px-2 w-full xs:w-12 md:w-12 lg:w-80 lg:h-8 max-w-[60px] bg-white-100 text-white-900 border-black-400 '
                       >
                         {[1, 2, 3, 4, 5].map(num => (
                           <option key={num} value={num}>
