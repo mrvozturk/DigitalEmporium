@@ -70,12 +70,13 @@ const CartList = () => {
                       <p className=' flex font-bold mr-2 xs:mr-3 xs:text-xxs'>
                         Renk:
                       </p>
-                      <p className=' flex font-bold mr-2 xs:mr-3 xs:text-xxs xs:mb-2 sm:mb-2 md:mb-2 lg:mb-0'>
+                      <p className=' flex font-bold mr-2 xs:mr-3 xs:text-xxs xs:mb-2 sm:mb-0 md:mb-2 lg:mb-0'>
                         Beden:
                       </p>{' '}
                     </div>
                     <div className='flex flex-col xs:flex-row md:gap-4 lg:gap-2.5 w-full lg:justify-end lg:flex-row lg:items-center xs:mt-0 sm:mt-0 md:mt-0 lg:mt-0 '>
-                      <select className='border px-2 py-1 text-xxs xs:py-1 md:py-1 lg:px-2 lg:py-1 w-full xs:w-11 md:w-12 lg:w-14 max-w-[50px]'>
+                      <select className='border px-2 py-1 text-xxs xs:py-1 md:py-1 lg:px-2 lg:py-1 w-full xs:w-12 md:w-12 lg:w-80 lg:h-8 max-w-[60px]'>
+                        {' '}
                         {[1, 2, 3, 4, 5].map(num => (
                           <option
                             key={num}
@@ -90,8 +91,8 @@ const CartList = () => {
                   </div>
                 </div>
 
-                <div className='flex items-center gap-4 mt-2 xs:mt-20 sm:mt-0 md:mt-0  lg:mt-0 '>
-                  <p className='text-xs font-bold lg:mt-0 lg:ml-2.5'>
+                <div className='flex items-center gap-4 mt-2 xs:mt-20 sm:mt-6 md:mt-10  lg:mt-3 '>
+                  <p className='text-xs lg:text-sm font-bold lg:mt-0 lg:ml-2.5'>
                     {item.price}
                   </p>
                 </div>
