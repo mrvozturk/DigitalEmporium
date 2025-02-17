@@ -31,7 +31,7 @@ const CartList = () => {
           </div>
         </div>
       ) : (
-        <div className='flex flex-col lg:flex-row gap-6 p-2 sm:p-4 md:p-6 lg:p-0'>
+        <div className='flex flex-col lg:flex-row gap-20 p-2 sm:p-4 md:p-6 lg:p-0 xs:gap-10 sm:gap-10 md:gap-10 lg:gap-20'>
           {/* 🚀 Sepet Ürünleri */}
           <div className='flex-1 mt-2'>
             <div className='flex justify-between items-center border-b border-gray-300 pb-4'>
