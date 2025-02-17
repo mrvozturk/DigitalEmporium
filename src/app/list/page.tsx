@@ -1,17 +1,15 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { AiOutlineShopping, AiOutlineHeart } from 'react-icons/ai';
+import { AiOutlineHeart } from 'react-icons/ai';
 import Link from 'next/link';
 import { getProducts, Product } from '../../lib/data';
-import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
-import { addToCart } from '../../lib/features/cart/cartSlice';
+import { AddToCartButton } from './../../components/addToCartButton';
 
 const ProductListing: React.FC = () => {
   const [productData, setProductData] = useState<Product[]>([]);
   const productCount = 8; // Gösterilecek ürün sayısı
-  const dispatch = useDispatch();
   const router = useRouter();
 
   useEffect(() => {
@@ -23,19 +21,6 @@ const ProductListing: React.FC = () => {
     fetchData();
   }, [productCount]);
 
-  const handleProductClick = (product: Product) => {
-    dispatch(
-      addToCart({
-        id: product.id,
-        src: product.photo,
-        quantity: 1,
-        title: product.title,
-        price: product.price
-      })
-    );
-    router.push('/cart'); 
-  };
-
   const addToFavorites = (productId: string) => {
     console.log(`Product ${productId} added to favorites`);
   };
@@ -46,35 +31,24 @@ const ProductListing: React.FC = () => {
         <div
           key={product.id}
           className='flex flex-col justify-between overflow-hidden cursor-pointer relative border border-gray-200 rounded-md shadow-md'
-          onClick={() => handleProductClick(product)}
+          onClick={() => router.push(`/product/${product.id}`)}
         >
           <div className='absolute top-2 right-2 flex flex-col gap-2 z-10 p-1'>
             <button
               className='flex items-center justify-center w-8 h-8 rounded-full bg-gray-200'
               onClick={event => {
-                event.stopPropagation(); // Tıklama etkisini durdurur
-                addToFavorites(product.id); // Favorilere ekler
+                event.stopPropagation();
+                addToFavorites(product.id);
               }}
             >
               <AiOutlineHeart className='text-black text-lg' />
             </button>
-            <button
-              className='flex items-center justify-center w-8 h-8 rounded-full bg-gray-200'
-              onClick={event => {
-                event.stopPropagation(); // Tıklama etkisini durdurur
-                dispatch(
-                  addToCart({
-                    id: product.id,
-                    src: product.photo,
-                    quantity: 1,
-                    title: product.title,
-                    price: product.price
-                  })
-                );
-              }}
-            >
-              <AiOutlineShopping className='text-black text-lg' />
-            </button>
+            <AddToCartButton
+              id={product.id}
+              src={product.photo}
+              title={product.title}
+              price={product.price}
+            />
           </div>
 
           <Link href={`/product/${product.id}`}>
@@ -98,7 +72,7 @@ const ProductListing: React.FC = () => {
                 {product.rating.count} yorum
               </p>
 
-              <p className='text-sm font-bold text-black'>{product.price}₺</p>
+              <p className='text-sm font-bold text-black'>{product.price}</p>
             </div>
           </div>
         </div>

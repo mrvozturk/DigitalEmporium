@@ -2,23 +2,34 @@
 import { useDispatch } from 'react-redux';
 import { addToCart } from '@/lib/features/cart/cartSlice';
 
-export function AddToCartButton({ id, src }: { id: string; src: string }) {
+import { AiOutlineShoppingCart } from 'react-icons/ai';
+
+export function AddToCartButton({
+  id,
+  src,
+  title,
+  price
+}: {
+  id: string;
+  src: string;
+  title: string;
+  price: string;
+}) {
   const dispatch = useDispatch();
 
-  const handleClick = () => {
-    console.log("Butona tıklandı, sepete ekleniyor:", { id, src }); 
-    dispatch(addToCart({ id, src, quantity: 1 ,
-      title: '',
-      price: ''
-    }));
+  const handleClick = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    console.log('Sepete ekleniyor:', { id, src, title, price });
+
+    dispatch(addToCart({ id, src, quantity: 1, title, price }));
   };
 
   return (
     <button
-      className='bg-black text-white px-4 py-2 rounded-full hover:bg-gray-800'
+      className='flex items-center justify-center w-8 h-8 rounded-full bg-gray-200'
       onClick={handleClick}
     >
-      Add to Cart
+      <AiOutlineShoppingCart className='text-lg' />
     </button>
   );
 }
