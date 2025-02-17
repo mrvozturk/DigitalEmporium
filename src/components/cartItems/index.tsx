@@ -51,7 +51,7 @@ const CartItems = () => {
                     alt={item.title}
                     width={100}
                     height={130}
-                    className='object-contain w-full h-[150px] xs:h-[100px]'
+                    className='object-contain w-full h-[140px] xs:h-[100px]'
                   />
                 </div>
 
@@ -75,7 +75,7 @@ const CartItems = () => {
                         Beden:
                       </p>{' '}
                     </div>
-                    <div className='flex flex-col  xs:flex-row md:gap-4 lg:gap-2.5 w-full lg:justify-end lg:flex-row lg:items-center xs:mt-0 sm:mt-0 md:mt-0 lg:mt-4 '>
+                    <div className='flex flex-col  xs:flex-row md:gap-4 lg:gap-2.5 w-full lg:justify-end lg:flex-row lg:items-center xs:mt-0 sm:mt-0 md:mt-0 lg:mt-3 '>
                       <select
                         value={item.quantity}
                         onChange={e => {
