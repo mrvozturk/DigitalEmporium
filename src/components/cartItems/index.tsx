@@ -1,13 +1,16 @@
 'use client';
 
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/lib/store';
 import Image from 'next/image';
 import { AiOutlineShopping } from 'react-icons/ai';
 
-const CartList = () => {
+import { removeFromCart } from '@/lib/features/cart/cartSlice';
+
+const CartItems = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
+  const dispatch = useDispatch();
 
   return (
     <div className='w-full max-w-6xl mx-auto p-4 bg-white xs:p-2 sm:p-0 md:p-0 lg:p-0'>
@@ -72,7 +75,7 @@ const CartList = () => {
                         Beden:
                       </p>{' '}
                     </div>
-                    <div className='flex flex-col xs:flex-row md:gap-4 lg:gap-2.5 w-full lg:justify-end lg:flex-row lg:items-center xs:mt-0 sm:mt-0 md:mt-0 lg:mt-0 '>
+                    <div className='flex flex-col  xs:flex-row md:gap-4 lg:gap-4.5 w-full lg:justify-end lg:flex-row lg:items-center xs:mt-0 sm:mt-0 md:mt-0 lg:mt-0 '>
                       <select
                         value={item.quantity}
                         onChange={e => {
@@ -89,12 +92,17 @@ const CartList = () => {
                     </div>
                   </div>
                 </div>
-
                 <div className='flex items-center gap-4 mt-2 xs:mt-20 sm:mt-6 md:mt-10  lg:mt-3 '>
                   <p className='text-xs lg:text-sm font-bold lg:mt-0 lg:ml-2.5'>
                     {item.price}
                   </p>
                 </div>
+                <button
+                  onClick={() => dispatch(removeFromCart(item.id))}
+                  className=' flex text-black-500 text-lg  transition'
+                >
+                  ✖️
+                </button>
               </div>
             ))}
           </div>
@@ -136,4 +144,4 @@ const CartList = () => {
   );
 };
 
-export default CartList;
+export default CartItems;
