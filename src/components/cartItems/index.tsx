@@ -45,13 +45,13 @@ const CartItems = () => {
             </div>
             {cartItems.map(item => (
               <div key={item.id} className='flex border-b border-gray-300 py-4'>
-                <div className='w-40 h-48 xs:w-30 xs:h-32 border border-gray-200 rounded-lg shadow-sm flex items-center justify-center'>
+                <div className='w-24 h-[140px] md:w-36 md:h-[200px] lg:w-[140px] lg:h-[210px] border border-gray-300 rounded-md shadow-md p-1'>
                   <Image
                     src={item.src}
                     alt={item.title}
-                    width={100}
-                    height={130}
-                    className='object-contain w-full h-[180px] xs:h-[100px]'
+                    width={300}
+                    height={500}
+                    className='w-full h-full object-contain'
                   />
                 </div>
 
