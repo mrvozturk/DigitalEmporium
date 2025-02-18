@@ -62,7 +62,7 @@ const CartItems = () => {
                   </div>
                   <a
                     href='#'
-                    className='flex flex-col text-xs text-black-600 underline mt-1 xs:text-xxs text-start'
+                    className='flex flex-col text-xs text-black-600 underline mb-1 xs:text-xxs text-start'
                   >
                     Düzenle
                   </a>
