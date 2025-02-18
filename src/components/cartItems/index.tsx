@@ -45,16 +45,19 @@ const CartItems = () => {
           <div className='flex-1 mt-2'>
             <div className='flex justify-between items-center border-b border-gray-300 pb-4'>
               <h1 className='text-lg font-bold'>Sepetim</h1>
-              <a href='#' className='text-xs text-black-600 underline'>
+              <a href='/' className='text-xs text-black-600 underline'>
                 Alışverişe Devam Et
               </a>
             </div>
-            {cartItems.map(item => (
-              <div key={item.id} className='flex border-b border-gray-300 py-4'>
+            {cartItems.map(product => (
+              <div
+                key={product.id}
+                className='flex border-b border-gray-300 py-4'
+              >
                 <div className='w-24 h-[140px] xs:w-[120px] xs:h-[135px] md:w-36 md:h-[200px] lg:w-[137px] lg:h-[180px] border border-gray-300 rounded-md shadow-md p-1'>
                   <Image
-                    src={item.src}
-                    alt={item.title}
+                    src={product.src}
+                    alt={product.title}
                     width={300}
                     height={500}
                     className='w-full h-full object-contain'
@@ -64,7 +67,7 @@ const CartItems = () => {
                 {/* Ürün Bilgileri */}
                 <div className='l w-full ml-2 '>
                   <div>
-                    <p className=' text-xxs text-start  '>{item.title}</p>
+                    <p className=' text-xxs text-start  '>{product.title}</p>
                   </div>
                   <a
                     href='#'
@@ -83,7 +86,7 @@ const CartItems = () => {
                     </div>
                     <div className='flex flex-row  xs:flex-row md:gap-4 lg:gap-2.5 w-full lg:justify-end lg:flex-row lg:items-center xs:mt-0 sm:mt-0 md:mt-0 lg:mt-0 '>
                       <select
-                        value={item.quantity}
+                        value={product.quantity}
                         onChange={e => {
                           const newQuantity = Number(e.target.value);
                         }}
@@ -100,11 +103,11 @@ const CartItems = () => {
                 </div>
                 <div className='flex items-center  mt-2 xs:mb-3 xs:mt-20 sm:mt-2 md:mt-10 lg:mt-0 xl:mt-0 '>
                   <p className='text-xxs lg:text-xs xs:text-xxs sm:text-xxs md:text-xxs font-bold  lg:ml-2.5'>
-                    {item.price}
+                    {product.price}
                   </p>
                 </div>
                 <button
-                  onClick={() => dispatch(removeFromCart(item.id))}
+                  onClick={() => dispatch(removeFromCart(product.id))}
                   className=' flex text-black-200   '
                 >
                   <AiOutlineClose className='text-lg text-lg xs:text-xs sm:text-xs md:text-xs lg:text-sm xs:mt-1 sm:mt-1 md:mt-1 lg:mt-0 ' />
