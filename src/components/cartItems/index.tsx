@@ -45,7 +45,7 @@ const CartItems = () => {
             </div>
             {cartItems.map(item => (
               <div key={item.id} className='flex border-b border-gray-300 py-4'>
-                <div className='w-24 h-[140px] md:w-36 md:h-[200px] lg:w-[137px] lg:h-[210px] border border-gray-300 rounded-md shadow-md p-1'>
+                <div className='w-24 h-[140px] md:w-36 md:h-[200px] lg:w-[137px] lg:h-[180px] border border-gray-300 rounded-md shadow-md p-1'>
                   <Image
                     src={item.src}
                     alt={item.title}
@@ -75,7 +75,7 @@ const CartItems = () => {
                         Beden:
                       </p>{' '}
                     </div>
-                    <div className='flex flex-col  xs:flex-row md:gap-4 lg:gap-2.5 w-full lg:justify-end lg:flex-row lg:items-center xs:mt-0 sm:mt-0 md:mt-0 lg:mt-0 '>
+                    <div className='flex flex-row  xs:flex-row md:gap-4 lg:gap-2.5 w-full lg:justify-end lg:flex-row lg:items-center xs:mt-0 sm:mt-0 md:mt-0 lg:mt-0 '>
                       <select
                         value={item.quantity}
                         onChange={e => {
