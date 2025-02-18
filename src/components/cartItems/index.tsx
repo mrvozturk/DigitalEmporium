@@ -34,7 +34,7 @@ const CartItems = () => {
           </div>
         </div>
       ) : (
-        <div className='flex flex-col lg:flex-row gap-20 p-2 sm:p-4 md:p-6 lg:p-0 xs:gap-10 sm:gap-10 md:gap-10 lg:gap-20'>
+        <div className='flex flex-col lg:flex-row gap-20 p-2 sm:p-4 md:p-6 lg:p-2 xs:gap-10 sm:gap-10 md:gap-10 lg:gap-20'>
           {/*  Sepet Ürünleri */}
           <div className='flex-1 mt-2'>
             <div className='flex justify-between items-center border-b border-gray-300 pb-4'>
@@ -45,7 +45,7 @@ const CartItems = () => {
             </div>
             {cartItems.map(item => (
               <div key={item.id} className='flex border-b border-gray-300 py-4'>
-                <div className='w-24 h-[140px] md:w-36 md:h-[200px] lg:w-[137px] lg:h-[180px] border border-gray-300 rounded-md shadow-md p-1'>
+                <div className='w-24 h-[140px] xs:w-[120px] xs:h-[135px] md:w-36 md:h-[200px] lg:w-[137px] lg:h-[180px] border border-gray-300 rounded-md shadow-md p-1'>
                   <Image
                     src={item.src}
                     alt={item.title}
@@ -58,7 +58,7 @@ const CartItems = () => {
                 {/* Ürün Bilgileri */}
                 <div className='l w-full ml-2 '>
                   <div>
-                    <p className=' text-xs text-start '>{item.title}</p>
+                    <p className=' text-xxs text-start  '>{item.title}</p>
                   </div>
                   <a
                     href='#'
@@ -71,7 +71,7 @@ const CartItems = () => {
                       <p className=' flex font-bold mr-2 xs:mr-3 xs:text-xxs'>
                         Renk:
                       </p>
-                      <p className=' flex font-bold mr-2 xs:mr-3 xs:text-xxs xs:mb-2 sm:mb-0 md:mb-2 lg:mb-0'>
+                      <p className=' flex font-bold mr-2 xs:mr-3 xs:text-xxs xs:mb-3 sm:mb-0 md:mb-2 lg:mb-0'>
                         Beden:
                       </p>{' '}
                     </div>
@@ -81,7 +81,7 @@ const CartItems = () => {
                         onChange={e => {
                           const newQuantity = Number(e.target.value);
                         }}
-                        className='border px-2 py-1 text-xs xs:py-1 md:py-1 lg:px-2 w-full xs:w-12 md:w-12 lg:w-80 lg:h-8 max-w-[60px] bg-white-100 text-white-900 border-black-400 '
+                        className='border px-2 py-1 text-xs xs:py-1 md:py-1 lg:px-2 lg:py-1 w-full xs:w-11  md:w-12 lg:w-40 lg:h-9 max-w-[60px] bg-white-100 text-white-900 border-black-400 '
                       >
                         {[1, 2, 3, 4, 5].map(num => (
                           <option key={num} value={num}>
@@ -93,7 +93,7 @@ const CartItems = () => {
                   </div>
                 </div>
                 <div className='flex items-center  mt-2 xs:mt-20 sm:mt-3 md:mt-10 lg:mt-0 xl:mt-0 '>
-                  <p className='text-xs lg:text-sm font-bold  lg:ml-2.5'>
+                <p className='text-xxs lg:text-xs xs:text-xxs sm:text-xxs md:text-xxs font-bold  lg:ml-2.5'>
                     {item.price}
                   </p>
                 </div>
