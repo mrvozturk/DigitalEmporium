@@ -11,6 +11,12 @@ import { removeFromCart } from '@/lib/features/cart/cartSlice';
 const CartItems = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch();
+  // Toplam fiyat hesaplama
+  const total = cartItems.reduce((acc, item) => {
+    const cleanedPrice = item.price.replace(/[^0-9.]/g, '');
+    const price = parseFloat(cleanedPrice);
+    return acc + price * item.quantity;
+  }, 0);
 
   return (
     <div className='w-full max-w-6xl mx-auto p-4 bg-white xs:p-2 sm:p-0 md:p-0 lg:p-0'>
@@ -93,7 +99,7 @@ const CartItems = () => {
                   </div>
                 </div>
                 <div className='flex items-center  mt-2 xs:mb-3 xs:mt-20 sm:mt-2 md:mt-10 lg:mt-0 xl:mt-0 '>
-                <p className='text-xxs lg:text-xs xs:text-xxs sm:text-xxs md:text-xxs font-bold  lg:ml-2.5'>
+                  <p className='text-xxs lg:text-xs xs:text-xxs sm:text-xxs md:text-xxs font-bold  lg:ml-2.5'>
                     {item.price}
                   </p>
                 </div>
@@ -114,6 +120,13 @@ const CartItems = () => {
             <div className='mt-3 text-xs'>
               <div className='flex justify-between'>
                 <span>Ürünlerin Toplamı ({cartItems.length} ürün)</span>
+                <span>
+                  $
+                  {total.toLocaleString('en-US', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                  })}
+                </span>
               </div>
               <div className='flex justify-between text-red-500 mt-2'>
                 <span>Yeni Sezon Ürünlerde Kargo Bedava</span>
@@ -130,6 +143,13 @@ const CartItems = () => {
               <hr className='my-3' />
               <div className='flex justify-between text-lg font-semibold'>
                 <span>Toplam</span>
+                <span>
+                  $
+                  {total.toLocaleString('en-US', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                  })}
+                </span>
               </div>
               <hr className='my-3' />
 
