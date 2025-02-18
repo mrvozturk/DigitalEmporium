@@ -45,7 +45,7 @@ const CartItems = () => {
             </div>
             {cartItems.map(item => (
               <div key={item.id} className='flex border-b border-gray-300 py-4'>
-                <div className='w-24 h-[140px] md:w-36 md:h-[200px] lg:w-[140px] lg:h-[210px] border border-gray-300 rounded-md shadow-md p-1'>
+                <div className='w-24 h-[140px] md:w-36 md:h-[200px] lg:w-[137px] lg:h-[210px] border border-gray-300 rounded-md shadow-md p-1'>
                   <Image
                     src={item.src}
                     alt={item.title}
