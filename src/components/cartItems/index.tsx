@@ -62,7 +62,7 @@ const CartItems = () => {
                   </div>
                   <a
                     href='#'
-                    className='flex flex-col text-xs text-black-600 underline mb-1 xs:text-xxs text-start'
+                    className='flex flex-col text-xs text-black-600 underline mb-2 xs:text-xxs text-start '
                   >
                     Düzenle
                   </a>
@@ -92,7 +92,7 @@ const CartItems = () => {
                     </div>
                   </div>
                 </div>
-                <div className='flex items-center  mt-2 xs:mt-20 sm:mt-3 md:mt-10 lg:mt-0 xl:mt-0 '>
+                <div className='flex items-center  mt-2 xs:mb-3 xs:mt-20 sm:mt-2 md:mt-10 lg:mt-0 xl:mt-0 '>
                 <p className='text-xxs lg:text-xs xs:text-xxs sm:text-xxs md:text-xxs font-bold  lg:ml-2.5'>
                     {item.price}
                   </p>
