@@ -124,7 +124,7 @@ const CartItems = () => {
               <div className='flex justify-between'>
                 <span>Ürünlerin Toplamı ({cartItems.length} ürün)</span>
                 <span>
-                  $
+            
                   {total.toLocaleString('en-US', {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2
@@ -147,11 +147,12 @@ const CartItems = () => {
               <div className='flex justify-between text-lg font-semibold'>
                 <span>Toplam</span>
                 <span>
-                  $
+                
                   {total.toLocaleString('en-US', {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2
                   })}
+                    TL
                 </span>
               </div>
               <hr className='my-3' />
