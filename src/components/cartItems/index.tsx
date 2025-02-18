@@ -11,9 +11,14 @@ import { removeFromCart } from '@/lib/features/cart/cartSlice';
 const CartItems = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch();
-  // Toplam fiyat hesaplama
   const total = cartItems.reduce((acc, item) => {
-    const cleanedPrice = item.price.replace(/[^0-9.]/g, '');
+    // 1. Binlik ayraçları (nokta) ve para birimini kaldır
+    // 2. Ondalık virgülünü noktaya çevir
+    const cleanedPrice = item.price
+      .replace(/[^\d,]/g, '') // Sadece rakam ve virgülü tut
+      .replace(/\./g, '')     // Binlik ayraçlarını sil (58.999,99 → 58999,99)
+      .replace(',', '.');     // Ondalık ayracını düzelt (58999,99 → 58999.99)
+
     const price = parseFloat(cleanedPrice);
     return acc + price * item.quantity;
   }, 0);
@@ -121,14 +126,14 @@ const CartItems = () => {
               Sipariş Özeti
             </h3>
             <div className='mt-3 text-xs'>
-              <div className='flex justify-between'>
+            <div className='flex justify-between'>
                 <span>Ürünlerin Toplamı ({cartItems.length} ürün)</span>
                 <span>
-            
-                  {total.toLocaleString('en-US', {
+                  {total.toLocaleString('tr-TR', {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2
                   })}
+                  TL
                 </span>
               </div>
               <div className='flex justify-between text-red-500 mt-2'>
@@ -147,12 +152,11 @@ const CartItems = () => {
               <div className='flex justify-between text-lg font-semibold'>
                 <span>Toplam</span>
                 <span>
-                
-                  {total.toLocaleString('en-US', {
+                  {total.toLocaleString('tr-TR', {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2
                   })}
-                    TL
+                  TL
                 </span>
               </div>
               <hr className='my-3' />
