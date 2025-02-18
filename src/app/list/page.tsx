@@ -72,7 +72,7 @@ const ProductListing: React.FC = () => {
                 {product.rating.count} yorum
               </p>
 
-              <p className='text-sm font-bold text-black'>{product.price}</p>
+              <p className='text-sm font-bold text-black'>{product.price}  </p>
             </div>
           </div>
         </div>
