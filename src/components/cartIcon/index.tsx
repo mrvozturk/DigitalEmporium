@@ -10,8 +10,6 @@ const CartIcon = () => {
 
   return (
     <div className='relative'>
-      {' '}
-      {/* <li> yerine <div> kullanıldı */}
       <Link
         href='/cart'
         className='flex items-center hover:text-gray-600 relative'
