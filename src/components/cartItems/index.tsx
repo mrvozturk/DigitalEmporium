@@ -12,12 +12,10 @@ const CartItems = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch();
   const total = cartItems.reduce((acc, item) => {
-    // 1. Binlik ayraçları (nokta) ve para birimini kaldır
-    // 2. Ondalık virgülünü noktaya çevir
     const cleanedPrice = item.price
       .replace(/[^\d,]/g, '') // Sadece rakam ve virgülü tut
-      .replace(/\./g, '')     // Binlik ayraçlarını sil (58.999,99 → 58999,99)
-      .replace(',', '.');     // Ondalık ayracını düzelt (58999,99 → 58999.99)
+      .replace(/\./g, '') // Binlik ayraçlarını sil (58.999,99 → 58999,99)
+      .replace(',', '.'); // Ondalık ayracını düzelt (58999,99 → 58999.99)
 
     const price = parseFloat(cleanedPrice);
     return acc + price * item.quantity;
@@ -126,7 +124,7 @@ const CartItems = () => {
               Sipariş Özeti
             </h3>
             <div className='mt-3 text-xs'>
-            <div className='flex justify-between'>
+              <div className='flex justify-between'>
                 <span>Ürünlerin Toplamı ({cartItems.length} ürün)</span>
                 <span>
                   {total.toLocaleString('tr-TR', {

@@ -3,10 +3,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface CartItem {
   id: string;
   src: string;
-  title: string; 
-  price: string; 
+  title: string;
+  price: string;
   quantity: number;
-  
 }
 
 interface CartState {
@@ -22,8 +21,9 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<CartItem>) => {
-      console.log("Ürün sepete ekleniyor:", action.payload);
-      const existingItem = state.items.find(item => item.id === action.payload.id);
+      const existingItem = state.items.find(
+        item => item.id === action.payload.id
+      );
       if (existingItem) {
         existingItem.quantity += 1;
       } else {
@@ -33,7 +33,7 @@ const cartSlice = createSlice({
     removeFromCart: (state, action: PayloadAction<string>) => {
       state.items = state.items.filter(item => item.id !== action.payload);
     },
-    clearCart: (state) => {
+    clearCart: state => {
       state.items = [];
     }
   }
