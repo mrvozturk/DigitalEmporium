@@ -74,7 +74,6 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
 
             {/* Ürün Bilgileri ve Butonlar */}
             <div className='flex-1 flex flex-col justify-between px-3'>
-              {/* Ürün Detayları */}
               <div>
                 <h3 className='text-sm  mb-1'>{product.title}</h3>
                 <p className='text-xs font-bold mb-2'>{product.price} </p>
@@ -100,10 +99,10 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
         ))}
 
         {/* Kampanya Kodu Alanı */}
-        <div className='flex justify-between items-center'>
-          <p className='text-base font-medium'>Kampanya kodu</p>
+        <div className='flex justify-between items-center border-b border-gray-200 py-3 '>
+          <p className='text-sm'>Kampanya kodu</p>
           <button
-            className='text-black-600'
+            className='text-black-600 text-xs font-bold'
             onClick={() => setIsCouponInputVisible(!isCouponInputVisible)}
           >
             {isCouponInputVisible ? 'Kapat' : 'Ekle'}
@@ -120,7 +119,7 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
       </div>
 
       {/* Sipariş Bölümü */}
-      <div className='p-5 border-t bg-white'>
+      <div className='p-5  bg-white'>
         <div className='flex justify-between text-base mb-3'>
           <span>Alt toplam ({products.length} ürün)</span>
           <span>
