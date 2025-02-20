@@ -23,12 +23,12 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
 
   if (!isOpen || products.length === 0) return null;
 
-  // Toplam fiyat hesaplama
+  // Ürün fiyatları hesaplama
   const total = products.reduce((acc, item) => {
     const cleanedPrice = item.price
       .replace(/[^\d,]/g, '')
-      .replace(/\./g, '') // Binlik ayraçlarını sil (58.999,99 → 58999,99)
-      .replace(',', '.'); // Ondalık ayracını düzelt (58999,99 → 58999.99)
+      .replace(/\./g, '')
+      .replace(',', '.');
     return acc + parseFloat(cleanedPrice) * item.quantity;
   }, 0);
 

@@ -14,9 +14,9 @@ const CartItems = () => {
 
   const total = cartItems.reduce((acc, item) => {
     const cleanedPrice = item.price
-      .replace(/[^\d,]/g, '') // Sadece rakam ve virgülü tut
-      .replace(/\./g, '') // Binlik ayraçlarını sil (58.999,99 → 58999,99)
-      .replace(',', '.'); // Ondalık ayracını düzelt (58999,99 → 58999.99)
+      .replace(/[^\d,]/g, '')
+      .replace(/\./g, '')
+      .replace(',', '.');
 
     const price = parseFloat(cleanedPrice);
     return acc + price * item.quantity;
@@ -98,7 +98,7 @@ const CartItems = () => {
                   </div>
                 </div>
 
-                {/* Adet Güncelleme ve Çöp Kutusu */}
+                {/* Adet Güncelleme ve Silme Butonları */}
                 <div className='flex flex-col items-center gap-4 lg:gap-16 xs:gap-4 sm:gap-5 md:gap-5'>
                   <button
                     onClick={() => dispatch(removeFromCart(product.id))}
@@ -110,7 +110,6 @@ const CartItems = () => {
                     />
                   </button>
 
-                  {/* Adet Güncelleme Butonları */}
                   <div className='flex items-center space-x-2 xs:space-x-1 mt-12 xs:mt-[50px] sm:mt-15 md:mt-15 lg:mt-5 lg:mb-2'>
                     <button
                       className='bg-gray-200 px-2 py-0.2  rounded disabled:opacity-50 '
