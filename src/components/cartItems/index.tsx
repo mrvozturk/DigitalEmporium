@@ -68,7 +68,7 @@ const CartItems = () => {
                     alt={product.title}
                     width={120}
                     height={120}
-                    className='object-contain border border-gray-300 rounded-md shadow-md p-1 w-[120px] h-[120px]'
+                    className='object-contain border border-gray-300 rounded-md shadow-md p-1 w-[120px] h-[120px] lg:h-[150px] '
                   />
                 </div>
 
@@ -111,7 +111,7 @@ const CartItems = () => {
                   </button>
 
                   {/* Adet Güncelleme Butonları */}
-                  <div className='flex items-center space-x-2 xs:space-x-1 mt-12 xs:mt-16 sm:mt-15 md:mt-20 lg:mt-12'>
+                  <div className='flex items-center space-x-2 xs:space-x-1 mt-12 xs:mt-[50px] sm:mt-15 md:mt-15 lg:mt-5 lg:mb-2'>
                     <button
                       className='bg-gray-200 px-2 py-0.2  rounded disabled:opacity-50 '
                       onClick={() =>

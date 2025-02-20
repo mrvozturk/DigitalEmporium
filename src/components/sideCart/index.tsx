@@ -74,7 +74,9 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
             {/* Ürün Bilgileri ve Butonlar */}
             <div className='flex-1 flex flex-col justify-between px-3'>
               <div>
-                <h3 className='text-sm mb-1'>{product.title}</h3>
+                <h3 className='text-sm xs:text-xs sm:text-xs md:text-xs lg:text-xs  mb-1'>
+                  {product.title}
+                </h3>
                 <p className='text-xs font-bold mb-2'>{product.price}</p>
                 <p className='text-xs text-gray-500'>1 adet | M | Orta gri</p>
               </div>
