@@ -56,7 +56,7 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-    <div className='loginFormContainer xs:w-[100%] sm:w-[100%] md:w-[40%] w-[40%] flex flex-col'>
+    <div className='loginFormContainer xs:w-[100%] sm:w-[100%] md:w-[100%] lg:w-[40%] xl:w-[40%] xs:p-0 sm:p-0 md:p-4 lg:p-4 xl:p-4 w-[40%] flex flex-col'>
       <h2 className='mt-2'>Giriş Yap</h2>
       <form onSubmit={handleSubmit} noValidate>
         <input
