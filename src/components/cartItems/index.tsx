@@ -62,7 +62,7 @@ const CartItems = () => {
                 key={product.id}
                 className='flex border-b py-2 border-gray-300 '
               >
-                <div className='flex items-start justify-between  w-full xs:w-[140px] sm:w-30 md:w-[110px] lg:w-[138px]  '>
+                <div className='flex items-start justify-between  w-full xs:w-[140px] sm:w-[110px] md:w-[110px] lg:w-[138px]  '>
                   <Image
                     src={product.src}
                     alt={product.title}
@@ -112,7 +112,7 @@ const CartItems = () => {
                   </button>
 
                   {/* Adet Güncelleme Butonları */}
-                  <div className='flex items-center space-x-2 xs:space-x-1 mt-12 xs:mt-16 sm:mt-0 md:mt-20 lg:mt-12'>
+                  <div className='flex items-center space-x-2 xs:space-x-1 mt-12 xs:mt-16 sm:mt-15 md:mt-20 lg:mt-12'>
                     <button
                       className='bg-gray-200 px-2 py-0.2  rounded disabled:opacity-50 '
                       onClick={() =>
