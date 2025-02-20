@@ -1,16 +1,16 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/lib/store';
 import Image from 'next/image';
 import { AiOutlineShopping, AiOutlineDelete } from 'react-icons/ai';
-
 import { removeFromCart, updateQuantity } from '@/lib/features/cart/cartSlice';
 
 const CartItems = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch();
+  const [isCouponInputVisible, setIsCouponInputVisible] = useState(false);
 
   const total = cartItems.reduce((acc, item) => {
     const cleanedPrice = item.price
@@ -47,7 +47,7 @@ const CartItems = () => {
         <div className='flex flex-col lg:flex-row gap-20 p-2 sm:p-4 md:p-6 lg:p-2 xs:gap-10 sm:gap-10 md:gap-10 lg:gap-20'>
           {/*  Sepet Ürünleri */}
           <div className='flex-1 mt-2'>
-            <div className='flex items-center justify-start border-b pb-2 mb-4'>
+            <div className='flex items-center justify-start border-b pb-2 mb-1'>
               <h1 className='text-lg font-bold'>
                 SEPETİM ({cartItems.length})
               </h1>
@@ -60,15 +60,15 @@ const CartItems = () => {
             {cartItems.map(product => (
               <div
                 key={product.id}
-                className='flex border-b border-gray-300 py-4'
+                className='flex border-b py-2 border-gray-300 '
               >
-                <div className='flex items-start justify-between mb-3 pb-3 w-full xs:w-[140px] sm:w-30 md:w-40 lg:w-40  '>
+                <div className='flex items-start justify-between  w-full xs:w-[140px] sm:w-30 md:w-[110px] lg:w-[138px]  '>
                   <Image
                     src={product.src}
                     alt={product.title}
                     width={150}
                     height={100}
-                    className='object-cover border border-gray-300 rounded-md shadow-md p-1 '
+                    className='object-cover border border-gray-300 rounded-md shadow-md p-2 '
                   />
                 </div>
 
@@ -78,13 +78,21 @@ const CartItems = () => {
                     <p className='text-xs xs:text-xxs sm:text-xxs md:text-xxs lg:text-xs  '>
                       {product.title}
                     </p>
-                    <p className='text-xxs lg:text-xs xs:text-2xs sm:text-xxs md:text-xxs font-bold mt-2 '>
+                    <a
+                      href='#'
+                      className='text-xs xs:text-xxs sm:text-xxs md:text-xxs lg:text-xs underline'
+                    >
+                      {' '}
+                      Düzenle
+                    </a>
+
+                    <p className='text-xxs lg:text-xs xs:text-2xs sm:text-xxs md:text-xxs lg:text-xs font-bold mt-2 '>
                       {product.price}
                     </p>
-                    <p className='text-xs xs:text-xxs sm:text-xxs md:text-xxs mt-2'>
+                    <p className='text-xs xs:text-xxs sm:text-xxs md:text-xxs lg:text-xs md:text-xxs mt-1'>
                       <span className='font-bold'> Beden: </span>
                     </p>
-                    <p className='text-xs xs:text-xxs sm:text-xxs md:text-xxs'>
+                    <p className='text-xs xs:text-xxs sm:text-xxs md:text-xxs lg:text-xs'>
                       <span className='font-bold'> Renk:</span>
                     </p>
                   </div>
@@ -104,7 +112,7 @@ const CartItems = () => {
                   </button>
 
                   {/* Adet Güncelleme Butonları */}
-                  <div className='flex items-center space-x-2 xs:space-x-1 mt-12'>
+                  <div className='flex items-center space-x-2 xs:space-x-1 mt-12 xs:mt-16 sm:mt-0 md:mt-20 lg:mt-12'>
                     <button
                       className='bg-gray-200 px-2 py-0.2  rounded disabled:opacity-50 '
                       onClick={() =>
@@ -143,7 +151,7 @@ const CartItems = () => {
           </div>
 
           <div className='w-full lg:w-1/3 '>
-            <h3 className=' py-3 flex text-lg font-semibold  border-b border-gray-300 '>
+            <h3 className=' py-2 flex text-lg font-semibold  border-b border-gray-300 '>
               Sipariş Özeti
             </h3>
             <div className='mt-3 text-xs'>
@@ -169,7 +177,26 @@ const CartItems = () => {
                 <span>Toplam İndirim</span>
                 <span>-0,00 TL</span>
               </div>
-              <hr className='my-3' />
+              {/* Kampanya Kodu Alanı */}
+              <div className='flex justify-between items-center  py-2 '>
+                <p className='text-xs '>Kampanya Kodu</p>
+                <button
+                  className='text-black-600 text-xs font-semibold mt-2 '
+                  onClick={() => setIsCouponInputVisible(!isCouponInputVisible)}
+                >
+                  {isCouponInputVisible ? 'Kapat' : 'Ekle'}
+                </button>
+              </div>
+
+              {isCouponInputVisible && (
+                <input
+                  type='text'
+                  className='w-full border px-3 py-2 mt-2 rounded-md text-sm'
+                  placeholder='Kodu gir'
+                />
+              )}
+
+              <hr className='my-2' />
               <div className='flex justify-between text-lg font-semibold'>
                 <span>Toplam</span>
                 <span>
