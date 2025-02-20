@@ -81,17 +81,17 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
               </div>
 
               <div className='flex justify-end space-x-3 mt-4'>
-                <button className='w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full hover:bg-red-200'>
-                  <AiOutlineHeart size={18} />
+                <button className='w-8 h-8  flex items-center justify-center bg-gray-100 rounded-full hover:bg-red-200'>
+                  <AiOutlineHeart size={18} className='w-6 h-6  xs:w-4 xs:h-4 sm:w-4 sm:h-4 md:w-4 md:h-4 lg:w-4 lg:h-4' />
                 </button>
-                <button className='w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full hover:bg-red-200'>
-                  <AiOutlineEdit size={18} />
+                <button className='w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full hover:bg-red-200'>
+                  <AiOutlineEdit size={18} className='w-4 h-4  xs:w-4 xs:h-4 sm:w-4 sm:h-4 md:w-4 md:h-4 lg:w-4 lg:h-4' />
                 </button>
                 <button
                   onClick={() => dispatch(removeFromCart(product.id))}
-                  className='w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full hover:bg-red-200 text-black-600'
+                  className='w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full hover:bg-red-200 text-black-600'
                 >
-                  <AiOutlineDelete size={18} />
+                  <AiOutlineDelete size={18} className='w-6 h-6  xs:w-4 xs:h-4 sm:w-4 sm:h-4 md:w-4 md:h-4 lg:w-4 lg:h-4'/>
                 </button>
               </div>
             </div>
