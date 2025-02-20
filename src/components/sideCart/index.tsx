@@ -41,7 +41,7 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
       {/* Sepet Başlık ve Kapatma Butonu */}
       <div className='flex items-center justify-between p-5'>
         <h2 className='text-lg font-bold'>Sepet ({products.length})</h2>
-        <button onClick={onClose} className=' text-black-600 hover:text-black'>
+        <button onClick={onClose} className='text-black-600 hover:text-black'>
           <AiOutlineClose size={24} />
         </button>
       </div>
@@ -61,21 +61,23 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
       {/* Sepet Ürünleri */}
       <div className='p-5 overflow-y-auto flex-1 max-h-[400px]'>
         {products.map(product => (
-          <div className='flex items-start justify-between mb-3 pb-3 w-full   '>
+          <div
+            key={product.id}
+            className='flex items-start justify-between mb-3 pb-3 w-full'
+          >
             <Image
-              key={product.id}
               src={product.src}
               alt={product.title}
               width={80}
               height={80}
-              className='object-cover border border-gray-300 rounded-md shadow-md p-1 '
+              className='object-cover border border-gray-300 rounded-md shadow-md p-1'
             />
 
             {/* Ürün Bilgileri ve Butonlar */}
             <div className='flex-1 flex flex-col justify-between px-3'>
               <div>
-                <h3 className='text-sm  mb-1'>{product.title}</h3>
-                <p className='text-xs font-bold mb-2'>{product.price} </p>
+                <h3 className='text-sm mb-1'>{product.title}</h3>
+                <p className='text-xs font-bold mb-2'>{product.price}</p>
                 <p className='text-xs text-gray-500'>1 adet | M | Orta gri</p>
               </div>
 
@@ -98,10 +100,10 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
         ))}
 
         {/* Kampanya Kodu Alanı */}
-        <div className='flex justify-between items-center border-b border-gray-200 py-3 '>
-          <p className='text-sm '>Kampanya kodu</p>
+        <div className='flex justify-between items-center border-b border-gray-200 py-3'>
+          <p className='text-sm'>Kampanya kodu</p>
           <button
-            className='text-black-600 text-xs font-bold '
+            className='text-black-600 text-xs font-bold'
             onClick={() => setIsCouponInputVisible(!isCouponInputVisible)}
           >
             {isCouponInputVisible ? 'Kapat' : 'Ekle'}
@@ -118,7 +120,7 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
       </div>
 
       {/* Sipariş Bölümü */}
-      <div className='p-5  bg-white'>
+      <div className='p-5 bg-white'>
         <div className='flex justify-between text-base mb-3'>
           <span>Alt toplam ({products.length} ürün)</span>
           <span>
@@ -129,7 +131,7 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
             TL
           </span>
         </div>
-        <div className=' text-sm flex justify-between text-base mb-3'>
+        <div className='text-sm flex justify-between text-base mb-3'>
           <span>Kargo ücreti</span>
           <span className='text-sm text-green-600 font-semibold'>ÜCRETSİZ</span>
         </div>
