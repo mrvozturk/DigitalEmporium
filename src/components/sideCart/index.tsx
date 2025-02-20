@@ -37,7 +37,7 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
     <div
       className={`fixed right-5 w-96 h-[650px] bg-white shadow-2xl rounded-lg transform mt-1 ${
         isOpen ? 'scale-100 opacity-100' : 'scale-90 opacity-0'
-      } transition-all duration-300 z-50 flex flex-col`}
+      } transition-all duration-300 z-50 flex flex-col xs:hidden md:flex`}
     >
       {/* Sepet Başlık ve Kapatma Butonu */}
       <div className='flex items-center justify-between p-5'>
