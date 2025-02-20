@@ -42,7 +42,7 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
       {/* Sepet Başlık ve Kapatma Butonu */}
       <div className='flex items-center justify-between p-5'>
         <h2 className='text-lg font-bold'>Sepet ({products.length})</h2>
-        <button onClick={onClose} className='text-gray-600 hover:text-black'>
+        <button onClick={onClose} className=' text-black-600 hover:text-black'>
           <AiOutlineClose size={24} />
         </button>
       </div>
@@ -62,14 +62,13 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
       {/* Sepet Ürünleri */}
       <div className='p-5 overflow-y-auto flex-1 max-h-[400px]'>
         {products.map(product => (
-          <div className='flex items-start justify-between mb-3 pb-3 w-full'>
-            {/* Ürün Görseli */}
+          <div className='flex items-start justify-between mb-3 pb-3 w-full '>
             <Image
               src={product.src}
               alt={product.title}
               width={80}
               height={80}
-              className='object-contain'
+              className='object-contain border border-gray-300 rounded-md shadow-md'
             />
 
             {/* Ürün Bilgileri ve Butonlar */}
@@ -100,9 +99,9 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
 
         {/* Kampanya Kodu Alanı */}
         <div className='flex justify-between items-center border-b border-gray-200 py-3 '>
-          <p className='text-sm'>Kampanya kodu</p>
+          <p className='text-sm '>Kampanya kodu</p>
           <button
-            className='text-black-600 text-xs font-bold'
+            className='text-black-600 text-xs font-bold '
             onClick={() => setIsCouponInputVisible(!isCouponInputVisible)}
           >
             {isCouponInputVisible ? 'Kapat' : 'Ekle'}
