@@ -23,7 +23,7 @@ const CartItems = () => {
   }, 0);
 
   return (
-    <div className='w-full max-w-6xl mx-auto p-4 bg-white xs:p-2 sm:p-0 md:p-0 lg:p-0'>
+    <div className='w-full max-w-6xl mx-auto p-4 bg-white xs:p-2 sm:p-0 md:p-0 lg:p-4'>
       {cartItems.length === 0 ? (
         <div className='flex flex-col items-center text-center mt-20'>
           <AiOutlineShopping className='text-5xl mb-4' />
@@ -62,13 +62,13 @@ const CartItems = () => {
                 key={product.id}
                 className='flex border-b border-gray-300 py-4'
               >
-                <div className='w-24 h-[140px] xs:w-[120px] xs:h-[135px] md:w-36 md:h-[200px] lg:w-[137px] lg:h-[180px] border border-gray-300 rounded-md shadow-md p-1'>
+                <div className='flex items-start justify-between mb-3 pb-3 w-full xs:w-[140px] sm:w-30 md:w-40 lg:w-40  '>
                   <Image
                     src={product.src}
                     alt={product.title}
-                    width={300}
-                    height={500}
-                    className='w-full h-full object-contain'
+                    width={150}
+                    height={100}
+                    className='object-cover border border-gray-300 rounded-md shadow-md p-1 '
                   />
                 </div>
 
