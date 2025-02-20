@@ -62,7 +62,7 @@ const CartItems = () => {
                 key={product.id}
                 className='flex border-b py-2 border-gray-300 '
               >
-                <div className='flex items-start justify-between  w-full xs:w-[140px] sm:w-[110px] md:w-[110px] lg:w-[138px]  '>
+                <div className='flex items-start justify-between  w-full xs:w-40 sm:w-[110px] md:w-[110px] lg:w-[138px]  '>
                   <Image
                     src={product.src}
                     alt={product.title}
