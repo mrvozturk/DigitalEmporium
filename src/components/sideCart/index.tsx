@@ -62,13 +62,13 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
       {/* Sepet Ürünleri */}
       <div className='p-5 overflow-y-auto flex-1 max-h-[400px]'>
         {products.map(product => (
-          <div className='flex items-start justify-between mb-3 pb-3 w-full '>
+          <div className='flex items-start justify-between mb-3 pb-3 w-full   '>
             <Image
               src={product.src}
               alt={product.title}
               width={80}
               height={80}
-              className='object-contain border border-gray-300 rounded-md shadow-md'
+              className='object-cover border border-gray-300 rounded-md shadow-md p-1 '
             />
 
             {/* Ürün Bilgileri ve Butonlar */}
