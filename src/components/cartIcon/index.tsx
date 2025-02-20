@@ -15,19 +15,26 @@ const CartIcon = () => {
 
   const handleMouseEnter = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    dispatch(toggleCart(true));  // <-- Mouse hover ile aç
+    dispatch(toggleCart(true));
   };
 
   const handleMouseLeave = () => {
     timeoutRef.current = setTimeout(() => {
-      dispatch(toggleCart(false));  // <-- Mouse bırakınca kapat
+      dispatch(toggleCart(false));
     }, 10000);
   };
 
   return (
-    <div className='relative' onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <div
+      className='relative'
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       {/* Sepet İkonu */}
-      <Link href='/cart' className='flex items-center hover:text-gray-600 relative'>
+      <Link
+        href='/cart'
+        className='flex items-center hover:text-gray-600 relative'
+      >
         <span className='hidden md:block mr-6'>Sepet [{cartItems.length}]</span>
         <div className='relative block md:hidden'>
           <AiOutlineShoppingCart className='text-xl' />
@@ -42,7 +49,10 @@ const CartIcon = () => {
       {/* SideCart */}
       {isCartOpen && (
         <div className='absolute top-12 right-0 w-[350px] z-50'>
-          <SideCart isOpen={isCartOpen} onClose={() => dispatch(toggleCart(false))} />
+          <SideCart
+            isOpen={isCartOpen}
+            onClose={() => dispatch(toggleCart(false))}
+          />
         </div>
       )}
     </div>
