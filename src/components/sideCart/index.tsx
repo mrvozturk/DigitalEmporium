@@ -62,14 +62,13 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
       <div className='p-5 overflow-y-auto flex-1 max-h-[400px]'>
         {products.map(product => (
           <div key={product.id} className='flex mb-3 pb-3 w-full '>
-            <div className='flex items-start  w-full xs:w-40 sm:w-[60px] md:w-[70px] lg:w-[80px] '>
-              {' '}
+            <div className='flex items-start justify-between  w-full xs:w-40 sm:w-[82px] md:w-[80px] lg:w-[80px]  '>
               <Image
                 src={product.src}
                 alt={product.title}
-                width={80}
-                height={80}
-                className='object-cover border border-gray-300 rounded-md shadow-md p-1'
+                width={120}
+                height={120}
+                className='object-contain border border-gray-300 rounded-md shadow-md p-1 w-[80px] h-[150px]'
               />
             </div>
             {/* Ürün Bilgileri ve Butonlar */}
@@ -82,16 +81,25 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
 
               <div className='flex justify-end space-x-3 mt-4'>
                 <button className='w-8 h-8  flex items-center justify-center bg-gray-100 rounded-full hover:bg-red-200'>
-                  <AiOutlineHeart size={18} className='w-6 h-6  xs:w-4 xs:h-4 sm:w-4 sm:h-4 md:w-4 md:h-4 lg:w-4 lg:h-4' />
+                  <AiOutlineHeart
+                    size={18}
+                    className='w-6 h-6  xs:w-4 xs:h-4 sm:w-4 sm:h-4 md:w-4 md:h-4 lg:w-4 lg:h-4'
+                  />
                 </button>
                 <button className='w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full hover:bg-red-200'>
-                  <AiOutlineEdit size={18} className='w-4 h-4  xs:w-4 xs:h-4 sm:w-4 sm:h-4 md:w-4 md:h-4 lg:w-4 lg:h-4' />
+                  <AiOutlineEdit
+                    size={18}
+                    className='w-4 h-4  xs:w-4 xs:h-4 sm:w-4 sm:h-4 md:w-4 md:h-4 lg:w-4 lg:h-4'
+                  />
                 </button>
                 <button
                   onClick={() => dispatch(removeFromCart(product.id))}
                   className='w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full hover:bg-red-200 text-black-600'
                 >
-                  <AiOutlineDelete size={18} className='w-6 h-6  xs:w-4 xs:h-4 sm:w-4 sm:h-4 md:w-4 md:h-4 lg:w-4 lg:h-4'/>
+                  <AiOutlineDelete
+                    size={18}
+                    className='w-6 h-6  xs:w-4 xs:h-4 sm:w-4 sm:h-4 md:w-4 md:h-4 lg:w-4 lg:h-4'
+                  />
                 </button>
               </div>
             </div>
