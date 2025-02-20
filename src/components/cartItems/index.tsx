@@ -66,9 +66,9 @@ const CartItems = () => {
                   <Image
                     src={product.src}
                     alt={product.title}
-                    width={150}
-                    height={100}
-                    className='object-cover border border-gray-300 rounded-md shadow-md p-2 '
+                    width={120}
+                    height={120}
+                    className='object-contain border border-gray-300 rounded-md shadow-md p-1 w-[120px] h-[120px]'
                   />
                 </div>
 
