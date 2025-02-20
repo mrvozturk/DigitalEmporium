@@ -1,7 +1,6 @@
 'use client';
 import { useDispatch } from 'react-redux';
-import { addToCart } from '@/lib/features/cart/cartSlice';
-
+import { addToCart, toggleCart } from '@/lib/features/cart/cartSlice';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 
 export function AddToCartButton({
@@ -19,9 +18,8 @@ export function AddToCartButton({
 
   const handleClick = (event: React.MouseEvent) => {
     event.stopPropagation();
-    console.log('Sepete ekleniyor:', { id, src, title, price });
-
-    dispatch(addToCart({ id, src, quantity: 1, title, price }));
+    dispatch(addToCart({ id, src, title, price }));
+    dispatch(toggleCart(true)); 
   };
 
   return (

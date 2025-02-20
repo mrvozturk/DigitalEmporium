@@ -100,7 +100,6 @@ const CartItems = () => {
 
                 {/* Adet Güncelleme ve Çöp Kutusu */}
                 <div className='flex flex-col items-center gap-4 lg:gap-16 xs:gap-4 sm:gap-5 md:gap-5'>
-                  {/* Çöp Kutusu Butonu */}
                   <button
                     onClick={() => dispatch(removeFromCart(product.id))}
                     className=' text-black-500 hover:text-red-500  xs:ml-20 sm:ml-20 md:ml-20 lg:ml-15'

@@ -21,7 +21,6 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
   const [isCouponInputVisible, setIsCouponInputVisible] = useState(false);
 
-  // Eğer sepet boşsa ve isOpen true olsa bile pop-up hiç açılmayacak
   if (!isOpen || products.length === 0) return null;
 
   // Toplam fiyat hesaplama
@@ -64,6 +63,7 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
         {products.map(product => (
           <div className='flex items-start justify-between mb-3 pb-3 w-full   '>
             <Image
+              key={product.id}
               src={product.src}
               alt={product.title}
               width={80}
