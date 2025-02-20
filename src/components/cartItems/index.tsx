@@ -78,32 +78,35 @@ const CartItems = () => {
                     <p className='text-xs xs:text-xxs sm:text-xxs md:text-xxs lg:text-xs  '>
                       {product.title}
                     </p>
-                    <p className='text-xxs lg:text-xs xs:text-xxs sm:text-xxs md:text-xxs font-bold mt-2 '>
+                    <p className='text-xxs lg:text-xs xs:text-2xs sm:text-xxs md:text-xxs font-bold mt-2 '>
                       {product.price}
                     </p>
-                    <p className='text-xs mt-2'>
+                    <p className='text-xs xs:text-xxs sm:text-xxs md:text-xxs mt-2'>
                       <span className='font-bold'> Beden: </span>
                     </p>
-                    <p className='text-xs'>
+                    <p className='text-xs xs:text-xxs sm:text-xxs md:text-xxs'>
                       <span className='font-bold'> Renk:</span>
                     </p>
                   </div>
                 </div>
 
                 {/* Adet Güncelleme ve Çöp Kutusu */}
-                <div className='flex flex-col items-center gap-4'>
+                <div className='flex flex-col items-center gap-4 lg:gap-16 xs:gap-4 sm:gap-5 md:gap-5'>
                   {/* Çöp Kutusu Butonu */}
                   <button
                     onClick={() => dispatch(removeFromCart(product.id))}
-                    className='text-black-500 hover:text-red-500  xs:ml-20 sm:ml-20 md:ml-20 lg:ml-15'
+                    className=' text-black-500 hover:text-red-500  xs:ml-20 sm:ml-20 md:ml-20 lg:ml-15'
                   >
-                    <AiOutlineDelete size={18} />
+                    <AiOutlineDelete
+                      size={14}
+                      className='w-6 h-6  xs:w-4 xs:h-4 sm:w-4 sm:h-4 md:w-4 md:h-4 lg:w-5 lg:h-5'
+                    />
                   </button>
 
                   {/* Adet Güncelleme Butonları */}
-                  <div className='flex items-center space-x-2 mt-12'>
+                  <div className='flex items-center space-x-2 xs:space-x-1 mt-12'>
                     <button
-                      className='bg-gray-200 px-2 py-0.2 rounded disabled:opacity-50 '
+                      className='bg-gray-200 px-2 py-0.2  rounded disabled:opacity-50 '
                       onClick={() =>
                         product.quantity > 1 &&
                         dispatch(
@@ -121,7 +124,7 @@ const CartItems = () => {
                       {product.quantity}
                     </span>
                     <button
-                      className='bg-gray-200 px-2 py-0.2  rounded'
+                      className='bg-gray-200 px-2 py-0.2 rounded'
                       onClick={() =>
                         dispatch(
                           updateQuantity({
