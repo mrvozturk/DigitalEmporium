@@ -1,16 +1,16 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/lib/store';
 import Image from 'next/image';
 import { AiOutlineShopping, AiOutlineDelete } from 'react-icons/ai';
 import { removeFromCart, updateQuantity } from '@/lib/features/cart/cartSlice';
+import CouponInput from '../couponInput';
 
 const CartItems = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch();
-  const [isCouponInputVisible, setIsCouponInputVisible] = useState(false);
 
   const total = cartItems.reduce((acc, item) => {
     const cleanedPrice = item.price
@@ -175,26 +175,9 @@ const CartItems = () => {
                 <span>Toplam İndirim</span>
                 <span>-0,00 TL</span>
               </div>
-              {/* Kampanya Kodu Alanı */}
-              <div className='flex justify-between items-center  py-2 '>
-                <p className='text-xs '>Kampanya Kodu</p>
-                <button
-                  className='text-black-600 text-xs font-semibold mt-2 '
-                  onClick={() => setIsCouponInputVisible(!isCouponInputVisible)}
-                >
-                  {isCouponInputVisible ? 'Kapat' : 'Ekle'}
-                </button>
-              </div>
+              {/* 📌 Kupon Kodu Alanı */}
+              <CouponInput />
 
-              {isCouponInputVisible && (
-                <input
-                  type='text'
-                  className='w-full border px-3 py-2 mt-2 rounded-md text-sm'
-                  placeholder='Kodu gir'
-                />
-              )}
-
-              <hr className='my-2' />
               <div className='flex justify-between text-lg font-semibold'>
                 <span>Toplam</span>
                 <span>

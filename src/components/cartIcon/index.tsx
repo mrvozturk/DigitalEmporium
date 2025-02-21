@@ -21,7 +21,7 @@ const CartIcon = () => {
   const handleMouseLeave = () => {
     timeoutRef.current = setTimeout(() => {
       dispatch(toggleCart(false));
-    }, 10000);
+    }, 3000);
   };
 
   return (

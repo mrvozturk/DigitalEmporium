@@ -15,7 +15,7 @@ interface CartState {
 
 const initialState: CartState = {
   items: [],
-  isCartOpen: false // Sepet başlangıçta kapalı
+  isCartOpen: false
 };
 
 const cartSlice = createSlice({
@@ -32,7 +32,7 @@ const cartSlice = createSlice({
       } else {
         state.items.push({ ...action.payload, quantity: 1 });
       }
-      state.isCartOpen = true; // Sepete eklenince pop-up aç
+      state.isCartOpen = true;
     },
 
     /** Ürünü sepetten çıkarma */
