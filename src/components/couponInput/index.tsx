@@ -35,15 +35,17 @@ export default function CouponInput() {
         />
         <button
           onClick={applyCoupon}
-          className='px-4 py-2 text-black font-bold border-l border-gray-400 hover:bg-black hover:text-white'
+          className='px-4 py-2 text-black font-bold border-l border-gray-400 hover:bg-black hover:text-white '
         >
           EKLE
         </button>
+       
       </div>
 
       {error && (
-        <span className='text-red-600 text-xs mt-1 text-left'>{error}</span>
+        <span className='text-red-600 text-xs mt-1 text-left '>{error}</span>
       )}
+
     </div>
   );
 }

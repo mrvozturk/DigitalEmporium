@@ -178,7 +178,7 @@ const CartItems = () => {
               {/* 📌 Kupon Kodu Alanı */}
               <CouponInput />
 
-              <div className='flex justify-between text-lg font-semibold'>
+              <div className='flex justify-between text-lg font-semibold border-t border-gray-300 py-2 border-b mb-2'>
                 <span>Toplam</span>
                 <span>
                   {total.toLocaleString('tr-TR', {
@@ -188,7 +188,6 @@ const CartItems = () => {
                   TL
                 </span>
               </div>
-              <hr className='my-3' />
 
               <button className='mt-2 w-full h-10 text-sm bg-black text-white  font-semibold'>
                 SİPARİŞİ TAMAMLA
