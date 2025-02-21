@@ -8,14 +8,14 @@ import { AiOutlineShoppingCart } from 'react-icons/ai';
 import SideCart from './../sideCart';
 
 const CartIcon = () => {
-  const cartItems = useSelector((state: RootState) => state.cart.items);
+  const products = useSelector((state: RootState) => state.cart.items);
   const isCartOpen = useSelector((state: RootState) => state.cart.isCartOpen);
   const dispatch = useDispatch();
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleMouseEnter = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    dispatch(toggleCart(true));
+    if (products.length > 0) dispatch(toggleCart(true));
   };
 
   const handleMouseLeave = () => {
@@ -35,19 +35,19 @@ const CartIcon = () => {
         href='/cart'
         className='flex items-center hover:text-gray-600 relative'
       >
-        <span className='hidden md:block mr-6'>Sepet [{cartItems.length}]</span>
+        <span className='hidden md:block mr-6'>Sepet [{products.length}]</span>
         <div className='relative block md:hidden'>
           <AiOutlineShoppingCart className='text-xl' />
-          {cartItems.length > 0 && (
+          {products.length > 0 && (
             <span className='absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full'>
-              {cartItems.length}
+              {products.length}
             </span>
           )}
         </div>
       </Link>
 
-      {/* SideCart */}
-      {isCartOpen && (
+      {/* SideCart  */}
+      {isCartOpen && products.length > 0 && (
         <div className='absolute top-12 right-0 w-[350px] z-50'>
           <SideCart
             isOpen={isCartOpen}

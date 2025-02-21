@@ -7,24 +7,18 @@ import Image from 'next/image';
 import { AiOutlineShopping, AiOutlineDelete } from 'react-icons/ai';
 import { removeFromCart, updateQuantity } from '@/lib/features/cart/cartSlice';
 import CouponInput from '../couponInput';
+import { calculateTotal } from './../../lib/utils/calculateTotal';
 
 const CartItems = () => {
-  const cartItems = useSelector((state: RootState) => state.cart.items);
+  const products = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch();
 
-  const total = cartItems.reduce((acc, item) => {
-    const cleanedPrice = item.price
-      .replace(/[^\d,]/g, '')
-      .replace(/\./g, '')
-      .replace(',', '.');
-
-    const price = parseFloat(cleanedPrice);
-    return acc + price * item.quantity;
-  }, 0);
+  // CalculateTotal
+  const total = calculateTotal(products);
 
   return (
     <div className='w-full max-w-6xl mx-auto p-4 bg-white xs:p-2 sm:p-0 md:p-0 lg:p-4'>
-      {cartItems.length === 0 ? (
+      {products.length === 0 ? (
         <div className='flex flex-col items-center text-center mt-20'>
           <AiOutlineShopping className='text-5xl mb-4' />
           <h2 className='text-xl font-bold mb-2'>Sepetiniz Boş</h2>
@@ -48,16 +42,14 @@ const CartItems = () => {
           {/*  Sepet Ürünleri */}
           <div className='flex-1 mt-2'>
             <div className='flex items-center justify-start border-b pb-2 mb-1'>
-              <h1 className='text-lg font-bold'>
-                SEPETİM ({cartItems.length})
-              </h1>
+              <h1 className='text-lg font-bold'>SEPETİM ({products.length})</h1>
 
               <span className='ml-4 text-gray-400 font-semibold'>
                 FAVORİLERİM
               </span>
             </div>
 
-            {cartItems.map(product => (
+            {products.map(product => (
               <div
                 key={product.id}
                 className='flex border-b py-2 border-gray-300 '
@@ -154,12 +146,9 @@ const CartItems = () => {
             </h3>
             <div className='mt-3 text-xs'>
               <div className='flex justify-between'>
-                <span>Ürünlerin Toplamı ({cartItems.length} ürün)</span>
+                <span>Ürünlerin Toplamı ({products.length} ürün)</span>
                 <span>
-                  {total.toLocaleString('tr-TR', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                  })}
+                  {total.toLocaleString('tr-TR', { minimumFractionDigits: 2 })}{' '}
                   TL
                 </span>
               </div>
@@ -181,10 +170,7 @@ const CartItems = () => {
               <div className='flex justify-between text-lg font-semibold border-t border-gray-300 py-2 border-b mb-2'>
                 <span>Toplam</span>
                 <span>
-                  {total.toLocaleString('tr-TR', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                  })}
+                  {total.toLocaleString('tr-TR', { minimumFractionDigits: 2 })}{' '}
                   TL
                 </span>
               </div>
