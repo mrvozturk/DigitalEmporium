@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 export default function CouponInput() {
   const [couponCode, setCouponCode] = useState('');
   const [error, setError] = useState('');
@@ -16,7 +15,7 @@ export default function CouponInput() {
       setError('Bu alan zorunludur.');
       return;
     }
-    if (couponCode !== 'VALIDCOUPON') {
+    if (couponCode !== 'DIGITALEMP25') {
       setError('Kupon kodu geçersizdir.');
       return;
     }
@@ -25,13 +24,13 @@ export default function CouponInput() {
   };
 
   return (
-    <div className='flex flex-col w-full max-w-sm mt-3 mb-3'>
-      <div className='flex border border-gray-400 '>
+    <div className='flex flex-col w-full mt-3 mb-3'>
+      <div className='flex border border-gray-400 w-full'>
         <input
           type='text'
           value={couponCode}
           onChange={handleInputChange}
-          className='flex-1 px-2 py-2 outline-none border-none '
+          className='flex-1 px-2 py-2 outline-none border-none w-full'
           placeholder='Kupon kodu girin'
         />
         <button
