@@ -56,7 +56,7 @@ const cartSlice = createSlice({
       }
     },
 
-    /** Ürün miktarını 1 azaltma */
+    /** Ürün miktarını azaltma */
     reduceQuantity: (state, action: PayloadAction<string>) => {
       const item = state.items.find(item => item.id === action.payload);
       if (item && item.quantity > 1) {
