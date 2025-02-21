@@ -54,7 +54,7 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
         <>
           {/* Ücretsiz Kargo Bilgisi */}
           <div className='px-6 py-3 border-b text-center'>
-            <p className='text-sm font-bold text-red-600'>
+            <p className='text-sm font-semibold text-red-600'>
               ÜCRETSİZ STANDART GÖNDERİ!
             </p>
             <p className='text-xs text-black'>
@@ -75,7 +75,9 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
                 />
                 <div className='flex-1 flex flex-col justify-between px-3'>
                   <div>
-                    <h3 className='text-sm mb-1'>{product.title}</h3>
+                    <h3 className='text-sm mb-1 xs:text-xs sm:text-xs md:text-xs lg:text-sm'>
+                      {product.title}
+                    </h3>
                     <p className='text-xs font-bold mb-2'>{product.price}</p>
                     <p className='text-xs text-gray-500'>
                       {product.quantity} adet | M | Orta gri
@@ -98,7 +100,7 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
                 </div>
               </div>
             ))}
-            {/* Kupon Alanı */}
+            {/* Kupon  */}
             <div className='text-xs'>
               <CouponInput />
             </div>
@@ -120,8 +122,13 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
               <span>Kargo ücreti</span>
               <span className='text-red-600 font-semibold'>ÜCRETSİZ</span>
             </div>
-            <div className='flex justify-between text-sm font-bold mb-3 '>
-              <span>Toplam (KDV dahil)</span>
+            <div className='flex justify-between text-sm font-semibold mb-3'>
+              <span>
+                Toplam{' '}
+                <span className='text-gray-400 font-normal text-xs'>
+                  (KDV dahil)
+                </span>
+              </span>
               <span>
                 {total.toLocaleString('tr-TR', {
                   minimumFractionDigits: 2,
@@ -130,6 +137,7 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
                 TL
               </span>
             </div>
+
             <button className='w-full text-sm bg-black text-white py-3 rounded-md hover:bg-white hover:text-black text-center font-semibold border border-black'>
               SİPARİŞİ İŞLEME AL
             </button>

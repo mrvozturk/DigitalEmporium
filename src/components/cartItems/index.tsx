@@ -75,7 +75,7 @@ const CartItems = () => {
                 {/* Ürün Bilgileri */}
                 <div className='l w-full ml-2 '>
                   <div className='flex flex-col flex-1 ml-1 text-start'>
-                    <p className='text-xs xs:text-xxs sm:text-xxs md:text-xxs lg:text-xs  '>
+                    <p className='text-xs xs:text-xxs sm:text-xxs md:text-xxs lg:text-sm  '>
                       {product.title}
                     </p>
                     <a
@@ -175,7 +175,7 @@ const CartItems = () => {
                 <span>Toplam İndirim</span>
                 <span>-0,00 TL</span>
               </div>
-              {/* 📌 Kupon Kodu Alanı */}
+              {/* Kupon  */}
               <CouponInput />
 
               <div className='flex justify-between text-lg font-semibold border-t border-gray-300 py-2 border-b mb-2'>
