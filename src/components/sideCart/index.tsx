@@ -54,7 +54,7 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
         <>
           {/* Ücretsiz Kargo Bilgisi */}
           <div className='px-6 py-3 border-b text-center'>
-            <p className='text-sm font-bold text-green-700'>
+            <p className='text-sm font-bold text-red-600'>
               ÜCRETSİZ STANDART GÖNDERİ!
             </p>
             <p className='text-xs text-black'>
@@ -106,7 +106,7 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
 
           {/* Sipariş Bilgileri */}
           <div className='p-5 border-t bg-white'>
-            <div className='flex justify-between text-base mb-3'>
+            <div className='flex justify-between text-base mb-3 text-xs'>
               <span>Alt toplam ({products.length} ürün)</span>
               <span>
                 {total.toLocaleString('tr-TR', {
@@ -116,11 +116,11 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
                 TL
               </span>
             </div>
-            <div className='flex justify-between text-base mb-3'>
+            <div className='flex justify-between text-base mb-3 text-xs'>
               <span>Kargo ücreti</span>
-              <span className='text-green-600 font-semibold'>ÜCRETSİZ</span>
+              <span className='text-red-600 font-semibold'>ÜCRETSİZ</span>
             </div>
-            <div className='flex justify-between text-sm font-bold mb-3'>
+            <div className='flex justify-between text-sm font-bold mb-3 '>
               <span>Toplam (KDV dahil)</span>
               <span>
                 {total.toLocaleString('tr-TR', {
@@ -130,7 +130,7 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
                 TL
               </span>
             </div>
-            <button className='w-full bg-green-600 text-white py-3 rounded-md hover:bg-green-700 text-center font-semibold text-lg'>
+            <button className='w-full text-sm bg-black text-white py-3 rounded-md hover:bg-white hover:text-black text-center font-semibold border border-black'>
               SİPARİŞİ İŞLEME AL
             </button>
           </div>
