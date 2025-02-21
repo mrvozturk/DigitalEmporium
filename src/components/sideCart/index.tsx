@@ -11,6 +11,7 @@ import {
 } from 'react-icons/ai';
 import Image from 'next/image';
 import CouponInput from '../couponInput';
+import { calculateTotal } from '@/lib/utils/calculateTotal';
 
 interface SideCartProps {
   isOpen: boolean;
@@ -22,15 +23,7 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
 
   if (!isOpen) return null;
-
-  // Ürün fiyatları hesaplama
-  const total = products.reduce((acc, item) => {
-    const cleanedPrice = item.price
-      .replace(/[^\d,]/g, '')
-      .replace(/\./g, '')
-      .replace(',', '.');
-    return acc + parseFloat(cleanedPrice) * item.quantity;
-  }, 0);
+  const total = calculateTotal(products);
 
   return (
     <div
@@ -111,11 +104,7 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
             <div className='flex justify-between text-base mb-3 text-xs'>
               <span>Alt toplam ({products.length} ürün)</span>
               <span>
-                {total.toLocaleString('tr-TR', {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2
-                })}
-                TL
+                {total.toLocaleString('tr-TR', { minimumFractionDigits: 2 })} TL
               </span>
             </div>
             <div className='flex justify-between text-base mb-3 text-xs'>
@@ -124,17 +113,13 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
             </div>
             <div className='flex justify-between text-sm font-semibold mb-3'>
               <span>
-                Toplam{' '}
+                Toplam
                 <span className='text-gray-400 font-normal text-xs'>
                   (KDV dahil)
                 </span>
               </span>
               <span>
-                {total.toLocaleString('tr-TR', {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2
-                })}
-                TL
+                {total.toLocaleString('tr-TR', { minimumFractionDigits: 2 })} TL
               </span>
             </div>
 
