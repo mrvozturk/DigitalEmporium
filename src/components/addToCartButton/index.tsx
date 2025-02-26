@@ -3,23 +3,20 @@ import { useDispatch } from 'react-redux';
 import { addToCart, toggleCart } from '@/lib/features/cart/cartSlice';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 
-export function AddToCartButton({
-  id,
-  src,
-  title,
-  price
-}: {
-  id: string;
-  src: string;
-  title: string;
-  price: string;
-}) {
+interface CartItem {
+  readonly id: string;
+  readonly src: string;
+  readonly title: string;
+  readonly price: string;
+}
+
+export function AddToCartButton({ id, src, title, price }: CartItem) {
   const dispatch = useDispatch();
 
   const handleClick = (event: React.MouseEvent) => {
     event.stopPropagation();
     dispatch(addToCart({ id, src, title, price }));
-    dispatch(toggleCart(true)); 
+    dispatch(toggleCart(true));
   };
 
   return (
