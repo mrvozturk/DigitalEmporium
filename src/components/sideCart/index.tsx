@@ -113,7 +113,7 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
             </div>
             <div className='flex justify-between text-sm font-semibold mb-3'>
               <span>
-                Toplam
+                Toplam{' '}
                 <span className='text-gray-400 font-normal text-xs'>
                   (KDV dahil)
                 </span>
