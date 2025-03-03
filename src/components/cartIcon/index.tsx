@@ -36,11 +36,12 @@ const CartIcon = () => {
 
   return (
     <div
-      role='button'
-      tabIndex={0}
+     
+
       className='relative'
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+ 
     >
       {/* Sepet İkonu */}
       <Link
