@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef, useEffect, useCallback } from 'react';
+import React, { useRef, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/lib/store';
 import { toggleCart } from '@/lib/features/cart/cartSlice';
@@ -28,35 +28,31 @@ const CartIcon = () => {
     }, 1000);
   }, [dispatch]);
 
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, []);
-
   return (
-    <div
-     
-
-      className='relative'
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
- 
-    >
-      {/* Sepet İkonu */}
+    <div className='relative'>
+      {/* Sepet Linki */}
       <Link
         href='/cart'
-        className='flex items-center hover:text-gray-600 relative'
+        className='relative flex items-center hover:text-gray-600'
       >
-        <span className='hidden md:block mr-6'>Sepet [{productCount}]</span>
-        <div className='relative md:hidden'>
-          <AiOutlineShoppingCart className='text-xl' />
-          {productCount > 0 && (
-            <span className='absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full'>
-              {productCount}
-            </span>
-          )}
-        </div>
+        <button
+          type='button'
+          className='flex items-center focus:outline-none'
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          onFocus={handleMouseEnter}
+          onBlur={handleMouseLeave}
+        >
+          <span className='hidden md:block mr-6'>Sepet [{productCount}]</span>
+          <div className='relative md:hidden'>
+            <AiOutlineShoppingCart className='text-xl' />
+            {productCount > 0 && (
+              <span className='absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full'>
+                {productCount}
+              </span>
+            )}
+          </div>
+        </button>
       </Link>
 
       {/* SideCart */}
