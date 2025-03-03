@@ -1,3 +1,4 @@
+'use client';
 import { useState } from 'react';
 export default function CouponInput() {
   const [couponCode, setCouponCode] = useState('');
@@ -24,6 +25,7 @@ export default function CouponInput() {
   };
 
   return (
+    
     <div className='flex flex-col w-full mt-3 mb-3'>
       <div className='flex border border-gray-400 w-full'>
         <input
