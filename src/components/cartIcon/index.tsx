@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/lib/store';
 import { toggleCart } from '@/lib/features/cart/cartSlice';
@@ -15,21 +15,29 @@ const CartIcon = () => {
   const dispatch = useDispatch();
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const handleMouseEnter = () => {
+  const handleMouseEnter = useCallback(() => {
     if (productCount > 0) {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
       dispatch(toggleCart(true));
     }
-  };
+  }, [dispatch, productCount]);
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = useCallback(() => {
     timeoutRef.current = setTimeout(() => {
       dispatch(toggleCart(false));
     }, 1000);
-  };
+  }, [dispatch]);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   return (
     <div
+      role='button'
+      tabIndex={0}
       className='relative'
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
