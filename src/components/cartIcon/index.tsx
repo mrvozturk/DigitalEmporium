@@ -5,7 +5,7 @@ import { RootState } from '@/lib/store';
 import { toggleCart } from '@/lib/features/cart/cartSlice';
 import Link from 'next/link';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
-import SideCart from './../sideCart';
+import SideCart from '../cartSidebar/sideCart';
 
 const CartIcon = () => {
   const productCount = useSelector(
