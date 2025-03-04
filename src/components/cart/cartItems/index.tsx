@@ -3,8 +3,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/lib/store';
 import { AiOutlineShopping } from 'react-icons/ai';
-import CartProductItem from './../cartProductItem';
-import CartSummary from './../cartSummary';
+import CartProductItem from '../cartProductItem';
+import CartSummary from '../cartSummary';
 
 const CartItems = () => {
   const products = useSelector((state: RootState) => state.cart.items);

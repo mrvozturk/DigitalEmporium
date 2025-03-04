@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/lib/store';
-import CouponInput from '../couponInput';
+import CouponInput from '../../couponInput';
 import { calculateTotal } from '@/lib/utils/calculateTotal';
 
 const CartSummary = () => {

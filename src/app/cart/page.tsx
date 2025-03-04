@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import FeatureSwiper from './../../components/swiper';
-import CartItems from '../../components/cartItems';
+import CartItems from '../../components/cart/cartItems';
 
 const CartPage: React.FC = () => {
   return (
