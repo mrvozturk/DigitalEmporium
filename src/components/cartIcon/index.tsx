@@ -14,10 +14,11 @@ const CartIcon = () => {
   const isCartOpen = useSelector((state: RootState) => state.cart.isCartOpen);
   const dispatch = useDispatch();
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-
   const handleMouseEnter = useCallback(() => {
     if (productCount > 0) {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
       dispatch(toggleCart(true));
     }
   }, [dispatch, productCount]);

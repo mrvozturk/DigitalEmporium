@@ -22,7 +22,10 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
   const products = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch();
 
-  if (!isOpen) return null;
+  if (!isOpen) {
+    return null;
+  }
+
   const total = calculateTotal(products);
 
   return (
