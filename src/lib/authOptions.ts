@@ -25,12 +25,11 @@ export const authOptions: NextAuthOptions = {
           method: 'POST',
           headers: myHeaders,
           body: raw
-          // redirect: 'follow' as RequestRedirect
         };
 
         const register = await (
           await fetch(
-            'https://postresql-api-pink.vercel.app/api/v1/user/register',
+            'https://postresql-api-git-generate-products-onatvaris-projects.vercel.app/api/v1/user/register',
             requestOptions
           )
         ).json();
@@ -63,21 +62,30 @@ export const authOptions: NextAuthOptions = {
           body: raw
         };
 
-        const login = await (
-          await fetch(
-            'https://postresql-api-pink.vercel.app/api/v1/user/login',
+        try {
+          const response = await fetch(
+            'https://postresql-api-git-generate-products-onatvaris-projects.vercel.app/api/v1/user/login',
             requestOptions
-          )
-        ).json();
+          );
 
-        console.log('login', login);
+          if (!response.ok) {
+            const errorText = await response.text();
+            console.error('Error Response:', errorText);
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
 
-        if (!login.user) {
-          console.error('Backend Error Response:', login);
-          throw new Error(JSON.stringify(login));
+          const login = await response.json();
+
+          if (!login.user) {
+            console.error('Backend Error Response:', login);
+            throw new Error(JSON.stringify(login));
+          }
+
+          return login.user;
+        } catch (error) {
+          console.error('Auth error:', error);
+          return null;
         }
-
-        return login.user;
       }
     })
   ],

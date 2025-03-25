@@ -1,7 +1,7 @@
 'use client';
 
 import 'react-datepicker/dist/react-datepicker.css';
-import React, { useState} from 'react';
+import React, { useState, forwardRef } from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import InputMask from 'react-input-mask';
 import {
@@ -22,6 +22,15 @@ interface CustomDateInputProps {
   onClick?: () => void;
   placeholder?: string;
 }
+
+const CustomDateInput = forwardRef<HTMLInputElement, CustomDateInputProps>((props, ref) => {
+  return (
+    <input ref={ref} {...props} />
+  );
+});
+
+CustomDateInput.displayName = 'CustomDateInput';
+
 const RegisterForm: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -105,6 +114,7 @@ const RegisterForm: React.FC = () => {
 
       if (response?.error) {
         console.error('Kayıt Hatası:', response.error);
+        console.error('Full Response:', response);
       } else {
         console.log('Kullanıcı başarıyla kaydedildi');
         router.push('/');
@@ -141,30 +151,6 @@ const RegisterForm: React.FC = () => {
       setShowPasswordCriteria(true);
     }
   };
-  const CustomDateInput: React.FC<CustomDateInputProps> = ({
-    value,
-    onClick,
-    placeholder
-  }) => (
-    <button
-      className='flex border border-gray-300 p-2 my-2 hover:border-gray-900'
-      onClick={onClick}
-      type='button'
-      aria-label='Tarih seçici aç'
-    >
-      <input
-        value={value}
-        placeholder={placeholder}
-        className='w-[calc(100%-20px)] p-0 border-0 outline-none text-xs cursor-pointer'
-        inputMode='text'
-        readOnly
-        aria-label={`Seçilen tarih: ${value ?? 'Henüz bir tarih seçilmedi'}`}
-      />
-      <AiOutlineCalendar className='text-[16px]' />
-    </button>
-  );
-
-  CustomDateInput.displayName = 'CustomDateInput';
 
   return (
     <div className='w-2/5 xs:w-[100%] sm:w-[100%] md:w-[40%]'>
