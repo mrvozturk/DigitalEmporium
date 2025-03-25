@@ -46,6 +46,7 @@ const LoginForm: React.FC = () => {
       password: form.password.value
     });
 
+    console.log('response', response)
     if (response?.error) {
       setLoginError('Geçersiz e-posta veya şifre');
       console.error('Giriş hatası:', response.error);

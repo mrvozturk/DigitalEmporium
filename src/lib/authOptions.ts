@@ -65,26 +65,29 @@ export const authOptions: NextAuthOptions = {
 
         const login = await (
           await fetch(
-            'https://postresql-api-pink.vercel.app/api/v1/user/login',
+            'http://192.168.1.106:3000/api/v1/user/login',
             requestOptions
           )
         ).json();
 
         console.log('login', login);
 
-        if (!login.user) {
+        if (!login.data.user) {
           console.error('Backend Error Response:', login);
           throw new Error(JSON.stringify(login));
         }
 
-        return login.user;
+        return login.data;
       }
     })
   ],
   callbacks: {
     // JWT callback to add user data to the token
     async jwt({ token, user }) {
+      console.log('token', token);
+      console.log('user', user);
       if (user) {
+        // token.user = user;
         token.user = user;
       }
       return token;
@@ -92,7 +95,10 @@ export const authOptions: NextAuthOptions = {
 
     // Session callback to pass token data into the session
     async session({ session, token }) {
+      console.log('session', session);
+      console.log('token', token);
       session.user = token.user as Session['user'];
+      console.log('session', session);
       return session;
     }
   }
