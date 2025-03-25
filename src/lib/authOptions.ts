@@ -56,11 +56,33 @@ export const authOptions: NextAuthOptions = {
       id: 'login',
       name: 'Login',
       credentials: {},
-      async authorize(credentials) {
-        return await fetchAuthData(
-          `${process.env.API_BASE_URL}user/login`,
-          credentials
-        );
+      async authorize(credentials, req) {
+        const myHeaders = new Headers();
+        myHeaders.append('Content-Type', 'application/json');
+
+        const raw = JSON.stringify(credentials);
+
+        const requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: raw
+        };
+
+        const login = await (
+          await fetch(
+            'http://192.168.1.106:3000/api/v1/user/login',
+            requestOptions
+          )
+        ).json();
+
+        console.log('login', login);
+
+        if (!login.data.user) {
+          console.error('Backend Error Response:', login);
+          throw new Error(JSON.stringify(login));
+        }
+
+        return login.data;
       }
     })
   ],
@@ -69,26 +91,22 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     // JWT token oluşturma ve güncelleme işlemleri
     async jwt({ token, user }) {
+      console.log('token', token);
+      console.log('user', user);
       if (user) {
-        // API'den gelen kullanıcı verilerini token'a ekliyoruz
-        if ((user as CustomUser).token && (user as CustomUser).user) {
-          token.accessToken = (user as CustomUser).token;
-          token.user = (user as CustomUser).user;
-        } else {
-          token.user = user;
-        }
+        // token.user = user;
+        token.user = user;
       }
       return token;
     },
 
-    // Oturum oluşturma ve güncelleme işlemleri
-    async session({ session, token }: { session: Session; token: JWT }) {
-      const customSession = session as CustomSession;
-
-      // Token'dan kullanıcı bilgilerini session'a aktarıyoruz
-      customSession.user = (token as any).user?.user ?? (token as any).user;
-
-      return customSession;
+    // Session callback to pass token data into the session
+    async session({ session, token }) {
+      console.log('session', session);
+      console.log('token', token);
+      session.user = token.user as Session['user'];
+      console.log('session', session);
+      return session;
     }
   }
 };

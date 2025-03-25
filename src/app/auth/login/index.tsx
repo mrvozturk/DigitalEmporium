@@ -89,7 +89,7 @@ const LoginForm: React.FC = () => {
         console.error('Giriş hatası:', response.error);
       } else {
         console.log('Başarıyla giriş yapıldı');
-        router.push('/profile');
+        router.push('/');
       }
     } catch (error) {
       // Beklenmeyen hatalar için
