@@ -96,7 +96,7 @@ export const getProducts = async (count: number): Promise<Product[]> => {
 export const getProduct = async (
   productId: string = 'B07ZPKBL9V'
 ): Promise<Product> => {
-  const url = `https://postresql-bcmp0fqoc-onatvaris-projects.vercel.app/api/v1/product/1`;
+  const url = `https://real-time-amazon-data.p.rapidapi.com/product-details?asin=${productId}&country=US`;
   const options = {
     method: 'GET',
     headers: {
@@ -108,7 +108,6 @@ export const getProduct = async (
   try {
     const response = await fetch(url, options);
     const result = await response.json();
-    return createProduct(result);
     if (result.data && Object.hasOwn(result.data, 'asin')) {
       return createProduct(result.data);
     } else {
