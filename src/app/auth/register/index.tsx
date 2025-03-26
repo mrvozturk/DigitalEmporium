@@ -101,15 +101,15 @@ const RegisterForm: React.FC = () => {
         firstName: form.firstName.value,
         lastName: form.lastName.value,
         password,
-        phoneNumber: form.phoneNumber.value,
+        phoneNumber: form.phoneNumber.value.replace(/\D/g, ''),
         gender: form.gender.value?.toUpperCase(),
-        birthDate: selectedDate ? selectedDate.toISOString().split('T')[0] : ''
+        birthDate: selectedDate ? selectedDate.toISOString().split('T')[0] : '',
+        username: 'ahmetyilmaz'
       };
       const response = await signIn('register', {
         redirect: false,
         callbackUrl: '/',
-        ...formData,
-        username: 'ahmetyilmaz'
+        ...formData
       });
 
       if (response?.error) {

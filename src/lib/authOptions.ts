@@ -25,11 +25,12 @@ export const authOptions: NextAuthOptions = {
           method: 'POST',
           headers: myHeaders,
           body: raw
+          // redirect: 'follow' as RequestRedirect
         };
 
         const register = await (
           await fetch(
-            'https://postresql-api-git-generate-products-onatvaris-projects.vercel.app/api/v1/user/register',
+            'https://postresql-api-pink.vercel.app/api/v1/user/register',
             requestOptions
           )
         ).json();
@@ -62,37 +63,31 @@ export const authOptions: NextAuthOptions = {
           body: raw
         };
 
-        try {
-          const response = await fetch(
-            'https://postresql-api-git-generate-products-onatvaris-projects.vercel.app/api/v1/user/login',
+        const login = await (
+          await fetch(
+            'http://192.168.1.106:3000/api/v1/user/login',
             requestOptions
-          );
+          )
+        ).json();
 
-          if (!response.ok) {
-            const errorText = await response.text();
-            console.error('Error Response:', errorText);
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
+        console.log('login', login);
 
-          const login = await response.json();
-
-          if (!login.user) {
-            console.error('Backend Error Response:', login);
-            throw new Error(JSON.stringify(login));
-          }
-
-          return login.user;
-        } catch (error) {
-          console.error('Auth error:', error);
-          return null;
+        if (!login.data.user) {
+          console.error('Backend Error Response:', login);
+          throw new Error(JSON.stringify(login));
         }
+
+        return login.data;
       }
     })
   ],
   callbacks: {
     // JWT callback to add user data to the token
     async jwt({ token, user }) {
+      console.log('token', token);
+      console.log('user', user);
       if (user) {
+        // token.user = user;
         token.user = user;
       }
       return token;
@@ -100,7 +95,10 @@ export const authOptions: NextAuthOptions = {
 
     // Session callback to pass token data into the session
     async session({ session, token }) {
+      console.log('session', session);
+      console.log('token', token);
       session.user = token.user as Session['user'];
+      console.log('session', session);
       return session;
     }
   }
