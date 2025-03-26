@@ -1,7 +1,7 @@
 'use client';
 
 import 'react-datepicker/dist/react-datepicker.css';
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import InputMask from 'react-input-mask';
 import {
@@ -167,7 +167,7 @@ const RegisterForm: React.FC = () => {
   CustomDateInput.displayName = 'CustomDateInput';
 
   return (
-    <div className='w-2/5 xs:w-[100%] sm:w-[100%] md:w-[40%]'>
+    <div className='w-2/5 xs:w-[100%] sm:w-[100%] md:w-[100%] lg:w-[40%] xl:w-[40%]  xs:p-0 sm:p-0 md:p-4 lg:p-4 xl:p-4'>
       <h2 className='mt-2'>Kayıt Ol</h2>
       <form className='flex flex-col' onSubmit={validateForm} noValidate>
         <input
