@@ -5,14 +5,6 @@ import LogoutButton from '@/components/logout';
 import { CustomSession, UserProfile } from '@/lib/types/auth';
 import { authOptions } from '@/lib/authOptions';
 
-/**
- * Kullanıcı Profil Sayfası
- *
- * Kullanıcının profil bilgilerini gösterir:
- * - Kişisel bilgiler (ad, soyad, e-posta, telefon, vb.)
- * - Çıkış yapma seçeneği
- * - Oturum kontrolü (giriş yapılmamışsa ana sayfaya yönlendirme)
- */
 const ProfilePage: React.FC = () => {
   const { user } = use(getServerSession(authOptions)) as CustomSession;
 
