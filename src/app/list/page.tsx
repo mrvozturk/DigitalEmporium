@@ -4,29 +4,64 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { AiOutlineHeart } from 'react-icons/ai';
 import Link from 'next/link';
-import { getProducts, Product } from '../../lib/data';
+
+import { Product } from './../../lib/types/product';
 import { AddToCartButton } from '../../components/addToCartButton';
 
-const ProductListing: React.FC = () => {
-  const [productData, setProductData] = useState<Product[]>([]);
-  const productCount = 8; // Gösterilecek ürün sayısı
+const ProductListing = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [refreshing, setRefreshing] = useState(false);
+
+  const fetchProducts = async () => {
+    try {
+      setRefreshing(true);
+      const response = await fetch('/api/product');
+      if (!response.ok) {
+        throw new Error('Ürünler alınırken hata oluştu.');
+      }
+      const data = await response.json();
+      setProducts(data.products || []);
+      setError('');
+    } catch (error) {
+      setError('Ürünler alınırken hata oluştu');
+      console.error('Ürünler alınırken hata:', error);
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const products = await getProducts(productCount);
-      setProductData(products);
-    };
-
-    fetchData();
+    fetchProducts();
   }, []);
 
-  const addToFavorites = (productId: string) => {
-    console.log(`Product ${productId} added to favorites`);
-  };
+  if (loading && !refreshing) {
+    return (
+      <div className='flex justify-center items-center min-h-[60vh]'>
+        <div className='animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-gray-900'></div>
+      </div>
+    );
+  }
+
+  if (error && !products.length) {
+    return (
+      <div className='flex flex-col justify-center items-center min-h-[60vh] p-4 text-center'>
+        <p className='text-red-500 text-lg mb-4'>{error}</p>
+        <button
+          onClick={fetchProducts}
+          className='px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors'
+        >
+          Tekrar Dene
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className='grid gap-5 p-4 grid-cols-2 md:grid-cols-4'>
-      {productData.map(product => (
+      {products.map(product => (
         <div
           key={product.id}
           className='relative border border-gray-200 rounded-md shadow-md overflow-hidden'
@@ -36,42 +71,49 @@ const ProductListing: React.FC = () => {
               className='flex items-center justify-center w-8 h-8 rounded-full bg-gray-200'
               onClick={event => {
                 event.stopPropagation();
-                addToFavorites(product.id);
               }}
               aria-label='Favorilere ekle'
             >
               <AiOutlineHeart className='text-black text-lg' />
             </button>
             <AddToCartButton
-              id={product.id}
-              src={product.photo}
-              title={product.title}
-              price={product.price}
+              id={product.id.toString()}
+              src={product.image}
+              title={product.name}
+              price={product.price.toString()}
             />
           </div>
 
-          {/* Ürün Kartı */}
-          <Link href={`/product/${product.id}`} className='block'>
             <Image
-              src={product.photo}
-              alt={product.title}
+              src={product.image}
+              alt={product.name}
               priority
               width={300}
               height={300}
               className='w-full h-64 object-contain p-4'
             />
-            <div className='p-4'>
-              <h2 className='text-md font-bold tracking-tight leading-5 line-clamp-3 mb-2'>
-                {product.title}
+
+            <div className='flex flex-col justify-between mt-2 flex-1'>
+              <h2 className='text-md font-bold tracking-tight leading-5 line-clamp-3 mb-4 px-4'>
+                {product.name}
               </h2>
-              <p className='text-sm text-gray-500 mb-1'>
-                {product.rating.count} yorum
-              </p>
-              <p className='text-sm font-bold text-black'>{product.price} </p>
+
+              <div className='flex flex-col mt-2 mb-2 px-4'>
+                <div className='flex items-center mb-2'>
+                  <p className='text-sm text-gray-500'>
+                    {product.numRatings} yorum
+                  </p>
+                </div>
+
+                <div className='flex justify-between items-center'>
+                  <p className='text-sm font-bold text-black'>
+                    {product.price}₺
+                  </p>
+                </div>
+              </div>
             </div>
-          </Link>
-        </div>
-      ))}
+          </div>
+        ))}
     </div>
   );
 };
