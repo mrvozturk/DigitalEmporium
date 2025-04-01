@@ -19,8 +19,6 @@ const LoginForm: React.FC = () => {
   const [showLoginPassword, setShowLoginPassword] = useState<boolean>(false);
   // Form hata mesajlarını tutan state
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
-  // Giriş hatalarını tutan state
-  const [loginError, setLoginError] = useState<string | null>(null);
 
   /**
    * Form validasyonu
@@ -64,12 +62,8 @@ const LoginForm: React.FC = () => {
 
     // Validasyon hataları varsa işlemi durdur
     if (Object.keys(errors).length > 0) {
-      setLoginError(null);
       return;
     }
-
-    // Önceki hata mesajlarını temizle
-    setLoginError(null);
 
     try {
       // NextAuth ile giriş işlemi
@@ -84,10 +78,16 @@ const LoginForm: React.FC = () => {
         try {
           // API'den dönen hata JSON formatındaysa parse et
           const errorData = JSON.parse(response.error);
-          setLoginError(errorData.message || 'Geçersiz e-posta veya şifre');
+          setFormErrors(prevState => ({
+            ...prevState,
+            loginError: errorData.message || 'Geçersiz e-posta veya şifre'
+          }));
         } catch {
           // JSON parse hatası olursa genel hata mesajı göster
-          setLoginError('Geçersiz e-posta veya şifre');
+          setFormErrors(prevState => ({
+            ...prevState,
+            loginError: 'Geçersiz e-posta veya şifre'
+          }));
         }
         console.error('Giriş hatası:', response.error);
       } else {
@@ -98,9 +98,11 @@ const LoginForm: React.FC = () => {
     } catch (error) {
       // Beklenmeyen hatalar için
       console.error('Giriş işlemi sırasında bir hata oluştu:', error);
-      setLoginError(
-        'Giriş sırasında bir hata oluştu. Lütfen daha sonra tekrar deneyin.'
-      );
+      setFormErrors(prevState => ({
+        ...prevState,
+        loginError:
+          'Giriş sırasında bir hata oluştu. Lütfen daha sonra tekrar deneyin.'
+      }));
     }
   };
 
@@ -146,9 +148,9 @@ const LoginForm: React.FC = () => {
         )}
 
         {/* Giriş hatası mesajı */}
-        {loginError && (
+        {formErrors.loginError && (
           <p className='text-red-500 text-[0.8rem] items-center'>
-            {loginError}
+            {formErrors.loginError}
           </p>
         )}
 
