@@ -1,5 +1,6 @@
 import React from 'react';
-import { getProduct, Product } from '../../../lib/data';
+import { fetchProductById } from '@/app/api/product/route';
+import { Product } from '@/lib/types/product';
 import { AiFillStar } from 'react-icons/ai';
 import { SwiperImage } from '@/components';
 import ProductOverview from '@/components/productOverview';
@@ -21,43 +22,47 @@ export default async function Page({
 }) {
   const filters = searchParams;
   const { productId } = params;
-  const productDetail: Product = await getProduct(productId);
+  const product: Product | null = await fetchProductById(productId);
 
-  if (!productDetail) {
+  if (!product) {
     return <div>Loading...</div>;
   }
 
-  const starRating = Math.round(productDetail.rating.rate);
+  // Convert string rating to number
+  const starRating = Math.round(parseFloat(product.rating) || 0);
 
   return (
-    <main className='productDetail flex flex-row justify-between lg:px-4 lg:py-2 mx-auto sm:px-3 md:px-3  xs:flex-col xs:py-0 xs:justify-center'>
+    <main className='productDetail flex flex-row justify-between lg:px-4 lg:py-2 mx-auto sm:px-3 md:px-3 xs:flex-col xs:py-0 xs:justify-center'>
       {/* Display product overview */}
-      <ProductOverview productDetail={productDetail} starRating={starRating} />
+      <ProductOverview product={product} />
       {/* Image Thumbnails */}
       <div>
         <SwiperImage
-          productDetail={{
-            photos: productDetail.photos,
-            title: productDetail.title
-          }}
-          colors={productDetail.colors}
+          product={product}
+          colors={product.variations
+            .filter(v => v.colorValue)
+            .map(v => ({
+              value: v.value,
+              isAvailable: v.isAvailable,
+              colorValue: v.colorValue
+            }))}
         />
       </div>
 
-      <MainImage initialPhoto={productDetail.photo} filters={filters} />
+      <MainImage product={product} filters={filters} />
 
       {/* Product Info */}
       <div className='basis-[60%] bg-white px-3'>
-        <p className='text-[0.75rem] lg:text-[0.85rem] md:text-[0.75rem] sm:text-[0.85rem]  text-[#007185] font-semibold xs:hidden'>
-          {productDetail.brand}
+        <p className='text-[0.75rem] lg:text-[0.85rem] md:text-[0.75rem] sm:text-[0.85rem] text-[#007185] font-semibold xs:hidden'>
+          {product.brand}
         </p>{' '}
         <h1 className='flex font-weight-bold text-[#111] leading-[1.3] my-1 xs:text-[0.9rem] sm:text-[0.9rem] md:text-[1.2rem] lg:text-[1.3rem] xs:hidden'>
-          {productDetail.title}
+          {product.name}
         </h1>
         {/* Review Section */}
         <div className='reviewSection flex items-center lg:mt-2 sm:mt-1 md:mt-1'>
           <span className='text-base font-bold mr-1 lg:text-xs sm:text-[0.75rem] md:text-[0.65rem] xs:hidden'>
-            {productDetail.rating.rate.toFixed(1)}
+            {product.rating}
           </span>
 
           <div className='flex ml-0.5 mr-1'>
@@ -80,11 +85,11 @@ export default async function Page({
               href='#reviews'
               className="text-[0.75rem] text-[#007185] no-underline cursor-pointer hover:text-[#d47b00] hover:underline after:content-['|'] after:ml-1 after:mr-1 after:text-[#2c697d] last:after:content-[''] xs:text-[0.25rem] sm:text-[0.64rem] md:text-[0.6rem] lg:text-[0.7rem] xl:text-[0.75rem] xs:hidden"
             >
-              {productDetail.rating.count} değerlendirme
+              {product.numRatings} değerlendirme
             </a>
             <a
               href='#search'
-              className="text-[0.75rem] text-[#007185] no-underline cursor-pointer hover:text-[#d47b00] hover:underline after:content-['|'] after:ml-1 after:mr-1 after:text-[#2c697d] last:after:content-[''] xs:text-[0.25rem]  sm:text-[0.64rem] md:text-[0.6rem] lg:text-[0.7rem] xl:text-[0.75rem] xs:hidden"
+              className="text-[0.75rem] text-[#007185] no-underline cursor-pointer hover:text-[#d47b00] hover:underline after:content-['|'] after:ml-1 after:mr-1 after:text-[#2c697d] last:after:content-[''] xs:text-[0.25rem] sm:text-[0.64rem] md:text-[0.6rem] lg:text-[0.7rem] xl:text-[0.75rem] xs:hidden"
             >
               Bu sayfayı ara
             </a>
@@ -93,80 +98,77 @@ export default async function Page({
         <hr className='border-t border-gray-300 xs:hidden' />
         {/* Price Section */}
         <p className='text-base font-semibold text-black mt-2 xs:hidden '>
-          Price: <span>{productDetail.price}</span>
+          Price: <span>{product.price.toFixed(2)}₺</span>
         </p>
-        {!!productDetail.colors.length && (
+        {/* Color variations */}
+        {product.variations.some(v => v.colorValue) && (
           <ProductImageAndColors
-            colors={productDetail.colors}
+            colors={product.variations
+              .filter(v => v.colorValue)
+              .map(v => ({
+                value: v.value,
+                isAvailable: v.isAvailable,
+                colorValue: v.colorValue || '',
+                colorPhoto: v.colorPhoto || ''
+              }))}
             productId={productId}
           />
         )}
-        {!!productDetail.colors.length && (
+        {product.variations.some(v => v.colorValue) && (
           <ColorSelector
-            colors={productDetail.colors}
+            colors={product.variations
+              .filter(v => v.colorValue)
+              .map(v => ({
+                value: v.value,
+                isAvailable: v.isAvailable,
+                colorValue: v.colorValue || '',
+                colorPhoto: v.colorPhoto || ''
+              }))}
             productId={productId}
-            price={productDetail.price}
+            price={product.price.toFixed(2)}
           />
         )}
         {/* Size Selector */}
         <div>
-          <SizeSelector sizes={productDetail.sizes} />{' '}
+          <SizeSelector
+            sizes={product.variations
+              .filter(v => !v.colorValue)
+              .map(v => ({ value: v.value }))}
+          />
         </div>
-        {/* Size Selector */}
-        <div className=' mt-2 text-black text-[0.8rem] sm:text-[0.7rem] md:text-[0.8rem] lg:text-[0.9rem] xs:hidden'>
+        {/* Size Selector dropdown */}
+        <div className='mt-2 text-black text-[0.8rem] sm:text-[0.7rem] md:text-[0.8rem] lg:text-[0.9rem] xs:hidden'>
           <h2 className='hidden sm:block'>Size:</h2>
-          <select className='mt-1 w-[20%] p-1.5 border border-[#31737d] rounded-lg bg-gray-90 outline-none text-sm  text-[0.8rem] sm:text-[0.7rem] md:text-[0.9rem] lg:text-[0.8rem] focus:ring-2 focus:ring-teal-500 hover:border-gray-400 sm:w-[40%] md:w-[45%] md:text-base lg:w-[30%] xl:w-[25%]'>
-            {productDetail.sizes.map(size => (
-              <option key={size.value} value={size.value}>
-                {size.value}
-              </option>
-            ))}
+          <select className='mt-1 w-[20%] p-1.5 border border-[#31737d] rounded-lg bg-gray-90 outline-none text-sm text-[0.8rem] sm:text-[0.7rem] md:text-[0.9rem] lg:text-[0.8rem] focus:ring-2 focus:ring-teal-500 hover:border-gray-400 sm:w-[40%] md:w-[45%] md:text-base lg:w-[30%] xl:w-[25%]'>
+            {product.variations
+              .filter(v => !v.colorValue)
+              .map(size => (
+                <option key={size.value} value={size.value}>
+                  {size.value}
+                </option>
+              ))}
           </select>
         </div>
-        <ProductOverview
-          productDetail={productDetail}
-          starRating={starRating}
-          showProductDivider={true}
-        />
-        <ProductOverview
-          productDetail={productDetail}
-          starRating={starRating}
-          showPriceSection={true}
-        />
-        <ProductOverview
-          productDetail={productDetail}
-          starRating={starRating}
-          showPurchaseSection={true}
-        />
-        <hr className=' mt-4 mb-1 xs:block sm:hidden'></hr>
-        <ProductOverview
-          starRating={starRating}
-          productDetail={productDetail}
-          showDetailsSection={true}
-        />
+        <ProductOverview product={product} showProductDivider={true} />
+        <ProductOverview product={product} showPriceSection={true} />
+        <ProductOverview product={product} showPurchaseSection={true} />
+        <hr className='mt-4 mb-1 xs:block sm:hidden'></hr>
+        <ProductOverview product={product} showDetailsSection={true} />
         {/* Product Details */}
         <div className='mt-4 xs:hidden'>
           <h2 className='text-xl font-bold mb-2 text-black'>Product details</h2>
-          <div className='flex justify-start text-sm mb-3'>
-            <strong className='font-semibold text-black'>Fabric type</strong>
-            <span className='text-black text-sm ml-2'>
-              {productDetail.fabricType}
-            </span>
-          </div>
-          <div className='flex justify-start text-sm mb-3'>
-            <strong className='font-semibold text-black'>
-              Care instructions
-            </strong>
-            <span className='text-black text-sm ml-2'>
-              {productDetail.careInstructions}
-            </span>
-          </div>
-          <div className='flex justify-start text-sm mb-3'>
-            <strong className='font-semibold text-black'>Origin</strong>
-            <span className='text-black text-sm ml-2'>
-              {productDetail.origin}
-            </span>
-          </div>
+
+          {product.details &&
+            Object.entries(product.details).map(([key, value], index) => (
+              <div
+                className='flex justify-start text-sm mb-3'
+                key={`detail-${index}`}
+              >
+                <strong className='font-semibold text-black'>{key}</strong>
+                <span className='text-black text-sm ml-2'>{value}</span>
+              </div>
+            ))}
+
           <hr className='border-t border-gray-300 mt-2' />
         </div>
         <div className='flex flex-col leading-6'>
@@ -179,8 +181,8 @@ export default async function Page({
 
           <div className='text-[0.9rem] leading-6 text-gray-800 max-h-16 overflow-hidden transition-[max-height] duration-300 ease-in-out font-medium peer-checked:max-h-full sm:text-gray-700'>
             <ul>
-              {productDetail.about.map(point => (
-                <li key={point}>{point}</li>
+              {product.features.map((point, index) => (
+                <li key={`feature-${index}`}>{point}</li>
               ))}
             </ul>
           </div>

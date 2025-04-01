@@ -1,7 +1,7 @@
 'use client';
 
 import 'react-datepicker/dist/react-datepicker.css';
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import InputMask from 'react-input-mask';
 import {
@@ -81,8 +81,8 @@ const RegisterForm: React.FC = () => {
     const phoneNumber = form.phoneNumber.value.replace(/\D/g, '');
     if (!phoneNumber) {
       errors.phoneNumber = 'Bu alan zorunludur';
-    } else if (phoneNumber.length < 11) {
-      errors.phoneNumber = 'Bu alan en az 11 karakter olmalıdır';
+    } else if (phoneNumber.length !== 10) {
+      errors.phoneNumber = 'Telefon numarası 10 haneli olmalıdır';
     }
 
     setFormErrors(errors);
@@ -92,7 +92,7 @@ const RegisterForm: React.FC = () => {
         firstName: form.firstName.value,
         lastName: form.lastName.value,
         password,
-        phoneNumber: form.phoneNumber.value,
+        phoneNumber: form.phoneNumber.value.replace(/\D/g, ''),
         gender: form.gender.value?.toUpperCase(),
         birthDate: selectedDate ? selectedDate.toISOString().split('T')[0] : ''
       };
@@ -104,7 +104,24 @@ const RegisterForm: React.FC = () => {
       });
 
       if (response?.error) {
-        console.error('Kayıt Hatası:', response.error);
+        try {
+          const errorData = JSON.parse(response.error);
+          console.error('Kayıt Hatası:', errorData);
+          
+          // Backend'den gelen hatalar varsa form hatalarını güncelle
+          if (errorData.errors) {
+            setFormErrors(prev => ({
+              ...prev,
+              ...errorData.errors
+            }));
+          } else if (errorData.message) {
+            // Genel hata mesajı
+            alert(`Kayıt hatası: ${errorData.message}`);
+          }
+        } catch (e) {
+          console.error('Kayıt Hatası (JSON parse hatası):', response.error);
+          alert(`Kayıt sırasında bir hata oluştu: ${response.error}`);
+        }
       } else {
         console.log('Kullanıcı başarıyla kaydedildi');
         router.push('/');
@@ -167,7 +184,7 @@ const RegisterForm: React.FC = () => {
   CustomDateInput.displayName = 'CustomDateInput';
 
   return (
-    <div className='w-2/5 xs:w-[100%] sm:w-[100%] md:w-[40%]'>
+    <div className='w-2/5 xs:w-[100%] sm:w-[100%] md:w-[100%] lg:w-[40%] xl:w-[40%]  xs:p-0 sm:p-0 md:p-4 lg:p-4 xl:p-4'>
       <h2 className='mt-2'>Kayıt Ol</h2>
       <form className='flex flex-col' onSubmit={validateForm} noValidate>
         <input
@@ -274,7 +291,7 @@ const RegisterForm: React.FC = () => {
         )}
 
         <InputMask
-          mask='0 (599) 999 99 99'
+          mask='(999) 999 99 99'
           maskChar='_'
           alwaysShowMask={true}
           type='tel'
