@@ -6,98 +6,64 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 // Özel tip tanımlamalarını import ediyoruz
 import { CustomSession, CustomUser } from './types/auth';
 
-// NextAuth yapılandırma ayarları
+async function fetchWithError<T>(
+  url: string,
+  credentials: unknown
+): Promise<T> {
+  const headers = new Headers();
+  headers.append('Content-Type', 'application/json');
+  if (process.env.NODE_ENV === 'development') {
+    headers.append(
+      'x-vercel-protection-bypass',
+      'pAzEiUDxe0LtLxE6m24n6TgpsdsCzlcd'
+    );
+  }
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(credentials)
+    });
+    const result = await response.json();
+    if (!result.success) {
+      throw new Error(JSON.stringify(result));
+    }
+    return result.data;
+  } catch (error) {
+    throw error instanceof Error ? error : new Error(JSON.stringify(error));
+  }
+}
+
 export const authOptions: NextAuthOptions = {
-  // JWT token imzalama için kullanılacak gizli anahtar
   secret: process.env.NEXTAUTH_SECRET ?? process.env.SECRET,
 
-  // Oturum yönetimi için JWT stratejisini kullanıyoruz
   session: { strategy: 'jwt' },
 
-  // Özel sayfa yönlendirmeleri
   pages: { signIn: '/' },
 
-  // Kimlik doğrulama sağlayıcıları
   providers: [
-    // Kayıt işlemi için provider
     CredentialsProvider({
       id: 'register',
       name: 'Credentials',
       credentials: {},
       async authorize(credentials) {
-        const myHeaders = new Headers();
-        myHeaders.append('Content-Type', 'application/json');
-
-        if (process.env.NODE_ENV === 'development') {
-          myHeaders.append(
-            'x-vercel-protection-bypass',
-            'pAzEiUDxe0LtLxE6m24n6TgpsdsCzlcd'
-          );
-        }
-
-        try {
-          const response = await fetch(
-            'https://postresql-api-git-generate-products-onatvaris-projects.vercel.app/api/v1/user/register',
-            {
-              method: 'POST',
-              headers: myHeaders,
-              body: JSON.stringify(credentials)
-            }
-          );
-
-          const register = await response.json();
-
-          if (!register.success) {
-            throw new Error(JSON.stringify(register));
-          }
-
-          return register.data;
-        } catch (error) {
-          throw error instanceof Error
-            ? error
-            : new Error(JSON.stringify(error));
-        }
+        return await fetchWithError(
+          'https://postresql-api-git-generate-products-onatvaris-projects.vercel.app/api/v1/user/register',
+          credentials
+        );
       }
     }),
 
-    // Giriş işlemi için provider
     CredentialsProvider({
       id: 'login',
       name: 'Login',
       credentials: {},
       async authorize(credentials) {
-        const myHeaders = new Headers();
-        myHeaders.append('Content-Type', 'application/json');
-
-        if (process.env.NODE_ENV === 'development') {
-          myHeaders.append(
-            'x-vercel-protection-bypass',
-            'pAzEiUDxe0LtLxE6m24n6TgpsdsCzlcd'
-          );
-        }
-
-        try {
-          const response = await fetch(
-            'https://postresql-api-git-generate-products-onatvaris-projects.vercel.app/api/v1/user/login',
-            {
-              method: 'POST',
-              headers: myHeaders,
-              body: JSON.stringify(credentials)
-            }
-          );
-
-          const login = await response.json();
-
-          if (!login.success) {
-            throw new Error(JSON.stringify(login));
-          }
-
-          return login.data;
-        } catch (error) {
-          throw error instanceof Error
-            ? error
-            : new Error(JSON.stringify(error));
-        }
+        return await fetchWithError(
+          'https://postresql-api-git-generate-products-onatvaris-projects.vercel.app/api/v1/user/login',
+          credentials
+        );
       }
     })
   ],

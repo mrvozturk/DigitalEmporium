@@ -37,7 +37,14 @@ const RegisterForm: React.FC = () => {
     number: false,
     specialChar: false
   });
-
+  const parseRegistrationError = (error: string) => {
+    try {
+      return JSON.parse(error);
+    } catch (e) {
+      console.error('JSON parse error:', error);
+      return { message: error };
+    }
+  };
   const validateForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const errors: { [key: string]: string } = {};
@@ -104,23 +111,16 @@ const RegisterForm: React.FC = () => {
       });
 
       if (response?.error) {
-        try {
-          const errorData = JSON.parse(response.error);
-          console.error('Kayıt Hatası:', errorData);
-          
-          // Backend'den gelen hatalar varsa form hatalarını güncelle
-          if (errorData.errors) {
-            setFormErrors(prev => ({
-              ...prev,
-              ...errorData.errors
-            }));
-          } else if (errorData.message) {
-            // Genel hata mesajı
-            alert(`Kayıt hatası: ${errorData.message}`);
-          }
-        } catch (e) {
-          console.error('Kayıt Hatası (JSON parse hatası):', response.error);
-          alert(`Kayıt sırasında bir hata oluştu: ${response.error}`);
+        const errorData = parseRegistrationError(response.error);
+        console.error('Kayıt Hatası:', errorData);
+
+        if (errorData.errors) {
+          setFormErrors(prev => ({
+            ...prev,
+            ...errorData.errors
+          }));
+        } else if (errorData.message) {
+          alert(`Kayıt hatası: ${errorData.message}`);
         }
       } else {
         console.log('Kullanıcı başarıyla kaydedildi');

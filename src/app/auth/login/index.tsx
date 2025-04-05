@@ -47,7 +47,14 @@ const LoginForm: React.FC = () => {
     setFormErrors(errors);
     return errors;
   };
-
+  const parseSignInError = (error: string): string => {
+    try {
+      const { message } = JSON.parse(error);
+      return message || 'Geçersiz e-posta veya şifre';
+    } catch {
+      return 'Geçersiz e-posta veya şifre';
+    }
+  };
   /**
    * Form gönderildiğinde çalışan fonksiyon
    * - Form validasyonu yapar
@@ -74,24 +81,13 @@ const LoginForm: React.FC = () => {
       });
 
       if (response?.error) {
-        // Hata mesajını işle ve göster
-        try {
-          // API'den dönen hata JSON formatındaysa parse et
-          const errorData = JSON.parse(response.error);
-          setFormErrors(prevState => ({
-            ...prevState,
-            loginError: errorData.message || 'Geçersiz e-posta veya şifre'
-          }));
-        } catch {
-          // JSON parse hatası olursa genel hata mesajı göster
-          setFormErrors(prevState => ({
-            ...prevState,
-            loginError: 'Geçersiz e-posta veya şifre'
-          }));
-        }
+        const errorMessage = parseSignInError(response.error);
+        setFormErrors(prevState => ({
+          ...prevState,
+          loginError: errorMessage,
+        }));
         console.error('Giriş hatası:', response.error);
       } else {
-        // Giriş başarılı, profil sayfasına yönlendir
         console.log('Başarıyla giriş yapıldı');
         router.push('/profile');
       }
