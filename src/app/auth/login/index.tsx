@@ -50,7 +50,7 @@ const LoginForm: React.FC = () => {
   const parseSignInError = (error: string): string => {
     try {
       const { message } = JSON.parse(error);
-      return message || 'Geçersiz e-posta veya şifre';
+      return message ?? 'Geçersiz e-posta veya şifre';
     } catch {
       return 'Geçersiz e-posta veya şifre';
     }

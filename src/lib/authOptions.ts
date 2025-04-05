@@ -89,7 +89,7 @@ export const authOptions: NextAuthOptions = {
       const customSession = session as CustomSession;
 
       // Token'dan kullanıcı bilgilerini session'a aktarıyoruz
-      customSession.user = (token as any).user?.user || (token as any).user;
+      customSession.user = (token as any).user?.user ?? (token as any).user;
 
       return customSession;
     }
