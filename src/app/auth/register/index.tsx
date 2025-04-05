@@ -41,10 +41,15 @@ const RegisterForm: React.FC = () => {
     try {
       return JSON.parse(error);
     } catch (e) {
-      console.error('JSON parse error:', e instanceof Error ? e.message : 'Unknown error', error);
-      return { 
-        message: 'Beklenmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyin.',
-        originalError: error 
+      console.error(
+        'JSON parse error:',
+        e instanceof Error ? e.message : 'Unknown error',
+        error
+      );
+      return {
+        message:
+          'Beklenmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyin.',
+        originalError: error
       };
     }
   };
@@ -65,45 +70,46 @@ const RegisterForm: React.FC = () => {
         errors[field] = 'Bu alan zorunludur';
       }
     });
-    
+
     return errors;
   };
 
   const validateEmail = (email: string) => {
     if (!email) return 'Bu alan zorunludur';
-    
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) return 'Geçerli bir e-posta adresi girin';
-    
+
     return '';
   };
 
   const validatePassword = (password: string) => {
     if (!password) return 'Bu alan zorunludur';
-    
+
     const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*.?&])[A-Za-z\d@$!%*.?&]{8,}$/;
     if (!passwordRegex.test(password)) {
       setShowPasswordCriteria(true);
       return 'Karakterler kurallara göre girilmelidir';
     }
-    
+
     setShowPasswordCriteria(false);
     return '';
   };
 
   const validatePhoneNumber = (phoneNumber: string) => {
     if (!phoneNumber) return 'Bu alan zorunludur';
-    if (phoneNumber.length !== 10) return 'Telefon numarası 10 haneli olmalıdır';
+    if (phoneNumber.length !== 10)
+      return 'Telefon numarası 10 haneli olmalıdır';
     return '';
   };
 
   const validateForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
-    
+
     // Get initial errors from required fields
     const errors = validateRequiredFields(form);
-    
+
     // Validate email if not already marked as error
     if (!errors.email) {
       const emailError = validateEmail(form.email.value.trim());
@@ -118,7 +124,9 @@ const RegisterForm: React.FC = () => {
 
     // Validate phone number if not already marked as error
     if (!errors.phoneNumber) {
-      const phoneError = validatePhoneNumber(form.phoneNumber.value.replace(/\D/g, ''));
+      const phoneError = validatePhoneNumber(
+        form.phoneNumber.value.replace(/\D/g, '')
+      );
       if (phoneError) errors.phoneNumber = phoneError;
     }
 
@@ -126,7 +134,7 @@ const RegisterForm: React.FC = () => {
     if (!selectedDate) errors.birthdate = 'Bu alan zorunludur';
 
     setFormErrors(errors);
-    
+
     // Submit if no errors
     if (Object.keys(errors).length === 0) {
       await submitRegistrationForm(form);
@@ -143,7 +151,7 @@ const RegisterForm: React.FC = () => {
       gender: form.gender.value?.toUpperCase(),
       birthDate: selectedDate ? selectedDate.toISOString().split('T')[0] : ''
     };
-    
+
     const response = await signIn('register', {
       redirect: false,
       callbackUrl: '/',
@@ -154,15 +162,6 @@ const RegisterForm: React.FC = () => {
     if (response?.error) {
       const errorData = parseRegistrationError(response.error);
       console.error('Kayıt Hatası:', errorData);
-
-      if (errorData.errors) {
-        setFormErrors(prev => ({
-          ...prev,
-          ...errorData.errors
-        }));
-      } else if (errorData.message) {
-        alert(`Kayıt hatası: ${errorData.message}`);
-      }
     } else {
       console.log('Kullanıcı başarıyla kaydedildi');
       router.push('/');
