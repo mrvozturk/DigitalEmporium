@@ -47,7 +47,11 @@ export const authOptions: NextAuthOptions = {
 
           const register = await response.json();
 
-          if (!register.success) {
+          if (
+            !register.success ||
+            !register.data?.token ||
+            !register.data?.user
+          ) {
             throw new Error(JSON.stringify(register));
           }
 
@@ -88,7 +92,7 @@ export const authOptions: NextAuthOptions = {
 
           const login = await response.json();
 
-          if (!login.success) {
+          if (!login.success || !login.data?.token || !login.data?.user) {
             throw new Error(JSON.stringify(login));
           }
 
@@ -106,15 +110,8 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     // JWT token oluşturma ve güncelleme işlemleri
     async jwt({ token, user }) {
-      if (user) {
-        // API'den gelen kullanıcı verilerini token'a ekliyoruz
-        if ((user as CustomUser).token && (user as CustomUser).user) {
-          token.accessToken = (user as CustomUser).token;
-          token.user = (user as CustomUser).user;
-        } else {
-          token.user = user;
-        }
-      }
+      token.accessToken = (user as CustomUser).token;
+      token.user = (user as CustomUser).user;
       return token;
     },
 
@@ -124,11 +121,7 @@ export const authOptions: NextAuthOptions = {
 
       // Token'dan kullanıcı bilgilerini session'a aktarıyoruz
       customSession.user = (token as any).user?.user || (token as any).user;
-
-      // Token varsa session'a ekliyoruz
-      if ((token as any).accessToken) {
-        customSession.accessToken = (token as any).accessToken as string;
-      }
+      customSession.accessToken = (token as any).accessToken as string;
 
       return customSession;
     }
