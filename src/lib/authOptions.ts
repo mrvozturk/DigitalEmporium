@@ -6,7 +6,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 // Özel tip tanımlamalarını import ediyoruz
 import { CustomSession, CustomUser } from './types/auth';
 
-async function fetchWithError<T>(
+async function fetchAuthData<T>(
   url: string,
   credentials: unknown
 ): Promise<T> {
@@ -48,7 +48,7 @@ export const authOptions: NextAuthOptions = {
       name: 'Credentials',
       credentials: {},
       async authorize(credentials) {
-        return await fetchWithError(
+        return await fetchAuthData(
           'https://postresql-api-git-generate-products-onatvaris-projects.vercel.app/api/v1/user/register',
           credentials
         );
@@ -60,7 +60,7 @@ export const authOptions: NextAuthOptions = {
       name: 'Login',
       credentials: {},
       async authorize(credentials) {
-        return await fetchWithError(
+        return await fetchAuthData(
           'https://postresql-api-git-generate-products-onatvaris-projects.vercel.app/api/v1/user/login',
           credentials
         );
