@@ -6,16 +6,13 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 // Özel tip tanımlamalarını import ediyoruz
 import { CustomSession, CustomUser } from './types/auth';
 
-async function fetchAuthData<T>(
-  url: string,
-  credentials: unknown
-): Promise<T> {
+async function fetchAuthData<T>(url: string, credentials: unknown): Promise<T> {
   const headers = new Headers();
   headers.append('Content-Type', 'application/json');
   if (process.env.NODE_ENV === 'development') {
     headers.append(
       'x-vercel-protection-bypass',
-      'pAzEiUDxe0LtLxE6m24n6TgpsdsCzlcd'
+      `${process.env.VERCEL_BYPASS}`
     );
   }
 
@@ -49,7 +46,7 @@ export const authOptions: NextAuthOptions = {
       credentials: {},
       async authorize(credentials) {
         return await fetchAuthData(
-          'https://postresql-api-git-generate-products-onatvaris-projects.vercel.app/api/v1/user/register',
+          `${process.env.API_BASE_URL}user/register`,
           credentials
         );
       }
@@ -61,7 +58,7 @@ export const authOptions: NextAuthOptions = {
       credentials: {},
       async authorize(credentials) {
         return await fetchAuthData(
-          'https://postresql-api-git-generate-products-onatvaris-projects.vercel.app/api/v1/user/login',
+          `${process.env.API_BASE_URL}user/login`,
           credentials
         );
       }
