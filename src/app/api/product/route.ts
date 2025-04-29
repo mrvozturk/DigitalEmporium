@@ -10,7 +10,7 @@ const HEADERS = {
   'x-vercel-protection-bypass': process.env.VERCEL_BYPASS_KEY ?? ''
 };
 
-const fetchProducts = async (): Promise<Product[]> => {
+export const fetchProducts = async (): Promise<Product[]> => {
   try {
     const response = await fetch(API_URL, {
       method: 'GET',
@@ -64,7 +64,7 @@ export async function GET() {
 }
 
 // Fetch a single product by ID
-const fetchProductById = async (productId: string): Promise<Product | null> => {
+export const fetchProductById = async (productId: string): Promise<Product | null> => {
   try {
     const products = await fetchProducts();
     const product = products.find(p => p.id.toString() === productId);
