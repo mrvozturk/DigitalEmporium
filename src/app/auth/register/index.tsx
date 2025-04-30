@@ -40,8 +40,8 @@ const RegisterForm: React.FC = () => {
 
   const validateForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = e.currentTarget;
     const errors: { [key: string]: string } = {};
+    const form = e.target as HTMLFormElement;
     const requiredFields = [
       'email',
       'firstName',
@@ -81,8 +81,8 @@ const RegisterForm: React.FC = () => {
     const phoneNumber = form.phoneNumber.value.replace(/\D/g, '');
     if (!phoneNumber) {
       errors.phoneNumber = 'Bu alan zorunludur';
-    } else if (phoneNumber.length < 11) {
-      errors.phoneNumber = 'Bu alan en az 11 karakter olmalıdır';
+    } else if (phoneNumber.length !== 10) {
+      errors.phoneNumber = 'Telefon numarası 10 haneli olmalıdır';
     }
 
     setFormErrors(errors);
@@ -92,7 +92,7 @@ const RegisterForm: React.FC = () => {
         firstName: form.firstName.value,
         lastName: form.lastName.value,
         password,
-        phoneNumber: form.phoneNumber.value,
+        phoneNumber: form.phoneNumber.value.replace(/\D/g, ''),
         gender: form.gender.value?.toUpperCase(),
         birthDate: selectedDate ? selectedDate.toISOString().split('T')[0] : ''
       };
@@ -104,7 +104,24 @@ const RegisterForm: React.FC = () => {
       });
 
       if (response?.error) {
-        console.error('Kayıt Hatası:', response.error);
+        try {
+          const errorData = JSON.parse(response.error);
+          console.error('Kayıt Hatası:', errorData);
+          
+          // Backend'den gelen hatalar varsa form hatalarını güncelle
+          if (errorData.errors) {
+            setFormErrors(prev => ({
+              ...prev,
+              ...errorData.errors
+            }));
+          } else if (errorData.message) {
+            // Genel hata mesajı
+            alert(`Kayıt hatası: ${errorData.message}`);
+          }
+        } catch (e) {
+          console.error('Kayıt Hatası (JSON parse hatası):', response.error);
+          alert(`Kayıt sırasında bir hata oluştu: ${response.error}`);
+        }
       } else {
         console.log('Kullanıcı başarıyla kaydedildi');
         router.push('/');
