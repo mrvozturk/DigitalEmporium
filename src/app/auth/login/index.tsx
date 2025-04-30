@@ -13,13 +13,31 @@ import { useRouter } from 'next/navigation';
  * - Hata mesajlarını gösterme
  * - Giriş başarılı olduğunda yönlendirme
  */
+/**
+ * Giriş Formu Bileşeni
+ *
+ * Kullanıcı kimlik doğrulama işlemlerini yönetir:
+ * - Form validasyonu
+ * - Giriş işlemi (NextAuth ile)
+ * - Hata mesajlarını gösterme
+ * - Giriş başarılı olduğunda yönlendirme
+ */
 const LoginForm: React.FC = () => {
   const router = useRouter();
   // Şifre görünürlüğünü kontrol eden state
+  // Şifre görünürlüğünü kontrol eden state
   const [showLoginPassword, setShowLoginPassword] = useState<boolean>(false);
   // Form hata mesajlarını tutan state
+  // Form hata mesajlarını tutan state
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
+  // Giriş hatalarını tutan state
+  const [loginError, setLoginError] = useState<string | null>(null);
 
+  /**
+   * Form validasyonu
+   * - Gerekli alanların doldurulduğunu kontrol eder
+   * - E-posta formatını doğrular
+   */
   /**
    * Form validasyonu
    * - Gerekli alanların doldurulduğunu kontrol eder
@@ -30,12 +48,14 @@ const LoginForm: React.FC = () => {
     const requiredFields = ['email', 'password'];
 
     // Zorunlu alanları kontrol et
+    // Zorunlu alanları kontrol et
     requiredFields.forEach(field => {
       if (!form[field].value.trim()) {
         errors[field] = 'Bu alan zorunludur';
       }
     });
 
+    // E-posta formatını kontrol et
     // E-posta formatını kontrol et
     const email = form.email.value.trim();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -47,14 +67,7 @@ const LoginForm: React.FC = () => {
     setFormErrors(errors);
     return errors;
   };
-  const parseSignInError = (error: string): string => {
-    try {
-      const { message } = JSON.parse(error);
-      return message ?? 'Geçersiz e-posta veya şifre';
-    } catch {
-      return 'Geçersiz e-posta veya şifre';
-    }
-  };
+
   /**
    * Form gönderildiğinde çalışan fonksiyon
    * - Form validasyonu yapar
@@ -68,9 +81,13 @@ const LoginForm: React.FC = () => {
     const errors = validateForm(form);
 
     // Validasyon hataları varsa işlemi durdur
+    // Validasyon hataları varsa işlemi durdur
     if (Object.keys(errors).length > 0) {
       return;
     }
+
+    // Önceki hata mesajlarını temizle
+    setLoginError(null);
 
     try {
       // NextAuth ile giriş işlemi
@@ -81,32 +98,37 @@ const LoginForm: React.FC = () => {
       });
 
       if (response?.error) {
-        const errorMessage = parseSignInError(response.error);
-        setFormErrors(prevState => ({
-          ...prevState,
-          loginError: errorMessage,
-        }));
+        // Hata mesajını işle ve göster
+        try {
+          // API'den dönen hata JSON formatındaysa parse et
+          const errorData = JSON.parse(response.error);
+          setLoginError(errorData.message || 'Geçersiz e-posta veya şifre');
+        } catch {
+          // JSON parse hatası olursa genel hata mesajı göster
+          setLoginError('Geçersiz e-posta veya şifre');
+        }
         console.error('Giriş hatası:', response.error);
       } else {
+        // Giriş başarılı, profil sayfasına yönlendir
         console.log('Başarıyla giriş yapıldı');
-        router.push('/profile');
+        router.push('/');
       }
     } catch (error) {
       // Beklenmeyen hatalar için
       console.error('Giriş işlemi sırasında bir hata oluştu:', error);
-      setFormErrors(prevState => ({
-        ...prevState,
-        loginError:
-          'Giriş sırasında bir hata oluştu. Lütfen daha sonra tekrar deneyin.'
-      }));
+      setLoginError(
+        'Giriş sırasında bir hata oluştu. Lütfen daha sonra tekrar deneyin.'
+      );
     }
   };
 
+  // Form bileşeni render etme
   // Form bileşeni render etme
   return (
     <div className='loginFormContainer xs:w-[100%] sm:w-[100%] md:w-[100%] lg:w-[40%] xl:w-[40%] xs:p-0 sm:p-0 md:p-4 lg:p-4 xl:p-4 w-[40%] flex flex-col'>
       <h2 className='mt-2'>Giriş Yap</h2>
       <form onSubmit={handleSubmit} noValidate>
+        {/* E-posta giriş alanı */}
         {/* E-posta giriş alanı */}
         <input
           className='w-full px-2 py-2 mt-2 mb-2 border border-black border-opacity-20 outline-none text-sm'
@@ -121,6 +143,8 @@ const LoginForm: React.FC = () => {
         )}
 
         {/* Şifre giriş alanı */}
+
+        {/* Şifre giriş alanı */}
         <div className='password-input-container flex items-center justify-between border border-gray-300 hover:border-black px-3 py-2 mb-2 mt-2'>
           <input
             className='password-input flex-grow outline-none border-none text-sm'
@@ -128,6 +152,7 @@ const LoginForm: React.FC = () => {
             name='password'
             placeholder='Şifre*'
           />
+          {/* Şifre göster/gizle butonu */}
           {/* Şifre göster/gizle butonu */}
           <button
             type='button'
@@ -144,16 +169,20 @@ const LoginForm: React.FC = () => {
         )}
 
         {/* Giriş hatası mesajı */}
-        {formErrors.loginError && (
+        {loginError && (
           <p className='text-red-500 text-[0.8rem] items-center'>
             {formErrors.loginError}
           </p>
         )}
 
         {/* Şifremi unuttum butonu */}
+
+        {/* Şifremi unuttum butonu */}
         <button className='self-start text-black text-opacity-90 cursor-pointer text-sm mt-2 mb-5 md:text-sm'>
           <span className='underline inline-block'>Şifremi Unuttum</span>
         </button>
+
+        {/* Giriş yap butonu */}
 
         {/* Giriş yap butonu */}
         <button

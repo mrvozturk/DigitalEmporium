@@ -37,24 +37,10 @@ const RegisterForm: React.FC = () => {
     number: false,
     specialChar: false
   });
-  const parseRegistrationError = (error: string) => {
-    try {
-      return JSON.parse(error);
-    } catch (e) {
-      console.error(
-        'JSON parse error:',
-        e instanceof Error ? e.message : 'Unknown error',
-        error
-      );
-      return {
-        message:
-          'Beklenmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyin.',
-        originalError: error
-      };
-    }
-  };
 
-  const validateRequiredFields = (form: HTMLFormElement) => {
+  const validateForm = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
     const errors: { [key: string]: string } = {};
     const requiredFields = [
       'email',
@@ -71,101 +57,59 @@ const RegisterForm: React.FC = () => {
       }
     });
 
-    return errors;
-  };
-
-  const validateEmail = (email: string) => {
-    if (!email) return 'Bu alan zorunludur';
-
+    const email = form.email.value.trim();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) return 'Geçerli bir e-posta adresi girin';
-
-    return '';
-  };
-
-  const validatePassword = (password: string) => {
-    if (!password) return 'Bu alan zorunludur';
-
-    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*.?&])[A-Za-z\d@$!%*.?&]{8,}$/;
-    if (!passwordRegex.test(password)) {
-      setShowPasswordCriteria(true);
-      return 'Karakterler kurallara göre girilmelidir';
+    if (!email) {
+      errors.email = 'Bu alan zorunludur';
+    } else if (!emailRegex.test(email)) {
+      errors.email = 'Geçerli bir e-posta adresi girin';
     }
 
-    setShowPasswordCriteria(false);
-    return '';
-  };
-
-  const validatePhoneNumber = (phoneNumber: string) => {
-    if (!phoneNumber) return 'Bu alan zorunludur';
-    if (phoneNumber.length !== 10)
-      return 'Telefon numarası 10 haneli olmalıdır';
-    return '';
-  };
-
-  const validateForm = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.target as HTMLFormElement;
-
-    // Get initial errors from required fields
-    const errors = validateRequiredFields(form);
-
-    // Validate email if not already marked as error
-    if (!errors.email) {
-      const emailError = validateEmail(form.email.value.trim());
-      if (emailError) errors.email = emailError;
-    }
-
-    // Validate password if not already marked as error
-    if (!errors.password) {
-      const passwordError = validatePassword(form.password.value);
-      if (passwordError) errors.password = passwordError;
-    }
-
-    // Validate phone number if not already marked as error
-    if (!errors.phoneNumber) {
-      const phoneError = validatePhoneNumber(
-        form.phoneNumber.value.replace(/\D/g, '')
-      );
-      if (phoneError) errors.phoneNumber = phoneError;
-    }
-
-    // Validate birthdate
     if (!selectedDate) errors.birthdate = 'Bu alan zorunludur';
 
-    setFormErrors(errors);
-
-    // Submit if no errors
-    if (Object.keys(errors).length === 0) {
-      await submitRegistrationForm(form);
-    }
-  };
-
-  const submitRegistrationForm = async (form: HTMLFormElement) => {
-    const formData = {
-      email: form.email.value,
-      firstName: form.firstName.value,
-      lastName: form.lastName.value,
-      password: form.password.value,
-      phoneNumber: form.phoneNumber.value.replace(/\D/g, ''),
-      gender: form.gender.value?.toUpperCase(),
-      birthDate: selectedDate ? selectedDate.toISOString().split('T')[0] : ''
-    };
-
-    const response = await signIn('register', {
-      redirect: false,
-      callbackUrl: '/',
-      ...formData,
-      username: 'ahmetyilmaz'
-    });
-
-    if (response?.error) {
-      const errorData = parseRegistrationError(response.error);
-      console.error('Kayıt Hatası:', errorData);
+    const password = form.password.value;
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*.?&])[A-Za-z\d@$!%*.?&]{8,}$/;
+    if (!password) {
+      errors.password = 'Bu alan zorunludur';
+    } else if (!passwordRegex.test(password)) {
+      errors.password = 'Karakterler kurallara göre girilmelidir';
+      setShowPasswordCriteria(true);
     } else {
-      console.log('Kullanıcı başarıyla kaydedildi');
-      router.push('/');
-      dispatch(setRegisterData(formData));
+      setShowPasswordCriteria(false);
+    }
+
+    const phoneNumber = form.phoneNumber.value.replace(/\D/g, '');
+    if (!phoneNumber) {
+      errors.phoneNumber = 'Bu alan zorunludur';
+    } else if (phoneNumber.length < 11) {
+      errors.phoneNumber = 'Bu alan en az 11 karakter olmalıdır';
+    }
+
+    setFormErrors(errors);
+    if (Object.keys(errors).length === 0) {
+      const formData = {
+        email: form.email.value,
+        firstName: form.firstName.value,
+        lastName: form.lastName.value,
+        password,
+        phoneNumber: form.phoneNumber.value,
+        gender: form.gender.value?.toUpperCase(),
+        birthDate: selectedDate ? selectedDate.toISOString().split('T')[0] : ''
+      };
+      const response = await signIn('register', {
+        redirect: false,
+        callbackUrl: '/',
+        ...formData,
+        username: 'ahmetyilmaz'
+      });
+
+      if (response?.error) {
+        console.error('Kayıt Hatası:', response.error);
+      } else {
+        console.log('Kullanıcı başarıyla kaydedildi');
+        router.push('/');
+        dispatch(setRegisterData(formData));
+      }
     }
   };
 
