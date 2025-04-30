@@ -111,7 +111,7 @@ const LoginForm: React.FC = () => {
       } else {
         // Giriş başarılı, profil sayfasına yönlendir
         console.log('Başarıyla giriş yapıldı');
-        router.push('/profile');
+        router.push('/');
       }
     } catch (error) {
       // Beklenmeyen hatalar için

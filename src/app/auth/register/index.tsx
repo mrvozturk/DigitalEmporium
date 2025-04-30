@@ -37,24 +37,10 @@ const RegisterForm: React.FC = () => {
     number: false,
     specialChar: false
   });
-  const parseRegistrationError = (error: string) => {
-    try {
-      return JSON.parse(error);
-    } catch (e) {
-      console.error(
-        'JSON parse error:',
-        e instanceof Error ? e.message : 'Unknown error',
-        error
-      );
-      return {
-        message:
-          'Beklenmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyin.',
-        originalError: error
-      };
-    }
-  };
 
-  const validateRequiredFields = (form: HTMLFormElement) => {
+  const validateForm = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
     const errors: { [key: string]: string } = {};
     const requiredFields = [
       'email',
@@ -71,23 +57,22 @@ const RegisterForm: React.FC = () => {
       }
     });
 
-    return errors;
-  };
-
-  const validateEmail = (email: string) => {
-    if (!email) return 'Bu alan zorunludur';
-
+    const email = form.email.value.trim();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) return 'Geçerli bir e-posta adresi girin';
+    if (!email) {
+      errors.email = 'Bu alan zorunludur';
+    } else if (!emailRegex.test(email)) {
+      errors.email = 'Geçerli bir e-posta adresi girin';
+    }
 
-    return '';
-  };
+    if (!selectedDate) errors.birthdate = 'Bu alan zorunludur';
 
-  const validatePassword = (password: string) => {
-    if (!password) return 'Bu alan zorunludur';
-
+    const password = form.password.value;
     const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*.?&])[A-Za-z\d@$!%*.?&]{8,}$/;
-    if (!passwordRegex.test(password)) {
+    if (!password) {
+      errors.password = 'Bu alan zorunludur';
+    } else if (!passwordRegex.test(password)) {
+      errors.password = 'Karakterler kurallara göre girilmelidir';
       setShowPasswordCriteria(true);
     } else {
       setShowPasswordCriteria(false);
@@ -96,20 +81,18 @@ const RegisterForm: React.FC = () => {
     const phoneNumber = form.phoneNumber.value.replace(/\D/g, '');
     if (!phoneNumber) {
       errors.phoneNumber = 'Bu alan zorunludur';
-    } else if (phoneNumber.length !== 10) {
-      errors.phoneNumber = 'Telefon numarası 10 haneli olmalıdır';
+    } else if (phoneNumber.length < 11) {
+      errors.phoneNumber = 'Bu alan en az 11 karakter olmalıdır';
     }
 
     setFormErrors(errors);
-
-    // Submit if no errors
     if (Object.keys(errors).length === 0) {
       const formData = {
         email: form.email.value,
         firstName: form.firstName.value,
         lastName: form.lastName.value,
         password,
-        phoneNumber: form.phoneNumber.value.replace(/\D/g, ''),
+        phoneNumber: form.phoneNumber.value,
         gender: form.gender.value?.toUpperCase(),
         birthDate: selectedDate ? selectedDate.toISOString().split('T')[0] : ''
       };
@@ -121,24 +104,7 @@ const RegisterForm: React.FC = () => {
       });
 
       if (response?.error) {
-        try {
-          const errorData = JSON.parse(response.error);
-          console.error('Kayıt Hatası:', errorData);
-
-          // Backend'den gelen hatalar varsa form hatalarını güncelle
-          if (errorData.errors) {
-            setFormErrors(prev => ({
-              ...prev,
-              ...errorData.errors
-            }));
-          } else if (errorData.message) {
-            // Genel hata mesajı
-            alert(`Kayıt hatası: ${errorData.message}`);
-          }
-        } catch (e) {
-          console.error('Kayıt Hatası (JSON parse hatası):', response.error);
-          alert(`Kayıt sırasında bir hata oluştu: ${response.error}`);
-        }
+        console.error('Kayıt Hatası:', response.error);
       } else {
         console.log('Kullanıcı başarıyla kaydedildi');
         router.push('/');
@@ -308,7 +274,6 @@ const RegisterForm: React.FC = () => {
         )}
 
         <InputMask
-          mask='(999) 999 99 99'
           mask='(999) 999 99 99'
           maskChar='_'
           alwaysShowMask={true}
