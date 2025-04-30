@@ -1,106 +1,228 @@
-// NextAuth için gerekli temel tipleri import ediyoruz
-import { NextAuthOptions, Session } from 'next-auth';
-import { JWT } from 'next-auth/jwt';
-// Kimlik doğrulama için Credentials provider'ı import ediyoruz
+import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-// Özel tip tanımlamalarını import ediyoruz
-import { CustomSession, CustomUser } from './types/auth';
+import { CustomSession } from './types/auth';
 
-async function fetchAuthData<T>(url: string, credentials: unknown): Promise<T> {
-  const headers = new Headers();
-  headers.append('Content-Type', 'application/json');
-  if (process.env.NODE_ENV === 'development') {
-    headers.append(
-      'x-vercel-protection-bypass',
-      `${process.env.VERCEL_BYPASS}`
-    );
-  }
-
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers,
-      body: JSON.stringify(credentials)
-    });
-    const result = await response.json();
-    if (!result.success) {
-      throw new Error(JSON.stringify(result));
-    }
-    return result.data;
-  } catch (error) {
-    throw error instanceof Error ? error : new Error(JSON.stringify(error));
-  }
-}
-
+/**
+ * NextAuth Kimlik Doğrulama Ayarları
+ * Bu dosya kullanıcı kayıt, giriş ve oturum yönetimi için temel yapılandırmayı içerir
+ */
 export const authOptions: NextAuthOptions = {
+  // JWT için gizli anahtar, çevre değişkenlerinden alınır
   secret: process.env.NEXTAUTH_SECRET ?? process.env.SECRET,
 
-  session: { strategy: 'jwt' },
+  // Oturum yönetimi stratejisi olarak JWT kullanılır
+  session: {
+    strategy: 'jwt'
+  },
 
-  pages: { signIn: '/' },
+  // Özel sayfa yönlendirmeleri
+  pages: {
+    signIn: '/' // Giriş için ana sayfaya yönlendir
+  },
 
+  // Kimlik doğrulama sağlayıcıları
   providers: [
+    // Kayıt İşlemi Sağlayıcısı
     CredentialsProvider({
       id: 'register',
       name: 'Credentials',
       credentials: {},
-      async authorize(credentials) {
-        return await fetchAuthData(
-          `${process.env.API_BASE_URL}user/register`,
-          credentials
-        );
-      }
-    }),
-
-    CredentialsProvider({
-      id: 'login',
-      name: 'Login',
-      credentials: {},
       async authorize(credentials, req) {
+        // API isteği için header'lar oluştur
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
 
+        // Geliştirme ortamı için özel bypass header'ı ekle
+        if (process.env.NODE_ENV === 'development') {
+          myHeaders.append(
+            'x-vercel-protection-bypass',
+            'pAzEiUDxe0LtLxE6m24n6TgpsdsCzlcd'
+          );
+        }
+
+        // Kullanıcı bilgilerini JSON formatına dönüştür
         const raw = JSON.stringify(credentials);
 
+        // API isteği için ayarları oluştur
         const requestOptions = {
           method: 'POST',
           headers: myHeaders,
           body: raw
         };
 
-        const login = await (
-          await fetch(
-            'https://postresql-api-pink.vercel.app/api/v1/user/login',
+        try {
+          // Kayıt API'sine istek gönder
+          const response = await fetch(
+            'https://postresql-api-git-generate-products-onatvaris-projects.vercel.app/api/v1/user/register',
             requestOptions
-          )
-        ).json();
+          );
+          const register = await response.json();
 
-        console.log('login', login);
+          // Debug için yanıtı konsola yazdır
+          console.log('register response:', register);
+          console.log('register data structure:', register.data);
 
-        if (!login.user) {
-          console.error('Backend Error Response:', login);
-          throw new Error(JSON.stringify(login));
+          // Başarısız yanıt durumunda hata fırlat
+          if (!register.success) {
+            console.error('Backend Error Response:', register);
+            throw new Error(JSON.stringify(register));
+          }
+
+          // API yanıt yapısını işle
+          const responseData = register.data;
+
+          // Kullanıcı bilgilerini al (iki farklı yapıyı da destekler)
+          const userData = responseData.user || responseData;
+
+          // Token kontrolü
+          if (!responseData.token) {
+            console.warn(
+              'Backend API token döndürmedi. Kullanıcı girişi gerekecek.'
+            );
+
+            // Token yoksa, NextAuth'un kullanıcı oturumunu otomatik olarak oluşturmamasını sağla
+            // Bunun yerine frontend'de kullanıcıyı giriş sayfasına yönlendirmek daha güvenli
+            return {
+              ...userData,
+              id: userData.id || String(Date.now()),
+              requiresLogin: true // Frontend'e kullanıcının giriş yapması gerektiğini bildir
+            };
+          }
+
+          // Token varsa normal şekilde döndür
+          return {
+            ...userData,
+            id: userData.id || String(Date.now()),
+            token: responseData.token
+          };
+        } catch (error) {
+          // Hata durumunda loglama yap ve hata fırlat
+          console.error('Registration error:', error);
+          throw new Error(
+            error instanceof Error ? error.message : JSON.stringify(error)
+          );
+        }
+      }
+    }),
+
+    // Giriş İşlemi Sağlayıcısı
+    CredentialsProvider({
+      id: 'login',
+      name: 'Login',
+      credentials: {},
+      async authorize(credentials, req) {
+        // API isteği için header'lar oluştur
+        const myHeaders = new Headers();
+        myHeaders.append('Content-Type', 'application/json');
+
+        // Geliştirme ortamı için özel bypass header'ı ekle
+        if (process.env.NODE_ENV === 'development') {
+          myHeaders.append(
+            'x-vercel-protection-bypass',
+            'pAzEiUDxe0LtLxE6m24n6TgpsdsCzlcd'
+          );
         }
 
-        return login.user;
+        // Kullanıcı bilgilerini JSON formatına dönüştür
+        const raw = JSON.stringify(credentials);
+        console.log('raw', raw);
+
+        // API isteği için ayarları oluştur
+        const requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: raw
+        };
+
+        try {
+          // Giriş API'sine istek gönder
+          const response = await fetch(
+            'https://postresql-api-git-generate-products-onatvaris-projects.vercel.app/api/v1/user/login',
+            requestOptions
+          );
+          const login = await response.json();
+
+          // Başarısız yanıt durumunda hata fırlat
+          if (!login.success) {
+            console.error('Backend Error Response:', login);
+            throw new Error(JSON.stringify(login));
+          }
+
+          // API yanıt yapısını işle
+          const loginData = login.data;
+
+          // Kullanıcı bilgilerini al (iki farklı yapıyı da destekler)
+          const userData = loginData.user || loginData;
+
+          // Token kontrolü
+          if (!loginData.token) {
+            console.error('Login API token döndürmedi. Yetkilendirme hatası.');
+            throw new Error('Token alınamadı. Lütfen tekrar giriş yapın.');
+          }
+
+          // Token varsa normal şekilde döndür
+          return {
+            ...userData,
+            id: userData.id || String(Date.now()),
+            token: loginData.token
+          };
+        } catch (error) {
+          // Hata durumunda loglama yap ve hata fırlat
+          console.error('Login error:', error);
+          throw new Error(
+            error instanceof Error ? error.message : JSON.stringify(error)
+          );
+        }
       }
     })
   ],
 
-  // NextAuth callback fonksiyonları
+  // NextAuth geri çağrı fonksiyonları
   callbacks: {
-    // JWT token oluşturma ve güncelleme işlemleri
+    // JWT tokenı oluşturma ve güncelleme
     async jwt({ token, user }) {
       if (user) {
+        // Kullanıcı bilgilerini token'a ekle
         token.user = user;
+
+        // Kullanıcının giriş yapması gerekiyorsa işaretle
+        if ((user as any).requiresLogin) {
+          token.requiresLogin = true;
+          return token;
+        }
+
+        // Token bilgisini kontrol et
+        if (!(user as any).token) {
+          console.warn('JWT callback: Kullanıcı tokenı bulunamadı');
+          token.error = 'missing_token';
+        } else {
+          // Giriş/kayıt işleminden gelen token'ı kullan
+          token.accessToken = (user as any).token;
+        }
       }
       return token;
     },
 
-    // Session callback to pass token data into the session
-    async session({ session, token }) {
-      session.user = token.user as Session['user'];
-      return session;
+    // Oturum bilgilerini oluştur ve güncelle
+    async session({ session, token }: { session: any; token: any }) {
+      // Oturum nesnesini özel tipimize dönüştür
+      const customSession = session as CustomSession;
+
+      // Eğer kullanıcının giriş yapması gerekiyorsa veya token hatası varsa
+      if (token.requiresLogin || token.error === 'missing_token') {
+        customSession.error = token.error || 'requires_login';
+      }
+
+      // Token'dan kullanıcı bilgilerini oturuma kopyala
+      customSession.user = token.user as CustomSession['user'];
+
+      // Token bilgisini oturuma ekle
+      if (token.accessToken) {
+        customSession.accessToken = token.accessToken as string;
+      }
+
+      // Özelleştirilmiş oturumu döndür
+      return customSession;
     }
   }
 };

@@ -89,83 +89,61 @@ const RegisterForm: React.FC = () => {
     const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*.?&])[A-Za-z\d@$!%*.?&]{8,}$/;
     if (!passwordRegex.test(password)) {
       setShowPasswordCriteria(true);
-      return 'Karakterler kurallara göre girilmelidir';
+    } else {
+      setShowPasswordCriteria(false);
     }
 
-    setShowPasswordCriteria(false);
-    return '';
-  };
-
-  const validatePhoneNumber = (phoneNumber: string) => {
-    if (!phoneNumber) return 'Bu alan zorunludur';
-    if (phoneNumber.length !== 10)
-      return 'Telefon numarası 10 haneli olmalıdır';
-    return '';
-  };
-
-  const validateForm = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.target as HTMLFormElement;
-
-    // Get initial errors from required fields
-    const errors = validateRequiredFields(form);
-
-    // Validate email if not already marked as error
-    if (!errors.email) {
-      const emailError = validateEmail(form.email.value.trim());
-      if (emailError) errors.email = emailError;
+    const phoneNumber = form.phoneNumber.value.replace(/\D/g, '');
+    if (!phoneNumber) {
+      errors.phoneNumber = 'Bu alan zorunludur';
+    } else if (phoneNumber.length !== 10) {
+      errors.phoneNumber = 'Telefon numarası 10 haneli olmalıdır';
     }
-
-    // Validate password if not already marked as error
-    if (!errors.password) {
-      const passwordError = validatePassword(form.password.value);
-      if (passwordError) errors.password = passwordError;
-    }
-
-    // Validate phone number if not already marked as error
-    if (!errors.phoneNumber) {
-      const phoneError = validatePhoneNumber(
-        form.phoneNumber.value.replace(/\D/g, '')
-      );
-      if (phoneError) errors.phoneNumber = phoneError;
-    }
-
-    // Validate birthdate
-    if (!selectedDate) errors.birthdate = 'Bu alan zorunludur';
 
     setFormErrors(errors);
 
     // Submit if no errors
     if (Object.keys(errors).length === 0) {
-      await submitRegistrationForm(form);
-    }
-  };
+      const formData = {
+        email: form.email.value,
+        firstName: form.firstName.value,
+        lastName: form.lastName.value,
+        password,
+        phoneNumber: form.phoneNumber.value.replace(/\D/g, ''),
+        gender: form.gender.value?.toUpperCase(),
+        birthDate: selectedDate ? selectedDate.toISOString().split('T')[0] : ''
+      };
+      const response = await signIn('register', {
+        redirect: false,
+        callbackUrl: '/',
+        ...formData,
+        username: 'ahmetyilmaz'
+      });
 
-  const submitRegistrationForm = async (form: HTMLFormElement) => {
-    const formData = {
-      email: form.email.value,
-      firstName: form.firstName.value,
-      lastName: form.lastName.value,
-      password: form.password.value,
-      phoneNumber: form.phoneNumber.value.replace(/\D/g, ''),
-      gender: form.gender.value?.toUpperCase(),
-      birthDate: selectedDate ? selectedDate.toISOString().split('T')[0] : ''
-    };
+      if (response?.error) {
+        try {
+          const errorData = JSON.parse(response.error);
+          console.error('Kayıt Hatası:', errorData);
 
-    const response = await signIn('register', {
-      redirect: false,
-      callbackUrl: '/',
-      ...formData,
-      username: 'ahmetyilmaz'
-    });
-
-    if (response?.error) {
-      const errorData = parseRegistrationError(response.error);
-      console.error('Kayıt Hatası:', errorData);
-    } else {
-      console.log('Kullanıcı başarıyla kaydedildi');
-      router.push('/');
-      dispatch(setRegisterData(formData));
+          // Backend'den gelen hatalar varsa form hatalarını güncelle
+          if (errorData.errors) {
+            setFormErrors(prev => ({
+              ...prev,
+              ...errorData.errors
+            }));
+          } else if (errorData.message) {
+            // Genel hata mesajı
+            alert(`Kayıt hatası: ${errorData.message}`);
+          }
+        } catch (e) {
+          console.error('Kayıt Hatası (JSON parse hatası):', response.error);
+          alert(`Kayıt sırasında bir hata oluştu: ${response.error}`);
+        }
+      } else {
+        console.log('Kullanıcı başarıyla kaydedildi');
+        router.push('/');
+        dispatch(setRegisterData(formData));
+      }
     }
   };
 
@@ -330,6 +308,7 @@ const RegisterForm: React.FC = () => {
         )}
 
         <InputMask
+          mask='(999) 999 99 99'
           mask='(999) 999 99 99'
           maskChar='_'
           alwaysShowMask={true}
