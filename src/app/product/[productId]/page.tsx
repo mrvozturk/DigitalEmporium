@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchProductById } from '@/app/api/product/route';
+import { fetchProductById } from '@/services/productService';
 import { Product } from '@/lib/types/product';
 import { AiFillStar } from 'react-icons/ai';
 import { SwiperImage } from '@/components';

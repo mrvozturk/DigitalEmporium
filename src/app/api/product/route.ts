@@ -1,71 +1,9 @@
-import {
-  Product,
-  createProduct,
-  ApiResponse
-} from './../../../lib/types/product';
-
-const API_URL = `${process.env.NEXT_PUBLIC_API_URL}products`;
-const HEADERS = {
-  'Content-Type': 'application/json',
-  'x-vercel-protection-bypass': process.env.VERCEL_BYPASS_KEY ?? ''
-};
-
-// Tüm ürünleri getir
-export const fetchProducts = async (): Promise<Product[]> => {
-  try {
-    console.log('Ürünler getiriliyor:', API_URL);
-    console.log('Kullanılan başlıklar:', HEADERS);
-
-    const response = await fetch(API_URL, {
-      method: 'GET',
-      headers: HEADERS
-    });
-
-    console.log('API Yanıt durumu:', response.status);
-
-    if (!response.ok) {
-      throw new Error('Ürünleri getirirken bir hata oluştu.');
-    }
-
-    const data = (await response.json()) as ApiResponse;
-    console.log('API Yanıt verisi:', data);
-
-    if (!data.success) {
-      throw new Error(data.message || 'API yanıtı başarısız.');
-    }
-
-    const products = data.data.map(item => createProduct(item));
-    console.log('Oluşturulan ürünler:', products);
-    return products;
-  } catch (error) {
-    console.error('Ürün API Hatası:', error);
-    return [];
-  }
-};
-
-// ID'ye göre tek bir ürün getir
-export const fetchProductById = async (productId: string): Promise<Product | null> => {
-  try {
-    const products = await fetchProducts();
-    const product = products.find(p => p.id.toString() === productId);
-
-    if (!product) {
-      console.error(`${productId} ID'li ürün bulunamadı`);
-      return null;
-    }
-
-    return product;
-  } catch (error) {
-    console.error(`${productId} ID'li ürün getirilirken hata:`, error);
-    return null;
-  }
-};
+import { fetchProducts } from '@/services/productService';
 
 // GET metodu: Ürün listesini döndürür
 export async function GET() {
   try {
     const products = await fetchProducts();
-    console.log('Döndürülecek son ürünler:', products);
     return new Response(JSON.stringify({ products }), {
       status: 200,
       headers: {
@@ -73,8 +11,8 @@ export async function GET() {
       }
     });
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Bilinmeyen hata';
-    console.error('GET işleyicisinde hata:', errorMessage);
+    const errorMessage =
+      error instanceof Error ? error.message : 'Bilinmeyen hata';
     return new Response(
       JSON.stringify({
         error: 'Ürünler getirilemedi',
