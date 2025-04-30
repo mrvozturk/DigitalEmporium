@@ -2,25 +2,17 @@ import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { CustomSession } from './types/auth';
 
-/**
- * NextAuth Kimlik Doğrulama Ayarları
- * Bu dosya kullanıcı kayıt, giriş ve oturum yönetimi için temel yapılandırmayı içerir
- */
 export const authOptions: NextAuthOptions = {
-  // JWT için gizli anahtar, çevre değişkenlerinden alınır
   secret: process.env.NEXTAUTH_SECRET ?? process.env.SECRET,
 
-  // Oturum yönetimi stratejisi olarak JWT kullanılır
   session: {
     strategy: 'jwt'
   },
 
-  // Özel sayfa yönlendirmeleri
   pages: {
     signIn: '/' // Giriş için ana sayfaya yönlendir
   },
 
-  // Kimlik doğrulama sağlayıcıları
   providers: [
     // Kayıt İşlemi Sağlayıcısı
     CredentialsProvider({
@@ -28,11 +20,9 @@ export const authOptions: NextAuthOptions = {
       name: 'Credentials',
       credentials: {},
       async authorize(credentials, req) {
-        // API isteği için header'lar oluştur
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'application/json');
 
-        // Geliştirme ortamı için özel bypass header'ı ekle
         if (process.env.NODE_ENV === 'development') {
           myHeaders.append(
             'x-vercel-protection-bypass',
@@ -40,10 +30,8 @@ export const authOptions: NextAuthOptions = {
           );
         }
 
-        // Kullanıcı bilgilerini JSON formatına dönüştür
         const raw = JSON.stringify(credentials);
 
-        // API isteği için ayarları oluştur
         const requestOptions = {
           method: 'POST',
           headers: myHeaders,
@@ -72,7 +60,7 @@ export const authOptions: NextAuthOptions = {
           const responseData = register.data;
 
           // Kullanıcı bilgilerini al (iki farklı yapıyı da destekler)
-          const userData = responseData.user || responseData;
+          const userData = responseData.user ?? responseData;
 
           // Token kontrolü
           if (!responseData.token) {
@@ -84,7 +72,7 @@ export const authOptions: NextAuthOptions = {
             // Bunun yerine frontend'de kullanıcıyı giriş sayfasına yönlendirmek daha güvenli
             return {
               ...userData,
-              id: userData.id || String(Date.now()),
+              id: userData.id ?? String(Date.now()),
               requiresLogin: true // Frontend'e kullanıcının giriş yapması gerektiğini bildir
             };
           }
@@ -92,7 +80,7 @@ export const authOptions: NextAuthOptions = {
           // Token varsa normal şekilde döndür
           return {
             ...userData,
-            id: userData.id || String(Date.now()),
+            id: userData.id ?? String(Date.now()),
             token: responseData.token
           };
         } catch (error) {
@@ -135,24 +123,20 @@ export const authOptions: NextAuthOptions = {
         };
 
         try {
-          // Giriş API'sine istek gönder
           const response = await fetch(
             'https://postresql-api-git-generate-products-onatvaris-projects.vercel.app/api/v1/user/login',
             requestOptions
           );
           const login = await response.json();
 
-          // Başarısız yanıt durumunda hata fırlat
           if (!login.success) {
             console.error('Backend Error Response:', login);
             throw new Error(JSON.stringify(login));
           }
 
-          // API yanıt yapısını işle
           const loginData = login.data;
 
-          // Kullanıcı bilgilerini al (iki farklı yapıyı da destekler)
-          const userData = loginData.user || loginData;
+          const userData = loginData.user ?? loginData;
 
           // Token kontrolü
           if (!loginData.token) {
@@ -163,7 +147,7 @@ export const authOptions: NextAuthOptions = {
           // Token varsa normal şekilde döndür
           return {
             ...userData,
-            id: userData.id || String(Date.now()),
+            id: userData.id ?? String(Date.now()),
             token: loginData.token
           };
         } catch (error) {
@@ -177,26 +161,20 @@ export const authOptions: NextAuthOptions = {
     })
   ],
 
-  // NextAuth geri çağrı fonksiyonları
   callbacks: {
-    // JWT tokenı oluşturma ve güncelleme
     async jwt({ token, user }) {
       if (user) {
-        // Kullanıcı bilgilerini token'a ekle
         token.user = user;
 
-        // Kullanıcının giriş yapması gerekiyorsa işaretle
         if ((user as any).requiresLogin) {
           token.requiresLogin = true;
           return token;
         }
 
-        // Token bilgisini kontrol et
         if (!(user as any).token) {
           console.warn('JWT callback: Kullanıcı tokenı bulunamadı');
           token.error = 'missing_token';
         } else {
-          // Giriş/kayıt işleminden gelen token'ı kullan
           token.accessToken = (user as any).token;
         }
       }
@@ -210,7 +188,7 @@ export const authOptions: NextAuthOptions = {
 
       // Eğer kullanıcının giriş yapması gerekiyorsa veya token hatası varsa
       if (token.requiresLogin || token.error === 'missing_token') {
-        customSession.error = token.error || 'requires_login';
+        customSession.error = token.error ?? 'requires_login';
       }
 
       // Token'dan kullanıcı bilgilerini oturuma kopyala
