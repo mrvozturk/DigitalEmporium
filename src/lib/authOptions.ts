@@ -53,7 +53,7 @@ export const authOptions: NextAuthOptions = {
         try {
           // Kayıt API'sine istek gönder
           const response = await fetch(
-            'https://postresql-api-git-generate-products-onatvaris-projects.vercel.app/api/v1/user/register',
+            'https://postresql-api-pink.vercel.app/api/v1/user/register',
             requestOptions
           );
           const register = await response.json();
@@ -137,7 +137,7 @@ export const authOptions: NextAuthOptions = {
         try {
           // Giriş API'sine istek gönder
           const response = await fetch(
-            'https://postresql-api-git-generate-products-onatvaris-projects.vercel.app/api/v1/user/login',
+            'https://postresql-api-pink.vercel.app/api/v1/user/login',
             requestOptions
           );
           const login = await response.json();
