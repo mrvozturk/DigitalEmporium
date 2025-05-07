@@ -4,11 +4,13 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
+
 const LoginForm: React.FC = () => {
   const router = useRouter();
   const [showLoginPassword, setShowLoginPassword] = useState<boolean>(false);
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
   const [loginError, setLoginError] = useState<string | null>(null);
+
 
   const validateForm = (form: HTMLFormElement) => {
     const errors: { [key: string]: string } = {};
@@ -31,6 +33,7 @@ const LoginForm: React.FC = () => {
     return errors;
   };
 
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -44,28 +47,18 @@ const LoginForm: React.FC = () => {
 
     try {
       const response = await signIn('login', {
-        redirect: false,
+        redirect: false, 
         email: form.email.value,
         password: form.password.value
       });
 
       if (response?.error) {
-        let errorMessage = 'Geçersiz e-posta veya şifre';
-        
         try {
-          if (typeof response.error === 'string') {
-            if (response.error.startsWith('{') || response.error.startsWith('[')) {
-              const errorData = JSON.parse(response.error);
-              errorMessage = errorData.message || errorMessage;
-            } else {
-              errorMessage = response.error;
-            }
-          }
-        } catch (parseError) {
-          console.error('Hata mesajı parse edilemedi:', parseError);
+          const errorData = JSON.parse(response.error);
+          setLoginError(errorData.message || 'Geçersiz e-posta veya şifre');
+        } catch {
+          setLoginError('Geçersiz e-posta veya şifre');
         }
-
-        setLoginError(errorMessage);
         console.error('Giriş hatası:', response.error);
       } else {
         console.log('Başarıyla giriş yapıldı');

@@ -1,9 +1,6 @@
 import { Session, User } from 'next-auth';
 
-/**
- * Kullanıcı Profil Bilgileri
- * Kullanıcının temel profil bilgilerini içeren tip
- */
+
 export interface UserProfile {
   id?: number;
   email?: string;
@@ -15,29 +12,20 @@ export interface UserProfile {
   [key: string]: any;
 }
 
-/**
- * NextAuth User tipini genişleten özel kullanıcı tipi
- * API yanıtından gelen token ve user bilgilerini içerir
- */
+
 export interface CustomUser extends User {
   token?: string;
   user?: UserProfile;
   [key: string]: any;
 }
 
-/**
- * NextAuth Session tipini genişleten özel oturum tipi
- * Token ve kullanıcı bilgilerini içerir
- */
 export interface CustomSession extends Session {
-  accessToken?: string; // JWT token'ı tutmak için
+  accessToken?: string; 
   user: UserProfile;
-  error?: string; // Oturum hatalarını izlemek için
+  error?: string; 
 }
 
-/**
- * Giriş Yanıtı - API'den dönen yanıt formatı
- */
+
 export interface LoginResponse {
   success: boolean;
   message: string;
@@ -47,26 +35,19 @@ export interface LoginResponse {
   };
 }
 
-/**
- * Giriş Bilgileri
- */
 export interface LoginCredentials {
   email: string;
   password: string;
 }
 
-/**
- * API Yanıt Formatı
- */
+
 export interface ApiResponse<T = any> {
   success: boolean;
   message: string;
   data?: T;
 }
 
-/**
- * Kayıt Bilgileri
- */
+
 export interface RegisterCredentials {
   email: string;
   firstName: string;
@@ -77,9 +58,7 @@ export interface RegisterCredentials {
   birthDate: string;
 }
 
-/**
- * Kayıt Yanıtı
- */
+
 export interface RegisterResponse {
   success: boolean;
   message: string;
