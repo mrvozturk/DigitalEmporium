@@ -18,7 +18,7 @@ const ProductImageAndColors: React.FC<ProductImageAndColorsProps> = ({
   colors,
   productId
 }) => {
-  const selectedColor = colors.find(color => color.colorAsin === productId) || colors[0];
+  const selectedColor = colors.find(color => color.colorAsin === productId) ?? colors[0];
 
   return (
     <div className='flex flex-col items-start xs:hidden'>
@@ -29,7 +29,6 @@ const ProductImageAndColors: React.FC<ProductImageAndColorsProps> = ({
 
       <div className='flex gap-2 xs:gap-1'>
         {colors.map((color, index) => {
-          // Use colorPhoto if available, otherwise create a color swatch
           const hasImage = !!color.colorPhoto;
           
           return (
@@ -47,7 +46,7 @@ const ProductImageAndColors: React.FC<ProductImageAndColorsProps> = ({
               >
                 {hasImage ? (
                   <Image
-                    src={color.colorPhoto || ''}
+                    src={color.colorPhoto ?? ''}
                     alt={color.value}
                     width={40}
                     height={40}

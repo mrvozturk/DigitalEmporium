@@ -17,8 +17,7 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
   showPriceSection = false,
   showProductDivider = false
 }) => {
-  // Calculate star rating from string rating
-  const starRating = Math.round(parseFloat(product.rating) || 0);
+  const starRating = Math.round(parseFloat(product.rating) ?? 0);
 
   return (
     <div className=' xs:block hidden'>
