@@ -119,10 +119,9 @@ export default async function Page({
             colors={product.variations
               .filter(v => v.colorValue)
               .map(v => ({
-                value: v.value,
-                isAvailable: v.isAvailable,
-                colorValue: v.colorValue || '',
-                colorPhoto: v.colorPhoto || ''
+                value: v.colorValue || '',
+                asin: v.colorAsin || '',
+                photo: v.colorPhoto || ''
               }))}
             productId={productId}
             price={product.price.toFixed(2)}
