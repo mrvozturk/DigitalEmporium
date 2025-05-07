@@ -2,7 +2,7 @@ import React, { use } from 'react';
 import { FiChevronRight } from 'react-icons/fi';
 import { getServerSession } from 'next-auth';
 import LogoutButton from '@/components/logout';
-import { CustomSession, UserProfile } from '@/lib/types/auth';
+import { CustomSession} from '@/lib/types/auth';
 import { authOptions } from '@/lib/authOptions';
 
 const ProfilePage: React.FC = () => {

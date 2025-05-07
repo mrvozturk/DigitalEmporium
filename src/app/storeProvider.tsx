@@ -14,13 +14,11 @@ export const StoreProvider = ({ children }: Props) => {
   const storeRef = useRef<AppStore | null>(null);
 
   if (!storeRef.current) {
-    // Store yalnızca bir kez oluşturulacak
     storeRef.current = makeStore();
   }
 
   useEffect(() => {
     if (storeRef.current != null) {
-      // refetchOnFocus ve refetchOnReconnect için dinleyiciler ekleniyor
       const unsubscribe = setupListeners(storeRef.current.dispatch);
       return unsubscribe;
     }
