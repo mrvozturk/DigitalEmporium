@@ -1,3 +1,10 @@
+/** Color Variant Type */
+export interface VariantColor {
+  value: string;
+  asin: string;
+  photo: string;
+}
+
 /** Ürün Tipleri */
 export interface Product {
   id: number;
