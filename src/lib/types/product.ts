@@ -24,6 +24,11 @@ export interface Product {
   delivery?: string;
   salesVolume?: string;
   asin: string;
+  fabricType: string;
+  careInstructions: string;
+  origin: string;
+  productByline?: string;
+  updatedAt?: string;
 }
 
 /** Ürün Varyasyon Tipleri */
@@ -36,6 +41,8 @@ export interface ProductVariation {
   colorValue?: string;
   colorPhoto?: string;
   colorIsAvailable?: boolean;
+  size?: string;
+  sizeIsAvailable?: boolean;
 }
 
 /** API Yanıt Tipleri */
@@ -67,6 +74,7 @@ export interface ProductApiResponse {
   productUrl: string;
   productPhoto: string;
   couponText?: string;
+  updated_at?: string;
   rating?: {
     rate: number;
     count: number;
@@ -85,6 +93,8 @@ export interface ProductVariationApiResponse {
   color_value?: string;
   color_photo?: string;
   color_is_available?: boolean;
+  size?: string;
+  size_is_available?: boolean;
 }
 
 export type FormVariation = {
@@ -94,6 +104,8 @@ export type FormVariation = {
   color_value?: string;
   color_is_available?: boolean;
   color_photo?: string;
+  size?: string;
+  size_is_available?: boolean;
 };
 
 export type ProductFormData = {
@@ -142,10 +154,17 @@ export const createProduct = (data: ProductApiResponse): Product => ({
     colorAsin: v.color_asin,
     colorValue: v.color_value,
     colorPhoto: v.color_photo ? v.color_photo.trim() : undefined,
-    colorIsAvailable: v.color_is_available
+    colorIsAvailable: v.color_is_available,
+    size: v.size,
+    sizeIsAvailable: v.size_is_available
   })),
   coupon: data.coupon_text,
   delivery: data.delivery,
   salesVolume: data.sales_volume,
-  asin: data.asin
+  asin: data.asin,
+  fabricType: data.fabricType,
+  careInstructions: data.careInstructions,
+  origin: data.origin,
+  productByline: data.product_byline,
+  updatedAt: data.updated_at
 });

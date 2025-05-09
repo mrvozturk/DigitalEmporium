@@ -131,8 +131,11 @@ export default async function Page({
         <div>
           <SizeSelector
             sizes={product.variations
-              .filter(v => !v.colorValue)
-              .map(v => ({ value: v.value }))}
+              .filter(v => !v.colorValue && v.size)
+              .map(v => ({ 
+                value: v.size || v.value,
+                isAvailable: v.sizeIsAvailable || v.isAvailable 
+              }))}
           />
         </div>
         {/* Size Selector dropdown */}
@@ -140,10 +143,15 @@ export default async function Page({
           <h2 className='hidden sm:block'>Size:</h2>
           <select className='mt-1 w-[20%] p-1.5 border border-[#31737d] rounded-lg bg-gray-90 outline-none text-sm text-[0.8rem] sm:text-[0.7rem] md:text-[0.9rem] lg:text-[0.8rem] focus:ring-2 focus:ring-teal-500 hover:border-gray-400 sm:w-[40%] md:w-[45%] md:text-base lg:w-[30%] xl:w-[25%]'>
             {product.variations
-              .filter(v => !v.colorValue)
+              .filter(v => !v.colorValue && v.size)
               .map(size => (
-                <option key={size.value} value={size.value}>
-                  {size.value}
+                <option 
+                  key={size.value} 
+                  value={size.size || size.value}
+                  disabled={!(size.sizeIsAvailable || size.isAvailable)}
+                >
+                  {size.size || size.value}
+                  {!(size.sizeIsAvailable || size.isAvailable) ? ' (Out of Stock)' : ''}
                 </option>
               ))}
           </select>
