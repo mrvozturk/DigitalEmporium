@@ -92,7 +92,7 @@ const RegisterForm: React.FC = () => {
         firstName: form.firstName.value,
         lastName: form.lastName.value,
         password,
-        phoneNumber: form.phoneNumber.value.replace(/\D/g, ''),
+        phoneNumber: form.phoneNumber.value,
         gender: form.gender.value?.toUpperCase(),
         birthDate: selectedDate ? selectedDate.toISOString().split('T')[0] : ''
       };
@@ -107,7 +107,7 @@ const RegisterForm: React.FC = () => {
         try {
           const errorData = JSON.parse(response.error);
           console.error('Kayıt Hatası:', errorData);
-          
+
           // Backend'den gelen hatalar varsa form hatalarını güncelle
           if (errorData.errors) {
             setFormErrors(prev => ({
@@ -151,6 +151,10 @@ const RegisterForm: React.FC = () => {
       /[^a-zA-ZığüşöçİĞÜŞÖÇ\s]/g,
       ''
     );
+  };
+
+  const handlePhoneNumberInput = (e: React.FormEvent<HTMLInputElement>) => {
+    e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '');
   };
 
   const handlePasswordFocus = () => {
@@ -297,6 +301,7 @@ const RegisterForm: React.FC = () => {
           type='tel'
           name='phoneNumber'
           placeholder='Telefon Numarası*'
+          onInput={handlePhoneNumberInput}
           className='w-full p-2 border border-gray-300 outline-none text-xs mb-2 mt-2 hover:border-gray-600'
         />
 
