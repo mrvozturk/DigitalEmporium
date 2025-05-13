@@ -23,8 +23,7 @@ const ProductListing = () => {
       setProducts(data.products || []);
       setError('');
     } catch (error) {
-      setError('Ürünler alınırken hata oluştu');
-      console.error('Ürünler alınırken hata:', error);
+      setError('Ürünler yüklenirken bir hata oluştu');
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -80,7 +79,7 @@ const ProductListing = () => {
               <button
                 className='flex items-center justify-center w-8 h-8 rounded-full bg-gray-200'
                 onClick={event => {
-                  event.stopPropagation(); // Tıklama etkisini durdurur
+                  event.stopPropagation();
                 }}
               >
                 <AiOutlineHeart className='text-black text-lg' />
@@ -88,7 +87,7 @@ const ProductListing = () => {
               <button
                 className='flex items-center justify-center w-8 h-8 rounded-full bg-gray-200'
                 onClick={event => {
-                  event.stopPropagation(); // Tıklama etkisini durdurur
+                  event.stopPropagation();
                 }}
               >
                 <AiOutlineShopping className='text-black text-lg' />
