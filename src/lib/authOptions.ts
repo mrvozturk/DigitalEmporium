@@ -2,6 +2,10 @@ import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { CustomSession } from './types/auth';
 
+if (!process.env.API_BASE_URL) {
+  throw new Error('API_BASE_URL environment variable is not defined');
+}
+
 export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET ?? process.env.SECRET,
 
@@ -10,7 +14,7 @@ export const authOptions: NextAuthOptions = {
   },
 
   pages: {
-    signIn: '/' 
+    signIn: '/'
   },
 
   providers: [
@@ -25,7 +29,7 @@ export const authOptions: NextAuthOptions = {
         if (process.env.NODE_ENV === 'development') {
           myHeaders.append(
             'x-vercel-protection-bypass',
-            'pAzEiUDxe0LtLxE6m24n6TgpsdsCzlcd'
+            process.env.VERCEL_BYPASS_KEY ?? ''
           );
         }
 
@@ -39,42 +43,32 @@ export const authOptions: NextAuthOptions = {
 
         try {
           const response = await fetch(
-            'https://postresql-api-pink.vercel.app/api/v1/user/register',
+            `${process.env.API_BASE_URL}user/register`,
             requestOptions
           );
           const register = await response.json();
 
-          console.log('register response:', register);
-          console.log('register data structure:', register.data);
-
           if (!register.success) {
-            console.error('Backend Error Response:', register);
             throw new Error(JSON.stringify(register));
           }
 
           const responseData = register.data;
-
           const userData = responseData.user ?? responseData;
 
           if (!responseData.token) {
-            console.warn(
-              'Backend API token döndürmedi. Kullanıcı girişi gerekecek.'
-            );
-
             return {
               ...userData,
-              id: userData.id ?? String(Date.now()),
+              id: userData.id,
               requiresLogin: true
             };
           }
 
           return {
             ...userData,
-            id: userData.id ?? String(Date.now()),
+            id: userData.id,
             token: responseData.token
           };
         } catch (error) {
-          console.error('Registration error:', error);
           throw new Error(
             error instanceof Error ? error.message : JSON.stringify(error)
           );
@@ -93,12 +87,11 @@ export const authOptions: NextAuthOptions = {
         if (process.env.NODE_ENV === 'development') {
           myHeaders.append(
             'x-vercel-protection-bypass',
-            'pAzEiUDxe0LtLxE6m24n6TgpsdsCzlcd'
+            process.env.VERCEL_BYPASS_KEY ?? ''
           );
         }
 
         const raw = JSON.stringify(credentials);
-        console.log('raw', raw);
 
         const requestOptions = {
           method: 'POST',
@@ -108,32 +101,28 @@ export const authOptions: NextAuthOptions = {
 
         try {
           const response = await fetch(
-            'https://postresql-api-pink.vercel.app/api/v1/user/login',
+            `${process.env.API_BASE_URL}user/login`,
             requestOptions
           );
           const login = await response.json();
 
           if (!login.success) {
-            console.error('Backend Error Response:', login);
             throw new Error(JSON.stringify(login));
           }
 
           const loginData = login.data;
-
           const userData = loginData.user ?? loginData;
 
           if (!loginData.token) {
-            console.error('Login API token döndürmedi. Yetkilendirme hatası.');
             throw new Error('Token alınamadı. Lütfen tekrar giriş yapın.');
           }
 
           return {
             ...userData,
-            id: userData.id ?? String(Date.now()),
+            id: userData.id,
             token: loginData.token
           };
         } catch (error) {
-          console.error('Login error:', error);
           throw new Error(
             error instanceof Error ? error.message : JSON.stringify(error)
           );
@@ -153,7 +142,6 @@ export const authOptions: NextAuthOptions = {
         }
 
         if (!(user as any).token) {
-          console.warn('JWT callback: Kullanıcı tokenı bulunamadı');
           token.error = 'missing_token';
         } else {
           token.accessToken = (user as any).token;

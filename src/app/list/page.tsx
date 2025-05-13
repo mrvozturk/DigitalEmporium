@@ -25,8 +25,7 @@ const ProductListing = () => {
       setProducts(data.products || []);
       setError('');
     } catch (error) {
-      setError('Ürünler alınırken hata oluştu');
-      console.error('Ürünler alınırken hata:', error);
+      setError('Ürünler yüklenirken bir hata oluştu');
     } finally {
       setLoading(false);
       setRefreshing(false);

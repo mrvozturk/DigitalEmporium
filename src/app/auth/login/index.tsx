@@ -59,13 +59,12 @@ const LoginForm: React.FC = () => {
         } catch {
           setLoginError('Geçersiz e-posta veya şifre');
         }
-        console.error('Giriş hatası:', response.error);
       } else {
         console.log('Başarıyla giriş yapıldı');
         router.push('/');
+        router.push('/profile');
       }
     } catch (error) {
-      console.error('Giriş işlemi sırasında bir hata oluştu:', error);
       setLoginError(
         'Giriş sırasında bir hata oluştu. Lütfen daha sonra tekrar deneyin.'
       );

@@ -28,14 +28,11 @@ export default async function Page({
     return <div>Loading...</div>;
   }
 
-  // Convert string rating to number
   const starRating = Math.round(parseFloat(product.rating) || 0);
 
   return (
     <main className='productDetail flex flex-row justify-between lg:px-4 lg:py-2 mx-auto sm:px-3 md:px-3 xs:flex-col xs:py-0 xs:justify-center'>
-      {/* Display product overview */}
       <ProductOverview product={product} />
-      {/* Image Thumbnails */}
       <div>
         <SwiperImage
           product={product}
@@ -51,7 +48,6 @@ export default async function Page({
 
       <MainImage product={product} filters={filters} />
 
-      {/* Product Info */}
       <div className='basis-[60%] bg-white px-3'>
         <p className='text-[0.75rem] lg:text-[0.85rem] md:text-[0.75rem] sm:text-[0.85rem] text-[#007185] font-semibold xs:hidden'>
           {product.brand}
@@ -59,7 +55,6 @@ export default async function Page({
         <h1 className='flex font-weight-bold text-[#111] leading-[1.3] my-1 xs:text-[0.9rem] sm:text-[0.9rem] md:text-[1.2rem] lg:text-[1.3rem] xs:hidden'>
           {product.name}
         </h1>
-        {/* Review Section */}
         <div className='reviewSection flex items-center lg:mt-2 sm:mt-1 md:mt-1'>
           <span className='text-base font-bold mr-1 lg:text-xs sm:text-[0.75rem] md:text-[0.65rem] xs:hidden'>
             {product.rating}
@@ -96,11 +91,9 @@ export default async function Page({
           </div>
         </div>
         <hr className='border-t border-gray-300 xs:hidden' />
-        {/* Price Section */}
         <p className='text-base font-semibold text-black mt-2 xs:hidden '>
           Price: <span>{product.price.toFixed(2)}₺</span>
         </p>
-        {/* Color variations */}
         {product.variations.some(v => v.colorValue) && (
           <ProductImageAndColors
             colors={product.variations
@@ -127,7 +120,6 @@ export default async function Page({
             price={product.price.toFixed(2)}
           />
         )}
-        {/* Size Selector */}
         <div>
           <SizeSelector
             sizes={product.variations
@@ -138,7 +130,6 @@ export default async function Page({
               }))}
           />
         </div>
-        {/* Size Selector dropdown */}
         <div className='mt-2 text-black text-[0.8rem] sm:text-[0.7rem] md:text-[0.8rem] lg:text-[0.9rem] xs:hidden'>
           <h2 className='hidden sm:block'>Size:</h2>
           <select className='mt-1 w-[20%] p-1.5 border border-[#31737d] rounded-lg bg-gray-90 outline-none text-sm text-[0.8rem] sm:text-[0.7rem] md:text-[0.9rem] lg:text-[0.8rem] focus:ring-2 focus:ring-teal-500 hover:border-gray-400 sm:w-[40%] md:w-[45%] md:text-base lg:w-[30%] xl:w-[25%]'>
@@ -161,7 +152,6 @@ export default async function Page({
         <ProductOverview product={product} showPurchaseSection={true} />
         <hr className='mt-4 mb-1 xs:block sm:hidden'></hr>
         <ProductOverview product={product} showDetailsSection={true} />
-        {/* Product Details */}
         <div className='mt-4 xs:hidden'>
           <h2 className='text-xl font-bold mb-2 text-black'>Product details</h2>
 
@@ -183,7 +173,6 @@ export default async function Page({
             About this item
           </h2>
 
-          {/* Hidden checkbox to control the collapse/expand */}
           <input type='checkbox' id='toggle' className='hidden peer' />
 
           <div className='text-[0.9rem] leading-6 text-gray-800 max-h-16 overflow-hidden transition-[max-height] duration-300 ease-in-out font-medium peer-checked:max-h-full sm:text-gray-700'>
@@ -194,7 +183,6 @@ export default async function Page({
             </ul>
           </div>
 
-          {/* Label for the checkbox acts as a toggle button */}
           <label
             htmlFor='toggle'
             className="block mt-2 bg-transparent border-none text-[#007185] cursor-pointer text-[0.9rem] hover:underline hover:text-[#007185] peer-checked:after:content-['See_less'] after:content-['See_more']"
@@ -203,7 +191,6 @@ export default async function Page({
         </div>
       </div>
 
-      {/* Stock and Purchase Section */}
       <div className='flex flex-col bg-white sm:p-4 md:p-4 p-6 rounded-lg border border-gray-300 w-full max-w-[250px] sm:max-w-[26vw] md:max-w-[24vw] lg:max-w-[250px] hidden sm:flex'>
         <p className='text-green-600 text-base mb-2 mt-0'>In Stock</p>
         <div className='w-full mb-5'>
