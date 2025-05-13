@@ -179,8 +179,8 @@ export default async function Page({
 
           <div className='text-[0.9rem] leading-6 text-gray-800 max-h-16 overflow-hidden transition-[max-height] duration-300 ease-in-out font-medium peer-checked:max-h-full sm:text-gray-700'>
             <ul>
-              {product.features.map((point, index) => (
-                <li key={`feature-${index}`}>{point}</li>
+              {product.features.map((point) => (
+                <li key={point}>{point}</li>
               ))}
             </ul>
           </div>
