@@ -158,10 +158,10 @@ export default async function Page({
           <h2 className='text-xl font-bold mb-2 text-black'>Product details</h2>
 
           {product.details &&
-            Object.entries(product.details).map(([key, value], index) => (
+            Object.entries(product.details).map(([key, value]) => (
               <div
                 className='flex justify-start text-sm mb-3'
-                key={`detail-${index}`}
+                key={`detail-${key}-${value}`}
               >
                 <strong className='font-semibold text-black'>{key}</strong>
                 <span className='text-black text-sm ml-2'>{value}</span>
