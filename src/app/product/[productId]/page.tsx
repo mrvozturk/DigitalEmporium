@@ -28,7 +28,7 @@ export default async function Page({
     return <div>Loading...</div>;
   }
 
-  const starRating = Math.round(parseFloat(product.rating) || 0);
+  const starRating = Math.round(parseFloat(product.rating) ?? 0);
 
   return (
     <main className='productDetail flex flex-row justify-between lg:px-4 lg:py-2 mx-auto sm:px-3 md:px-3 xs:flex-col xs:py-0 xs:justify-center'>
@@ -101,8 +101,8 @@ export default async function Page({
               .map(v => ({
                 value: v.value,
                 isAvailable: v.isAvailable,
-                colorValue: v.colorValue || '',
-                colorPhoto: v.colorPhoto || ''
+                colorValue: v.colorValue ?? '',
+                colorPhoto: v.colorPhoto ?? ''
               }))}
             productId={productId}
           />
@@ -112,9 +112,9 @@ export default async function Page({
             colors={product.variations
               .filter(v => v.colorValue)
               .map(v => ({
-                value: v.colorValue || '',
-                asin: v.colorAsin || '',
-                photo: v.colorPhoto || ''
+                value: v.colorValue ?? '',
+                asin: v.colorAsin ?? '',
+                photo: v.colorPhoto ?? ''
               }))}
             productId={productId}
             price={product.price.toFixed(2)}
@@ -124,9 +124,9 @@ export default async function Page({
           <SizeSelector
             sizes={product.variations
               .filter(v => !v.colorValue && v.size)
-              .map(v => ({ 
-                value: v.size || v.value,
-                isAvailable: v.sizeIsAvailable || v.isAvailable 
+              .map(v => ({
+                value: v.size ?? v.value,
+                isAvailable: v.sizeIsAvailable ?? v.isAvailable
               }))}
           />
         </div>
@@ -136,13 +136,15 @@ export default async function Page({
             {product.variations
               .filter(v => !v.colorValue && v.size)
               .map(size => (
-                <option 
-                  key={size.value} 
-                  value={size.size || size.value}
-                  disabled={!(size.sizeIsAvailable || size.isAvailable)}
+                <option
+                  key={size.value}
+                  value={size.size ?? size.value}
+                  disabled={!(size.sizeIsAvailable ?? size.isAvailable)}
                 >
-                  {size.size || size.value}
-                  {!(size.sizeIsAvailable || size.isAvailable) ? ' (Out of Stock)' : ''}
+                  {size.size ?? size.value}
+                  {!(size.sizeIsAvailable ?? size.isAvailable)
+                    ? ' (Out of Stock)'
+                    : ''}
                 </option>
               ))}
           </select>
