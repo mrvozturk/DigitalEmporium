@@ -25,7 +25,11 @@ const ProductListing = () => {
       setProducts(data.products ?? []);
       setError('');
     } catch (error) {
-      setError('Ürünler yüklenirken bir hata oluştu');
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : 'Ürünler yüklenirken bir hata oluştu';
+      setError(errorMessage);
     } finally {
       setLoading(false);
       setRefreshing(false);
