@@ -4,13 +4,11 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
-
 const LoginForm: React.FC = () => {
   const router = useRouter();
   const [showLoginPassword, setShowLoginPassword] = useState<boolean>(false);
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
   const [loginError, setLoginError] = useState<string | null>(null);
-
 
   const validateForm = (form: HTMLFormElement) => {
     const errors: { [key: string]: string } = {};
@@ -33,7 +31,6 @@ const LoginForm: React.FC = () => {
     return errors;
   };
 
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -48,22 +45,19 @@ const LoginForm: React.FC = () => {
 
     try {
       const response = await signIn('login', {
-        redirect: false, 
+        redirect: false,
         email: form.email.value,
         password: form.password.value
       });
 
       if (response?.error) {
-        try {
-          const errorData = JSON.parse(response.error);
-          setLoginError(errorData.message || 'Geçersiz e-posta veya şifre');
-        } catch {
-          setLoginError('Geçersiz e-posta veya şifre');
-        }
-      } else {
-        router.push('/profile');
+        setLoginError('Geçersiz e-posta veya şifre');
+        return;
       }
+
+      router.push('/');
     } catch (error) {
+      console.error('Login error:', error);
       setLoginError(
         'Giriş sırasında bir hata oluştu. Lütfen daha sonra tekrar deneyin.'
       );
