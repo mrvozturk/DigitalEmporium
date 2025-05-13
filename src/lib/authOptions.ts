@@ -2,10 +2,6 @@ import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { CustomSession } from './types/auth';
 
-if (!process.env.API_BASE_URL) {
-  throw new Error('API_BASE_URL environment variable is not defined');
-}
-
 export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET ?? process.env.SECRET,
 
