@@ -20,7 +20,7 @@ const ProductListing = () => {
         throw new Error('Ürünler alınırken hata oluştu.');
       }
       const data = await response.json();
-      setProducts(data.products || []);
+      setProducts(data.products ?? []);
       setError('');
     } catch (error) {
       setError('Ürünler yüklenirken bir hata oluştu');
