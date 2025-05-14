@@ -33,7 +33,7 @@ const ProductImageAndColors: React.FC<ProductImageAndColorsProps> = ({
           
           return (
             <Link 
-              key={`color-${index}`} 
+              key={color.colorAsin} 
               href={`${color.colorAsin}`}
               shallow
             >
