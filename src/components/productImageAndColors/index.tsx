@@ -18,7 +18,37 @@ const ProductImageAndColors: React.FC<ProductImageAndColorsProps> = ({
   colors,
   productId
 }) => {
-  const selectedColor = colors.find(color => color.colorAsin === productId) ?? colors[0];
+  const selectedColor =
+    colors.find(color => color.colorAsin === productId) ?? colors[0];
+
+  const renderColorDisplay = (color: Color) => {
+    if (color.colorPhoto) {
+      return (
+        <Image
+          src={color.colorPhoto}
+          alt={color.value}
+          width={40}
+          height={40}
+          className='object-cover w-full h-full'
+        />
+      );
+    }
+
+    if (color.colorValue) {
+      return (
+        <div
+          className='w-full h-full'
+          style={{ backgroundColor: color.colorValue }}
+        />
+      );
+    }
+
+    return (
+      <div className='w-full h-full bg-gray-200 flex items-center justify-center text-xs'>
+        {color.value.charAt(0)}
+      </div>
+    );
+  };
 
   return (
     <div className='flex flex-col items-start xs:hidden'>
@@ -29,11 +59,9 @@ const ProductImageAndColors: React.FC<ProductImageAndColorsProps> = ({
 
       <div className='flex gap-2 xs:gap-1'>
         {colors.map((color, index) => {
-          const hasImage = !!color.colorPhoto;
-          
           return (
             <Link 
-              key={color.colorAsin} 
+              key={color.colorAsin ?? `color-${color.value}-${index}`} 
               href={`${color.colorAsin}`}
               shallow
             >
@@ -44,24 +72,7 @@ const ProductImageAndColors: React.FC<ProductImageAndColorsProps> = ({
                     : 'border-gray-300'
                 } hover:border-2 hover:border-black`}
               >
-                {hasImage ? (
-                  <Image
-                    src={color.colorPhoto ?? ''}
-                    alt={color.value}
-                    width={40}
-                    height={40}
-                    className='object-cover w-full h-full'
-                  />
-                ) : color.colorValue ? (
-                  <div 
-                    className="w-full h-full"
-                    style={{ backgroundColor: color.colorValue }}
-                  />
-                ) : (
-                  <div className="w-full h-full bg-gray-200 flex items-center justify-center text-xs">
-                    {color.value.charAt(0)}
-                  </div>
-                )}
+                {renderColorDisplay(color)}
               </div>
             </Link>
           );
