@@ -107,7 +107,7 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
             <div className='flex flex-col mb-4'>
               <strong className='text-md text-gray-900 mb-2'>Features</strong>
               <ul className='list-disc ml-5'>
-                {product.features.map((feature) => (
+                {product.features.map(feature => (
                   <li
                     key={`feature-${feature}`}
                     className='text-sm text-gray-700 mb-1'
@@ -120,10 +120,10 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
           )}
 
           {product.details &&
-            Object.entries(product.details).map(([key, value], index) => (
+            Object.entries(product.details).map(([key, value]) => (
               <div
                 className='flex flex-col text-base mb-4'
-                key={`detail-${index}`}
+                key={`detail-${key}-${value}`}
               >
                 <strong className='text-md text-gray-900'>{key}</strong>
                 <span className='text-sm text-gray-700'>{value}</span>
