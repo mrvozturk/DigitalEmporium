@@ -3,7 +3,6 @@
 import 'react-datepicker/dist/react-datepicker.css';
 import React, { useState } from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
-import InputMask from 'react-input-mask';
 import {
   AiOutlineCalendar,
   AiOutlineEye,
