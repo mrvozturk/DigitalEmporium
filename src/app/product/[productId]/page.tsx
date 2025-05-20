@@ -28,7 +28,7 @@ export default async function Page({
     return <div>Loading...</div>;
   }
 
-  const starRating = Math.round(parseFloat(product.rating) ?? 0);
+  const starRating = Math.round(parseFloat(product.rating) || 0);
 
   return (
     <main className='productDetail flex flex-row justify-between lg:px-4 lg:py-2 mx-auto sm:px-3 md:px-3 xs:flex-col xs:py-0 xs:justify-center'>
