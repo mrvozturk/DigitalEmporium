@@ -60,9 +60,9 @@ const ProductImageAndColors: React.FC<ProductImageAndColorsProps> = ({
       <div className='flex gap-2 xs:gap-1'>
         {colors.map((color, index) => {
           return (
-            <Link 
-              key={color.colorAsin ?? `color-${color.value}-${index}`} 
-              href={`${color.colorAsin}`}
+            <Link
+              key={color.colorAsin ?? `color-${color.value}-${index}`}
+              href={`/product/${productId}?color=${color.colorAsin}`}
               shallow
             >
               <div
