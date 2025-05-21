@@ -74,7 +74,7 @@ const ImageSwiper = ({ product, colors }: ImageSwiperProps) => {
       >
         {productImages.map((photo, index) => (
           <Image
-            key={`image-${index}`}
+            key={photo}
             src={photo}
             alt={`${product.name} - ${index + 1}`}
             width={340}
@@ -92,9 +92,9 @@ const ImageSwiper = ({ product, colors }: ImageSwiperProps) => {
         className='flex justify-center items-center xs:bg-white xs:border xs:bg-[#f6f4f4] xs:py-4 xs:w-full sm:hidden xs:mb-3'
         id='paginationDots'
       >
-        {productImages.map((_, index) => (
+        {productImages.map((photo, index) => (
           <span
-            key={`dot-${index}`}
+            key={photo}
             className={`xs:inline-block xs:h-2.5 xs:w-2.5 xs:rounded-full xs:mx-1 xs:border xs:border-[#8b8a8a] ${
               index === activeIndex
                 ? 'xs:bg-[#1a6b7c] xs:border-none'
