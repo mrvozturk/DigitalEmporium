@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface RegisterState {
+  id?: string;
   email: string;
   firstName: string;
   lastName: string;
@@ -8,6 +9,7 @@ interface RegisterState {
   phoneNumber: string;
   birthdate: string;
   gender: string;
+  requiresLogin?: boolean;
 }
 
 const initialState: RegisterState = {

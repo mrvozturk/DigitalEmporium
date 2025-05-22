@@ -1,10 +1,9 @@
 import React from 'react';
 import { AiFillStar } from 'react-icons/ai';
-import { Product } from '../../lib/data';
+import { Product } from '../../lib/types/product';
 
 interface ProductOverviewProps {
-  productDetail: Product;
-  starRating: number;
+  product: Product;
   showDetailsSection?: boolean;
   showPurchaseSection?: boolean;
   showPriceSection?: boolean;
@@ -12,13 +11,14 @@ interface ProductOverviewProps {
 }
 
 const ProductOverview: React.FC<ProductOverviewProps> = ({
-  productDetail,
-  starRating,
+  product,
   showDetailsSection = false,
   showPurchaseSection = false,
   showPriceSection = false,
   showProductDivider = false
 }) => {
+  const starRating = Math.round(parseFloat(product.rating) ?? 0);
+
   return (
     <div className=' xs:block hidden'>
       {!showDetailsSection &&
@@ -31,17 +31,17 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
                 className='text-xs font-medium  mt-2 mr-2 '
                 style={{ color: '#007185' }}
               >
-                {productDetail.brand}
+                {product.brand}
               </p>
               <div className='flex items-center mt-2'>
                 <span className='text-xs mr-2' style={{ color: '#007185' }}>
-                  {productDetail.rating.rate.toFixed(1)}
+                  {product.rating}
                 </span>
                 <div className='flex items-center'>
                   {[...Array(5)].map((_, index) => (
                     <a
                       href='#review'
-                      key={`${productDetail.title}-star-${index}`}
+                      key={`${product.name}-star-${index}`}
                       className='text-md'
                     >
                       <AiFillStar
@@ -53,14 +53,19 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
               </div>
             </div>
             <h1 className='text-base font-medium text-gray-700 mt-2'>
-              {productDetail.title}
+              {product.name}
             </h1>
+            {product.salesVolume && (
+              <p className='text-xs text-gray-500 mt-1'>
+                {product.salesVolume} satış
+              </p>
+            )}
           </div>
         )}
 
       {showPriceSection && (
         <p className='text-2xl font-semibold text-gray-900 mt-4'>
-          {productDetail.price}
+          {product.price.toFixed(2)}₺
         </p>
       )}
 
@@ -97,24 +102,42 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
       {showDetailsSection && (
         <div className='flex flex-col gap-4 mt-4'>
           <h2 className='text-xl font-bold text-gray-900'>Product details</h2>
-          <div className='flex flex-col text-base mb-4'>
-            <strong className='text-md text-gray-900'>Fabric type</strong>
-            <span className='text-sm text-gray-700'>
-              {productDetail.fabricType}
-            </span>
-          </div>
-          <div className='flex flex-col text-base mb-4'>
-            <strong className='text-md text-gray-900'>Care instructions</strong>
-            <span className='text-sm text-gray-700'>
-              {productDetail.careInstructions}
-            </span>
-          </div>
-          <div className='flex flex-col text-base mb-4'>
-            <strong className='text-md text-gray-900'>Origin</strong>
-            <span className='text-sm text-gray-700'>
-              {productDetail.origin}
-            </span>
-          </div>
+
+          {product.features && product.features.length > 0 && (
+            <div className='flex flex-col mb-4'>
+              <strong className='text-md text-gray-900 mb-2'>Features</strong>
+              <ul className='list-disc ml-5'>
+                {product.features.map(feature => (
+                  <li
+                    key={`feature-${feature}`}
+                    className='text-sm text-gray-700 mb-1'
+                  >
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {product.details &&
+            Object.entries(product.details).map(([key, value]) => (
+              <div
+                className='flex flex-col text-base mb-4'
+                key={`detail-${key}-${value}`}
+              >
+                <strong className='text-md text-gray-900'>{key}</strong>
+                <span className='text-sm text-gray-700'>{value}</span>
+              </div>
+            ))}
+
+          {product.description && (
+            <div className='flex flex-col text-base mb-4'>
+              <strong className='text-md text-gray-900'>Description</strong>
+              <span className='text-sm text-gray-700'>
+                {product.description}
+              </span>
+            </div>
+          )}
         </div>
       )}
     </div>

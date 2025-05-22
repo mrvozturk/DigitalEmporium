@@ -3,7 +3,6 @@
 import 'react-datepicker/dist/react-datepicker.css';
 import React, { useState } from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
-import InputMask from 'react-input-mask';
 import {
   AiOutlineCalendar,
   AiOutlineEye,
@@ -92,7 +91,7 @@ const RegisterForm: React.FC = () => {
         firstName: form.firstName.value,
         lastName: form.lastName.value,
         password,
-        phoneNumber: form.phoneNumber.value.replace(/\D/g, ''),
+        phoneNumber: form.phoneNumber.value,
         gender: form.gender.value?.toUpperCase(),
         birthDate: selectedDate ? selectedDate.toISOString().split('T')[0] : ''
       };
@@ -106,26 +105,24 @@ const RegisterForm: React.FC = () => {
       if (response?.error) {
         try {
           const errorData = JSON.parse(response.error);
-          console.error('Kayıt Hatası:', errorData);
-          
-          // Backend'den gelen hatalar varsa form hatalarını güncelle
           if (errorData.errors) {
             setFormErrors(prev => ({
               ...prev,
               ...errorData.errors
             }));
           } else if (errorData.message) {
-            // Genel hata mesajı
             alert(`Kayıt hatası: ${errorData.message}`);
           }
         } catch (e) {
-          console.error('Kayıt Hatası (JSON parse hatası):', response.error);
           alert(`Kayıt sırasında bir hata oluştu: ${response.error}`);
         }
       } else {
-        console.log('Kullanıcı başarıyla kaydedildi');
         router.push('/');
-        dispatch(setRegisterData(formData));
+        dispatch(
+          setRegisterData({
+            ...formData
+          })
+        );
       }
     }
   };
@@ -151,6 +148,10 @@ const RegisterForm: React.FC = () => {
       /[^a-zA-ZığüşöçİĞÜŞÖÇ\s]/g,
       ''
     );
+  };
+
+  const handlePhoneNumberInput = (e: React.FormEvent<HTMLInputElement>) => {
+    e.currentTarget.value = e.currentTarget.value.replace(/\D/g, '');
   };
 
   const handlePasswordFocus = () => {
@@ -290,16 +291,15 @@ const RegisterForm: React.FC = () => {
           </div>
         )}
 
-        <InputMask
-          mask='(999) 999 99 99'
-          maskChar='_'
-          alwaysShowMask={true}
+        <input
           type='tel'
           name='phoneNumber'
-          placeholder='Telefon Numarası*'
+          placeholder='Telefon Numarası* (5XX XXX XX XX)'
           className='w-full p-2 border border-gray-300 outline-none text-xs mb-2 mt-2 hover:border-gray-600'
+          maxLength={10}
+          pattern='[0-9]{10}'
+          onInput={handlePhoneNumberInput}
         />
-
         {formErrors.phoneNumber && (
           <p className='text-red-500 text-xs'>{formErrors.phoneNumber}</p>
         )}

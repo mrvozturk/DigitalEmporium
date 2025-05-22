@@ -2,7 +2,6 @@ import {
   QuandrupleBanners,
   QuandrupleBannerWithoutAnimation
 } from '@/components';
-import type { Metadata } from 'next';
 
 export default function IndexPage() {
   return (
@@ -13,6 +12,3 @@ export default function IndexPage() {
   );
 }
 
-export const metadata: Metadata = {
-  title: 'Redux Toolkit'
-};

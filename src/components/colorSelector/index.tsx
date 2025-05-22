@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { VariantColor } from '@/lib/data';
+import { VariantColor } from '@/lib/types/product';
 
 interface ColorSelectorProps {
   colors: VariantColor[];

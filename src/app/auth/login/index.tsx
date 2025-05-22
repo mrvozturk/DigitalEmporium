@@ -50,29 +50,13 @@ const LoginForm: React.FC = () => {
       });
 
       if (response?.error) {
-        let errorMessage = 'Geçersiz e-posta veya şifre';
-        
-        try {
-          if (typeof response.error === 'string') {
-            if (response.error.startsWith('{') || response.error.startsWith('[')) {
-              const errorData = JSON.parse(response.error);
-              errorMessage = errorData.message || errorMessage;
-            } else {
-              errorMessage = response.error;
-            }
-          }
-        } catch (parseError) {
-          console.error('Hata mesajı parse edilemedi:', parseError);
-        }
-
-        setLoginError(errorMessage);
-        console.error('Giriş hatası:', response.error);
-      } else {
-        console.log('Başarıyla giriş yapıldı');
-        router.push('/');
+        setLoginError('Geçersiz e-posta veya şifre');
+        return;
       }
+
+      router.push('/');
     } catch (error) {
-      console.error('Giriş işlemi sırasında bir hata oluştu:', error);
+      console.error('Login error:', error);
       setLoginError(
         'Giriş sırasında bir hata oluştu. Lütfen daha sonra tekrar deneyin.'
       );

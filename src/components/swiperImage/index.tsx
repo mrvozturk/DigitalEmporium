@@ -3,26 +3,27 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-
-interface ProductDetail {
-  photos: string[];
-  title: string;
-}
+import { Product } from '@/lib/types/product';
 
 interface Color {
   value: string;
-  photo: string;
+  isAvailable: boolean;
+  colorValue?: string;
 }
 
 interface ImageSwiperProps {
-  productDetail: ProductDetail;
+  product: Product;
   colors: Color[];
 }
 
-const ImageSwiper = ({ productDetail, colors }: ImageSwiperProps) => {
+const ImageSwiper = ({ product, colors }: ImageSwiperProps) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const thumbnailsRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
+
+  const productImages = product.images && product.images.length > 0 
+    ? product.images 
+    : product.image ? [product.image] : [];
 
   useEffect(() => {
     if (thumbnailsRef.current) {
@@ -33,7 +34,7 @@ const ImageSwiper = ({ productDetail, colors }: ImageSwiperProps) => {
 
   const handleThumbnailClick = (photo: string, index: number) => {
     setActiveIndex(index);
-    router.push(`?imageUrl=${photo}`);
+    router.push(`?imageUrl=${encodeURIComponent(photo)}`);
   };
 
   useEffect(() => {
@@ -60,6 +61,10 @@ const ImageSwiper = ({ productDetail, colors }: ImageSwiperProps) => {
     };
   }, []);
 
+  if (productImages.length === 0) {
+    return null;
+  }
+
   return (
     <div className='w-full flex flex-col justify-center items-center p-0 xs:bg-[#f6f4f4] xs:mt-2 '>
       <div
@@ -67,11 +72,11 @@ const ImageSwiper = ({ productDetail, colors }: ImageSwiperProps) => {
         id='imageThumbnails'
         ref={thumbnailsRef}
       >
-        {productDetail.photos.map((photo, index) => (
+        {productImages.map((photo, index) => (
           <Image
             key={photo}
             src={photo}
-            alt={productDetail.title}
+            alt={`${product.name} - ${index + 1}`}
             width={340}
             height={352}
             className={`w-full flex-shrink-0 snap-center aspect-[4/5] object-contain object-center cursor-pointer align-center xs:p-3
@@ -84,12 +89,12 @@ const ImageSwiper = ({ productDetail, colors }: ImageSwiperProps) => {
         ))}
       </div>
       <div
-        className='flex justify-center items-center  xs:bg-white xs:border xs:bg-[#f6f4f4]  xs:py-4 xs:w-full sm:hidden xs:mb-3'
+        className='flex justify-center items-center xs:bg-white xs:border xs:bg-[#f6f4f4] xs:py-4 xs:w-full sm:hidden xs:mb-3'
         id='paginationDots'
       >
-        {productDetail.photos.map((photo, index) => (
+        {productImages.map((photo, index) => (
           <span
-            key={`dot-${photo}`}
+            key={photo}
             className={`xs:inline-block xs:h-2.5 xs:w-2.5 xs:rounded-full xs:mx-1 xs:border xs:border-[#8b8a8a] ${
               index === activeIndex
                 ? 'xs:bg-[#1a6b7c] xs:border-none'
