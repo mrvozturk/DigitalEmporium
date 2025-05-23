@@ -1,27 +1,38 @@
 import { Product, createProduct, ApiResponse } from '../lib/types/product';
 
-const API_URL = `${process.env.NEXT_PUBLIC_API_URL}products`;
+const API_URL = process.env.NEXT_PUBLIC_API_URL
+  ? `${process.env.NEXT_PUBLIC_API_URL}products`
+  : 'https://postresql-api-pink.vercel.app/api/v1/products';
+
 const HEADERS = {
   'Content-Type': 'application/json',
   'x-vercel-protection-bypass': process.env.VERCEL_BYPASS_KEY ?? ''
 };
 
 export const fetchProducts = async (): Promise<Product[]> => {
-  const response = await fetch(API_URL, {
-    method: 'GET',
-    headers: HEADERS
-  });
+  try {
+    console.log('API URL:', API_URL); // Debug için URL'yi logla
+    const response = await fetch(API_URL, {
+      method: 'GET',
+      headers: HEADERS
+    });
 
-  if (!response.ok) {
-    throw new Error('Ürünleri getirirken bir hata oluştu.');
+    if (!response.ok) {
+      throw new Error(
+        `Ürünleri getirirken bir hata oluştu. Status: ${response.status}`
+      );
+    }
+
+    const data = (await response.json()) as ApiResponse;
+    if (!data.success) {
+      throw new Error(data.message || 'API yanıtı başarısız.');
+    }
+
+    return data.data.map(item => createProduct(item));
+  } catch (error) {
+    console.error('Fetch Products Error:', error);
+    throw error;
   }
-
-  const data = (await response.json()) as ApiResponse;
-  if (!data.success) {
-    throw new Error(data.message || 'API yanıtı başarısız.');
-  }
-
-  return data.data.map(item => createProduct(item));
 };
 
 export const fetchProductById = async (
