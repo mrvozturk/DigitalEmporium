@@ -11,7 +11,7 @@ const HEADERS = {
 
 export const fetchProducts = async (): Promise<Product[]> => {
   try {
-    console.log('API URL:', API_URL); // Debug için URL'yi logla
+    console.log('API URL:', API_URL);
     const response = await fetch(API_URL, {
       method: 'GET',
       headers: HEADERS
