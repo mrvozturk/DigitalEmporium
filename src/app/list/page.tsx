@@ -17,7 +17,9 @@ const ProductListing = () => {
   const fetchProducts = async () => {
     try {
       setRefreshing(true);
-      const response = await fetch('/api/product');
+      const response = await fetch('/api/product', {
+        cache: 'no-store'
+      });
       if (!response.ok) {
         throw new Error('Ürünler alınırken hata oluştu.');
       }
