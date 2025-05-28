@@ -41,7 +41,9 @@ export default async function Page({
             .map(v => ({
               value: v.value,
               isAvailable: v.isAvailable,
-              colorValue: v.colorValue
+              colorValue: v.colorValue,
+              colorPhoto: v.colorPhoto ?? '',
+              colorAsin: v.colorAsin
             }))}
         />
       </div>
@@ -102,7 +104,8 @@ export default async function Page({
                 value: v.value,
                 isAvailable: v.isAvailable,
                 colorValue: v.colorValue ?? '',
-                colorPhoto: v.colorPhoto ?? ''
+                colorPhoto: v.colorPhoto ?? '',
+                colorAsin: v.colorAsin
               }))}
             productId={productId}
           />
