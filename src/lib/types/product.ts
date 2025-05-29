@@ -33,8 +33,8 @@ export interface Product {
 
 /** Ürün Varyasyon Tipleri */
 export interface ProductVariation {
-  id: number;
-  productId: number;
+  id: string;
+  productId: string;
   value: string;
   isAvailable: boolean;
   colorAsin?: string;
@@ -43,6 +43,8 @@ export interface ProductVariation {
   colorIsAvailable?: boolean;
   size?: string;
   sizeIsAvailable?: boolean;
+  images?: string[];
+  image?: string;
 }
 
 /** API Yanıt Tipleri */
@@ -95,6 +97,8 @@ export interface ProductVariationApiResponse {
   color_is_available?: boolean;
   size?: string;
   size_is_available?: boolean;
+  images?: string[];
+  image?: string;
 }
 
 export type FormVariation = {
@@ -147,8 +151,8 @@ export const createProduct = (data: ProductApiResponse): Product => ({
   details: data.product_details || {},
   category: data.categoryId,
   variations: (data.productVariations || []).map(v => ({
-    id: v.id,
-    productId: v.productId,
+    id: v.id.toString(),
+    productId: v.productId.toString(),
     value: v.value,
     isAvailable: v.is_available,
     colorAsin: v.color_asin,
@@ -156,7 +160,9 @@ export const createProduct = (data: ProductApiResponse): Product => ({
     colorPhoto: v.color_photo ? v.color_photo.trim() : undefined,
     colorIsAvailable: v.color_is_available,
     size: v.size,
-    sizeIsAvailable: v.size_is_available
+    sizeIsAvailable: v.size_is_available,
+    images: v.images || [],
+    image: v.image
   })),
   coupon: data.coupon_text,
   delivery: data.delivery,

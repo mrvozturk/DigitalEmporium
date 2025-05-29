@@ -24,7 +24,7 @@ const ColorSelector: React.FC<ColorSelectorProps> = ({
 
       <div className='flex overflow-x-auto whitespace-nowrap scrollbar-hide'>
         {colors.map(color => (
-          <Link key={color.value} href={`${color.asin}`} shallow>
+          <Link key={color.value} href={`/product/${productId}?color=${color.asin}`} shallow>
             <div
               className={`flex-shrink-0 w-16 h-16 flex justify-center items-center rounded-full overflow-hidden border m-1 
               ${
