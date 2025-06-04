@@ -53,5 +53,6 @@ export const fetchProductById = async (
     throw new Error(data.message ?? 'API yanıtı başarısız.');
   }
 
+  console.log('data.data', data.data)
   return createProduct(data.data);
 };

@@ -31,6 +31,25 @@ export interface Product {
   updatedAt?: string;
 }
 
+/** Type for objects within the attributes array of ProductVariation */
+export interface VariantAttribute {
+  id: number;
+  variantId: number;
+  size?: string;
+  sku?: string;
+  in_stock?: boolean;
+}
+
+/** Type for size options passed to SizeSelector */
+export interface SizeOption {
+  value: string;
+  isAvailable: boolean;
+  sizeIsAvailable?: boolean;
+  variant_photos?: string[];
+  attributes?: VariantAttribute[];
+  images?: string[];
+}
+
 /** Ürün Varyasyon Tipleri */
 export interface ProductVariation {
   id: string;
@@ -43,6 +62,8 @@ export interface ProductVariation {
   colorIsAvailable?: boolean;
   size?: string;
   sizeIsAvailable?: boolean;
+  variant_photos?: string[];
+  attributes?: VariantAttribute[];
   images?: string[];
   image?: string;
 }
@@ -52,6 +73,16 @@ export interface ApiResponse {
   success: boolean;
   message: string;
   data: ProductApiResponse[];
+}
+
+export interface ProductVariantApiResponse {
+  id: number;
+  productId: number;
+  color?: string;
+  variant_photos?: string[];
+  skus?: any[];
+  is_available?: boolean;
+  size?: string;
 }
 
 export interface ProductApiResponse {
@@ -84,6 +115,7 @@ export interface ProductApiResponse {
   product_details: Record<string, string>;
   categoryId: number;
   productVariations: ProductVariationApiResponse[];
+  variants?: ProductVariantApiResponse[];
 }
 
 export interface ProductVariationApiResponse {
@@ -97,8 +129,9 @@ export interface ProductVariationApiResponse {
   color_is_available?: boolean;
   size?: string;
   size_is_available?: boolean;
-  images?: string[];
-  image?: string;
+  variant_photos?: string[];
+  color?: string;
+  sku?: any;
 }
 
 export type FormVariation = {
@@ -150,18 +183,20 @@ export const createProduct = (data: ProductApiResponse): Product => ({
   features: data.about_product || [],
   details: data.product_details || {},
   category: data.categoryId,
-  variations: (data.productVariations || []).map(v => ({
+  variations: ((data as any).productVariations || (data as any).variants || []).map((v: any) => ({
     id: v.id.toString(),
     productId: v.productId.toString(),
-    value: v.value,
-    isAvailable: v.is_available,
-    colorAsin: v.color_asin,
-    colorValue: v.color_value,
-    colorPhoto: v.color_photo ? v.color_photo.trim() : undefined,
+    value: v.value || v.color || '',
+    isAvailable: v.is_available ?? false,
+    colorAsin: v.color_asin || '',
+    colorValue: v.color_value || v.color,
+    colorPhoto: v.color_photo || v.variant_photos?.[0] || '',
     colorIsAvailable: v.color_is_available,
     size: v.size,
     sizeIsAvailable: v.size_is_available,
-    images: v.images || [],
+    variant_photos: v.variant_photos || [],
+    attributes: v.skus,
+    images: v.images,
     image: v.image
   })),
   coupon: data.coupon_text,
