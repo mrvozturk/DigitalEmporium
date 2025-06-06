@@ -63,7 +63,7 @@ export interface ProductVariation {
   size?: string;
   sizeIsAvailable?: boolean;
   variant_photos?: string[];
-  variantDetails?: VariantDetail[];
+  sizes?: VariantDetail[];
   images?: string[];
   image?: string;
 }
@@ -195,7 +195,7 @@ export const createProduct = (data: ProductApiResponse): Product => ({
     size: v.size,
     sizeIsAvailable: v.size_is_available,
     variant_photos: v.variant_photos || [],
-    variantDetails: v.skus,
+    sizes: v.skus,
     images: v.images,
     image: v.image
   })),
