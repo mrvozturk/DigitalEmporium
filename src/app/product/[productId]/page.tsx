@@ -27,7 +27,7 @@ export default async function Page({
 
   console.log(
     'product',
-    product?.variations?.forEach(v => console.log('v', v.attributes))
+    product?.variations?.forEach(v => console.log('v', v.variantDetails))
   );
 
   if (!product) {
@@ -35,7 +35,7 @@ export default async function Page({
   }
 
   const sizeOptions: SizeOption[] = product.variations.flatMap(v =>
-    (v.attributes || [])
+    (v.variantDetails || [])
       .filter((attr: any) => attr.size && attr.in_stock !== undefined)
       .map((attr: any) => ({
         value: attr.size,

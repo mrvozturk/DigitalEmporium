@@ -32,7 +32,7 @@ export interface Product {
 }
 
 /** Type for objects within the attributes array of ProductVariation */
-export interface VariantAttribute {
+export interface VariantDetail {
   id: number;
   variantId: number;
   size?: string;
@@ -46,7 +46,7 @@ export interface SizeOption {
   isAvailable: boolean;
   sizeIsAvailable?: boolean;
   variant_photos?: string[];
-  attributes?: VariantAttribute[];
+  attributes?: VariantDetail[];
   images?: string[];
 }
 
@@ -63,7 +63,7 @@ export interface ProductVariation {
   size?: string;
   sizeIsAvailable?: boolean;
   variant_photos?: string[];
-  attributes?: VariantAttribute[];
+  variantDetails?: VariantDetail[];
   images?: string[];
   image?: string;
 }
@@ -195,7 +195,7 @@ export const createProduct = (data: ProductApiResponse): Product => ({
     size: v.size,
     sizeIsAvailable: v.size_is_available,
     variant_photos: v.variant_photos || [],
-    attributes: v.skus,
+    variantDetails: v.skus,
     images: v.images,
     image: v.image
   })),
