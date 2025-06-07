@@ -1,11 +1,9 @@
-/** Color Variant Type */
 export interface VariantColor {
   value: string;
   asin: string;
   photo: string;
 }
 
-/** Ürün Tipleri */
 export interface Product {
   id: number;
   name: string;
@@ -31,26 +29,23 @@ export interface Product {
   updatedAt?: string;
 }
 
-/** Type for objects within the attributes array of ProductVariation */
-export interface VariantDetail {
+export interface Sku {
   id: number;
   variantId: number;
-  size?: string;
-  sku?: string;
-  in_stock?: boolean;
+  size: string | null;
+  sku: string;
+  in_stock: boolean;
 }
 
-/** Type for size options passed to SizeSelector */
 export interface SizeOption {
   value: string;
   isAvailable: boolean;
   sizeIsAvailable?: boolean;
   variant_photos?: string[];
-  attributes?: VariantDetail[];
+  attributes?: Sku[];
   images?: string[];
 }
 
-/** Ürün Varyasyon Tipleri */
 export interface ProductVariation {
   id: string;
   productId: string;
@@ -63,12 +58,11 @@ export interface ProductVariation {
   size?: string;
   sizeIsAvailable?: boolean;
   variant_photos?: string[];
-  sizes?: VariantDetail[];
+  sizes?: Sku[];
   images?: string[];
   image?: string;
 }
 
-/** API Yanıt Tipleri */
 export interface ApiResponse {
   success: boolean;
   message: string;
@@ -183,7 +177,11 @@ export const createProduct = (data: ProductApiResponse): Product => ({
   features: data.about_product || [],
   details: data.product_details || {},
   category: data.categoryId,
-  variations: ((data as any).productVariations || (data as any).variants || []).map((v: any) => ({
+  variations: (
+    (data as any).productVariations ||
+    (data as any).variants ||
+    []
+  ).map((v: any) => ({
     id: v.id.toString(),
     productId: v.productId.toString(),
     value: v.value || v.color || '',
@@ -195,7 +193,13 @@ export const createProduct = (data: ProductApiResponse): Product => ({
     size: v.size,
     sizeIsAvailable: v.size_is_available,
     variant_photos: v.variant_photos || [],
-    sizes: v.skus,
+    sizes: (v.skus || []).map((skuItem: any) => ({
+      id: skuItem.id,
+      variantId: skuItem.variantId,
+      size: skuItem.size || null,
+      sku: skuItem.sku || '',
+      in_stock: skuItem.in_stock ?? false
+    })) as Sku[],
     images: v.images,
     image: v.image
   })),
