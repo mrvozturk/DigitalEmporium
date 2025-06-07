@@ -1,6 +1,6 @@
 import React from 'react';
 import { fetchProductById } from '@/services/productService';
-import { Product } from '@/lib/types/product';
+import { Product, SizeOption } from '@/lib/types/product';
 import { AiFillStar } from 'react-icons/ai';
 import { SwiperImage } from '@/components';
 import ProductOverview from '@/components/productOverview';
@@ -10,7 +10,8 @@ import MainImage from '@/components/mainImage';
 import ColorSelector from '@/components/colorSelector';
 
 export type FiltersType = {
-  imageUrl: string;
+  imageUrl?: string;
+  color?: string;
 };
 
 export default async function Page({
@@ -24,9 +25,33 @@ export default async function Page({
   const { productId } = params;
   const product: Product | null = await fetchProductById(productId);
 
+  console.log(
+    'product',
+    product?.variations?.forEach(v => console.log('v', v.sizes))
+  );
+
   if (!product) {
     return <div>Loading...</div>;
   }
+
+  const sizeOptions: SizeOption[] = product.variations.flatMap(v =>
+    (v.sizes || [])
+      .filter((attr: any) => attr.size && attr.in_stock !== undefined)
+      .map((attr: any) => ({
+        value: attr.size,
+        isAvailable: attr.in_stock ?? false
+      }))
+  );
+  const selectedColorAsin = filters.color;
+  const selectedVariation = product.variations.find(
+    variation => variation.colorAsin === selectedColorAsin
+  );
+
+  const swiperImages =
+    selectedVariation?.variant_photos &&
+    selectedVariation.variant_photos.length > 0
+      ? selectedVariation.variant_photos
+      : [];
 
   const starRating = Math.round(parseFloat(product.rating) || 0);
 
@@ -36,12 +61,15 @@ export default async function Page({
       <div>
         <SwiperImage
           product={product}
+          images={swiperImages}
           colors={product.variations
             .filter(v => v.colorValue)
             .map(v => ({
-              value: v.value,
+              value: v.value || (v as any).color || '',
               isAvailable: v.isAvailable,
-              colorValue: v.colorValue
+              photo:
+                v.colorPhoto || (v.variant_photos && v.variant_photos[0]) || '',
+              asin: v.colorAsin ?? ''
             }))}
         />
       </div>
@@ -102,7 +130,8 @@ export default async function Page({
                 value: v.value,
                 isAvailable: v.isAvailable,
                 colorValue: v.colorValue ?? '',
-                colorPhoto: v.colorPhoto ?? ''
+                colorPhoto: v.colorPhoto ?? '',
+                colorAsin: v.colorAsin
               }))}
             productId={productId}
           />
@@ -120,33 +149,21 @@ export default async function Page({
             price={product.price.toFixed(2)}
           />
         )}
-        <div>
-          <SizeSelector
-            sizes={product.variations
-              .filter(v => !v.colorValue && v.size)
-              .map(v => ({
-                value: v.size ?? v.value,
-                isAvailable: v.sizeIsAvailable ?? v.isAvailable
-              }))}
-          />
+        <div className='xs:block sm:hidden'>
+          <SizeSelector sizeOptions={sizeOptions} />
         </div>
-        <div className='mt-2 text-black text-[0.8rem] sm:text-[0.7rem] md:text-[0.8rem] lg:text-[0.9rem] xs:hidden'>
+        <div className='mt-2 text-black text-[0.8rem] sm:text-[0.7rem] md:text-[0.8rem] lg:text-[0.9rem] xs:hidden sm:block'>
           <h2 className='hidden sm:block'>Size:</h2>
-          <select className='mt-1 w-[20%] p-1.5 border border-[#31737d] rounded-lg bg-gray-90 outline-none text-sm text-[0.8rem] sm:text-[0.7rem] md:text-[0.9rem] lg:text-[0.8rem] focus:ring-2 focus:ring-teal-500 hover:border-gray-400 sm:w-[40%] md:w-[45%] md:text-base lg:w-[30%] xl:w-[25%]'>
-            {product.variations
-              .filter(v => !v.colorValue && v.size)
-              .map(size => (
-                <option
-                  key={`${size.value}-${size.size ?? size.value}`}
-                  value={size.size ?? size.value}
-                  disabled={!(size.sizeIsAvailable ?? size.isAvailable)}
-                >
-                  {size.size ?? size.value}
-                  {!(size.sizeIsAvailable ?? size.isAvailable)
-                    ? ' (Out of Stock)'
-                    : ''}
-                </option>
-              ))}
+          <select className='mt-1 w-[20%] p-1.5 border border-[#31737d] '>
+            {sizeOptions.map(size => (
+              <option
+                key={size.value}
+                value={size.value}
+                disabled={!size.isAvailable}
+              >
+                {size.value} {size.isAvailable ? '' : '(Out of Stock)'}
+              </option>
+            ))}
           </select>
         </div>
         <ProductOverview product={product} showProductDivider={true} />
@@ -179,7 +196,7 @@ export default async function Page({
 
           <div className='text-[0.9rem] leading-6 text-gray-800 max-h-16 overflow-hidden transition-[max-height] duration-300 ease-in-out font-medium peer-checked:max-h-full sm:text-gray-700'>
             <ul>
-              {product.features.map((point) => (
+              {product.features.map(point => (
                 <li key={`feature-${point}`}>{point}</li>
               ))}
             </ul>

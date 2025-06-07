@@ -15,7 +15,7 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
   showDetailsSection = false,
   showPurchaseSection = false,
   showPriceSection = false,
-  showProductDivider = false
+  showProductDivider = false,
 }) => {
   const starRating = Math.round(parseFloat(product.rating) ?? 0);
 

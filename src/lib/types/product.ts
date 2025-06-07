@@ -1,11 +1,9 @@
-/** Color Variant Type */
 export interface VariantColor {
   value: string;
   asin: string;
   photo: string;
 }
 
-/** Ürün Tipleri */
 export interface Product {
   id: number;
   name: string;
@@ -31,10 +29,26 @@ export interface Product {
   updatedAt?: string;
 }
 
-/** Ürün Varyasyon Tipleri */
-export interface ProductVariation {
+export interface Sku {
   id: number;
-  productId: number;
+  variantId: number;
+  size: string | null;
+  sku: string;
+  in_stock: boolean;
+}
+
+export interface SizeOption {
+  value: string;
+  isAvailable: boolean;
+  sizeIsAvailable?: boolean;
+  variant_photos?: string[];
+  attributes?: Sku[];
+  images?: string[];
+}
+
+export interface ProductVariation {
+  id: string;
+  productId: string;
   value: string;
   isAvailable: boolean;
   colorAsin?: string;
@@ -43,13 +57,26 @@ export interface ProductVariation {
   colorIsAvailable?: boolean;
   size?: string;
   sizeIsAvailable?: boolean;
+  variant_photos?: string[];
+  sizes?: Sku[];
+  images?: string[];
+  image?: string;
 }
 
-/** API Yanıt Tipleri */
 export interface ApiResponse {
   success: boolean;
   message: string;
   data: ProductApiResponse[];
+}
+
+export interface ProductVariantApiResponse {
+  id: number;
+  productId: number;
+  color?: string;
+  variant_photos?: string[];
+  skus?: any[];
+  is_available?: boolean;
+  size?: string;
 }
 
 export interface ProductApiResponse {
@@ -82,6 +109,7 @@ export interface ProductApiResponse {
   product_details: Record<string, string>;
   categoryId: number;
   productVariations: ProductVariationApiResponse[];
+  variants?: ProductVariantApiResponse[];
 }
 
 export interface ProductVariationApiResponse {
@@ -95,6 +123,9 @@ export interface ProductVariationApiResponse {
   color_is_available?: boolean;
   size?: string;
   size_is_available?: boolean;
+  variant_photos?: string[];
+  color?: string;
+  sku?: any;
 }
 
 export type FormVariation = {
@@ -146,17 +177,31 @@ export const createProduct = (data: ProductApiResponse): Product => ({
   features: data.about_product || [],
   details: data.product_details || {},
   category: data.categoryId,
-  variations: (data.productVariations || []).map(v => ({
-    id: v.id,
-    productId: v.productId,
-    value: v.value,
-    isAvailable: v.is_available,
-    colorAsin: v.color_asin,
-    colorValue: v.color_value,
-    colorPhoto: v.color_photo ? v.color_photo.trim() : undefined,
+  variations: (
+    (data as any).productVariations ||
+    (data as any).variants ||
+    []
+  ).map((v: any) => ({
+    id: v.id.toString(),
+    productId: v.productId.toString(),
+    value: v.value || v.color || '',
+    isAvailable: v.is_available ?? false,
+    colorAsin: v.color_asin || '',
+    colorValue: v.color_value || v.color,
+    colorPhoto: v.color_photo || v.variant_photos?.[0] || '',
     colorIsAvailable: v.color_is_available,
     size: v.size,
-    sizeIsAvailable: v.size_is_available
+    sizeIsAvailable: v.size_is_available,
+    variant_photos: v.variant_photos || [],
+    sizes: (v.skus || []).map((skuItem: any) => ({
+      id: skuItem.id,
+      variantId: skuItem.variantId,
+      size: skuItem.size || null,
+      sku: skuItem.sku || '',
+      in_stock: skuItem.in_stock ?? false
+    })) as Sku[],
+    images: v.images,
+    image: v.image
   })),
   coupon: data.coupon_text,
   delivery: data.delivery,

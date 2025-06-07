@@ -1,15 +1,16 @@
 'use client';
 import React, { useState } from 'react';
+import { SizeOption } from "@/lib/types/product";
 
 interface Size {
   value: string;
 }
 
 interface SizeSelectorProps {
-  sizes: Size[];
+  sizeOptions: SizeOption[];
 }
 
-const SizeSelector: React.FC<SizeSelectorProps> = ({ sizes }) => {
+const SizeSelector: React.FC<SizeSelectorProps> = ({ sizeOptions }) => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
   return (
@@ -23,7 +24,7 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({ sizes }) => {
         )}
       </h2>
       <div className='flex flex-row overflow-x-scroll whitespace-nowrap mt-1 scrollbar-hide '>
-        {sizes.map(size => (
+        {sizeOptions.map(size => (
           <button
             key={size.value}
             className={`shrink-0 w-1/4 lg:w-1/4 mr-2 border rounded px-3 py-2 text-xs font-bold mt-2 ${

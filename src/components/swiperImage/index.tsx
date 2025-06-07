@@ -8,12 +8,14 @@ import { Product } from '@/lib/types/product';
 interface Color {
   value: string;
   isAvailable: boolean;
-  colorValue?: string;
+  photo: string;
+  asin: string;
 }
 
 interface ImageSwiperProps {
   product: Product;
   colors: Color[];
+  images?: string[];
 }
 
 const ImageSwiper = ({ product, colors }: ImageSwiperProps) => {

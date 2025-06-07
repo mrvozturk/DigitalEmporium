@@ -3,9 +3,9 @@ import Image from 'next/image';
 import { Product } from '@/lib/types/product';
 
 interface MainImageProps {
-  product?: Product | any;
+  product?: Product;
   initialPhoto?: string;
-  filters?: { imageUrl?: string };
+  filters?: { imageUrl?: string; color?: string };
 }
 
 const MainImage: React.FC<MainImageProps> = ({
@@ -15,11 +15,20 @@ const MainImage: React.FC<MainImageProps> = ({
 }) => {
   const getProductImage = (): string => {
     if (!product) return initialPhoto ?? '';
+
+    // Check if a color filter is applied and find the corresponding variation
+    if (filters.color && product.variations) {
+      const selectedVariation = product.variations.find(
+        (variation: any) => variation.colorAsin === filters.color
+      );
+      if (selectedVariation?.colorPhoto) {
+        return selectedVariation.colorPhoto;
+      }
+    }
+
+    // Fallback to existing logic if no color filter or no colorPhoto for the selected color
     if (filters.imageUrl) return filters.imageUrl;
     if (product.image) return product.image;
-    if (product.photo) return product.photo;
-    if (product.product_photo) return product.product_photo;
-    if (product.productPhoto) return product.productPhoto;
 
     return initialPhoto ?? '';
   };
@@ -27,7 +36,7 @@ const MainImage: React.FC<MainImageProps> = ({
   const selectedImage = getProductImage();
 
   const productName =
-    product?.name ?? product?.title ?? product?.product_title ?? 'Main Product';
+    product?.name ?? 'Main Product';
 
   return (
     <div
