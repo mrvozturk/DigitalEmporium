@@ -51,14 +51,6 @@ export default async function Page({
     selectedVariation?.variant_photos &&
     selectedVariation.variant_photos.length > 0
       ? selectedVariation.variant_photos
-      : selectedVariation?.images && selectedVariation.images.length > 0
-      ? selectedVariation.images
-      : selectedVariation?.image
-      ? [selectedVariation.image]
-      : product.images && product.images.length > 0
-      ? product.images
-      : product.image
-      ? [product.image]
       : [];
 
   const starRating = Math.round(parseFloat(product.rating) || 0);
