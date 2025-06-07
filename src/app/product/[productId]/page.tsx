@@ -12,6 +12,7 @@ import ColorSelector from '@/components/colorSelector';
 export type FiltersType = {
   imageUrl?: string;
   color?: string;
+  variantId?: string;
 };
 
 export default async function Page({
@@ -25,32 +26,39 @@ export default async function Page({
   const { productId } = params;
   const product: Product | null = await fetchProductById(productId);
 
-  console.log(
-    'product',
-    product?.variations?.forEach(v => console.log('v', v.sizes))
-  );
-
   if (!product) {
     return <div>Loading...</div>;
   }
 
-  const sizeOptions: SizeOption[] = product.variations.flatMap(v =>
-    (v.sizes || [])
-      .filter((attr: any) => attr.size && attr.in_stock !== undefined)
-      .map((attr: any) => ({
-        value: attr.size,
-        isAvailable: attr.in_stock ?? false
-      }))
-  );
-  const selectedColorAsin = filters.color;
-  const selectedVariation = product.variations.find(
-    variation => variation.colorAsin === selectedColorAsin
-  );
+  const selectedVariantId = filters.variantId ? parseInt(filters.variantId, 10) : undefined;
+  console.log('1. URL\'den gelen selectedVariantId:', selectedVariantId);
+
+  console.log('2. Ürünün tüm varyasyonlarındaki variantId ve sizes değerleri:', product.variations.map(v => ({
+    variantId: v.variantId,
+    colorAsin: v.colorAsin,
+    sizes: v.sizes
+  })));
+
+  const currentSelectedVariation = product.variations.find(
+    variation => variation.variantId === selectedVariantId
+  ) || product.variations[0];
+
+  console.log('3. currentSelectedVariation (seçili veya varsayılan varyasyon):', currentSelectedVariation);
+
+  const sizeOptions: SizeOption[] = (currentSelectedVariation?.sizes || [])
+    .filter((attr: any) => attr.size && attr.in_stock !== undefined)
+    .map((attr: any) => ({
+      value: attr.size,
+      isAvailable: attr.in_stock ?? false
+    }));
+
+  console.log('4. currentSelectedVariation.sizes (veya .skus) içeriği:', currentSelectedVariation?.sizes);
+  console.log('5. Oluşturulan sizeOptions:', sizeOptions);
 
   const swiperImages =
-    selectedVariation?.variant_photos &&
-    selectedVariation.variant_photos.length > 0
-      ? selectedVariation.variant_photos
+    currentSelectedVariation?.variant_photos &&
+    currentSelectedVariation.variant_photos.length > 0
+      ? currentSelectedVariation.variant_photos
       : [];
 
   const starRating = Math.round(parseFloat(product.rating) || 0);
@@ -69,7 +77,7 @@ export default async function Page({
               isAvailable: v.isAvailable,
               photo:
                 v.colorPhoto || (v.variant_photos && v.variant_photos[0]) || '',
-              asin: v.colorAsin ?? ''
+              asin: v.variantId?.toString() ?? ''
             }))}
         />
       </div>
@@ -131,9 +139,11 @@ export default async function Page({
                 isAvailable: v.isAvailable,
                 colorValue: v.colorValue ?? '',
                 colorPhoto: v.colorPhoto ?? '',
-                colorAsin: v.colorAsin
+                colorAsin: v.colorAsin,
+                variantId: v.variantId
               }))}
             productId={productId}
+            selectedVariantId={selectedVariantId}
           />
         )}
         {product.variations.some(v => v.colorValue) && (
@@ -142,7 +152,7 @@ export default async function Page({
               .filter(v => v.colorValue)
               .map(v => ({
                 value: v.colorValue ?? '',
-                asin: v.colorAsin ?? '',
+                asin: v.variantId?.toString() ?? '',
                 photo: v.colorPhoto ?? ''
               }))}
             productId={productId}

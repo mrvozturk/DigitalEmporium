@@ -49,6 +49,7 @@ export interface SizeOption {
 export interface ProductVariation {
   id: string;
   productId: string;
+  variantId: number;
   value: string;
   isAvailable: boolean;
   colorAsin?: string;
@@ -74,7 +75,7 @@ export interface ProductVariantApiResponse {
   productId: number;
   color?: string;
   variant_photos?: string[];
-  skus?: any[];
+  skus?: RawSkuData[];
   is_available?: boolean;
   size?: string;
 }
@@ -128,6 +129,14 @@ export interface ProductVariationApiResponse {
   sku?: any;
 }
 
+export interface RawSkuData {
+  id: number;
+  variantId: number;
+  size?: string | null;
+  sku?: string;
+  in_stock?: boolean;
+}
+
 export type FormVariation = {
   value: string;
   is_available: boolean;
@@ -178,30 +187,29 @@ export const createProduct = (data: ProductApiResponse): Product => ({
   details: data.product_details || {},
   category: data.categoryId,
   variations: (
-    (data as any).productVariations ||
-    (data as any).variants ||
+    data.productVariations ||
+    data.variants ||
     []
-  ).map((v: any) => ({
+  ).map((v: ProductVariationApiResponse | ProductVariantApiResponse) => ({
     id: v.id.toString(),
     productId: v.productId.toString(),
-    value: v.value || v.color || '',
+    variantId: v.id,
+    value: (v as ProductVariationApiResponse).value || (v as ProductVariantApiResponse).color || '',
     isAvailable: v.is_available ?? false,
-    colorAsin: v.color_asin || '',
-    colorValue: v.color_value || v.color,
-    colorPhoto: v.color_photo || v.variant_photos?.[0] || '',
-    colorIsAvailable: v.color_is_available,
+    colorAsin: (v as ProductVariationApiResponse).color_asin || '',
+    colorValue: (v as ProductVariationApiResponse).color_value || (v as ProductVariantApiResponse).color,
+    colorPhoto: (v as ProductVariationApiResponse).color_photo || v.variant_photos?.[0] || '',
+    colorIsAvailable: (v as ProductVariationApiResponse).color_is_available,
     size: v.size,
-    sizeIsAvailable: v.size_is_available,
+    sizeIsAvailable: (v as ProductVariationApiResponse).size_is_available,
     variant_photos: v.variant_photos || [],
-    sizes: (v.skus || []).map((skuItem: any) => ({
+    sizes: ('skus' in v && v.skus || []).map((skuItem: RawSkuData) => ({
       id: skuItem.id,
       variantId: skuItem.variantId,
       size: skuItem.size || null,
       sku: skuItem.sku || '',
       in_stock: skuItem.in_stock ?? false
     })) as Sku[],
-    images: v.images,
-    image: v.image
   })),
   coupon: data.coupon_text,
   delivery: data.delivery,
