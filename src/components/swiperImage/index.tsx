@@ -7,7 +7,6 @@ import { Product } from '@/lib/types/product';
 
 interface Color {
   value: string;
-  isAvailable: boolean;
   photo: string;
   asin: string;
 }

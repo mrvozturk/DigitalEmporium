@@ -1,6 +1,6 @@
 import React from 'react';
 import { fetchProductById } from '@/services/productService';
-import { Product, SizeOption } from '@/lib/types/product';
+import { Product, SizeOption, Sku } from '@/lib/types/product';
 import { AiFillStar } from 'react-icons/ai';
 import { SwiperImage } from '@/components';
 import ProductOverview from '@/components/productOverview';
@@ -46,10 +46,10 @@ export default async function Page({
   console.log('3. currentSelectedVariation (seçili veya varsayılan varyasyon):', currentSelectedVariation);
 
   const sizeOptions: SizeOption[] = (currentSelectedVariation?.sizes || [])
-    .filter((attr: any) => attr.size && attr.in_stock !== undefined)
-    .map((attr: any) => ({
-      value: attr.size,
-      isAvailable: attr.in_stock ?? false
+    .filter((skuItem: Sku) => skuItem.size && skuItem.in_stock !== undefined)
+    .map((skuItem: Sku) => ({
+      value: skuItem.size || '',
+      skuData: skuItem
     }));
 
   console.log('4. currentSelectedVariation.sizes (veya .skus) içeriği:', currentSelectedVariation?.sizes);
@@ -74,7 +74,6 @@ export default async function Page({
             .filter(v => v.colorValue)
             .map(v => ({
               value: v.value || (v as any).color || '',
-              isAvailable: v.isAvailable,
               photo:
                 v.colorPhoto || (v.variant_photos && v.variant_photos[0]) || '',
               asin: v.variantId?.toString() ?? ''
@@ -136,7 +135,6 @@ export default async function Page({
               .filter(v => v.colorValue)
               .map(v => ({
                 value: v.value,
-                isAvailable: v.isAvailable,
                 colorValue: v.colorValue ?? '',
                 colorPhoto: v.colorPhoto ?? '',
                 colorAsin: v.colorAsin,
@@ -169,9 +167,9 @@ export default async function Page({
               <option
                 key={size.value}
                 value={size.value}
-                disabled={!size.isAvailable}
+                disabled={!size.skuData.in_stock}
               >
-                {size.value} {size.isAvailable ? '' : '(Out of Stock)'}
+                {size.value} {size.skuData.in_stock ? '' : '(Out of Stock)'}
               </option>
             ))}
           </select>

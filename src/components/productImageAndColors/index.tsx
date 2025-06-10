@@ -3,7 +3,6 @@ import Link from 'next/link';
 
 interface Color {
   value: string;
-  isAvailable: boolean;
   colorValue?: string;
   colorPhoto?: string;
   colorAsin?: string;

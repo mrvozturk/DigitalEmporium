@@ -31,10 +31,11 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({ sizeOptions }) => {
               selectedSize === size.value
                 ? 'bg-black text-white border-black'
                 : 'bg-white text-black border-black'
-            }`}
+            } ${!size.skuData.in_stock ? 'opacity-50 cursor-not-allowed' : ''}`}
             onClick={() => setSelectedSize(size.value)}
+            disabled={!size.skuData.in_stock}
           >
-            {size.value}
+            {size.value} {size.skuData.in_stock ? '' : '(Out of Stock)'}
           </button>
         ))}
       </div>
