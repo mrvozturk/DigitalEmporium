@@ -16,7 +16,6 @@ export interface Product {
   delivery?: string;
   salesVolume?: string;
   asin: string;
-
   updatedAt?: string;
 }
 
@@ -28,16 +27,10 @@ export interface Variant {
   variant_photos?: string[];
   sizes?: Sku[];
   value: string;
-  color_asin?: string;
-  color_value?: string;
-  color_photo?: string;
-  sku?: any;
   variantId: number;
   colorAsin?: string;
   colorValue?: string;
   colorPhoto?: string;
-  images?: string[];
-  image?: string;
   asin: string;
   photo: string;
 }
@@ -53,12 +46,6 @@ export interface Sku {
 export interface SizeOption {
   value: string;
   skuData: Sku;
-}
-
-export interface ApiResponse {
-  success: boolean;
-  message: string;
-  data: ProductApiResponse[];
 }
 
 export interface ProductApiResponse {
@@ -86,6 +73,7 @@ export interface ProductApiResponse {
   categoryId: number;
   Category?: Category;
   variants?: Variant[];
+  
 }
 
 type JsonValue =
@@ -114,27 +102,25 @@ export const createProduct = (data: ProductApiResponse): Product => ({
   features: data.about_product || [],
   details: (data.product_details || {}) as Record<string, string>,
   category: data.categoryId,
-  variations: (data.variants || []).map(
-    (v: Variant) => ({
-      id: v.id,
-      productId: v.productId,
-      variantId: v.id,
-      value: v.value || v.color || '',
-      colorAsin: v.color_asin || '',
-      colorValue: v.color_value || v.color,
-      colorPhoto: v.color_photo || v.variant_photos?.[0] || '',
-      variant_photos: v.variant_photos || [],
-      asin: v.asin,
-      photo: v.photo,
-      sizes: ((v as any).skus || []).map((skuItem: Sku) => ({
-        id: skuItem.id,
-        variantId: skuItem.variantId,
-        size: skuItem.size || null,
-        sku: skuItem.sku || '',
-        in_stock: skuItem.in_stock ?? false
-      })) as Sku[]
-    })
-  ),
+  variations: (data.variants || []).map((v: Variant) => ({
+    id: v.id,
+    productId: v.productId,
+    variantId: v.id,
+    value: v.value || v.color || '',
+    colorAsin: v.colorAsin || '',
+    colorValue: v.colorValue || v.color,
+    colorPhoto: v.colorPhoto || v.variant_photos?.[0] || '',
+    variant_photos: v.variant_photos || [],
+    asin: v.asin,
+    photo: v.photo,
+    sizes: ((v as any).skus || []).map((skuItem: Sku) => ({
+      id: skuItem.id,
+      variantId: skuItem.variantId,
+      size: skuItem.size || null,
+      sku: skuItem.sku || '',
+      in_stock: skuItem.in_stock ?? false
+    })) as Sku[]
+  })),
   coupon: data.coupon_text || '',
   delivery: data.delivery || '',
   salesVolume: data.sales_volume || '',

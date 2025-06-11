@@ -24,6 +24,7 @@ export default async function Page({
 }) {
   const filters = searchParams;
   const { productId } = params;
+  const colorAsin = searchParams.color;
   const product: Product | null = await fetchProductById(productId);
 
   if (!product) {
@@ -149,11 +150,15 @@ export default async function Page({
             colors={product.variations
               .filter(v => v.colorValue)
               .map(v => ({
+                id: v.id,
+                productId: v.productId,
+                variantId: v.variantId,
                 value: v.colorValue ?? '',
                 asin: v.variantId?.toString() ?? '',
                 photo: v.colorPhoto ?? ''
               }))}
             productId={productId}
+            currentSelectedColorAsin={colorAsin || product.variations[0]?.variantId?.toString()}
             price={product.price.toFixed(2)}
           />
         )}

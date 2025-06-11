@@ -1,19 +1,21 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { VariantColor } from '@/lib/types/product';
+import { Variant } from '@/lib/types/product';
 
 interface ColorSelectorProps {
-  colors: VariantColor[];
+  colors: Variant[];
   productId: string;
+  currentSelectedColorAsin: string | undefined;
   price: string;
 }
 
 const ColorSelector: React.FC<ColorSelectorProps> = ({
   colors,
   productId,
+  currentSelectedColorAsin,
   price
 }) => {
-  const selectedColor = colors.find(color => color.asin === productId);
+  const selectedColor = colors.find(color => color.asin === currentSelectedColorAsin);
 
   return (
     <div className='hidden xs:block'>
