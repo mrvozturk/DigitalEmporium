@@ -31,20 +31,29 @@ export default async function Page({
     return <div>Loading...</div>;
   }
 
-  const selectedVariantId = filters.variantId ? parseInt(filters.variantId, 10) : undefined;
-  console.log('1. URL\'den gelen selectedVariantId:', selectedVariantId);
+  const selectedVariantId = filters.variantId
+    ? parseInt(filters.variantId, 10)
+    : undefined;
+  console.log("1. URL'den gelen selectedVariantId:", selectedVariantId);
 
-  console.log('2. Ürünün tüm varyasyonlarındaki variantId ve sizes değerleri:', product.variations.map(v => ({
-    variantId: v.variantId,
-    colorAsin: v.colorAsin,
-    sizes: v.sizes
-  })));
+  console.log(
+    '2. Ürünün tüm varyasyonlarındaki variantId ve sizes değerleri:',
+    product.variations.map(v => ({
+      variantId: v.variantId,
+      colorAsin: v.colorAsin,
+      sizes: v.sizes
+    }))
+  );
 
-  const currentSelectedVariation = product.variations.find(
-    variation => variation.variantId === selectedVariantId
-  ) || product.variations[0];
+  const currentSelectedVariation =
+    product.variations.find(
+      variation => variation.variantId === selectedVariantId
+    ) || product.variations[0];
 
-  console.log('3. currentSelectedVariation (seçili veya varsayılan varyasyon):', currentSelectedVariation);
+  console.log(
+    '3. currentSelectedVariation (seçili veya varsayılan varyasyon):',
+    currentSelectedVariation
+  );
 
   const sizeOptions: SizeOption[] = (currentSelectedVariation?.sizes || [])
     .filter((skuItem: Sku) => skuItem.size && skuItem.in_stock !== undefined)
@@ -53,7 +62,10 @@ export default async function Page({
       skuData: skuItem
     }));
 
-  console.log('4. currentSelectedVariation.sizes (veya .skus) içeriği:', currentSelectedVariation?.sizes);
+  console.log(
+    '4. currentSelectedVariation.sizes (veya .skus) içeriği:',
+    currentSelectedVariation?.sizes
+  );
   console.log('5. Oluşturulan sizeOptions:', sizeOptions);
 
   const swiperImages =
@@ -155,10 +167,13 @@ export default async function Page({
                 variantId: v.variantId,
                 value: v.colorValue ?? '',
                 asin: v.variantId?.toString() ?? '',
-                photo: v.colorPhoto ?? ''
+                photo: v.colorPhoto ?? '',
+                sizeOptions: []
               }))}
             productId={productId}
-            currentSelectedColorAsin={colorAsin || product.variations[0]?.variantId?.toString()}
+            currentSelectedColorAsin={
+              colorAsin || product.variations[0]?.variantId?.toString()
+            }
             price={product.price.toFixed(2)}
           />
         )}

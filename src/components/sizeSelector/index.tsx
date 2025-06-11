@@ -1,10 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { SizeOption } from "@/lib/types/product";
-
-interface Size {
-  value: string;
-}
+import { SizeOption } from '@/lib/types/product';
 
 interface SizeSelectorProps {
   sizeOptions: SizeOption[];
@@ -14,7 +10,7 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({ sizeOptions }) => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
   return (
-    <div  className='xs:block hidden'>
+    <div className='xs:block hidden'>
       <h2 className='text-sm mt-2  '>
         Size:{' '}
         {selectedSize ? (

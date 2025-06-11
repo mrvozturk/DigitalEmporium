@@ -33,6 +33,7 @@ export interface Variant {
   colorPhoto?: string;
   asin: string;
   photo: string;
+  sizeOptions: SizeOption[];
 }
 
 export interface Sku {
@@ -73,6 +74,7 @@ export interface ProductApiResponse {
   categoryId: number;
   Category?: Category;
   variants?: Variant[];
+  sizeOptions: SizeOption[]; 
   
 }
 
@@ -119,7 +121,8 @@ export const createProduct = (data: ProductApiResponse): Product => ({
       size: skuItem.size || null,
       sku: skuItem.sku || '',
       in_stock: skuItem.in_stock ?? false
-    })) as Sku[]
+    })) as Sku[],
+    sizeOptions: v.sizeOptions
   })),
   coupon: data.coupon_text || '',
   delivery: data.delivery || '',
