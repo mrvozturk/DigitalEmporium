@@ -1,4 +1,8 @@
-import { Product, createProduct, ApiResponse } from '../lib/types/product';
+import {
+  Product,
+  createProduct,
+  ProductApiResponse
+} from '../lib/types/product';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
   ? `${process.env.NEXT_PUBLIC_API_URL}products`
@@ -10,30 +14,24 @@ const HEADERS = {
 };
 
 export const fetchProducts = async (): Promise<Product[]> => {
-  try {
-    console.log('API URL:', API_URL);
-    const response = await fetch(API_URL, {
-      method: 'GET',
-      headers: HEADERS,
-      cache: 'no-store'
-    });
+  const response = await fetch(API_URL, {
+    method: 'GET',
+    headers: HEADERS,
+    cache: 'no-store'
+  });
 
-    if (!response.ok) {
-      throw new Error(
-        `Ürünleri getirirken bir hata oluştu. Status: ${response.status}`
-      );
-    }
-
-    const data = (await response.json()) as ApiResponse;
-    if (!data.success) {
-      throw new Error(data.message || 'API yanıtı başarısız.');
-    }
-
-    return data.data.map(item => createProduct(item));
-  } catch (error) {
-    console.error('Fetch Products Error:', error);
-    throw error;
+  if (!response.ok) {
+    throw new Error(
+      `Ürünleri getirirken bir hata oluştu. Status: ${response.status}`
+    );
   }
+
+  const data = await response.json();
+  if (!data.success) {
+    throw new Error(data.message || 'API yanıtı başarısız.');
+  }
+
+  return data.data.map((item: ProductApiResponse) => createProduct(item));
 };
 
 export const fetchProductById = async (
@@ -53,6 +51,5 @@ export const fetchProductById = async (
     throw new Error(data.message ?? 'API yanıtı başarısız.');
   }
 
-  console.log('data.data', data.data)
   return createProduct(data.data);
 };

@@ -74,8 +74,6 @@ export interface ProductApiResponse {
   categoryId: number;
   Category?: Category;
   variants?: Variant[];
-  sizeOptions: SizeOption[]; 
-  
 }
 
 type JsonValue =
