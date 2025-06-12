@@ -5,7 +5,7 @@ import { Product } from '@/lib/types/product';
 interface MainImageProps {
   product?: Product | any;
   initialPhoto?: string;
-  filters?: { imageUrl?: string };
+  filters?: { imageUrl?: string; color?: string };
 }
 
 const MainImage: React.FC<MainImageProps> = ({
@@ -15,6 +15,22 @@ const MainImage: React.FC<MainImageProps> = ({
 }) => {
   const getProductImage = (): string => {
     if (!product) return initialPhoto ?? '';
+
+    if (filters.color && product.variations) {
+      const selectedVariation = product.variations.find(
+        (variation: any) => variation.colorAsin === filters.color
+      );
+      
+      if (selectedVariation) {
+        if (selectedVariation.colorPhoto) {
+          return selectedVariation.colorPhoto;
+        }
+        if (selectedVariation.variant_photos && selectedVariation.variant_photos.length > 0) {
+          return selectedVariation.variant_photos[0];
+        }
+      }
+    }
+
     if (filters.imageUrl) return filters.imageUrl;
     if (product.image) return product.image;
     if (product.photo) return product.photo;
