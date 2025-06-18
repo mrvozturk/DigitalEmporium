@@ -43,6 +43,23 @@ const nextConfig = {
         hostname: 'img-kotontr.mncdn.com' // Koton diğer resim servisi
       }
     ]
+  },
+  // Vercel'de cache'i devre dışı bırak
+  experimental: {
+    serverActions: true
+  },
+  headers: async () => {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'no-store, must-revalidate'
+          }
+        ]
+      }
+    ];
   }
 };
 
