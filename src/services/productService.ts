@@ -10,14 +10,19 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 const HEADERS = {
   'Content-Type': 'application/json',
-  'x-vercel-protection-bypass': process.env.VERCEL_BYPASS_KEY ?? ''
+  'x-vercel-protection-bypass': process.env.VERCEL_BYPASS_KEY ?? '',
+  'Cache-Control': 'no-cache, no-store, must-revalidate',
+  'Pragma': 'no-cache',
+  'Expires': '0'
 };
 
 export const fetchProducts = async (): Promise<Product[]> => {
-  const response = await fetch(API_URL, {
+  const timestamp = new Date().getTime(); // Her istek için benzersiz timestamp
+  const response = await fetch(`${API_URL}?_t=${timestamp}`, {
     method: 'GET',
     headers: HEADERS,
-    cache: 'no-store'
+    cache: 'no-store',
+    next: { revalidate: 0 }
   });
 
   if (!response.ok) {
@@ -37,9 +42,12 @@ export const fetchProducts = async (): Promise<Product[]> => {
 export const fetchProductById = async (
   productId: string
 ): Promise<Product | null> => {
-  const response = await fetch(`${API_URL}/${productId}`, {
+  const timestamp = new Date().getTime(); // Her istek için benzersiz timestamp
+  const response = await fetch(`${API_URL}/${productId}?_t=${timestamp}`, {
     method: 'GET',
-    headers: HEADERS
+    headers: HEADERS,
+    cache: 'no-store',
+    next: { revalidate: 0 }
   });
 
   if (!response.ok) {
