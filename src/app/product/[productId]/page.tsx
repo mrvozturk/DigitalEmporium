@@ -1,6 +1,6 @@
 import React from 'react';
 import { fetchProductById } from '@/services/productService';
-import { Product } from '@/lib/types/product';
+import { Product, SizeOption, Sku } from '@/lib/types/product';
 import { AiFillStar } from 'react-icons/ai';
 import { SwiperImage } from '@/components';
 import ProductOverview from '@/components/productOverview';
@@ -10,7 +10,9 @@ import MainImage from '@/components/mainImage';
 import ColorSelector from '@/components/colorSelector';
 
 export type FiltersType = {
-  imageUrl: string;
+  imageUrl?: string;
+  color?: string;
+  variantId?: string;
 };
 
 export default async function Page({
@@ -22,11 +24,55 @@ export default async function Page({
 }) {
   const filters = searchParams;
   const { productId } = params;
+  const colorAsin = searchParams.color;
   const product: Product | null = await fetchProductById(productId);
 
   if (!product) {
     return <div>Loading...</div>;
   }
+
+  const selectedVariantId = filters.variantId
+    ? parseInt(filters.variantId, 10)
+    : undefined;
+  console.log("1. URL'den gelen selectedVariantId:", selectedVariantId);
+
+  console.log(
+    '2. Ürünün tüm varyasyonlarındaki variantId ve sizes değerleri:',
+    product.variations.map(v => ({
+      variantId: v.variantId,
+      colorAsin: v.colorAsin,
+      sizes: v.sizes
+    }))
+  );
+
+  const currentSelectedVariation =
+    product.variations.find(
+      variation => variation.variantId === selectedVariantId
+    ) || product.variations[0];
+
+  console.log(
+    '3. currentSelectedVariation (seçili veya varsayılan varyasyon):',
+    currentSelectedVariation
+  );
+
+  const sizeOptions: SizeOption[] = (currentSelectedVariation?.sizes || [])
+    .filter((skuItem: Sku) => skuItem.size && skuItem.in_stock !== undefined)
+    .map((skuItem: Sku) => ({
+      value: skuItem.size || '',
+      skuData: skuItem
+    }));
+
+  console.log(
+    '4. currentSelectedVariation.sizes (veya .skus) içeriği:',
+    currentSelectedVariation?.sizes
+  );
+  console.log('5. Oluşturulan sizeOptions:', sizeOptions);
+
+  const swiperImages =
+    currentSelectedVariation?.variant_photos &&
+    currentSelectedVariation.variant_photos.length > 0
+      ? currentSelectedVariation.variant_photos
+      : [];
 
   const starRating = Math.round(parseFloat(product.rating) || 0);
 
@@ -36,12 +82,14 @@ export default async function Page({
       <div>
         <SwiperImage
           product={product}
+          images={swiperImages}
           colors={product.variations
             .filter(v => v.colorValue)
             .map(v => ({
-              value: v.value,
-              isAvailable: v.isAvailable,
-              colorValue: v.colorValue
+              value: v.value || (v as any).color || '',
+              photo:
+                v.colorPhoto || (v.variant_photos && v.variant_photos[0]) || '',
+              asin: v.variantId?.toString() ?? ''
             }))}
         />
       </div>
@@ -80,7 +128,7 @@ export default async function Page({
               href='#reviews'
               className="text-[0.75rem] text-[#007185] no-underline cursor-pointer hover:text-[#d47b00] hover:underline after:content-['|'] after:ml-1 after:mr-1 after:text-[#2c697d] last:after:content-[''] xs:text-[0.25rem] sm:text-[0.64rem] md:text-[0.6rem] lg:text-[0.7rem] xl:text-[0.75rem] xs:hidden"
             >
-              {product.numRatings} değerlendirme
+              {product.numRatings} değerlendirmeee
             </a>
             <a
               href='#search'
@@ -100,11 +148,13 @@ export default async function Page({
               .filter(v => v.colorValue)
               .map(v => ({
                 value: v.value,
-                isAvailable: v.isAvailable,
                 colorValue: v.colorValue ?? '',
-                colorPhoto: v.colorPhoto ?? ''
+                colorPhoto: v.colorPhoto ?? '',
+                colorAsin: v.colorAsin,
+                variantId: v.variantId
               }))}
             productId={productId}
+            selectedVariantId={selectedVariantId}
           />
         )}
         {product.variations.some(v => v.colorValue) && (
@@ -112,41 +162,36 @@ export default async function Page({
             colors={product.variations
               .filter(v => v.colorValue)
               .map(v => ({
+                id: v.id,
+                productId: v.productId,
+                variantId: v.variantId,
                 value: v.colorValue ?? '',
-                asin: v.colorAsin ?? '',
-                photo: v.colorPhoto ?? ''
+                asin: v.variantId?.toString() ?? '',
+                photo: v.colorPhoto ?? '',
+                sizeOptions: []
               }))}
             productId={productId}
+            currentSelectedColorAsin={
+              colorAsin || product.variations[0]?.variantId?.toString()
+            }
             price={product.price.toFixed(2)}
           />
         )}
-        <div>
-          <SizeSelector
-            sizes={product.variations
-              .filter(v => !v.colorValue && v.size)
-              .map(v => ({
-                value: v.size ?? v.value,
-                isAvailable: v.sizeIsAvailable ?? v.isAvailable
-              }))}
-          />
+        <div className='xs:block sm:hidden'>
+          <SizeSelector sizeOptions={sizeOptions} />
         </div>
-        <div className='mt-2 text-black text-[0.8rem] sm:text-[0.7rem] md:text-[0.8rem] lg:text-[0.9rem] xs:hidden'>
+        <div className='mt-2 text-black text-[0.8rem] sm:text-[0.7rem] md:text-[0.8rem] lg:text-[0.9rem] xs:hidden sm:block'>
           <h2 className='hidden sm:block'>Size:</h2>
-          <select className='mt-1 w-[20%] p-1.5 border border-[#31737d] rounded-lg bg-gray-90 outline-none text-sm text-[0.8rem] sm:text-[0.7rem] md:text-[0.9rem] lg:text-[0.8rem] focus:ring-2 focus:ring-teal-500 hover:border-gray-400 sm:w-[40%] md:w-[45%] md:text-base lg:w-[30%] xl:w-[25%]'>
-            {product.variations
-              .filter(v => !v.colorValue && v.size)
-              .map(size => (
-                <option
-                  key={`${size.value}-${size.size ?? size.value}`}
-                  value={size.size ?? size.value}
-                  disabled={!(size.sizeIsAvailable ?? size.isAvailable)}
-                >
-                  {size.size ?? size.value}
-                  {!(size.sizeIsAvailable ?? size.isAvailable)
-                    ? ' (Out of Stock)'
-                    : ''}
-                </option>
-              ))}
+          <select className='mt-1 w-[20%] p-1.5 border border-[#31737d] '>
+            {sizeOptions.map(size => (
+              <option
+                key={size.value}
+                value={size.value}
+                disabled={!size.skuData.in_stock}
+              >
+                {size.value} {size.skuData.in_stock ? '' : '(Out of Stock)'}
+              </option>
+            ))}
           </select>
         </div>
         <ProductOverview product={product} showProductDivider={true} />
@@ -179,7 +224,7 @@ export default async function Page({
 
           <div className='text-[0.9rem] leading-6 text-gray-800 max-h-16 overflow-hidden transition-[max-height] duration-300 ease-in-out font-medium peer-checked:max-h-full sm:text-gray-700'>
             <ul>
-              {product.features.map((point) => (
+              {product.features.map(point => (
                 <li key={`feature-${point}`}>{point}</li>
               ))}
             </ul>

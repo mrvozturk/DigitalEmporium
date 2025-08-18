@@ -18,7 +18,12 @@ const ProductListing = () => {
     try {
       setRefreshing(true);
       const response = await fetch('/api/product', {
-        cache: 'no-store'
+        cache: 'no-store',
+        headers: {
+          'Cache-Control': 'no-cache',
+          'Pragma': 'no-cache'
+        },
+        next: { revalidate: 0 }
       });
       if (!response.ok) {
         throw new Error('Ürünler alınırken hata oluştu.');
