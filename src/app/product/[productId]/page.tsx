@@ -128,7 +128,7 @@ export default async function Page({
               href='#reviews'
               className="text-[0.75rem] text-[#007185] no-underline cursor-pointer hover:text-[#d47b00] hover:underline after:content-['|'] after:ml-1 after:mr-1 after:text-[#2c697d] last:after:content-[''] xs:text-[0.25rem] sm:text-[0.64rem] md:text-[0.6rem] lg:text-[0.7rem] xl:text-[0.75rem] xs:hidden"
             >
-              {product.numRatings} değerlendirme
+              {product.numRatings} değerlendirmeee
             </a>
             <a
               href='#search'
