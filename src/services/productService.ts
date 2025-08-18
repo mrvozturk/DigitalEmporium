@@ -5,7 +5,7 @@ import {
 } from '../lib/types/product';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
-  ? `${process.env.NEXT_PUBLIC_API_URL}api/v1/products`
+  ? `${process.env.NEXT_PUBLIC_API_URL}products`
   : 'https://postresql-api-pink.vercel.app/api/v1/products';
 
 const HEADERS = {
