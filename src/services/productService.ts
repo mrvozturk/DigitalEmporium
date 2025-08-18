@@ -6,7 +6,7 @@ import {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
   ? `${process.env.NEXT_PUBLIC_API_URL}api/v1/products`
-  : 'https://postresql-api-pink.vercel.app/api/v1/products';
+  : 'https://postresql-api-git-development-onatvaris-projects.vercel.app';
 
 const HEADERS = {
   'Content-Type': 'application/json',
