@@ -37,15 +37,15 @@ export default async function Page({
   const currentSelectedVariant: Variant =
     product.variants?.find(v => v.id === selectedVariantId) ??
     product.variants?.[0]!; // Non-null assertion to guarantee Variant type
-
-  // Size options mapping
-  const sizeOptions: SizeOption[] = (currentSelectedVariant?.sizes || [])
-    .filter((skuItem: Sku) => skuItem.size && skuItem.in_stock !== undefined)
+  const sizeOptions: SizeOption[] = (currentSelectedVariant?.skus || [])
+    .filter((skuItem: Sku) => skuItem.size)
     .map((skuItem: Sku) => ({
-      value: skuItem.size || '',
+      value: skuItem.size as string,
       skuData: skuItem,
-      sizes: currentSelectedVariant.sizes ?? []
+      skus: currentSelectedVariant?.skus || []
     }));
+
+  console.log('Size Options:', sizeOptions);
 
   const starRating = Math.round(parseFloat(product.product_star_rating ?? '0'));
 

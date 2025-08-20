@@ -27,7 +27,7 @@ export interface Variant {
   productId: number;
   color?: string;
   variant_photos?: string[];
-  sizes?: Sku[];
+  skus?: Sku[];
   value: string; // color value
   variantId: number;
   colorAsin?: string;
@@ -49,7 +49,7 @@ export interface Sku {
 export interface SizeOption {
   value: string;
   skuData: Sku;
-  sizes: Sku[];
+  skus: Sku[];
 }
 
 type JsonValue =
