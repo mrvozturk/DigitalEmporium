@@ -12,7 +12,7 @@ import Swiper from 'swiper';
 
 export type FiltersType = {
   imageUrl?: string;
-  color?: string; // colorAsin
+  color?: string;
   variantId?: string;
 };
 
@@ -36,7 +36,7 @@ export default async function Page({
 
   const currentSelectedVariant: Variant =
     product.variants?.find(v => v.id === selectedVariantId) ??
-    product.variants?.[0]!; // Non-null assertion to guarantee Variant type
+    product.variants?.[0]!;
   const sizeOptions: SizeOption[] = (currentSelectedVariant?.skus || [])
     .filter((skuItem: Sku) => skuItem.size)
     .map((skuItem: Sku) => ({
@@ -57,18 +57,19 @@ export default async function Page({
       <div>
         <SwiperImage
           product={product}
-          colors={
-            product.variants?.map(v => ({
-              value: v.value,
-              photo: v.colorPhoto ?? v.photo ?? v.variant_photos?.[0] ?? '',
-              asin: v.colorAsin ?? v.asin
-            })) ?? []
-          }
-          variantId={currentSelectedVariant.id}
+          variant={product.variants?.find(
+            v => v.id === currentSelectedVariant.id
+          )}
         />
       </div>
 
-      <MainImage product={product} filters={filters} />
+      <MainImage
+        product={product}
+        filters={{
+          ...filters,
+          variantId: filters.variantId ? Number(filters.variantId) : undefined
+        }}
+      />
 
       <div className='basis-[60%] bg-white px-3'>
         <p className='text-[0.75rem] lg:text-[0.85rem] md:text-[0.75rem] sm:text-[0.85rem] text-[#007185] font-semibold xs:hidden'>
@@ -122,22 +123,22 @@ export default async function Page({
         </p>
 
         {/* Color Pickers */}
-        {product.variants?.some(v => v.colorValue) && (
+        {product.variants?.some(v => v.color) && (
           <ProductImageAndColors
-            colors={product.variants ?? []}
-            productId={productId}
-            selectedVariantId={currentSelectedVariant.id}
+            colors={product.variants}
+            productId={Number(productId)}
+            selectedVariantId={currentSelectedVariant?.id}
           />
         )}
 
-        {product.variants?.some(v => v.colorValue) && (
+        {product.variants?.some(v => v.color) && (
           <ColorSelector
             colors={product.variants ?? []}
             productId={productId}
-            currentSelectedColorAsin={
-              colorAsin || product.variants?.[0]?.colorAsin
+            currentSelectedVariantId={
+              currentSelectedVariant?.id ?? product.variants[0]?.id
             }
-            price={product.product_price.toFixed(2)}
+            price={product.product_price}
           />
         )}
 
