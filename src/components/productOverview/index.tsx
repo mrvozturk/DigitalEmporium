@@ -15,45 +15,55 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
   showDetailsSection = false,
   showPurchaseSection = false,
   showPriceSection = false,
-  showProductDivider = false,
+  showProductDivider = false
 }) => {
-  const starRating = Math.round(parseFloat(product.rating) ?? 0);
+  // product_star_rating string gelebilir -> number'a çevirelim
+  const ratingValue = product.product_star_rating
+    ? parseFloat(product.product_star_rating)
+    : 0;
+  const starRating = Math.round(ratingValue);
 
   return (
-    <div className=' xs:block hidden'>
+    <div className='xs:block hidden'>
       {!showDetailsSection &&
         !showPurchaseSection &&
         !showPriceSection &&
         !showProductDivider && (
           <div className='w-full px-4'>
             <div className='flex justify-between items-center w-full'>
-              <p
-                className='text-xs font-medium  mt-2 mr-2 '
-                style={{ color: '#007185' }}
-              >
-                {product.brand}
-              </p>
+              {product.product_byline && (
+                <p
+                  className='text-xs font-medium mt-2 mr-2'
+                  style={{ color: '#007185' }}
+                >
+                  {product.product_byline}
+                </p>
+              )}
               <div className='flex items-center mt-2'>
-                <span className='text-xs mr-2' style={{ color: '#007185' }}>
-                  {product.rating}
-                </span>
-                <div className='flex items-center'>
-                  {[...Array(5)].map((_, index) => (
-                    <a
-                      href='#review'
-                      key={`${product.name}-star-${index}`}
-                      className='text-md'
-                    >
-                      <AiFillStar
-                        color={index < starRating ? '#ffc107' : '#e4e5e9'}
-                      />
-                    </a>
-                  ))}
-                </div>
+                {product.product_star_rating && (
+                  <>
+                    <span className='text-xs mr-2' style={{ color: '#007185' }}>
+                      {ratingValue.toFixed(1)}
+                    </span>
+                    <div className='flex items-center'>
+                      {[...Array(5)].map((_, index) => (
+                        <a
+                          href='#review'
+                          key={`${product.product_title}-star-${index}`}
+                          className='text-md'
+                        >
+                          <AiFillStar
+                            color={index < starRating ? '#ffc107' : '#e4e5e9'}
+                          />
+                        </a>
+                      ))}
+                    </div>
+                  </>
+                )}
               </div>
             </div>
             <h1 className='text-base font-medium text-gray-700 mt-2'>
-              {product.name}
+              {product.product_title}
             </h1>
             {product.salesVolume && (
               <p className='text-xs text-gray-500 mt-1'>
@@ -64,8 +74,8 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
         )}
 
       {showPriceSection && (
-        <p className='text-2xl font-semibold text-gray-900 mt-4'>
-          {product.price.toFixed(2)}₺
+        <p className='text-base font-semibold text-black mt-2 xs:hidden'>
+          Price: <span>{Number(product.product_price).toFixed(2)}₺</span>
         </p>
       )}
 
@@ -103,11 +113,11 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
         <div className='flex flex-col gap-4 mt-4'>
           <h2 className='text-xl font-bold text-gray-900'>Product details</h2>
 
-          {product.features && product.features.length > 0 && (
+          {product.about_product?.length > 0 && (
             <div className='flex flex-col mb-4'>
               <strong className='text-md text-gray-900 mb-2'>Features</strong>
               <ul className='list-disc ml-5'>
-                {product.features.map(feature => (
+                {product.about_product.map(feature => (
                   <li
                     key={`feature-${feature}`}
                     className='text-sm text-gray-700 mb-1'
@@ -119,8 +129,8 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
             </div>
           )}
 
-          {product.details &&
-            Object.entries(product.details).map(([key, value]) => (
+          {product.product_details &&
+            Object.entries(product.product_details).map(([key, value]) => (
               <div
                 className='flex flex-col text-base mb-4'
                 key={`detail-${key}-${value}`}
@@ -130,11 +140,11 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
               </div>
             ))}
 
-          {product.description && (
+          {product.customers_say && (
             <div className='flex flex-col text-base mb-4'>
               <strong className='text-md text-gray-900'>Description</strong>
               <span className='text-sm text-gray-700'>
-                {product.description}
+                {product.customers_say}
               </span>
             </div>
           )}

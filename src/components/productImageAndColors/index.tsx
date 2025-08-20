@@ -1,16 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
-
-interface Color {
-  value: string;
-  colorValue?: string;
-  colorPhoto?: string;
-  colorAsin?: string;
-  variantId?: number;
-}
+import { Variant } from '@/lib/types/product';
 
 interface ProductImageAndColorsProps {
-  colors: Color[];
+  colors: Variant[];
   productId: string;
   selectedVariantId?: number;
 }
@@ -21,14 +14,15 @@ const ProductImageAndColors: React.FC<ProductImageAndColorsProps> = ({
   selectedVariantId
 }) => {
   const currentSelectedColor =
-    colors.find(color => color.variantId === selectedVariantId) ?? colors[0];
+    colors.find(variant => variant.id === selectedVariantId) ?? colors[0];
 
-  const renderColorDisplay = (color: Color) => {
-    if (color.colorPhoto) {
+  const renderColorDisplay = (variant: Variant) => {
+    // Öncelik: colorPhoto > colorValue > fallback
+    if (variant.colorPhoto) {
       return (
         <Image
-          src={color.colorPhoto}
-          alt={color.value}
+          src={variant.colorPhoto}
+          alt={variant.value}
           width={40}
           height={40}
           className='object-cover w-full h-full'
@@ -36,18 +30,32 @@ const ProductImageAndColors: React.FC<ProductImageAndColorsProps> = ({
       );
     }
 
-    if (color.colorValue) {
+    if (variant.colorValue) {
       return (
         <div
           className='w-full h-full'
-          style={{ backgroundColor: color.colorValue }}
+          style={{ backgroundColor: variant.colorValue }}
         />
       );
     }
 
+    // Fallback: sadece photo varsa göster
+    if (variant.photo) {
+      return (
+        <Image
+          src={variant.photo}
+          alt={variant.value}
+          width={40}
+          height={40}
+          className='object-cover w-full h-full'
+        />
+      );
+    }
+
+    // Fallback: ilk harf göster
     return (
       <div className='w-full h-full bg-gray-200 flex items-center justify-center text-xs'>
-        {color.value.charAt(0)}
+        {variant.value.charAt(0)}
       </div>
     );
   };
@@ -60,22 +68,22 @@ const ProductImageAndColors: React.FC<ProductImageAndColorsProps> = ({
       </h2>
 
       <div className='flex gap-2 xs:gap-1'>
-        {colors.map((color, index) => {
-          const variantIdString = color.variantId?.toString();
+        {colors.map((variant, index) => {
+          const variantIdString = variant.id.toString();
 
           return (
             <Link
-              key={variantIdString ?? `color-${color.value}-${index}`}
+              key={`color-${variant.value}-${variantIdString}-${index}`}
               href={`/product/${productId}?variantId=${variantIdString}`}
             >
               <div
                 className={`w-10 h-10 xs:w-8 xs:h-8 border rounded-lg overflow-hidden cursor-pointer ${
-                  currentSelectedColor?.variantId === color.variantId
+                  currentSelectedColor?.id === variant.id
                     ? 'border-2 border-black'
                     : 'border-gray-300'
                 } hover:border-2 hover:border-black`}
               >
-                {renderColorDisplay(color)}
+                {renderColorDisplay(variant)}
               </div>
             </Link>
           );

@@ -21,7 +21,7 @@ const ProductListing = () => {
         cache: 'no-store',
         headers: {
           'Cache-Control': 'no-cache',
-          'Pragma': 'no-cache'
+          Pragma: 'no-cache'
         },
         next: { revalidate: 0 }
       });
@@ -72,7 +72,10 @@ const ProductListing = () => {
   return (
     <div className='grid gap-5 p-4 grid-cols-2 md:grid-cols-4'>
       {products.map(product => (
-        <div key={product.id} className='relative border border-gray-200 rounded-md shadow-md overflow-hidden'>
+        <div
+          key={product.id}
+          className='relative border border-gray-200 rounded-md shadow-md overflow-hidden'
+        >
           <div className='absolute top-2 right-2 flex flex-col gap-2 z-10 p-1'>
             <button
               className='flex items-center justify-center w-8 h-8 rounded-full bg-gray-200'
@@ -83,19 +86,20 @@ const ProductListing = () => {
             >
               <AiOutlineHeart className='text-black text-lg' />
             </button>
+
             <AddToCartButton
               id={product.id.toString()}
-              src={product.image}
-              title={product.name}
-              price={product.price.toString()}
+              src={product.product_photo}
+              title={product.product_title}
+              price={product.product_price.toString()}
             />
           </div>
 
           <Link href={`/product/${product.id}`}>
             <div className='cursor-pointer'>
               <Image
-                src={product.image}
-                alt={product.name}
+                src={product.product_photo}
+                alt={product.product_title}
                 priority
                 width={300}
                 height={300}
@@ -104,19 +108,19 @@ const ProductListing = () => {
 
               <div className='flex flex-col justify-between mt-2 flex-1'>
                 <h2 className='text-md font-bold tracking-tight leading-5 line-clamp-3 mb-4 px-4'>
-                  {product.name}
+                  {product.product_title}
                 </h2>
 
                 <div className='flex flex-col mt-2 mb-2 px-4'>
                   <div className='flex items-center mb-2'>
                     <p className='text-sm text-gray-500'>
-                      {product.numRatings} yorum
+                      {product.product_num_ratings ?? 0} yorum
                     </p>
                   </div>
 
                   <div className='flex justify-between items-center'>
                     <p className='text-sm font-bold text-black'>
-                      {product.price}₺
+                      {product.product_price}₺
                     </p>
                   </div>
                 </div>
