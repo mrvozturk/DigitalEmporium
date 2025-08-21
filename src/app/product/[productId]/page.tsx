@@ -135,7 +135,7 @@ export default async function Page({
           <ColorSelector
             colors={product.variants ?? []}
             productId={productId}
-            currentSelectedVariantId={
+            selectedVariantId={
               currentSelectedVariant?.id ?? product.variants[0]?.id
             }
             price={product.product_price}

@@ -17,7 +17,6 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
   showPriceSection = false,
   showProductDivider = false
 }) => {
-  // product_star_rating string gelebilir -> number'a çevirelim
   const ratingValue = product.product_star_rating
     ? parseFloat(product.product_star_rating)
     : 0;
