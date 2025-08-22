@@ -3,9 +3,9 @@ import Image from 'next/image';
 import { Product } from '@/lib/types/product';
 
 interface MainImageProps {
-  product?: Product | any;
+  product?: Product;
   initialPhoto?: string;
-  filters?: { imageUrl?: string; color?: string };
+  filters?: { imageUrl?: string; variantId?: number };
 }
 
 const MainImage: React.FC<MainImageProps> = ({
@@ -13,56 +13,39 @@ const MainImage: React.FC<MainImageProps> = ({
   initialPhoto,
   filters = {}
 }) => {
-  const getProductImage = (): string => {
-    if (!product) return initialPhoto ?? '';
-
-    if (filters.color && product.variations) {
-      const selectedVariation = product.variations.find(
-        (variation: any) => variation.colorAsin === filters.color
-      );
-      
-      if (selectedVariation) {
-        if (selectedVariation.colorPhoto) {
-          return selectedVariation.colorPhoto;
-        }
-        if (selectedVariation.variant_photos && selectedVariation.variant_photos.length > 0) {
-          return selectedVariation.variant_photos[0];
-        }
-      }
-    }
-
-    if (filters.imageUrl) return filters.imageUrl;
-    if (product.image) return product.image;
-    if (product.photo) return product.photo;
-    if (product.product_photo) return product.product_photo;
-    if (product.productPhoto) return product.productPhoto;
-
-    return initialPhoto ?? '';
-  };
-
-  const selectedImage = getProductImage();
-
-  const productName =
-    product?.name ?? product?.title ?? product?.product_title ?? 'Main Product';
+  const selectedImage =
+    // Variant fotoğrafı
+    (filters.variantId &&
+      product?.variants?.find(v => v.id === filters.variantId)
+        ?.variant_photos?.[0]) ??
+    // Filtrede imageUrl varsa
+    filters.imageUrl ??
+    // Ürünün ana fotoğrafı
+    product?.product_photo ??
+    // Ürünün fotoğraflarından ilki
+    product?.product_photos?.[0] ??
+    // Başlangıç fotoğrafı
+    initialPhoto ??
+    '';
 
   return (
     <div
-      className=' xs:hidden
-         sm:flex flex-1 basis-1/4 items-start justify-center 
-        sm:basis-[45%] md:basis-[35%] lg:basis-1/4
-        max-w-[25vw] ml-2
-      '
+      className='xs:hidden sm:flex flex-1 basis-1/4 items-start justify-center 
+                 sm:basis-[45%] md:basis-[35%] lg:basis-1/4 max-w-[25vw] ml-2'
     >
-      <Image
-        src={selectedImage}
-        alt={productName}
-        width={600}
-        height={700}
-        className='
-          w-full max-w-[25vw] max-h-[25vw] object-contain p-2 border border-gray-200 bg-gray-200
-          xs:block 
-        '
-      />
+      {selectedImage ? (
+        <Image
+          src={selectedImage}
+          alt={product?.product_title ?? 'Main Product'}
+          width={600}
+          height={700}
+          className='w-full max-w-[25vw] max-h-[25vw] object-contain p-2 border border-gray-200 bg-gray-200 xs:block'
+        />
+      ) : (
+        <div className='w-full h-[25vw] flex items-center justify-center border border-gray-200 bg-gray-100 text-gray-500 text-sm'>
+          No Image
+        </div>
+      )}
     </div>
   );
 };

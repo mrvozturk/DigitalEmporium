@@ -1,13 +1,14 @@
 import React from 'react';
 import { fetchProductById } from '@/services/productService';
-import { Product, SizeOption, Sku } from '@/lib/types/product';
+import { Product, SizeOption, Sku, Variant } from '@/lib/types/product';
 import { AiFillStar } from 'react-icons/ai';
-import { SwiperImage } from '@/components';
+import SwiperImage from '@/components/swiperImage';
 import ProductOverview from '@/components/productOverview';
 import SizeSelector from '@/components/sizeSelector';
 import ProductImageAndColors from '@/components/productImageAndColors';
 import MainImage from '@/components/mainImage';
 import ColorSelector from '@/components/colorSelector';
+import Swiper from 'swiper';
 
 export type FiltersType = {
   imageUrl?: string;
@@ -19,93 +20,69 @@ export default async function Page({
   params,
   searchParams
 }: {
-  readonly params: Readonly<{ productId: string; colorName?: string }>;
+  readonly params: Readonly<{ productId: string }>;
   readonly searchParams: Readonly<FiltersType>;
 }) {
-  const filters = searchParams;
   const { productId } = params;
+  const filters = searchParams;
   const colorAsin = searchParams.color;
-  const product: Product | null = await fetchProductById(productId);
 
-  if (!product) {
-    return <div>Loading...</div>;
-  }
+  const product: Product | null = await fetchProductById(productId);
+  if (!product) return <div>Loading...</div>;
 
   const selectedVariantId = filters.variantId
     ? parseInt(filters.variantId, 10)
     : undefined;
-  console.log("1. URL'den gelen selectedVariantId:", selectedVariantId);
 
-  console.log(
-    '2. Ürünün tüm varyasyonlarındaki variantId ve sizes değerleri:',
-    product.variations.map(v => ({
-      variantId: v.variantId,
-      colorAsin: v.colorAsin,
-      sizes: v.sizes
-    }))
-  );
-
-  const currentSelectedVariation =
-    product.variations.find(
-      variation => variation.variantId === selectedVariantId
-    ) || product.variations[0];
-
-  console.log(
-    '3. currentSelectedVariation (seçili veya varsayılan varyasyon):',
-    currentSelectedVariation
-  );
-
-  const sizeOptions: SizeOption[] = (currentSelectedVariation?.sizes || [])
-    .filter((skuItem: Sku) => skuItem.size && skuItem.in_stock !== undefined)
+  const currentSelectedVariant: Variant =
+    product.variants?.find(v => v.id === selectedVariantId) ??
+    product.variants?.[0]!;
+  const sizeOptions: SizeOption[] = (currentSelectedVariant?.skus || [])
+    .filter((skuItem: Sku) => skuItem.size)
     .map((skuItem: Sku) => ({
-      value: skuItem.size || '',
-      skuData: skuItem
+      value: skuItem.size as string,
+      skuData: skuItem,
+      skus: currentSelectedVariant?.skus || []
     }));
 
-  console.log(
-    '4. currentSelectedVariation.sizes (veya .skus) içeriği:',
-    currentSelectedVariation?.sizes
-  );
-  console.log('5. Oluşturulan sizeOptions:', sizeOptions);
+  console.log('Size Options:', sizeOptions);
 
-  const swiperImages =
-    currentSelectedVariation?.variant_photos &&
-    currentSelectedVariation.variant_photos.length > 0
-      ? currentSelectedVariation.variant_photos
-      : [];
-
-  const starRating = Math.round(parseFloat(product.rating) || 0);
+  const starRating = Math.round(parseFloat(product.product_star_rating ?? '0'));
 
   return (
     <main className='productDetail flex flex-row justify-between lg:px-4 lg:py-2 mx-auto sm:px-3 md:px-3 xs:flex-col xs:py-0 xs:justify-center'>
       <ProductOverview product={product} />
+
+      {/* Swiper Images */}
       <div>
         <SwiperImage
           product={product}
-          images={swiperImages}
-          colors={product.variations
-            .filter(v => v.colorValue)
-            .map(v => ({
-              value: v.value || (v as any).color || '',
-              photo:
-                v.colorPhoto || (v.variant_photos && v.variant_photos[0]) || '',
-              asin: v.variantId?.toString() ?? ''
-            }))}
+          variant={product.variants?.find(
+            v => v.id === currentSelectedVariant.id
+          )}
         />
       </div>
 
-      <MainImage product={product} filters={filters} />
+      <MainImage
+        product={product}
+        filters={{
+          ...filters,
+          variantId: filters.variantId ? Number(filters.variantId) : undefined
+        }}
+      />
 
       <div className='basis-[60%] bg-white px-3'>
         <p className='text-[0.75rem] lg:text-[0.85rem] md:text-[0.75rem] sm:text-[0.85rem] text-[#007185] font-semibold xs:hidden'>
-          {product.brand}
-        </p>{' '}
+          {product.product_byline}
+        </p>
         <h1 className='flex font-weight-bold text-[#111] leading-[1.3] my-1 xs:text-[0.9rem] sm:text-[0.9rem] md:text-[1.2rem] lg:text-[1.3rem] xs:hidden'>
-          {product.name}
+          {product.product_title}
         </h1>
+
+        {/* Reviews */}
         <div className='reviewSection flex items-center lg:mt-2 sm:mt-1 md:mt-1'>
           <span className='text-base font-bold mr-1 lg:text-xs sm:text-[0.75rem] md:text-[0.65rem] xs:hidden'>
-            {product.rating}
+            {product.product_star_rating}
           </span>
 
           <div className='flex ml-0.5 mr-1'>
@@ -128,7 +105,7 @@ export default async function Page({
               href='#reviews'
               className="text-[0.75rem] text-[#007185] no-underline cursor-pointer hover:text-[#d47b00] hover:underline after:content-['|'] after:ml-1 after:mr-1 after:text-[#2c697d] last:after:content-[''] xs:text-[0.25rem] sm:text-[0.64rem] md:text-[0.6rem] lg:text-[0.7rem] xl:text-[0.75rem] xs:hidden"
             >
-              {product.numRatings} değerlendirmeee
+              {product.product_num_ratings} değerlendirme
             </a>
             <a
               href='#search'
@@ -138,51 +115,40 @@ export default async function Page({
             </a>
           </div>
         </div>
+
         <hr className='border-t border-gray-300 xs:hidden' />
-        <p className='text-base font-semibold text-black mt-2 xs:hidden '>
-          Price: <span>{product.price.toFixed(2)}₺</span>
+
+        <p className='text-base font-semibold text-black mt-2 xs:hidden'>
+          Price: <span> {product.product_price}</span>
         </p>
-        {product.variations.some(v => v.colorValue) && (
+
+        {/* Color Pickers */}
+        {product.variants?.some(v => v.color) && (
           <ProductImageAndColors
-            colors={product.variations
-              .filter(v => v.colorValue)
-              .map(v => ({
-                value: v.value,
-                colorValue: v.colorValue ?? '',
-                colorPhoto: v.colorPhoto ?? '',
-                colorAsin: v.colorAsin,
-                variantId: v.variantId
-              }))}
-            productId={productId}
-            selectedVariantId={selectedVariantId}
+            colors={product.variants}
+            productId={Number(productId)}
+            selectedVariantId={currentSelectedVariant?.id}
           />
         )}
-        {product.variations.some(v => v.colorValue) && (
+
+        {product.variants?.some(v => v.color) && (
           <ColorSelector
-            colors={product.variations
-              .filter(v => v.colorValue)
-              .map(v => ({
-                id: v.id,
-                productId: v.productId,
-                variantId: v.variantId,
-                value: v.colorValue ?? '',
-                asin: v.variantId?.toString() ?? '',
-                photo: v.colorPhoto ?? '',
-                sizeOptions: []
-              }))}
+            colors={product.variants ?? []}
             productId={productId}
-            currentSelectedColorAsin={
-              colorAsin || product.variations[0]?.variantId?.toString()
+            selectedVariantId={
+              currentSelectedVariant?.id ?? product.variants[0]?.id
             }
-            price={product.price.toFixed(2)}
+            price={product.product_price}
           />
         )}
+
+        {/* Sizes */}
         <div className='xs:block sm:hidden'>
           <SizeSelector sizeOptions={sizeOptions} />
         </div>
         <div className='mt-2 text-black text-[0.8rem] sm:text-[0.7rem] md:text-[0.8rem] lg:text-[0.9rem] xs:hidden sm:block'>
           <h2 className='hidden sm:block'>Size:</h2>
-          <select className='mt-1 w-[20%] p-1.5 border border-[#31737d] '>
+          <select className='mt-1 w-[20%] p-1.5 border border-[#31737d]'>
             {sizeOptions.map(size => (
               <option
                 key={size.value}
@@ -194,16 +160,19 @@ export default async function Page({
             ))}
           </select>
         </div>
+
+        {/* Product Overview Sections */}
         <ProductOverview product={product} showProductDivider={true} />
         <ProductOverview product={product} showPriceSection={true} />
         <ProductOverview product={product} showPurchaseSection={true} />
-        <hr className='mt-4 mb-1 xs:block sm:hidden'></hr>
+        <hr className='mt-4 mb-1 xs:block sm:hidden' />
         <ProductOverview product={product} showDetailsSection={true} />
+
+        {/* Product Details */}
         <div className='mt-4 xs:hidden'>
           <h2 className='text-xl font-bold mb-2 text-black'>Product details</h2>
-
-          {product.details &&
-            Object.entries(product.details).map(([key, value]) => (
+          {product.product_details &&
+            Object.entries(product.product_details).map(([key, value]) => (
               <div
                 className='flex justify-start text-sm mb-3'
                 key={`detail-${key}-${value}`}
@@ -212,9 +181,10 @@ export default async function Page({
                 <span className='text-black text-sm ml-2'>{value}</span>
               </div>
             ))}
-
           <hr className='border-t border-gray-300 mt-2' />
         </div>
+
+        {/* About this item */}
         <div className='flex flex-col leading-6'>
           <h2 className='text-xl font-bold text-black my-2 sm:text-lg'>
             About this item
@@ -224,7 +194,7 @@ export default async function Page({
 
           <div className='text-[0.9rem] leading-6 text-gray-800 max-h-16 overflow-hidden transition-[max-height] duration-300 ease-in-out font-medium peer-checked:max-h-full sm:text-gray-700'>
             <ul>
-              {product.features.map(point => (
+              {product.about_product.map(point => (
                 <li key={`feature-${point}`}>{point}</li>
               ))}
             </ul>
@@ -238,6 +208,7 @@ export default async function Page({
         </div>
       </div>
 
+      {/* Right Side Add to Cart Section */}
       <div className='flex flex-col bg-white sm:p-4 md:p-4 p-6 rounded-lg border border-gray-300 w-full max-w-[250px] sm:max-w-[26vw] md:max-w-[24vw] lg:max-w-[250px] hidden sm:flex'>
         <p className='text-green-600 text-base mb-2 mt-0'>In Stock</p>
         <div className='w-full mb-5'>

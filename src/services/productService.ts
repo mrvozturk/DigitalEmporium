@@ -1,8 +1,4 @@
-import {
-  Product,
-  createProduct,
-  ProductApiResponse
-} from '../lib/types/product';
+import { Product } from '../lib/types/product';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
   ? `${process.env.NEXT_PUBLIC_API_URL}products`
@@ -19,7 +15,6 @@ export const fetchProducts = async (): Promise<Product[]> => {
     headers: HEADERS,
     cache: 'no-store'
   });
-  console.log('response', response);
 
   if (!response.ok) {
     throw new Error(
@@ -28,11 +23,12 @@ export const fetchProducts = async (): Promise<Product[]> => {
   }
 
   const data = await response.json();
+
   if (!data.success) {
     throw new Error(data.message || 'API yanıtı başarısız.');
   }
 
-  return data.data.map((item: ProductApiResponse) => createProduct(item));
+  return data.data as Product[]; // API birebir Product tipine uygunsa
 };
 
 export const fetchProductById = async (
@@ -48,9 +44,10 @@ export const fetchProductById = async (
   }
 
   const data = await response.json();
+
   if (!data.success) {
     throw new Error(data.message ?? 'API yanıtı başarısız.');
   }
 
-  return createProduct(data.data);
+  return data.data as Product; // Tek ürün dönüşü
 };

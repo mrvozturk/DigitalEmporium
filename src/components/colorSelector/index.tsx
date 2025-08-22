@@ -4,55 +4,62 @@ import { Variant } from '@/lib/types/product';
 
 interface ColorSelectorProps {
   colors: Variant[];
-  productId: string;
-  currentSelectedColorAsin: string | undefined;
-  price: string;
+  productId: string | number;
+  selectedVariantId?: number;
+  price: number;
 }
 
 const ColorSelector: React.FC<ColorSelectorProps> = ({
   colors,
   productId,
-  currentSelectedColorAsin,
+  selectedVariantId,
   price
 }) => {
-  const selectedColor = colors.find(
-    color => color.asin === currentSelectedColorAsin
-  );
+  const currentColor =
+    colors.find(v => v.id === selectedVariantId) ?? colors[0];
 
   return (
     <div className='hidden xs:block'>
-      <h2 className='text-xs text-black font-normal mt-1 mb-1  font-medium'>
-        <span>Color: </span>
-        <span className='font-bold'>{selectedColor?.value}</span>
+      <h2 className='text-xs text-black mt-1 mb-1'>
+        Color: <span className='font-bold'>{currentColor?.color ?? 'N/A'}</span>
       </h2>
 
-      <div className='flex overflow-x-auto whitespace-nowrap scrollbar-hide'>
-        {colors.map(color => (
-          <Link
-            key={color.value}
-            href={`/product/${productId}?variantId=${color.variantId}&color=${color.asin}`}
-            shallow
-          >
-            <div
-              className={`flex-shrink-0 w-16 h-16 flex justify-center items-center rounded-full overflow-hidden border m-1 
-              ${
-                selectedColor?.value === color.value
-                  ? 'border-[2px] border-black'
-                  : 'border-gray-300'
-              }
-              hover:border-[2px] hover:border-black`}
+      <div className='flex overflow-x-auto gap-2 scrollbar-hide'>
+        {colors.map(variant => {
+          const isActive = currentColor?.id === variant.id;
+          const image = variant.variant_photos?.[0];
+
+          return (
+            <Link
+              key={variant.id}
+              href={`/product/${productId}?variantId=${variant.id}`}
+              shallow
             >
-              <Image
-                src={color.photo}
-                alt={color.value}
-                width={50}
-                height={50}
-                className='w-full h-full rounded-full object-cover'
-              />
-            </div>
-            <p className='text-xs text-gray-700 text-center mb-1'>{price}</p>
-          </Link>
-        ))}
+              <div className='flex flex-col items-center'>
+                <div
+                  className={`w-16 h-16 rounded-full border flex items-center justify-center overflow-hidden 
+                    ${isActive ? 'border-2 border-black' : 'border-gray-300'} 
+                    hover:border-2 hover:border-black`}
+                >
+                  {image ? (
+                    <Image
+                      src={image}
+                      alt={variant.color ?? 'Color'}
+                      width={50}
+                      height={50}
+                      className='w-full h-full object-cover rounded-full'
+                    />
+                  ) : (
+                    <div className='w-full h-full bg-gray-200 flex items-center justify-center text-xs rounded-full'>
+                      {variant.color?.[0] ?? '?'}
+                    </div>
+                  )}
+                </div>
+                <p className='text-xs text-gray-700 mt-1'>{price}</p>
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

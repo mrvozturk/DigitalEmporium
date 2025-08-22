@@ -3,35 +3,26 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { Product } from '@/lib/types/product';
-
-interface Color {
-  value: string;
-  photo: string;
-  asin: string;
-}
+import { Product, Variant } from '@/lib/types/product';
 
 interface ImageSwiperProps {
   product: Product;
-  colors: Color[];
-  images?: string[];
+  variant?: Variant;
 }
 
-const ImageSwiper = ({ product, colors }: ImageSwiperProps) => {
+const ImageSwiper = ({ product, variant }: ImageSwiperProps) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const thumbnailsRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
 
-  const productImages = product.images && product.images.length > 0 
-    ? product.images 
-    : product.image ? [product.image] : [];
-
-  useEffect(() => {
-    if (thumbnailsRef.current) {
-      thumbnailsRef.current.scrollLeft = 0;
-      setActiveIndex(0);
-    }
-  }, []);
+  const productImages =
+    variant && variant.variant_photos.length > 0
+      ? variant.variant_photos
+      : product.product_photos && product.product_photos.length > 0
+      ? product.product_photos
+      : product.product_photo
+      ? [product.product_photo]
+      : [];
 
   const handleThumbnailClick = (photo: string, index: number) => {
     setActiveIndex(index);
@@ -40,47 +31,42 @@ const ImageSwiper = ({ product, colors }: ImageSwiperProps) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (thumbnailsRef.current) {
-        const thumbnails = thumbnailsRef.current;
-        const { scrollLeft } = thumbnails;
-        const thumbnailWidth = thumbnails.clientWidth;
+      if (!thumbnailsRef.current) return;
+      const thumbnails = Array.from(
+        thumbnailsRef.current.children
+      ) as HTMLDivElement[];
+      if (thumbnails.length === 0) return;
 
-        const newIndex = Math.round(scrollLeft / thumbnailWidth);
-        setActiveIndex(newIndex);
-      }
+      const thumbnailWidth =
+        thumbnails[0].offsetWidth +
+        parseInt(getComputedStyle(thumbnails[0]).marginRight || '0');
+      const scrollLeft = thumbnailsRef.current.scrollLeft;
+      const newIndex = Math.round(scrollLeft / thumbnailWidth);
+      setActiveIndex(newIndex);
     };
 
-    const thumbnailsElement = thumbnailsRef.current;
-    if (thumbnailsElement) {
-      thumbnailsElement.addEventListener('scroll', handleScroll);
-    }
+    const thumbnailsEl = thumbnailsRef.current;
+    thumbnailsEl?.addEventListener('scroll', handleScroll);
 
-    return () => {
-      if (thumbnailsElement) {
-        thumbnailsElement.removeEventListener('scroll', handleScroll);
-      }
-    };
-  }, []);
+    return () => thumbnailsEl?.removeEventListener('scroll', handleScroll);
+  }, [productImages]);
 
-  if (productImages.length === 0) {
-    return null;
-  }
+  if (productImages.length === 0) return null;
 
   return (
-    <div className='w-full flex flex-col justify-center items-center p-0 xs:bg-[#f6f4f4] xs:mt-2 '>
+    <div className='w-full flex flex-col justify-center items-center p-0 xs:bg-[#f6f4f4] xs:mt-2'>
       <div
         className='flex snap-x snap-mandatory overflow-x-auto scroll-smooth px-0 w-full sm:flex-col gap-2 items-center hide-scrollbar'
-        id='imageThumbnails'
         ref={thumbnailsRef}
       >
         {productImages.map((photo, index) => (
           <Image
             key={photo}
             src={photo}
-            alt={`${product.name} - ${index + 1}`}
+            alt={`${product.product_title} - ${index + 1}`}
             width={340}
             height={352}
-            className={`w-full flex-shrink-0 snap-center aspect-[4/5] object-contain object-center cursor-pointer align-center xs:p-3
+            className={`w-full flex-shrink-0 snap-center aspect-[4/5] object-contain cursor-pointer xs:p-3
               xs:w-full xs:aspect-square xs:object-contain 
               sm:w-[70px] sm:h-[50px] sm:border sm:border-[#b8b4b4] sm:rounded-md sm:shadow-lg 
               md:w-[55px] md:h-[45px]
@@ -89,13 +75,12 @@ const ImageSwiper = ({ product, colors }: ImageSwiperProps) => {
           />
         ))}
       </div>
-      <div
-        className='flex justify-center items-center xs:bg-white xs:border xs:bg-[#f6f4f4] xs:py-4 xs:w-full sm:hidden xs:mb-3'
-        id='paginationDots'
-      >
-        {productImages.map((photo, index) => (
+
+      {/* Pagination Dots */}
+      <div className='flex justify-center items-center xs:bg-white xs:border xs:bg-[#f6f4f4] xs:py-4 xs:w-full sm:hidden xs:mb-3'>
+        {productImages.map((_, index) => (
           <span
-            key={photo}
+            key={index}
             className={`xs:inline-block xs:h-2.5 xs:w-2.5 xs:rounded-full xs:mx-1 xs:border xs:border-[#8b8a8a] ${
               index === activeIndex
                 ? 'xs:bg-[#1a6b7c] xs:border-none'
