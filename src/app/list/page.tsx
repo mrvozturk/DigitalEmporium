@@ -98,7 +98,7 @@ const ProductListing = () => {
           <Link href={`/product/${product.id}`}>
             <div className='cursor-pointer'>
               <Image
-                src={product.product_photo}
+                src={product.product_photos[0]}
                 alt={product.product_title}
                 priority
                 width={300}
