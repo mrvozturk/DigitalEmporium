@@ -51,11 +51,11 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
 
           {/* Cart Items */}
           <div className='p-5 overflow-y-auto flex-1 max-h-[350px]'>
-            {products.map(product => (
+            {products.map(cartItem => (
               <CartProductItem
-                key={product.id}
-                product={product}
-                onRemove={(id: string) => dispatch(removeFromCart(id))}
+                key={`${cartItem.product.id}-${cartItem.variant?.id || 'no-variant'}-${cartItem.sku?.id || 'no-sku'}`}
+                product={cartItem}
+                onRemove={(productId: number, variantId?: number, skuId?: number) => dispatch(removeFromCart({ productId, variantId, skuId }))}
               />
             ))}
             <CouponInput />
