@@ -41,8 +41,13 @@ const CartItems = () => {
               </span>
             </div>
 
-            {products.map(product => (
-              <CartProductItem key={product.id} product={product} />
+            {products.map(cartItem => (
+              <CartProductItem
+                key={`${cartItem.product.id}-${
+                  cartItem.variant?.id || 'no-variant'
+                }-${cartItem.sku?.id || 'no-sku'}`}
+                product={cartItem}
+              />
             ))}
           </div>
 

@@ -1,12 +1,13 @@
 export const calculateTotal = (
-  items: { price: string; quantity: number }[]
+  items: { price?: string; quantity: number }[]
 ) => {
   return items.reduce((acc, item) => {
-    const cleanedPrice = item.price
-      .replace(/[^\d,]/g, '') // Sadece rakamları ve virgülü al
-      .replace(/\./g, '') // Noktaları kaldır
-      .replace(',', '.'); // Virgülü noktaya çevir
+    const cleanedPrice = (item.price ?? '0')
+      .replace(/[^\d,]/g, '')
+      .replace(/\./g, '')
+      .replace(',', '.');
 
-    return acc + parseFloat(cleanedPrice) * item.quantity;
+    const numericPrice = parseFloat(cleanedPrice);
+    return acc + (isNaN(numericPrice) ? 0 : numericPrice) * item.quantity;
   }, 0);
 };

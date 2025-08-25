@@ -1,21 +1,19 @@
 'use client';
 import { useDispatch } from 'react-redux';
 import { addToCart, toggleCart } from '@/lib/features/cart/cartSlice';
+import { Product, Variant, Sku } from '@/lib/types/product';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 
-interface CartItem {
-  readonly id: string;
-  readonly src: string;
-  readonly title: string;
-  readonly price: string;
+interface AddToCartButtonProps {
+  product: Product;
 }
 
-export function AddToCartButton({ id, src, title, price }: CartItem) {
+export function AddToCartButton({ product }: AddToCartButtonProps) {
   const dispatch = useDispatch();
 
   const handleClick = (event: React.MouseEvent) => {
     event.stopPropagation();
-    dispatch(addToCart({ id, src, title, price }));
+    dispatch(addToCart({ product }));
     dispatch(toggleCart(true));
   };
 

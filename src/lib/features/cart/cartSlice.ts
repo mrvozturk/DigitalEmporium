@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Product, Variant, Sku } from '@/lib/types/product';
 
-interface CartItem {
-  id: string;
-  src: string;
-  title: string;
-  price: string;
+export interface CartItem {
+  product: Product;
   quantity: number;
+  variant?: Variant;
+  sku?: Sku;
 }
 
 interface CartState {
@@ -22,22 +22,49 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addToCart: (state, action: PayloadAction<Omit<CartItem, 'quantity'>>) => {
+    addToCart: (
+      state,
+      action: PayloadAction<{ product: Product; variant?: Variant; sku?: Sku }>
+    ) => {
+      const { product, variant, sku } = action.payload;
+
       const existingItem = state.items.find(
-        item => item.id === action.payload.id
+        item =>
+          item.product?.id === product.id &&
+          item.variant?.id === variant?.id &&
+          item.sku?.id === sku?.id
       );
 
       if (existingItem) {
         existingItem.quantity += 1;
       } else {
-        state.items.push({ ...action.payload, quantity: 1 });
+        state.items.push({
+          product,
+          variant,
+          sku,
+          quantity: 1
+        });
       }
 
       state.isCartOpen = true;
     },
 
-    removeFromCart: (state, action: PayloadAction<string>) => {
-      state.items = state.items.filter(item => item.id !== action.payload);
+    removeFromCart: (
+      state,
+      action: PayloadAction<{
+        productId: number;
+        variantId?: number;
+        skuId?: number;
+      }>
+    ) => {
+      state.items = state.items.filter(
+        item =>
+          !(
+            item.product.id === action.payload.productId &&
+            (action.payload.variantId === undefined || item.variant?.id === action.payload.variantId) &&
+            (action.payload.skuId === undefined || item.sku?.id === action.payload.skuId)
+          )
+      );
     },
 
     clearCart: state => {
@@ -46,9 +73,19 @@ const cartSlice = createSlice({
 
     updateQuantity: (
       state,
-      action: PayloadAction<{ id: string; quantity: number }>
+      action: PayloadAction<{
+        productId: number;
+        variantId?: number;
+        skuId?: number;
+        quantity: number;
+      }>
     ) => {
-      const item = state.items.find(item => item.id === action.payload.id);
+      const item = state.items.find(
+        item =>
+          item.product.id === action.payload.productId &&
+          (action.payload.variantId === undefined || item.variant?.id === action.payload.variantId) &&
+          (action.payload.skuId === undefined || item.sku?.id === action.payload.skuId)
+      );
 
       if (item && action.payload.quantity > 0) {
         item.quantity = action.payload.quantity;
