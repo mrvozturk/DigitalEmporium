@@ -21,7 +21,7 @@ const ColorSelector: React.FC<ColorSelectorProps> = ({
   return (
     <div className='hidden xs:block'>
       <h2 className='text-xs text-black mt-1 mb-1'>
-        Color: <span className='font-bold'>{currentColor?.color ?? 'N/A'}</span>
+        Renk: <span className='font-bold'>{currentColor?.color ?? 'N/A'}</span>
       </h2>
 
       <div className='flex overflow-x-auto gap-2 scrollbar-hide'>

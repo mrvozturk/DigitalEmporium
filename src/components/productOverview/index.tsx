@@ -74,7 +74,7 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
 
       {showPriceSection && (
         <p className='text-base font-semibold text-black mt-2 xs:hidden'>
-          Price: <span>{Number(product.product_price).toFixed(2)}₺</span>
+          Fiyat: <span>{Number(product.product_price).toFixed(2)}₺</span>
         </p>
       )}
 
@@ -82,7 +82,7 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
 
       {showPurchaseSection && (
         <div className='w-full p-1 mt-4 rounded-lg'>
-          <p className='text-green-700 text-lg font-medium mb-2'>In Stock</p>
+          <p className='text-green-700 text-lg font-medium mb-2'>Stok Durumu</p>
           <div className='w-full mb-4'>
             <select
               id='quantity'
@@ -90,7 +90,7 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
               defaultValue=''
             >
               <option value='' disabled hidden>
-                Quantity:
+                Ürün Miktarı:
               </option>
               {[1, 2, 3, 4, 5].map(qty => (
                 <option key={qty} value={qty}>
@@ -100,21 +100,21 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
             </select>
           </div>
           <button className='w-full py-3 bg-yellow-400 text-black font-medium rounded-lg hover:border-4 hover:border-black-500'>
-            Add to Cart
+            Sepete Ekle
           </button>
           <button className='w-full py-3 bg-orange-500 text-black font-medium rounded-lg mt-4 hover:border-4 hover:border-black-500'>
-            Buy Now
+            Satın Al
           </button>
         </div>
       )}
 
       {showDetailsSection && (
         <div className='flex flex-col gap-4 mt-4'>
-          <h2 className='text-xl font-bold text-gray-900'>Product details</h2>
+          <h2 className='text-xl font-bold text-gray-900'>Ürün Hakkında </h2>
 
           {product.about_product?.length > 0 && (
             <div className='flex flex-col mb-4'>
-              <strong className='text-md text-gray-900 mb-2'>Features</strong>
+              <strong className='text-md text-gray-900 mb-2'>Özellikler</strong>
               <ul className='list-disc ml-5'>
                 {product.about_product.map(feature => (
                   <li

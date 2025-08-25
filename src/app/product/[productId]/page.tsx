@@ -119,7 +119,7 @@ export default async function Page({
         <hr className='border-t border-gray-300 xs:hidden' />
 
         <p className='text-base font-semibold text-black mt-2 xs:hidden'>
-          Price: <span> {product.product_price}</span>
+          Fiyat: <span> {product.product_price}</span>
         </p>
 
         {/* Color Pickers */}
@@ -147,7 +147,7 @@ export default async function Page({
           <SizeSelector sizeOptions={sizeOptions} />
         </div>
         <div className='mt-2 text-black text-[0.8rem] sm:text-[0.7rem] md:text-[0.8rem] lg:text-[0.9rem] xs:hidden sm:block'>
-          <h2 className='hidden sm:block'>Size:</h2>
+          <h2 className='hidden sm:block'>Beden:</h2>
           <select className='mt-1 w-[20%] p-1.5 border border-[#31737d]'>
             {sizeOptions.map(size => (
               <option
@@ -170,7 +170,7 @@ export default async function Page({
 
         {/* Product Details */}
         <div className='mt-4 xs:hidden'>
-          <h2 className='text-xl font-bold mb-2 text-black'>Product details</h2>
+          <h2 className='text-xl font-bold mb-2 text-black'>Ürün Detay</h2>
           {product.product_details &&
             Object.entries(product.product_details).map(([key, value]) => (
               <div
@@ -185,9 +185,9 @@ export default async function Page({
         </div>
 
         {/* About this item */}
-        <div className='flex flex-col leading-6'>
+        <div className='flex flex-col leading-6 xs:hidden'>
           <h2 className='text-xl font-bold text-black my-2 sm:text-lg'>
-            About this item
+            Ürün Hakkında
           </h2>
 
           <input type='checkbox' id='toggle' className='hidden peer' />
@@ -210,7 +210,7 @@ export default async function Page({
 
       {/* Right Side Add to Cart Section */}
       <div className='flex flex-col bg-white sm:p-4 md:p-4 p-6 rounded-lg border border-gray-300 w-full max-w-[250px] sm:max-w-[26vw] md:max-w-[24vw] lg:max-w-[250px] hidden sm:flex'>
-        <p className='text-green-600 text-base mb-2 mt-0'>In Stock</p>
+        <p className='text-green-600 text-base mb-2 mt-0'>Stok Durumu</p>
         <div className='w-full mb-5'>
           <select
             id='quantity'
@@ -218,7 +218,7 @@ export default async function Page({
             defaultValue=''
           >
             <option value='' disabled hidden>
-              Quantity:
+              Ürün Miktarı
             </option>
             {[1, 2, 3, 4, 5].map(qty => (
               <option key={`qty-${qty}`} value={qty}>
@@ -228,10 +228,10 @@ export default async function Page({
           </select>
         </div>
         <button className='block w-full py-2 text-sm text-black bg-yellow-400 rounded-full cursor-pointer mb-4'>
-          Add to Cart
+          Sepete Ekle
         </button>
         <button className='block w-full py-2 text-sm text-black bg-orange-500 rounded-full cursor-pointer'>
-          Buy Now
+          Satın Al
         </button>
       </div>
     </main>
