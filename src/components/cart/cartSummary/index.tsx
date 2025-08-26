@@ -17,20 +17,20 @@ const CartSummary = () => {
         <div className='flex justify-between'>
           <span>Ürünlerin Toplamı ({products.length} ürün)</span>
           <span>
-            {total.toLocaleString('tr-TR', { minimumFractionDigits: 2 })} TL
+            {total.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 })}
           </span>
         </div>
         <div className='flex justify-between text-red-500 mt-2'>
           <span>Yeni Sezon Ürünlerde Kargo Bedava</span>
-          <span>-0,00 TL</span>
+          <span>-$0.00</span>
         </div>
         <div className='flex justify-between text-red-500 mt-2'>
           <span>Kargo Bedava</span>
-          <span>-0,00 TL</span>
+          <span>-$0.00</span>
         </div>
         <div className='flex justify-between text-black-500 mt-2'>
           <span>Toplam İndirim</span>
-          <span>-0,00 TL</span>
+          <span>-$0.00</span>
         </div>
 
         {/* Kupon Girişi */}
@@ -39,7 +39,7 @@ const CartSummary = () => {
         <div className='flex justify-between text-lg font-semibold border-t border-gray-300 py-2 border-b mb-2'>
           <span>Toplam</span>
           <span>
-            {total.toLocaleString('tr-TR', { minimumFractionDigits: 2 })} TL
+            {total.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 })}
           </span>
         </div>
 

@@ -87,12 +87,7 @@ const ProductListing = () => {
               <AiOutlineHeart className='text-black text-lg' />
             </button>
 
-            <AddToCartButton
-              id={product.id.toString()}
-              src={product.product_photo}
-              title={product.product_title}
-              price={product.product_price.toString()}
-            />
+            <AddToCartButton product={product} />
           </div>
 
           <Link href={`/product/${product.id}`}>
@@ -120,7 +115,7 @@ const ProductListing = () => {
 
                   <div className='flex justify-between items-center'>
                     <p className='text-sm font-bold text-black'>
-                      {product.product_price}₺
+                      {product.product_price}
                     </p>
                   </div>
                 </div>

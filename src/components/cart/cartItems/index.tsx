@@ -42,7 +42,7 @@ const CartItems = () => {
             </div>
 
             {products.map(product => (
-              <CartProductItem key={product.id} product={product} />
+              <CartProductItem key={product.product.id} product={product} />
             ))}
           </div>
 

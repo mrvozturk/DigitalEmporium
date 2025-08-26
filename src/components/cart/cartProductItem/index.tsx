@@ -3,27 +3,25 @@ import Image from 'next/image';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
 import { removeFromCart, updateQuantity } from '@/lib/features/cart/cartSlice';
+import type { CartItem } from '@/lib/features/cart/cartSlice';
 
 interface CartProductItemProps {
-  product: {
-    id: string;
-    src: string;
-    title: string;
-    price: string;
-    quantity: number;
-  };
+  product: CartItem;
 }
 
-const CartProductItem: React.FC<CartProductItemProps> = ({ product }) => {
+const CartProductItem: React.FC<CartProductItemProps> = ({
+  product: cartItem
+}) => {
   const dispatch = useDispatch();
+  const { product, variant, sku, quantity } = cartItem;
 
   return (
     <div className='flex border-b py-2 border-gray-300'>
       {/* Ürün Resmi */}
       <div className='flex items-start justify-between w-full xs:w-40 sm:w-[110px] md:w-[110px] lg:w-[138px]'>
         <Image
-          src={product.src}
-          alt={product.title}
+          src={product.product_photos?.[0] || '/placeholder.png'}
+          alt={product.product_title}
           width={120}
           height={120}
           className='object-contain border border-gray-300 rounded-md shadow-md p-1 w-[120px] h-[120px] lg:h-[150px]'
@@ -34,7 +32,7 @@ const CartProductItem: React.FC<CartProductItemProps> = ({ product }) => {
       <div className='w-full ml-2'>
         <div className='flex flex-col flex-1 ml-1 text-start'>
           <p className='text-xs xs:text-xxs sm:text-xxs md:text-xxs lg:text-sm'>
-            {product.title}
+            {product.product_title}
           </p>
           <a
             href='#'
@@ -43,13 +41,13 @@ const CartProductItem: React.FC<CartProductItemProps> = ({ product }) => {
             Düzenle
           </a>
           <p className='text-xxs lg:text-xs xs:text-2xs sm:text-xxs md:text-xxs lg:text-xs font-bold mt-2'>
-            {product.price}
+            {cartItem.product.product_price}
           </p>
           <p className='text-xs xs:text-xxs sm:text-xxs md:text-xxs lg:text-xs mt-1'>
-            <span className='font-bold'>Beden:</span>
+            <span className='font-bold'>Beden:</span> {sku?.size}
           </p>
           <p className='text-xs xs:text-xxs sm:text-xxs md:text-xxs lg:text-xs'>
-            <span className='font-bold'>Renk:</span>
+            <span className='font-bold'>Renk:</span> {variant?.color}
           </p>
         </div>
       </div>
@@ -58,7 +56,15 @@ const CartProductItem: React.FC<CartProductItemProps> = ({ product }) => {
       <div className='flex flex-col items-center gap-4 lg:gap-16 xs:gap-4 sm:gap-5 md:gap-5'>
         {/* Silme Butonu */}
         <button
-          onClick={() => dispatch(removeFromCart(product.id))}
+          onClick={() =>
+            dispatch(
+              removeFromCart({
+                productId: product.id,
+                variantId: variant?.id,
+                skuId: sku?.id
+              })
+            )
+          }
           className='text-black-500 hover:text-red-500 xs:ml-20 sm:ml-20 md:ml-20 lg:ml-15'
         >
           <AiOutlineDelete className='w-6 h-6 xs:w-4 xs:h-4 sm:w-4 sm:h-4 md:w-4 md:h-4 lg:w-5 lg:h-5' />
@@ -69,26 +75,30 @@ const CartProductItem: React.FC<CartProductItemProps> = ({ product }) => {
           <button
             className='bg-gray-200 px-2 py-0.2 rounded disabled:opacity-50'
             onClick={() =>
-              product.quantity > 1 &&
+              cartItem.quantity > 1 &&
               dispatch(
                 updateQuantity({
-                  id: product.id,
-                  quantity: product.quantity - 1
+                  productId: product.id,
+                  variantId: variant?.id,
+                  skuId: sku?.id,
+                  quantity: cartItem.quantity - 1
                 })
               )
             }
-            disabled={product.quantity <= 1}
+            disabled={cartItem.quantity <= 1}
           >
             -
           </button>
-          <span className='px-3 font-semibold'>{product.quantity}</span>
+          <span className='px-3 font-semibold'>{cartItem.quantity}</span>
           <button
             className='bg-gray-200 px-2 py-0.2 rounded'
             onClick={() =>
               dispatch(
                 updateQuantity({
-                  id: product.id,
-                  quantity: product.quantity + 1
+                  productId: product.id,
+                  variantId: variant?.id,
+                  skuId: sku?.id,
+                  quantity: cartItem.quantity + 1
                 })
               )
             }

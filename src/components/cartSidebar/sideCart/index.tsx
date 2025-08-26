@@ -53,9 +53,11 @@ const SideCart: React.FC<SideCartProps> = ({ isOpen, onClose }) => {
           <div className='p-5 overflow-y-auto flex-1 max-h-[350px]'>
             {products.map(product => (
               <CartProductItem
-                key={product.id}
+                key={product.product.id}
                 product={product}
-                onRemove={(id: string) => dispatch(removeFromCart(id))}
+                onRemove={(productId: number) =>
+                  dispatch(removeFromCart({ productId }))
+                }
               />
             ))}
             <CouponInput />

@@ -1,34 +1,33 @@
 import React from 'react';
 import Image from 'next/image';
 import { AiOutlineHeart, AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
+import type { CartItem } from '../../../../src/lib/features/cart/cartSlice';
 
 interface CartItemProps {
-  product: {
-    id: string;
-    src: string;
-    title: string;
-    price: string;
-    quantity: number;
-  };
-  onRemove: (id: string) => void;
+  product: CartItem;
+  onRemove: (productId: number) => void;
 }
 
-const CartItem: React.FC<CartItemProps> = ({ product, onRemove }) => {
+const CartItem: React.FC<CartItemProps> = ({ product: cartItem, onRemove }) => {
+  const { product, variant, sku, quantity } = cartItem;
+
   return (
     <div key={product.id} className='flex mb-3 pb-3 border-b'>
       <Image
-        src={product.src}
-        alt={product.title}
-        width={80}
+        src={product.product_photos?.[0] || '/placeholder.png'}
+        alt={product.product_title}
+        width={120}
         height={120}
-        className='object-contain border border-gray-300 rounded-md shadow-md p-1 w-[80px] h-[120px]'
+        className='object-contain border border-gray-300 rounded-md shadow-md p-1 w-[120px] h-[120px] lg:h-[150px]'
       />
+
       <div className='flex-1 flex flex-col justify-between px-3'>
         <div>
-          <h3 className='text-sm mb-1'>{product.title}</h3>
-          <p className='text-xs font-bold mb-2'>{product.price}</p>
+          <h3 className='text-sm mb-1'>{product.product_title}</h3>
+          <p className='text-xs font-bold mb-2'>{product.product_price}</p>
           <p className='text-xs text-gray-500'>
-            {product.quantity} adet | M | Orta gri
+            {quantity} adet {sku?.size && `| ${sku.size}`}{' '}
+            {variant?.color && `| ${variant.color}`}
           </p>
         </div>
         <div className='flex justify-end space-x-3 mt-4'>
