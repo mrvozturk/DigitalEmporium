@@ -9,7 +9,9 @@ interface CartProductItemProps {
   product: CartItem;
 }
 
-const CartProductItem: React.FC<CartProductItemProps> = ({ product: cartItem }) => {
+const CartProductItem: React.FC<CartProductItemProps> = ({
+  product: cartItem
+}) => {
   const dispatch = useDispatch();
   const { product, variant, sku, quantity } = cartItem;
 
@@ -18,7 +20,7 @@ const CartProductItem: React.FC<CartProductItemProps> = ({ product: cartItem }) 
       {/* Ürün Resmi */}
       <div className='flex items-start justify-between w-full xs:w-40 sm:w-[110px] md:w-[110px] lg:w-[138px]'>
         <Image
-          src={product.product_photos[0] || product.product_photo || (variant && variant.variant_photos && variant.variant_photos[0]) || ''}
+          src={product.product_photos?.[0] || '/placeholder.png'}
           alt={product.product_title}
           width={120}
           height={120}
@@ -54,7 +56,15 @@ const CartProductItem: React.FC<CartProductItemProps> = ({ product: cartItem }) 
       <div className='flex flex-col items-center gap-4 lg:gap-16 xs:gap-4 sm:gap-5 md:gap-5'>
         {/* Silme Butonu */}
         <button
-          onClick={() => dispatch(removeFromCart({ productId: product.id, variantId: variant?.id, skuId: sku?.id }))}
+          onClick={() =>
+            dispatch(
+              removeFromCart({
+                productId: product.id,
+                variantId: variant?.id,
+                skuId: sku?.id
+              })
+            )
+          }
           className='text-black-500 hover:text-red-500 xs:ml-20 sm:ml-20 md:ml-20 lg:ml-15'
         >
           <AiOutlineDelete className='w-6 h-6 xs:w-4 xs:h-4 sm:w-4 sm:h-4 md:w-4 md:h-4 lg:w-5 lg:h-5' />

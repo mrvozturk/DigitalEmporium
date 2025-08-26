@@ -14,12 +14,13 @@ const CartItem: React.FC<CartItemProps> = ({ product: cartItem, onRemove }) => {
   return (
     <div key={product.id} className='flex mb-3 pb-3 border-b'>
       <Image
-        src={product.product_photos[0] || product.product_photo || (variant && variant.variant_photos && variant.variant_photos[0]) || ''}
+        src={product.product_photos?.[0] || '/placeholder.png'}
         alt={product.product_title}
-        width={80}
+        width={120}
         height={120}
-        className='object-contain border border-gray-300 rounded-md shadow-md p-1 w-[80px] h-[120px]'
+        className='object-contain border border-gray-300 rounded-md shadow-md p-1 w-[120px] h-[120px] lg:h-[150px]'
       />
+
       <div className='flex-1 flex flex-col justify-between px-3'>
         <div>
           <h3 className='text-sm mb-1'>{product.product_title}</h3>
