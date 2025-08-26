@@ -1,7 +1,8 @@
 'use client';
+
 import { useDispatch } from 'react-redux';
 import { addToCart, toggleCart } from '@/lib/features/cart/cartSlice';
-import { Product, Variant, Sku } from '@/lib/types/product';
+import { Product } from '@/lib/types/product';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 
 interface AddToCartButtonProps {
@@ -13,7 +14,8 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
 
   const handleClick = (event: React.MouseEvent) => {
     event.stopPropagation();
-    dispatch(addToCart({ product }));
+
+    dispatch(addToCart({ product, quantity: 1 }));
     dispatch(toggleCart(true));
   };
 

@@ -24,9 +24,14 @@ const cartSlice = createSlice({
   reducers: {
     addToCart: (
       state,
-      action: PayloadAction<{ product: Product; variant?: Variant; sku?: Sku }>
+      action: PayloadAction<{
+        product: Product;
+        variant?: Variant;
+        sku?: Sku;
+        quantity?: number;
+      }>
     ) => {
-      const { product, variant, sku } = action.payload;
+      const { product, variant, sku, quantity = 1 } = action.payload;
 
       const existingItem = state.items.find(
         item =>
@@ -36,13 +41,13 @@ const cartSlice = createSlice({
       );
 
       if (existingItem) {
-        existingItem.quantity += 1;
+        existingItem.quantity += quantity;
       } else {
         state.items.push({
           product,
           variant,
           sku,
-          quantity: 1
+          quantity
         });
       }
 
@@ -61,8 +66,10 @@ const cartSlice = createSlice({
         item =>
           !(
             item.product.id === action.payload.productId &&
-            (action.payload.variantId === undefined || item.variant?.id === action.payload.variantId) &&
-            (action.payload.skuId === undefined || item.sku?.id === action.payload.skuId)
+            (action.payload.variantId === undefined ||
+              item.variant?.id === action.payload.variantId) &&
+            (action.payload.skuId === undefined ||
+              item.sku?.id === action.payload.skuId)
           )
       );
     },
@@ -83,8 +90,10 @@ const cartSlice = createSlice({
       const item = state.items.find(
         item =>
           item.product.id === action.payload.productId &&
-          (action.payload.variantId === undefined || item.variant?.id === action.payload.variantId) &&
-          (action.payload.skuId === undefined || item.sku?.id === action.payload.skuId)
+          (action.payload.variantId === undefined ||
+            item.variant?.id === action.payload.variantId) &&
+          (action.payload.skuId === undefined ||
+            item.sku?.id === action.payload.skuId)
       );
 
       if (item && action.payload.quantity > 0) {

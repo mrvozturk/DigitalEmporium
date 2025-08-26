@@ -9,6 +9,7 @@ import ProductImageAndColors from '@/components/productImageAndColors';
 import MainImage from '@/components/mainImage';
 import ColorSelector from '@/components/colorSelector';
 import Swiper from 'swiper';
+import ProductActions from '@/components/productActions';
 
 export type FiltersType = {
   imageUrl?: string;
@@ -79,7 +80,6 @@ export default async function Page({
           {product.product_title}
         </h1>
 
-        {/* Reviews */}
         <div className='reviewSection flex items-center lg:mt-2 sm:mt-1 md:mt-1'>
           <span className='text-base font-bold mr-1 lg:text-xs sm:text-[0.75rem] md:text-[0.65rem] xs:hidden'>
             {product.product_star_rating}
@@ -148,11 +148,14 @@ export default async function Page({
         </div>
         <div className='mt-2 text-black text-[0.8rem] sm:text-[0.7rem] md:text-[0.8rem] lg:text-[0.9rem] xs:hidden sm:block'>
           <h2 className='hidden sm:block'>Beden:</h2>
-          <select className='mt-1 w-[20%] p-1.5 border border-[#31737d]'>
+          <select
+            id='size-select'
+            className='mt-1 w-[20%] p-1.5 border border-[#31737d]'
+          >
             {sizeOptions.map(size => (
               <option
-                key={size.value}
-                value={size.value}
+                key={size.skuData.id}
+                value={size.skuData.id}
                 disabled={!size.skuData.in_stock}
               >
                 {size.value} {size.skuData.in_stock ? '' : '(Out of Stock)'}
@@ -207,33 +210,10 @@ export default async function Page({
           ></label>
         </div>
       </div>
-
-      {/* Right Side Add to Cart Section */}
-      <div className='flex flex-col bg-white sm:p-4 md:p-4 p-6 rounded-lg border border-gray-300 w-full max-w-[250px] sm:max-w-[26vw] md:max-w-[24vw] lg:max-w-[250px] hidden sm:flex'>
-        <p className='text-green-600 text-base mb-2 mt-0'>Stok Durumu</p>
-        <div className='w-full mb-5'>
-          <select
-            id='quantity'
-            className='w-full p-2.5 border border-gray-300 rounded-md bg-gray-50 text-sm'
-            defaultValue=''
-          >
-            <option value='' disabled hidden>
-              Ürün Miktarı
-            </option>
-            {[1, 2, 3, 4, 5].map(qty => (
-              <option key={`qty-${qty}`} value={qty}>
-                {qty}
-              </option>
-            ))}
-          </select>
-        </div>
-        <button className='block w-full py-2 text-sm text-black bg-yellow-400 rounded-full cursor-pointer mb-4'>
-          Sepete Ekle
-        </button>
-        <button className='block w-full py-2 text-sm text-black bg-orange-500 rounded-full cursor-pointer'>
-          Satın Al
-        </button>
-      </div>
+      <ProductActions
+        product={product}
+        currentSelectedVariant={currentSelectedVariant}
+      />
     </main>
   );
 }
