@@ -5,12 +5,12 @@ import { useDispatch } from 'react-redux';
 import { addToCart, toggleCart } from '@/lib/features/cart/cartSlice';
 import { Product, Variant, Sku } from '@/lib/types/product';
 
-interface ProductActionsProps {
+interface DesktopAddToCart {
   product: Product;
   currentSelectedVariant: Variant;
 }
 
-const ProductActions: React.FC<ProductActionsProps> = ({
+const DesktopAddToCart: React.FC<DesktopAddToCart> = ({
   product,
   currentSelectedVariant
 }) => {
@@ -85,4 +85,4 @@ const ProductActions: React.FC<ProductActionsProps> = ({
   );
 };
 
-export default ProductActions;
+export default DesktopAddToCart;

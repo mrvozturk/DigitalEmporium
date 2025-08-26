@@ -9,7 +9,8 @@ import ProductImageAndColors from '@/components/productImageAndColors';
 import MainImage from '@/components/mainImage';
 import ColorSelector from '@/components/colorSelector';
 import Swiper from 'swiper';
-import ProductActions from '@/components/productActions';
+import DesktopAddToCart from '@/components/deskopAddToCart';
+import MobileAddToCart from '@/components/mobileAddToCart';
 
 export type FiltersType = {
   imageUrl?: string;
@@ -163,11 +164,14 @@ export default async function Page({
             ))}
           </select>
         </div>
+        <MobileAddToCart
+          product={product}
+          currentSelectedVariant={currentSelectedVariant}
+        />
 
         {/* Product Overview Sections */}
         <ProductOverview product={product} showProductDivider={true} />
         <ProductOverview product={product} showPriceSection={true} />
-        <ProductOverview product={product} showPurchaseSection={true} />
         <hr className='mt-4 mb-1 xs:block sm:hidden' />
         <ProductOverview product={product} showDetailsSection={true} />
 
@@ -210,7 +214,7 @@ export default async function Page({
           ></label>
         </div>
       </div>
-      <ProductActions
+      <DesktopAddToCart
         product={product}
         currentSelectedVariant={currentSelectedVariant}
       />

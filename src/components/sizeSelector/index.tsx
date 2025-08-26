@@ -4,19 +4,16 @@ import { SizeOption } from '@/lib/types/product';
 
 interface SizeSelectorProps {
   sizeOptions: SizeOption[];
-  onSizeSelect?: (size: SizeOption) => void;
 }
 
-const SizeSelector: React.FC<SizeSelectorProps> = ({
-  sizeOptions,
-  onSizeSelect
-}) => {
+const SizeSelector: React.FC<SizeSelectorProps> = ({ sizeOptions }) => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
   const handleSelect = (size: SizeOption) => {
     if (!size.skuData.in_stock) return;
     setSelectedSize(size.value);
-    onSizeSelect?.(size);
+
+    window.dispatchEvent(new CustomEvent('sizeSelected', { detail: size }));
   };
 
   return (
@@ -38,7 +35,7 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({
           return (
             <button
               key={size.value}
-              className={`shrink-0 w-1/4 lg:w-1/4 mr-2 border rounded px-3 py-2 text-xs font-bold mt-2 transition
+              className={`shrink-0 w-1/4 mr-2 border rounded px-3 py-2 text-xs font-bold mt-2 transition
                 ${
                   isSelected
                     ? 'bg-black text-white border-black'

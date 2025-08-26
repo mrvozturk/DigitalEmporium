@@ -5,7 +5,7 @@ import { Product } from '../../lib/types/product';
 interface ProductOverviewProps {
   product: Product;
   showDetailsSection?: boolean;
-  showPurchaseSection?: boolean;
+
   showPriceSection?: boolean;
   showProductDivider?: boolean;
 }
@@ -13,7 +13,7 @@ interface ProductOverviewProps {
 const ProductOverview: React.FC<ProductOverviewProps> = ({
   product,
   showDetailsSection = false,
-  showPurchaseSection = false,
+
   showPriceSection = false,
   showProductDivider = false
 }) => {
@@ -24,53 +24,50 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
 
   return (
     <div className='xs:block hidden'>
-      {!showDetailsSection &&
-        !showPurchaseSection &&
-        !showPriceSection &&
-        !showProductDivider && (
-          <div className='w-full px-4'>
-            <div className='flex justify-between items-center w-full'>
-              {product.product_byline && (
-                <p
-                  className='text-xs font-medium mt-2 mr-2'
-                  style={{ color: '#007185' }}
-                >
-                  {product.product_byline}
-                </p>
-              )}
-              <div className='flex items-center mt-2'>
-                {product.product_star_rating && (
-                  <>
-                    <span className='text-xs mr-2' style={{ color: '#007185' }}>
-                      {ratingValue.toFixed(1)}
-                    </span>
-                    <div className='flex items-center'>
-                      {[...Array(5)].map((_, index) => (
-                        <a
-                          href='#review'
-                          key={`${product.product_title}-star-${index}`}
-                          className='text-md'
-                        >
-                          <AiFillStar
-                            color={index < starRating ? '#ffc107' : '#e4e5e9'}
-                          />
-                        </a>
-                      ))}
-                    </div>
-                  </>
-                )}
-              </div>
-            </div>
-            <h1 className='text-base font-medium text-gray-700 mt-2'>
-              {product.product_title}
-            </h1>
-            {product.salesVolume && (
-              <p className='text-xs text-gray-500 mt-1'>
-                {product.salesVolume} satış
+      {!showDetailsSection && !showPriceSection && !showProductDivider && (
+        <div className='w-full px-4'>
+          <div className='flex justify-between items-center w-full'>
+            {product.product_byline && (
+              <p
+                className='text-xs font-medium mt-2 mr-2'
+                style={{ color: '#007185' }}
+              >
+                {product.product_byline}
               </p>
             )}
+            <div className='flex items-center mt-2'>
+              {product.product_star_rating && (
+                <>
+                  <span className='text-xs mr-2' style={{ color: '#007185' }}>
+                    {ratingValue.toFixed(1)}
+                  </span>
+                  <div className='flex items-center'>
+                    {[...Array(5)].map((_, index) => (
+                      <a
+                        href='#review'
+                        key={`${product.product_title}-star-${index}`}
+                        className='text-md'
+                      >
+                        <AiFillStar
+                          color={index < starRating ? '#ffc107' : '#e4e5e9'}
+                        />
+                      </a>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
           </div>
-        )}
+          <h1 className='text-base font-medium text-gray-700 mt-2'>
+            {product.product_title}
+          </h1>
+          {product.salesVolume && (
+            <p className='text-xs text-gray-500 mt-1'>
+              {product.salesVolume} satış
+            </p>
+          )}
+        </div>
+      )}
 
       {showPriceSection && (
         <p className='text-base font-semibold text-black mt-2 xs:hidden'>
@@ -79,34 +76,6 @@ const ProductOverview: React.FC<ProductOverviewProps> = ({
       )}
 
       {showProductDivider && <hr className='my-4 border-t border-gray-300' />}
-
-      {showPurchaseSection && (
-        <div className='w-full p-1 mt-4 rounded-lg'>
-          <p className='text-green-700 text-lg font-medium mb-2'>Stok Durumu</p>
-          <div className='w-full mb-4'>
-            <select
-              id='quantity'
-              className='w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-200 text-base'
-              defaultValue=''
-            >
-              <option value='' disabled hidden>
-                Ürün Miktarı:
-              </option>
-              {[1, 2, 3, 4, 5].map(qty => (
-                <option key={qty} value={qty}>
-                  {qty}
-                </option>
-              ))}
-            </select>
-          </div>
-          <button className='w-full py-3 bg-yellow-400 text-black font-medium rounded-lg hover:border-4 hover:border-black-500'>
-            Sepete Ekle
-          </button>
-          <button className='w-full py-3 bg-orange-500 text-black font-medium rounded-lg mt-4 hover:border-4 hover:border-black-500'>
-            Satın Al
-          </button>
-        </div>
-      )}
 
       {showDetailsSection && (
         <div className='flex flex-col gap-4 mt-4'>
