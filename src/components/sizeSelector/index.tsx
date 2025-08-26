@@ -44,7 +44,7 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({ sizeOptions }) => {
                 ${
                   !inStock
                     ? 'opacity-50 cursor-not-allowed'
-                    : 'hover:bg-gray-100'
+                    : 'hover:bg-black-100'
                 }
               `}
               onClick={() => handleSelect(size)}
