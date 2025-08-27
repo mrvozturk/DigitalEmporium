@@ -43,14 +43,14 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({ sizeOptions }) => {
                 }
                 ${
                   !inStock
-                    ? 'opacity-50 cursor-not-allowed'
+                    ? 'opacity-50 cursor-not-allowed line-through'
                     : 'hover:bg-black-100'
                 }
               `}
               onClick={() => handleSelect(size)}
               disabled={!inStock}
             >
-              {size.value} {!inStock && '(Out of Stock)'}
+              {size.value}
             </button>
           );
         })}

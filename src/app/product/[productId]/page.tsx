@@ -158,8 +158,9 @@ export default async function Page({
                 key={size.skuData.id}
                 value={size.skuData.id}
                 disabled={!size.skuData.in_stock}
+                className={!size.skuData.in_stock ? 'line-through' : ''}
               >
-                {size.value} {size.skuData.in_stock ? '' : '(Out of Stock)'}
+                {size.value}
               </option>
             ))}
           </select>
